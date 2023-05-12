@@ -1,2 +1,7 @@
-﻿  MainGame.cpp
+﻿  GLSLProgram.cpp
+  MainGame.cpp
+D:\Jauntlet\MainGame.cpp(59,15): warning C4305: '+=': truncation from 'double' to 'float'
+  Sprite.cpp
+  main.cpp
+  Generating Code...
   Jauntlet.vcxproj -> D:\Jauntlet\Debug\Jauntlet.exe

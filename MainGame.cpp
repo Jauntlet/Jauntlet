@@ -1,24 +1,17 @@
 #include "MainGame.h"
 #include<iostream>
 #include<string>
+#include"Errors.h"
 
-void fatalError(std::string errorString) {
-	std::cout << errorString << std::endl;
-	std::cout << "Enter any key to quit...";
-	int tmp;
-	std::cin >> tmp;
-	SDL_Quit();
-}
-
-MainGame::MainGame() {
-	_window = nullptr;
-	_screenWidth = 1024;
-	_screenHeight = 768;
-	_gameState = GameState::PLAY;
+MainGame::MainGame() : _window(nullptr), _screenWidth(1024), _screenHeight(768), _gameState(GameState::PLAY), time(0) {
+	
 }
 
 void MainGame::run() {
 	initSystems();
+
+	_sprite.init(-1, -1, 2, 2);
+
 	gameLoop();
 }
 
@@ -47,11 +40,24 @@ void MainGame::initSystems() {
 
 	// sets the background color of window
 	glClearColor(0.298f, 0.094f, 0.125f, 1);
+
+	initShaders();
+}
+
+void MainGame::initShaders() {
+	_colorProgram.compileShaders("Shaders/colorShading.vert", "Shaders/colorShading.frag");
+	_colorProgram.addAttribute("vertexPosition");
+	_colorProgram.addAttribute("vertexColor");
+	_colorProgram.linkShaders();
 }
 
 void MainGame::gameLoop() {
 	while (_gameState != GameState::EXIT) {
 		processInput();
+
+		// temporary time
+		time += 0.01;
+
 		drawGame();
 	}
 }
@@ -71,19 +77,18 @@ void MainGame::processInput() {
 }
 
 void MainGame::drawGame() {
-	// Reset openGL
+	// Reset screen
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glEnableClientState(GL_COLOR_ARRAY);
 	
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex2f(0, 0);
-	glVertex2f(0, 500);
-	glVertex2f(500, 500);
+	_colorProgram.use();
 
-	glEnd();
+	GLuint timeLocation = _colorProgram.getUniformLocation("time");
+	glUniform1f(timeLocation, time);
+
+	_sprite.draw();
+
+	_colorProgram.unuse();
 
 	SDL_GL_SwapWindow(_window);
 }
