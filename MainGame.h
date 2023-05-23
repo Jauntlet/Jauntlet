@@ -5,6 +5,7 @@
 
 #include"GLSLProgram.h"
 #include"Sprite.h"
+#include "GLTexture.h"
 
 enum class GameState {
 	PLAY, EXIT
@@ -24,6 +25,7 @@ private:
 	void gameLoop();
 	void processInput();
 	void drawGame();
+	void calculateFPS();
 
 	SDL_Window* _window;
 	GameState _gameState;
@@ -31,6 +33,10 @@ private:
 	int _screenHeight;
 
 	GLSLProgram _colorProgram;
+
+	float _fps;
+	float _frameTime;
+	float _maxFPS;
 
 	// for testing: remove later
 	Sprite _sprite;

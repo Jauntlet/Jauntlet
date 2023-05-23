@@ -1,7 +1,7 @@
-﻿  GLSLProgram.cpp
-  MainGame.cpp
-D:\Jauntlet\MainGame.cpp(59,15): warning C4305: '+=': truncation from 'double' to 'float'
-  Sprite.cpp
-  main.cpp
-  Generating Code...
+﻿  MainGame.cpp
+D:\Jauntlet\MainGame.cpp(66,20): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+D:\Jauntlet\MainGame.cpp(71,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Jauntlet\MainGame.cpp(87,29): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
+D:\Jauntlet\MainGame.cpp(133,25): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+D:\Jauntlet\MainGame.cpp(135,21): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
   Jauntlet.vcxproj -> D:\Jauntlet\Debug\Jauntlet.exe

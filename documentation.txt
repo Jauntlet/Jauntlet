@@ -1,0 +1,28 @@
+Programming Standards:
+- Private variables start with an '_'
+- We do not use namespace std
+
+Shaders:
+Shaders are a complicated subject, and hard to understand under pretty much every circumstance. The shader files themselves are in a language called "GLSL" (Open Graphics Library Shading language) and does not natively have any IDE support
+
+Currently within Jauntlet you can create an instance of GLSLProgram to compile a vertex and fragment shader. Simply use GLSLProgram.compileShaders("vertexShaderFilePath", "fragmentShaderFilePath") to create those two shaders. 
+
+You can add attributes to each shader by also adding GLSLProgram.addAttribute("Attribute") and then link them using GLSLProgram.linkShaders();
+To access any variables you add, you can use GLSLProgram.getUniformLocation("Attribute")
+
+* note GLSLProgram references whatever you named the actual program when creating it.
+
+In the future there will be more ways to create and compile shaders but that will have to created seperately. As for actually making shaders,
+reference any in the "Shaders" folder and learn more about GLSL shader programming. 
+
+Sprites:
+Sprites are for simple 2D textures that can be displayed at a position.
+
+To use a sprite, first create one, then run Sprite.init(x, y, width, height, texturePath)
+
+Notice: Be careful with vectors, as they can recreate the sprite if you add more to the vector, causing the sprite buffers to be deleted, use a vector<Sprite*> instead
+
+Obtaining a Texture:
+(handled if you are just using a sprite!)
+We use texture caching to make sure that we are efficentely allocating and reusing textures efficiently, We firstly have a global ResourceManager which stores the majority of the textures, which you can use with ResourceManager::getTexture(filePath);
+if for some reason you need to make a new seperate cache of textures, you can create a new one with the TextureCache class.

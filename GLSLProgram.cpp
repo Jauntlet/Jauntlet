@@ -22,7 +22,6 @@ void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const 
 
 	compileShader(vertexShaderFilePath, _vertexShaderID);
 	compileShader(fragmentShaderFilePath, _fragmentShaderID);
-
 }
 
 void GLSLProgram::linkShaders() {

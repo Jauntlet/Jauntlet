@@ -33,3 +33,6 @@
 
 # Visual studio
 .vs/
+
+# other
+*.tlog
