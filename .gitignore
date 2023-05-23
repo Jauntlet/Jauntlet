@@ -34,5 +34,7 @@
 # Visual studio
 .vs/
 
-# other
+# debug
 *.tlog
+*.idb
+*.pdb
