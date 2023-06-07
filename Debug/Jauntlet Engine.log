@@ -1,0 +1,9 @@
+﻿  main.cpp
+  MainGame.cpp
+D:\Jauntlet Engine\MainGame.cpp(38,20): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+D:\Jauntlet Engine\MainGame.cpp(43,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Jauntlet Engine\MainGame.cpp(59,29): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
+D:\Jauntlet Engine\MainGame.cpp(105,25): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+D:\Jauntlet Engine\MainGame.cpp(107,21): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+  Generating Code...
+  Jauntlet Engine.vcxproj -> D:\Jauntlet Engine\Debug\Jauntlet Engine.exe

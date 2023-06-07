@@ -1,0 +1,15 @@
+﻿  Errors.cpp
+  GLSLProgram.cpp
+  ImageLoader.cpp
+  IOManager.cpp
+D:\Jauntlet Engine\Jauntlet\IOManager.cpp(17,15): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  Jauntlet.cpp
+  picoPNG.cpp
+  ResourceManager.cpp
+  Sprite.cpp
+  TextureCache.cpp
+  Window.cpp
+  Generating Code...
+opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+  Jauntlet.vcxproj -> D:\Jauntlet Engine\x64\Debug\Jauntlet.lib

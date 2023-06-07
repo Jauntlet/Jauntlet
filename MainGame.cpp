@@ -1,10 +1,9 @@
 #include "MainGame.h"
 #include<iostream>
 #include<string>
+#include<Jauntlet/Errors.h>
 
-#include"Errors.h"
-
-MainGame::MainGame() : _window(nullptr), _screenWidth(1024), _screenHeight(768), _gameState(GameState::PLAY), time(0), _maxFPS(120) {
+MainGame::MainGame() : _screenWidth(1024), _screenHeight(768), _gameState(GameState::PLAY), time(0), _maxFPS(120), _fps(0), _frameTime(0), _window() {
 
 }
 
@@ -18,37 +17,10 @@ void MainGame::run() {
 }
 
 void MainGame::initSystems() {
-	// Initialize SDL
-	SDL_Init(SDL_INIT_EVERYTHING);
 
-	// allows for buffer swapping
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	Jauntlet::init();
 
-	// create the window
-	_window = SDL_CreateWindow("Jauntlet Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_OPENGL);
-	if (_window == nullptr) {
-		fatalError("SDL Window could not be created!");
-	}
-
-	// Have OpenGL work on the window
-	SDL_GLContext glContext = SDL_GL_CreateContext(_window);
-	if (glContext == nullptr) {
-		fatalError("SDL_GL context could not be created!");
-	}
-	// enable GLEW for older PCs that don't support everything modern
-	GLenum error = glewInit();
-	if (error != GLEW_OK) {
-		fatalError("Could not initialize glew!");
-	}
-
-	// tells you your version of OpenGL
-	std::printf("*** OpenGL Version: %s ***\n", glGetString(GL_VERSION));
-
-	// sets the background color of window
-	glClearColor(0.298f, 0.094f, 0.125f, 1);
-
-	// this turns on VSync (0 = off, 1 = on)
-	SDL_GL_SetSwapInterval(0);
+	_window.create("Jauntlet Game Engine", _screenWidth, _screenHeight, 0);
 
 	initShaders();
 }
@@ -122,7 +94,7 @@ void MainGame::drawGame() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_colorProgram.unuse();
 
-	SDL_GL_SwapWindow(_window);
+	_window.swapBuffer();
 }
 
 void MainGame::calculateFPS() {

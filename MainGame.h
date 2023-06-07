@@ -2,10 +2,11 @@
 
 #include<SDL/SDL.h>
 #include<GL/glew.h>
-
-#include"GLSLProgram.h"
-#include"Sprite.h"
-#include "GLTexture.h"
+#include<Jauntlet/GLSLProgram.h>
+#include<Jauntlet/Sprite.h>
+#include<Jauntlet/GLTexture.h>
+#include<Jauntlet/Window.h>
+#include<Jauntlet/Jauntlet.h>
 
 enum class GameState {
 	PLAY, EXIT
@@ -27,17 +28,17 @@ private:
 	void drawGame();
 	void calculateFPS();
 
-	SDL_Window* _window;
+	Jauntlet::Window _window;
 	GameState _gameState;
 	int _screenWidth;
 	int _screenHeight;
 
-	GLSLProgram _colorProgram;
+	Jauntlet::GLSLProgram _colorProgram;
 
 	float _fps;
 	float _frameTime;
 	float _maxFPS;
 
 	// for testing: remove later
-	Sprite _sprite;
+	Jauntlet::Sprite _sprite;
 };
