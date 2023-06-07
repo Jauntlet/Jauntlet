@@ -11,7 +11,7 @@ void MainGame::run() {
 	initSystems();
 
 	// debugging code: to be removed
-	_sprite.init(-1, -1, 2, 2, "Textures/Craig.png");
+	_sprite.init(-1, -1, 2, 2, "Textures/craig.png");
 
 	gameLoop();
 }
@@ -20,7 +20,7 @@ void MainGame::initSystems() {
 
 	Jauntlet::init();
 
-	_window.create("Jauntlet Game Engine", _screenWidth, _screenHeight, 0);
+	_window.create("Jauntlet", _screenWidth, _screenHeight, 0);
 
 	initShaders();
 }
@@ -45,11 +45,11 @@ void MainGame::gameLoop() {
 		drawGame();
 		calculateFPS();
 		
-		// debug output FPS every 10 frames
+		// debug output FPS every 30 frames
 		static int frameCounter = 0;
 		frameCounter++;
-		if (frameCounter == 10) {
-			std::cout << _fps << std::endl;
+		if (frameCounter == 30) {
+			std::cout << std::round(_fps) << std::endl;
 			frameCounter = 0;
 		}
 
