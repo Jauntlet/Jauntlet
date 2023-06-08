@@ -38,7 +38,6 @@
 *.pdb
 *.app
 *.log
-Debug/Jauntlet Engine.exe.recipe
-Debug/Jauntlet Engine.exe.recipe
+*.recipe
 *.ilk
 *.idb

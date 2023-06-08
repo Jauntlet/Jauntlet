@@ -12,14 +12,14 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 		flags |= SDL_WINDOW_HIDDEN;
 	}
 	if (currentFlags & FULLSCREEN) {
-		flags |= SDL_WINDOW_FULLSCREEN;
+		flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 	}
 	if (currentFlags & BORDERLESS) {
 		flags |= SDL_WINDOW_BORDERLESS;
 	}
 
 	// create the window
-	_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
+	_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);
 	if (_sdlWindow == nullptr) {
 		fatalError("SDL Window could not be created!");
 	}
