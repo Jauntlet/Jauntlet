@@ -3,15 +3,17 @@
 #include<string>
 #include<Jauntlet/Errors.h>
 
-MainGame::MainGame() : _screenWidth(1024), _screenHeight(768), _gameState(GameState::PLAY), time(0), _maxFPS(120), _fps(0), _frameTime(0), _window() {
 
+MainGame::MainGame() : _screenWidth(1024), _screenHeight(768), _gameState(GameState::PLAY), time(0), _maxFPS(120), _fps(0), _frameTime(0), _window(), _camera() {
+
+	_camera.init(_screenWidth, _screenHeight);
 }
 
 void MainGame::run() {
 	initSystems();
 
 	// debugging code: to be removed
-	_sprite.init(-1, -1, 2, 2, "Textures/craig.png");
+	_sprite.init(0, 0, _screenWidth / 2, _screenWidth / 2, "Textures/craig.png");
 
 	gameLoop();
 }
@@ -42,6 +44,8 @@ void MainGame::gameLoop() {
 		// temporary time
 		time += 0.01;
 
+		_camera.update();
+
 		drawGame();
 		calculateFPS();
 		
@@ -71,6 +75,28 @@ void MainGame::processInput() {
 			case SDL_QUIT:
 				_gameState = GameState::EXIT;
 				break;
+			case SDL_KEYDOWN:
+				switch (evnt.key.keysym.sym) {
+					case SDLK_w:
+						_camera.setPosition(_camera.getPosition() + glm::vec2(0, 20));
+					break;
+					case SDLK_s:
+						_camera.setPosition(_camera.getPosition() + glm::vec2(0, -20));
+						break;
+					case SDLK_a:
+						_camera.setPosition(_camera.getPosition() + glm::vec2(-20, 0));
+						break;
+					case SDLK_d:
+						_camera.setPosition(_camera.getPosition() + glm::vec2(20, 0));
+						break;
+					case SDLK_q:
+						_camera.setScale(_camera.getScale() + 0.1);
+						break;
+					case SDLK_e:
+						_camera.setScale(_camera.getScale() - 0.1);
+						break;
+				}
+				break;
 		}
 	}
 }
@@ -88,6 +114,12 @@ void MainGame::drawGame() {
 
 	// GLuint timeLocation = _colorProgram.getUniformLocation("time");
 	// glUniform1f(timeLocation, time);
+
+	// Set the camera matrix
+	GLuint pLocation = _colorProgram.getUniformLocation("P");
+	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
+
+	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
 	_sprite.draw();
 

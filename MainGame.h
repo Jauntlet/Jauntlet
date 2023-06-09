@@ -7,6 +7,7 @@
 #include<Jauntlet/GLTexture.h>
 #include<Jauntlet/Window.h>
 #include<Jauntlet/Jauntlet.h>
+#include<Jauntlet/Camera2D.h>
 
 enum class GameState {
 	PLAY, EXIT
@@ -34,6 +35,7 @@ private:
 	int _screenHeight;
 
 	Jauntlet::GLSLProgram _colorProgram;
+	Jauntlet::Camera2D _camera;
 
 	float _fps;
 	float _frameTime;
