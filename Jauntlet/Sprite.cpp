@@ -71,18 +71,14 @@ void Sprite::draw() {
 	// bind information
 	glBindTexture(GL_TEXTURE_2D, _texture.id);
 	glBindBuffer(GL_ARRAY_BUFFER, _vboID);
-	glEnableVertexAttribArray(0);
 	
-	// Position attribute pointer
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-	// Color attribute pointer
-	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
-	// UV attribute pointer
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	// unbind information (don't unbind the texture)
 	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

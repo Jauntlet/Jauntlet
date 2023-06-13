@@ -2,12 +2,14 @@
 
 #include<SDL/SDL.h>
 #include<GL/glew.h>
+
 #include<Jauntlet/GLSLProgram.h>
 #include<Jauntlet/Sprite.h>
 #include<Jauntlet/GLTexture.h>
 #include<Jauntlet/Window.h>
 #include<Jauntlet/Jauntlet.h>
 #include<Jauntlet/Camera2D.h>
+#include<Jauntlet/SpriteBatch.h>
 
 enum class GameState {
 	PLAY, EXIT
@@ -41,6 +43,5 @@ private:
 	float _frameTime;
 	float _maxFPS;
 
-	// for testing: remove later
-	Jauntlet::Sprite _sprite;
+	Jauntlet::SpriteBatch _spriteBatch;
 };
