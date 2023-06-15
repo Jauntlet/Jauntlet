@@ -5,7 +5,8 @@
 
 namespace Jauntlet
 {
-FpsLimiter::FpsLimiter() {
+// all of the initialized variables are almost instantly overwritten, so don't worry about them (its to remove warnings)
+FpsLimiter::FpsLimiter() : _fps(0), _frameTime(0), _maxFPS(120), _startTicks(0) {
 
 }
 void FpsLimiter::init(int maxFPS) {
@@ -20,7 +21,7 @@ void FpsLimiter::beginFrame() {
 	_startTicks = SDL_GetTicks();
 }
 
-int FpsLimiter::endFrame() {
+float FpsLimiter::endFrame() {
 	calculateFPS();
 
 	// FPS limiting 

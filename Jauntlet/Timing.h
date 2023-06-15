@@ -8,13 +8,13 @@ public:
 
 	void beginFrame();
 	// returns current FPS
-	int endFrame();
+	float endFrame();
 private:
 	void calculateFPS();
 
 	float _fps;
 	float _frameTime;
-	int _maxFPS;
+	float _maxFPS;
 	unsigned int _startTicks;
 };
 }
