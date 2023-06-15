@@ -11,6 +11,7 @@
 #include<Jauntlet/Camera2D.h>
 #include<Jauntlet/SpriteBatch.h>
 #include<Jauntlet/InputManager.h>
+#include<Jauntlet/Timing.h>
 
 enum class GameState {
 	PLAY, EXIT
@@ -30,7 +31,6 @@ private:
 	void gameLoop();
 	void processInput();
 	void drawGame();
-	void calculateFPS();
 
 	Jauntlet::Window _window;
 	GameState _gameState;
@@ -39,11 +39,13 @@ private:
 
 	Jauntlet::GLSLProgram _colorProgram;
 	Jauntlet::Camera2D _camera;
-
-	float _fps;
-	float _frameTime;
-	float _maxFPS;
-
+	
 	Jauntlet::SpriteBatch _spriteBatch;
+	
 	Jauntlet::InputManager _inputManager;
+	Jauntlet::FpsLimiter _fpsLimiter;
+
+	int _fps;
+	int _maxFPS;
+
 };

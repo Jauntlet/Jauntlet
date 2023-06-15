@@ -5,7 +5,7 @@
 #include<Jauntlet/Errors.h>
 #include<Jauntlet/ResourceManager.h>
 
-MainGame::MainGame() : _screenWidth(1024), _screenHeight(768), _gameState(GameState::PLAY), time(0), _maxFPS(120), _fps(0), _frameTime(0), _window(), _camera() {
+MainGame::MainGame() : _screenWidth(1024), _screenHeight(768), _gameState(GameState::PLAY), time(0), _maxFPS(120), _fps(0), _window(), _camera() {
 
 	_camera.init(_screenWidth, _screenHeight);
 }
@@ -25,6 +25,7 @@ void MainGame::initSystems() {
 	initShaders();
 
 	_spriteBatch.init();
+	_fpsLimiter.init(_maxFPS);
 }
 
 void MainGame::initShaders() {
@@ -37,7 +38,8 @@ void MainGame::initShaders() {
 
 void MainGame::gameLoop() {
 	while (_gameState != GameState::EXIT) {
-		float startTicks = SDL_GetTicks();
+		
+		_fpsLimiter.beginFrame();
 		
 		processInput();
 
@@ -47,20 +49,15 @@ void MainGame::gameLoop() {
 		_camera.update();
 
 		drawGame();
-		calculateFPS();
-		
+
+		_fps = _fpsLimiter.endFrame();
+
 		// debug output FPS every 30 frames
 		static int frameCounter = 0;
 		frameCounter++;
 		if (frameCounter == 30) {
 			std::cout << std::round(_fps) << std::endl;
 			frameCounter = 0;
-		}
-
-		// FPS limiting 
-		float frameTicks = SDL_GetTicks() - startTicks;
-		if (1000 / _maxFPS > frameTicks) {
-			SDL_Delay(1000 / _maxFPS - frameTicks);
 		}
 	}
 }
@@ -146,40 +143,4 @@ void MainGame::drawGame() {
 	_colorProgram.unuse();
 
 	_window.swapBuffer();
-}
-
-void MainGame::calculateFPS() {
-	// NUM_SAMPLES is how many frames we are averaging by
-	static const int NUM_SAMPLES = 10;
-	static float frameTimes[NUM_SAMPLES] = {};
-	static int currentFrame = 0;
-	static float prevTicks = SDL_GetTicks();
-	
-	float currentTicks = SDL_GetTicks();
-
-	_frameTime = currentTicks - prevTicks;
-	frameTimes[currentFrame % NUM_SAMPLES] = _frameTime;
-
-	prevTicks = currentTicks;
-
-	int count = NUM_SAMPLES;
-
-	currentFrame++;
-
-	if (currentFrame < NUM_SAMPLES) {
-		count = currentFrame;
-	}
-
-	float frameTimeAverage = 0;
-	for (int i = 0; i < count; i++) {
-		frameTimeAverage += frameTimes[i];
-	}
-	frameTimeAverage /= count;
-
-	if (frameTimeAverage > 0) {
-		_fps = 1000 / frameTimeAverage;
-	}
-	else {
-		_fps = 0;
-	}
 }
