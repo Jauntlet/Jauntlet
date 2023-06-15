@@ -10,6 +10,7 @@
 #include<Jauntlet/Jauntlet.h>
 #include<Jauntlet/Camera2D.h>
 #include<Jauntlet/SpriteBatch.h>
+#include<Jauntlet/InputManager.h>
 
 enum class GameState {
 	PLAY, EXIT
@@ -44,4 +45,5 @@ private:
 	float _maxFPS;
 
 	Jauntlet::SpriteBatch _spriteBatch;
+	Jauntlet::InputManager _inputManager;
 };

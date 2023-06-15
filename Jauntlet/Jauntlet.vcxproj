@@ -154,6 +154,7 @@
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="picoPNG.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="picoPNG.h" />
