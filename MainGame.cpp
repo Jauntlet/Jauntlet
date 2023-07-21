@@ -55,7 +55,7 @@ void MainGame::gameLoop() {
 		// debug output FPS every 30 frames
 		static int frameCounter = 0;
 		frameCounter++;
-		if (frameCounter == 30) {
+		if (frameCounter == 10000) {
 			std::cout << std::round(_fps) << std::endl;
 			frameCounter = 0;
 		}
@@ -78,6 +78,15 @@ void MainGame::processInput() {
 			case SDL_KEYUP:
 				_inputManager.releaseKey(evnt.key.keysym.sym);
 				break;
+			case SDL_MOUSEBUTTONDOWN:
+				_inputManager.pressKey(evnt.button.button);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				_inputManager.releaseKey(evnt.button.button);
+				break;
+			case SDL_MOUSEMOTION:
+				_inputManager.setMouseCoords(evnt.motion.x, evnt.motion.y);
+				break;
 		}
 	}
 
@@ -98,6 +107,11 @@ void MainGame::processInput() {
 	}
 	if (_inputManager.isKeyDown(SDLK_e)) {
 		_camera.setScale(_camera.getScale() - 0.1);
+	}
+
+	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
+		glm::vec2 mouseCoords = _camera.convertScreenToWorld(_inputManager.getMouseCoords());
+		std::cout << mouseCoords.x << " " << mouseCoords.y << std::endl;
 	}
 }
 
@@ -133,7 +147,6 @@ void MainGame::drawGame() {
 	color.a = 255;
 
 	_spriteBatch.draw(pos, uv, texture.id, 0, color);
-	_spriteBatch.draw(pos + glm::vec4(50, 0, 0, 0), uv, texture.id, 0, color);
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
