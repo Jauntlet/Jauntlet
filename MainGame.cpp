@@ -99,7 +99,6 @@ void MainGame::processInput() {
 	if (_inputManager.isKeyDown(SDLK_e)) {
 		_camera.setScale(_camera.getScale() - 0.1);
 	}
-
 }
 
 void MainGame::drawGame() {
