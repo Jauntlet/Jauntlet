@@ -23,8 +23,6 @@ public:
 
 	void run();
 
-	float time;
-
 private:
 	void initSystems();
 	void initShaders();
@@ -33,19 +31,15 @@ private:
 	void drawGame();
 
 	Jauntlet::Window _window;
-	GameState _gameState;
-	int _screenWidth;
-	int _screenHeight;
 
 	Jauntlet::GLSLProgram _colorProgram;
+	
 	Jauntlet::Camera2D _camera;
 	
-	Jauntlet::SpriteBatch _spriteBatch;
-	
 	Jauntlet::InputManager _inputManager;
-	Jauntlet::FpsLimiter _fpsLimiter;
 
+	GameState _gameState;
+
+	int _screenWidth, _screenHeight;
 	int _fps;
-	int _maxFPS;
-
 };
