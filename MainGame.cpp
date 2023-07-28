@@ -5,13 +5,14 @@
 #include<Jauntlet/ResourceManager.h>
 #include<Jauntlet/Timing.h>
 
+#include<iostream>
 MainGame::MainGame() : 
 	_screenWidth(1024), 
 	_screenHeight(768), 
 	_gameState(GameState::PLAY),
 	_fps(0),
-	_window() {
-
+	_window(),
+	_level(32) {
 }
 
 void MainGame::run() {
@@ -26,6 +27,14 @@ void MainGame::initSystems() {
 	_window.create("Jauntlet Game Engine", _screenWidth, _screenHeight, 0);
 
 	initShaders();
+
+	_camera.init(_screenWidth, _screenHeight);
+
+	// Temporary level loading
+	_level.registerTile('B', "Textures/Craig.png");
+	_level.registerTile('T', "Textures/test (2).png");
+	_level.loadTileMap("Levels/level0.txt");
+
 }
 
 void MainGame::initShaders() {
@@ -45,6 +54,7 @@ void MainGame::gameLoop() {
 		fpsLimiter.beginFrame();
 
 		processInput();
+		_camera.update();
 
 		drawGame();
 
@@ -86,5 +96,22 @@ void MainGame::drawGame() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
+	_colorProgram.use();
+	
+	glActiveTexture(GL_TEXTURE0);
+
+	// Reading information into shaders
+	GLint textureUniform = _colorProgram.getUniformLocation("imageTexture");
+	glUniform1i(textureUniform, 0);
+
+	glm::mat4 projectionMatrix = _camera.getCameraMatrix();
+	GLint pUniform = _colorProgram.getUniformLocation("P");
+	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+
+	// Draw Level
+	_level.draw();
+
+	_colorProgram.unuse();
+
 	_window.swapBuffer();
 }

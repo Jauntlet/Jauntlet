@@ -11,7 +11,7 @@ namespace Jauntlet {
 	{
 	public:
 		// loads in the tilemap
-		TileMap(const std::string& fileName, int tileSize);
+		TileMap(int tileSize);
 
 		// register a key to identify a tile
 		void registerTile(char identifier, std::string filePath);

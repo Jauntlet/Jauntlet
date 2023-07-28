@@ -12,6 +12,7 @@
 #include<Jauntlet/SpriteBatch.h>
 #include<Jauntlet/InputManager.h>
 #include<Jauntlet/Timing.h>
+#include<Jauntlet/TileMap.h>
 
 enum class GameState {
 	PLAY, EXIT
@@ -42,4 +43,8 @@ private:
 
 	int _screenWidth, _screenHeight;
 	int _fps;
+
+	// Temporary variables for testing
+
+	Jauntlet::TileMap _level;
 };
