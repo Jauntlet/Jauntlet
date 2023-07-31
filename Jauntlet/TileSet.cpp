@@ -11,7 +11,7 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 	_right(Right), _left(Left), _bottom(Bottom), _top(Top),
 	_bottomRight(BottomRight), _bottomLeft(BottomLeft), _bottomTop(BottomTop),
 	_topRight(TopRight), _topLeft(TopLeft), _rightLeft(RightLeft),
-	_bottomTopLeft(BottomTopLeft), _bottomTopRight(BottomTopRight), _topRightLeft(TopRightLeft),
+	_bottomTopLeft(BottomTopLeft), _bottomTopRight(BottomTopRight), _bottomLeftRight(BottomLeftRight), _topRightLeft(TopRightLeft),
 	_topLeftCorner(TopLeftCorner), _topRightCorner(TopRightCorner), _bottomLeftCorner(BottomLeftCorner), _bottomRightCorner(BottomRightCorner) {
 	
 }
