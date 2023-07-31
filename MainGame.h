@@ -39,6 +39,8 @@ private:
 	
 	Jauntlet::InputManager _inputManager;
 
+	Jauntlet::TextureCache _textureCache;
+
 	GameState _gameState;
 
 	int _screenWidth, _screenHeight;
@@ -47,4 +49,5 @@ private:
 	// Temporary variables for testing
 
 	Jauntlet::TileMap _level;
+	TileSet _bricks;
 };

@@ -1,4 +1,6 @@
-B....B
-......TTTTTTT
-B....T
-.TTTT.
+TTTTTTTTTTTTT
+T    TTTTTTTT
+TTTTTT      T
+TTTTTT      T
+T    T      T
+TTTTTTTTTTTTT

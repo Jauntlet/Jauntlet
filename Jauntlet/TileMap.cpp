@@ -5,19 +5,24 @@
 #include "Errors.h"
 #include "ResourceManager.h"
 #include "ImageLoader.h"
+#include "TileSet.h"
 
 using namespace Jauntlet;
 
-TileMap::TileMap(int tileSize) {
-	
-	_tileSize = tileSize;
-
+TileMap::TileMap(TextureCache* textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 }
 
 void TileMap::registerTile(char identifier, std::string filePath) {	
-	GLTexture texture = ImageLoader::loadPNG(filePath);
 	
-	_tiles.insert(std::make_pair(identifier, texture));
+	tile tmp = tile(filePath);
+	
+	_tiles.insert(std::make_pair(identifier, tmp));
+}
+
+void TileMap::registerTileSet(char identifier, TileSet& tileSet) {
+	tile tmp = tile(&tileSet);
+
+	_tiles.insert(std::make_pair(identifier, tmp));
 }
 
 void TileMap::loadTileMap(std::string filePath) {
@@ -40,29 +45,42 @@ void TileMap::loadTileMap(std::string filePath) {
 
 	glm::vec4 uvRect(0, 0, 1, 1);
 	Jauntlet::Color whiteColor;
-	whiteColor.r = 255;
-	whiteColor.g = 255;
-	whiteColor.b = 255;
-	whiteColor.a = 255;
+	whiteColor.setColor(255, 255, 255, 255);
 
 	// Rendering all tiles into the sprite batch
 	for (int y = 0; y < _levelData.size(); y++) {
 		for (int x = 0; x < _levelData[y].size(); x++) {
 			char tile = _levelData[y][x];
-
 			// Create the location and size of the tile
 			glm::vec4 destRect(x * _tileSize, -y * _tileSize, _tileSize, _tileSize);
-
 			// Find and Process the tile
 			auto mapIterator = _tiles.find(tile);
 
 			if (mapIterator == _tiles.end()) {
 				continue;
 			}
+			
+			if (mapIterator->second.isTileSet) {
+				unsigned int tileData = 0;
 
-			// add tile to the spriteBatch
-			_spriteBatch.draw(destRect, uvRect, mapIterator->second.id, 0, whiteColor);
+				if (x + 1 < _levelData[y].size() && _tiles.find(_levelData[y][x + 1]) != _tiles.end()) {
+					tileData |= TileSet::TileSides::RIGHT;
+				}
+				if (x > 0 && _tiles.find(_levelData[y][x - 1]) != _tiles.end()) {
+					tileData |= TileSet::TileSides::LEFT;
+				}
+				if (y + 1 < _levelData.size() && _tiles.find(_levelData[y + 1][x]) != _tiles.end()) {
+					tileData |= TileSet::TileSides::BOTTOM;
+				}
+				if (y > 0 && _tiles.find(_levelData[y - 1][x]) != _tiles.end()) {
+					tileData |= TileSet::TileSides::TOP;
+				}
 
+				_spriteBatch.draw(destRect, uvRect, _textureCache->getTexture(mapIterator->second.tileSet->tileSetToTile(tileData)).id, 0, whiteColor);
+			}
+			else {
+				_spriteBatch.draw(destRect, uvRect, _textureCache->getTexture(mapIterator->second.texture).id, 0, whiteColor);
+			}
 		}
 	}
 	_spriteBatch.end();
