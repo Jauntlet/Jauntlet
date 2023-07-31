@@ -30,7 +30,6 @@ void Sprite::init(float x, float y, float width, float height, std::string textu
 
 	Vertex vertexData[6] = {};
 
-	// yeah the vertexes for the sprite are hardcoded. Feel free to try and use for loops or something I am small brain
 	// First triangle
 	vertexData[0].setPosition(x + width, y + height);
 	vertexData[0].setUV(1, 1);
