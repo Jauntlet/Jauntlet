@@ -27,7 +27,7 @@ void TileMap::registerTileSet(char identifier, TileSet& tileSet) {
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
 
-void TileMap::loadTileMap(std::string filePath) {
+void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
 	std::ifstream file;
 	file.open(filePath);
 
@@ -54,7 +54,7 @@ void TileMap::loadTileMap(std::string filePath) {
 		for (int x = 0; x < _levelData[y].size(); x++) {
 			char tile = _levelData[y][x];
 			// Create the location and size of the tile
-			glm::vec4 destRect(x * _tileSize, -y * _tileSize, _tileSize, _tileSize);
+			glm::vec4 destRect(x * _tileSize + offsetX, -y * _tileSize + offsetY, _tileSize, _tileSize);
 			// Find and Process the tile
 			auto mapIterator = _tiles.find(tile);
 

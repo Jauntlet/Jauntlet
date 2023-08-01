@@ -40,7 +40,7 @@ namespace Jauntlet {
 		// register a key to identify a tileSet
 		void registerTileSet(char identifier, TileSet& tileSet);
 		// loads tile map from a file of chars to place all the tiles in the world
-		void loadTileMap(std::string filePath);
+		void loadTileMap(std::string filePath, float offsetX = 0, float offsetY = 0);
 
 		void draw();
 	private:
