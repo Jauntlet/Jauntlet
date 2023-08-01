@@ -53,8 +53,8 @@ std::string TileSet::tileSetToTile(unsigned int layout) {
 		case 14:
 			return _right;
 		case 15:
-			return _allSidesCovered;
-		default:
 			return _noSidesCovered;
+		default:
+			return _allSidesCovered;
 	}
 }

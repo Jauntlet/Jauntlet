@@ -1,6 +1,8 @@
 #include "TileMap.h"
 
 #include <fstream>
+// remove IOSTREAM when working fully
+#include <iostream>
 
 #include "Errors.h"
 #include "ResourceManager.h"
@@ -69,10 +71,10 @@ void TileMap::loadTileMap(std::string filePath) {
 				if (x > 0 && _tiles.find(_levelData[y][x - 1]) != _tiles.end()) {
 					tileData |= TileSet::TileSides::LEFT;
 				}
-				if (y + 1 < _levelData.size() && _tiles.find(_levelData[y + 1][x]) != _tiles.end()) {
+				if (y + 1 < _levelData.size() && x < _levelData[y + 1].size() && _tiles.find(_levelData[y + 1][x]) != _tiles.end()) {
 					tileData |= TileSet::TileSides::BOTTOM;
 				}
-				if (y > 0 && _tiles.find(_levelData[y - 1][x]) != _tiles.end()) {
+				if (y > 0 && x < _levelData[y - 1].size() && _tiles.find(_levelData[y - 1][x]) != _tiles.end()) {
 					tileData |= TileSet::TileSides::TOP;
 				}
 
