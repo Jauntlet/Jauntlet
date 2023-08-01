@@ -5,14 +5,12 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 	std::string Right, std::string Left, std::string Bottom, std::string Top,
 	std::string BottomRight, std::string BottomLeft, std::string BottomTop,
 	std::string TopRight, std::string TopLeft, std::string RightLeft,
-	std::string BottomTopLeft, std::string BottomTopRight, std::string BottomLeftRight, std::string TopRightLeft,
-	std::string TopLeftCorner, std::string TopRightCorner, std::string BottomLeftCorner, std::string BottomRightCorner) :
+	std::string BottomTopLeft, std::string BottomTopRight, std::string BottomLeftRight, std::string TopRightLeft) :
 	_allSidesCovered(AllSidesCovered), _noSidesCovered(NoSidesCovered),
 	_right(Right), _left(Left), _bottom(Bottom), _top(Top),
 	_bottomRight(BottomRight), _bottomLeft(BottomLeft), _bottomTop(BottomTop),
 	_topRight(TopRight), _topLeft(TopLeft), _rightLeft(RightLeft),
-	_bottomTopLeft(BottomTopLeft), _bottomTopRight(BottomTopRight), _bottomLeftRight(BottomLeftRight), _topRightLeft(TopRightLeft),
-	_topLeftCorner(TopLeftCorner), _topRightCorner(TopRightCorner), _bottomLeftCorner(BottomLeftCorner), _bottomRightCorner(BottomRightCorner) {
+	_bottomTopLeft(BottomTopLeft), _bottomTopRight(BottomTopRight), _bottomLeftRight(BottomLeftRight), _topRightLeft(TopRightLeft) {
 	
 }
 
@@ -53,8 +51,8 @@ std::string TileSet::tileSetToTile(unsigned int layout) {
 		case 14:
 			return _right;
 		case 15:
-			return _noSidesCovered;
-		default:
 			return _allSidesCovered;
+		default:
+			return _noSidesCovered;
 	}
 }

@@ -13,10 +13,9 @@ MainGame::MainGame() :
 	_fps(0),
 	_window(),
 	_level(&_textureCache, 32),
-	_bricks("Textures/all.png", "Textures/none.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
+	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
-		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png",
-		"Textures/topLeftCorner.png", "Textures/topRightCorner.png", "Textures/bottomLeftCorner.png", "Textures/bottomRightCorner.png") {
+		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png") {
 }
 
 void MainGame::run() {

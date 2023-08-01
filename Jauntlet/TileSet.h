@@ -10,8 +10,7 @@ public:
 			std::string Right, std::string Left, std::string Bottom, std::string Top, 
 			std::string BottomRight, std::string BottomLeft, std::string BottomTop, 
 			std::string TopRight, std::string TopLeft, std::string RightLeft, 
-			std::string BottomTopLeft, std::string BottomTopRight, std::string BottomLeftRight, std::string TopRightLeft, 
-			std::string TopLeftCorner, std::string TopRightCorner, std::string BottomLeftCorner, std::string BottomRightCorner);
+			std::string BottomTopLeft, std::string BottomTopRight, std::string BottomLeftRight, std::string TopRightLeft);
 
 	std::string tileSetToTile(unsigned int layout);
 private:
