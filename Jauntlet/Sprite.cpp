@@ -5,23 +5,7 @@
 #include<cstddef>
 using namespace Jauntlet;
 
-Sprite::Sprite() : _x(0), _y(0), _height(0), _width(0), _vboID(0), _texture() {
-	
-}
-
-// this is a destructor
-Sprite::~Sprite() {
-	if (_vboID != 0) {
-		glDeleteBuffers(1, &_vboID);
-	}
-}
-
-void Sprite::init(float x, float y, float width, float height, std::string texturePath) {
-	_x = x;
-	_y = y;
-	_width = width;
-	_height = height;
-	
+Sprite::Sprite(float x, float y, float width, float height, std::string texturePath) : _x(x), _y(y), _width(width), _height(height), _vboID(0) {
 	_texture = ResourceManager::getTexture(texturePath);
 
 	if (_vboID == 0) {
@@ -63,6 +47,13 @@ void Sprite::init(float x, float y, float width, float height, std::string textu
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+// this is a destructor
+Sprite::~Sprite() {
+	if (_vboID != 0) {
+		glDeleteBuffers(1, &_vboID);
+	}
 }
 
 void Sprite::draw() {

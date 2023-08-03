@@ -17,12 +17,11 @@ Shaders:
 
 Sprites:
   Sprites are for simple 2D textures that can be displayed at a position.
-
-  To use a sprite, first create one, then run Sprite.init(x, y, width, height, texturePath)
+  initialized with Sprite(x, y, width, height, texturePath);
 
   Notice: Be careful with vectors, as they can recreate the sprite if you add more to the vector, causing the sprite buffers to be deleted, use a vector<Sprite*> instead
 
-  Obtaining a Texture:
+Obtaining a Texture:
   (handled if you are just using a sprite!)
   We use texture caching to make sure that we are efficentely allocating and reusing textures efficiently, We firstly have a global ResourceManager which stores the majority of the textures, which you can use with ResourceManager::getTexture(filePath);
   if for some reason you need to make a new seperate cache of textures, you can create a new one with the TextureCache class.

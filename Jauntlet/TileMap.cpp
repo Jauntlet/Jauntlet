@@ -1,8 +1,6 @@
 #include "TileMap.h"
 
 #include <fstream>
-// remove IOSTREAM when working fully
-#include <iostream>
 
 #include "Errors.h"
 #include "ResourceManager.h"
