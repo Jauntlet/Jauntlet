@@ -76,10 +76,10 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 					tileData |= TileSet::TileSides::TOP;
 				}
 
-				_spriteBatch.draw(destRect, uvRect, _textureCache->getTexture(mapIterator->second.tileSet->tileSetToTile(tileData)).id, 0, whiteColor);
+				_spriteBatch.draw(destRect, uvRect, _textureCache.getTexture(mapIterator->second.tileSet->tileSetToTile(tileData)).id, 0, whiteColor);
 			}
 			else {
-				_spriteBatch.draw(destRect, uvRect, _textureCache->getTexture(mapIterator->second.texture).id, 0, whiteColor);
+				_spriteBatch.draw(destRect, uvRect, _textureCache.getTexture(mapIterator->second.texture).id, 0, whiteColor);
 			}
 		}
 	}
