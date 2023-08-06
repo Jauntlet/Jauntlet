@@ -33,7 +33,7 @@ namespace Jauntlet {
 	{
 	public:
 		// loads in the tilemap
-		TileMap(TextureCache* textureCache, int tileSize);
+		TileMap(TextureCache& textureCache, int tileSize);
 
 		// register a key to identify a tile
 		void registerTile(char identifier, std::string filePath);

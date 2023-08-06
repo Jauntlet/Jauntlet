@@ -16,6 +16,7 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 	
 }
 
+// used by tilemaps to find and display the correct tile based on surrounding tiles
 std::string TileSet::tileSetToTile(unsigned int layout) {
 	
 	// 1 = right side

@@ -13,6 +13,7 @@
 #include<Jauntlet/InputManager.h>
 #include<Jauntlet/Timing.h>
 #include<Jauntlet/TileMap.h>
+#include<Jauntlet/TileSet.h>
 
 enum class GameState {
 	PLAY, EXIT
@@ -49,5 +50,5 @@ private:
 	// Temporary variables for testing
 
 	Jauntlet::TileMap _level;
-	TileSet _bricks;
+	Jauntlet::TileSet _bricks;
 };

@@ -9,7 +9,7 @@
 
 using namespace Jauntlet;
 
-TileMap::TileMap(TextureCache* textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
+TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(&textureCache) {
 }
 
 void TileMap::registerTile(char identifier, std::string filePath) {	

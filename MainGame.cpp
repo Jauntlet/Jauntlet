@@ -12,7 +12,7 @@ MainGame::MainGame() :
 	_gameState(GameState::PLAY),
 	_fps(0),
 	_window(),
-	_level(&_textureCache, 32),
+	_level(_textureCache, 32),
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
 		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png") {
