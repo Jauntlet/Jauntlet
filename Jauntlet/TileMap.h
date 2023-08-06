@@ -51,7 +51,7 @@ namespace Jauntlet {
 
 		std::map<char, tile> _tiles;
 
-		TextureCache* _textureCache;
+		TextureCache& _textureCache;
 	};
 }
 
