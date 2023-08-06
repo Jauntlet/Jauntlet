@@ -1,5 +1,7 @@
 #include "TileSet.h"
 
+using namespace Jauntlet;
+
 // I am sorry for my crimes against humanity.
 TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 	std::string Right, std::string Left, std::string Bottom, std::string Top,
