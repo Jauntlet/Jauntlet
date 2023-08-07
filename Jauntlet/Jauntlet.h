@@ -1,6 +1,5 @@
 #pragma once
-
 namespace Jauntlet {
-	// initializes the game engine
-	extern int init();
+// initializes the game engine
+extern int init();
 }

@@ -1,8 +1,6 @@
 #pragma once
 // this code is a prebuilt PNG loader: we may want to look into our own in the future.
-
 // THIS CODE IS NOT OURS
-
 #include <vector>
 
 namespace Jauntlet {

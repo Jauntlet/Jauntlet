@@ -12,8 +12,7 @@ using namespace Jauntlet;
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 }
 
-void TileMap::registerTile(char identifier, std::string filePath) {	
-	
+void TileMap::registerTile(char identifier, std::string filePath) {
 	tile tmp = tile(filePath);
 	
 	_tiles.insert(std::make_pair(identifier, tmp));

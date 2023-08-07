@@ -22,4 +22,3 @@ private:
 	glm::vec2 _mouseCoords;
 };
 }
-

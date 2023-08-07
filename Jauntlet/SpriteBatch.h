@@ -6,7 +6,6 @@
 #include"Vertex.h"
 
 namespace Jauntlet {
-	
 enum class GlyphSortType {
 	NONE, FRONT_TO_BACK, BACK_TO_FRONT, TEXTURE
 };
@@ -59,4 +58,3 @@ private:
 	std::vector<RenderBatch> _renderBatches;
 };
 }
-

@@ -135,8 +135,8 @@ void SpriteBatch::sortGlyphs() {
 	
 	switch (_sortType) {
 	case GlyphSortType::BACK_TO_FRONT:
-			std::stable_sort(_glyphs.begin(), _glyphs.end(), compareBackToFront);
-			break;
+		std::stable_sort(_glyphs.begin(), _glyphs.end(), compareBackToFront);
+		break;
 	case GlyphSortType::FRONT_TO_BACK:
 		std::stable_sort(_glyphs.begin(), _glyphs.end(), compareFrontToBack);
 		break;
