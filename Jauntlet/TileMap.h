@@ -49,6 +49,8 @@ public:
 	void registerTile(char identifier, std::string filePath, TileCollision collisionType = TileCollision::SQUARE);
 	// register a key to identify a tileSet
 	void registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::SQUARE);
+	// register a key to execute a function at its location
+	void registerFunction(char identifier, std::function<void(int, int)> customFunction);
 	// loads tile map from a file of chars to place all the tiles in the world
 	void loadTileMap(std::string filePath, float offsetX = 0, float offsetY = 0);
 	// draw the tilemap on screen

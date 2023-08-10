@@ -23,6 +23,11 @@ void TileMap::registerTileSet(char identifier, TileSet& tileSet, TileCollision c
 
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
+void TileMap::registerFunction(char identifier, std::function<void(int, int)> customFunction) {
+	tile tmp = tile(customFunction);
+
+	_tiles.insert(std::make_pair(identifier, tmp));
+}
 
 void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
 	std::ifstream file;
