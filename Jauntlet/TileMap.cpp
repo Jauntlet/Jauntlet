@@ -12,14 +12,14 @@ using namespace Jauntlet;
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 }
 
-void TileMap::registerTile(char identifier, std::string filePath) {
-	tile tmp = tile(filePath);
+void TileMap::registerTile(char identifier, std::string filePath, TileCollision collisionType /*= TileCollision::SQUARE*/) {
+	tile tmp = tile(filePath, collisionType);
 	
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
 
-void TileMap::registerTileSet(char identifier, TileSet& tileSet) {
-	tile tmp = tile(&tileSet);
+void TileMap::registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType /*= TileCollision::SQUARE*/) {
+	tile tmp = tile(&tileSet, collisionType);
 
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
@@ -59,7 +59,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 				continue;
 			}
 			
-			if (mapIterator->second.isTileSet) {
+			if (mapIterator->second.tileSet != nullptr) {
 				unsigned int tileData = 0;
 
 				if (x + 1 < _levelData[y].size() && _tiles.find(_levelData[y][x + 1]) != _tiles.end()) {
@@ -76,6 +76,9 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 				}
 
 				_spriteBatch.draw(destRect, uvRect, _textureCache.getTexture(mapIterator->second.tileSet->tileSetToTile(tileData)).id, 0, whiteColor);
+			}
+			else if (mapIterator->second.tileFunc != nullptr) {
+				mapIterator->second.tileFunc(x * _tileSize + offsetX, -y * _tileSize + offsetY);
 			}
 			else {
 				_spriteBatch.draw(destRect, uvRect, _textureCache.getTexture(mapIterator->second.texture).id, 0, whiteColor);

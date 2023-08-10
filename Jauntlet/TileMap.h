@@ -2,29 +2,41 @@
 #include<string>
 #include<vector>
 #include<map>
+#include<functional>
 
 #include "SpriteBatch.h"
 #include "GLTexture.h"
 #include "TextureCache.h"
 #include "TileSet.h"
 namespace Jauntlet {
-// This is probably an unintuitive way to handle this but here are the reasons this solution was chosen
-// 1. We use a map to connect chars with the information of tiles. We need to be able to put both tilesets and individual tiles in there.
-// 2. We need to be able to tell the TileMap whether the tile is a TileSet or a individual tile. 
+
+// This should probably moved somewhere else / renamed later for more global use.
+enum class TileCollision { NONE = 0x0, SQUARE = 0x1 };
+	
+// This is probably an unintuitive way to handle this, however we need to be able to efficentely link the chars from the level file to the texture or tileset based on what it is.
 struct tile {
 	std::string texture;
-	bool isTileSet;
 	TileSet* tileSet;
+	TileCollision collisionType;
+	std::function<void(int, int)> tileFunc;
 
-	tile(std::string Texture) {
+	tile(std::string Texture, TileCollision colType) {
 		texture = Texture;
-		isTileSet = false;
 		tileSet = nullptr;
+		tileFunc = nullptr;
+
+		collisionType = colType;
 	}
-	tile(TileSet* tileset) {
-		texture = "";
-		isTileSet = true;
+	tile(TileSet* tileset, TileCollision colType) {
 		tileSet = tileset;
+		tileFunc = nullptr;
+
+		collisionType = colType;
+	}
+	tile(std::function<void(int, int)> func) {
+		tileSet = nullptr;
+		tileFunc = func;
+		collisionType = TileCollision::NONE;
 	}
 };
 
@@ -34,9 +46,9 @@ public:
 	// loads in the tilemap
 	TileMap(TextureCache& textureCache, int tileSize);
 	// register a key to identify a tile
-	void registerTile(char identifier, std::string filePath);
+	void registerTile(char identifier, std::string filePath, TileCollision collisionType = TileCollision::SQUARE);
 	// register a key to identify a tileSet
-	void registerTileSet(char identifier, TileSet& tileSet);
+	void registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::SQUARE);
 	// loads tile map from a file of chars to place all the tiles in the world
 	void loadTileMap(std::string filePath, float offsetX = 0, float offsetY = 0);
 	// draw the tilemap on screen
