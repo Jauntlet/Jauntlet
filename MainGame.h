@@ -45,7 +45,7 @@ private:
 	GameState _gameState;
 
 	int _screenWidth, _screenHeight;
-	int _fps;
+	float _fps;
 
 	// Temporary variables for testing
 

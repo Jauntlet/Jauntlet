@@ -47,6 +47,16 @@ Tilemaps:
 
   Finally you just need to render the tilemap in your gameloop to see it in game.
   TileMap.draw();
+Input Manager:
+	Inputs are obviously very important to making a game work so heres a guide on how to use our input Manager:
+	*Note: Input is currently detected outside of the engine, meaning if you didn't copy over the code than the input manager may not work properly. This will be changed eventually.
+	
+	Detect if a key is pressed or not (returns bool):
+	inputManager.isKeyDown(keyValue);
+	Most keys are written like "SDLK_w" for the W key.
+	
+	Get the coords of the players mouse (Vec2)
+	inputManager.getMouseCoords();
 
 Error Handling:
   #include <Jauntlet/Errors.h>
