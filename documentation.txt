@@ -31,6 +31,11 @@ Tilesets:
   #include<Jauntlet/TileSet.h>
   The constructor for the tilesets are very long and require filepaths for many different states. This should be visible within Visual Studio so GL!
 
+  You can specify what the tileset will connect to when put into a tilemap. 
+  addConnectionRule(unsigned int rule);
+  This function is expecting you to input a Connection rule like: Jauntlet::TileSet::ConnectionRules::CONDITION. Valid conditions are: NONE, TILESETS, TILES, EMPTY. 
+  Note: NONE means connect to nothing, EMPTY means connect to spaces that are empty.
+
 Tilemaps:
   Tilemaps are used for placing tiles into the world on a grid-based system. They load information from a text file using single-digit characters you define. 
   #include <Jauntlet/TileMap.h>
@@ -42,8 +47,11 @@ Tilemaps:
   TileMap.registerTile(char identifier, std::string filePath);
   TileMap.registerTileSet(char identifier, TileSet& tileSet);
 
+  You can run a function instead of loading a tile via the following method:
+  TileMap.registerFunction(char identifier, &functionName(int, int));
+
   You can load a level using the following method.
-  TileMap.loadTileMap(std::string filePath);
+  TileMap.loadTileMap(std::string filePath, float offsetX, float offsetY);
 
   Finally you just need to render the tilemap in your gameloop to see it in game.
   TileMap.draw();

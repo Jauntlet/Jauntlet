@@ -67,16 +67,16 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			if (mapIterator->second.tileSet != nullptr) {
 				unsigned int tileData = 0;
 
-				if (x + 1 < _levelData[y].size() && _tiles.find(_levelData[y][x + 1]) != _tiles.end()) {
+				if (testTileSetRules(*mapIterator->second.tileSet, x + 1, y)) {
 					tileData |= TileSet::TileSides::RIGHT;
 				}
-				if (x > 0 && _tiles.find(_levelData[y][x - 1]) != _tiles.end()) {
+				if (testTileSetRules(*mapIterator->second.tileSet, x - 1, y)) {
 					tileData |= TileSet::TileSides::LEFT;
 				}
-				if (y + 1 < _levelData.size() && x < _levelData[y + 1].size() && _tiles.find(_levelData[y + 1][x]) != _tiles.end()) {
+				if (testTileSetRules(*mapIterator->second.tileSet, x, y + 1)) {
 					tileData |= TileSet::TileSides::BOTTOM;
 				}
-				if (y > 0 && x < _levelData[y - 1].size() && _tiles.find(_levelData[y - 1][x]) != _tiles.end()) {
+				if (testTileSetRules(*mapIterator->second.tileSet, x, y - 1)) {
 					tileData |= TileSet::TileSides::TOP;
 				}
 
@@ -95,4 +95,33 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 
 void TileMap::draw() {
 	_spriteBatch.renderBatch();
+}
+
+bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
+	
+	// make sure the position is within the level range
+	if (y < 0 || y >= _levelData.size() || x >= _levelData[y].size() || x < 0) {
+		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
+	}
+	
+	auto iterator = _tiles.find(_levelData[y][x]);
+	
+	if (iterator == _tiles.end()) { // must always check if the result is empty first
+		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
+	}
+
+	if (iterator->second.tileSet != nullptr && iterator->second.tileSet->getID() == tile.getID()) { // check if the tile is the same tileset
+		return true;
+	}
+	if (tile.connectionRules & TileSet::ConnectionRules::NONE) { // test if the tileset wants to connect to nothing
+		return false;
+	}
+	if (iterator->second.tileFunc != nullptr) { // check if the tile is a function. For now we treat it as if the space is empty.
+		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
+	}
+	if (iterator->second.tileSet != nullptr) { // check if the tile is a tileset
+		return (tile.connectionRules & TileSet::ConnectionRules::TILESETS) ? true : false;
+	}
+	// The only remaining condition is if the tile is a regular tile.
+	return (tile.connectionRules & TileSet::ConnectionRules::TILES) ? true : false;
 }

@@ -18,8 +18,8 @@ struct tile {
 	std::string texture;
 	TileSet* tileSet;
 	TileCollision collisionType;
-	std::function<void(int, int)> tileFunc;
 
+	std::function<void(int, int)> tileFunc;
 	tile(std::string Texture, TileCollision colType) {
 		texture = Texture;
 		tileSet = nullptr;
@@ -47,7 +47,7 @@ public:
 	TileMap(TextureCache& textureCache, int tileSize);
 	// register a key to identify a tile
 	void registerTile(char identifier, std::string filePath, TileCollision collisionType = TileCollision::SQUARE);
-	// register a key to identify a tileSet
+	// register a key to identify a tileSet. TileSetConnections should be from the "TileSetConnections" ENUM.
 	void registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::SQUARE);
 	// register a key to execute a function at its location
 	void registerFunction(char identifier, std::function<void(int, int)> customFunction);
@@ -56,6 +56,9 @@ public:
 	// draw the tilemap on screen
 	void draw();
 private:
+	// checks whether or not a tileset would connect to the specified tile position.
+	bool testTileSetRules(TileSet tile, int x, int y);
+
 	std::vector<std::string> _levelData;
 	SpriteBatch _spriteBatch;
 
