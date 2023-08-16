@@ -4,6 +4,7 @@
 #include<Jauntlet/Errors.h>
 #include<Jauntlet/ResourceManager.h>
 #include<Jauntlet/Timing.h>
+#include<Jauntlet/TileSet.h>
 
 #include<iostream>
 MainGame::MainGame() : 
@@ -35,8 +36,8 @@ void MainGame::initSystems() {
 
 	// Temporary level loading
 	_level.registerTile('B', "Textures/Craig.png");
-
 	_level.registerTileSet('T', _bricks);
+
 	_level.loadTileMap("Levels/level0.txt");
 }
 
@@ -56,41 +57,15 @@ void MainGame::gameLoop() {
 	while (_gameState == GameState::PLAY) {
 		fpsLimiter.beginFrame();
 
-		processInput();
+		// process all input and detect if the player hits quit
+		if (_inputManager.processInput()) {
+			_gameState = GameState::EXIT;
+		}
 		_camera.update();
 
 		drawGame();
 
 		_fps = fpsLimiter.endFrame();
-	}
-}
-
-void MainGame::processInput() {
-	SDL_Event evnt;
-	
-	while (SDL_PollEvent(&evnt))
-	{
-		switch (evnt.type)
-		{
-			case SDL_QUIT:
-				_gameState = GameState::EXIT;
-				break;
-			case SDL_KEYDOWN:
-				_inputManager.pressKey(evnt.key.keysym.sym);
-				break;
-			case SDL_KEYUP:
-				_inputManager.releaseKey(evnt.key.keysym.sym);
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				_inputManager.pressKey(evnt.button.button);
-				break;
-			case SDL_MOUSEBUTTONUP:
-				_inputManager.releaseKey(evnt.button.button);
-				break;
-			case SDL_MOUSEMOTION:
-				_inputManager.setMouseCoords(evnt.motion.x, evnt.motion.y);
-				break;
-		}
 	}
 }
 

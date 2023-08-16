@@ -98,7 +98,6 @@ void TileMap::draw() {
 }
 
 bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
-	
 	// make sure the position is within the level range
 	if (y < 0 || y >= _levelData.size() || x >= _levelData[y].size() || x < 0) {
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
@@ -109,7 +108,6 @@ bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 	if (iterator == _tiles.end()) { // must always check if the result is empty first
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
-
 	if (iterator->second.tileSet != nullptr && iterator->second.tileSet->getID() == tile.getID()) { // check if the tile is the same tileset
 		return true;
 	}
