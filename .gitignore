@@ -42,3 +42,7 @@
 *.ilk
 *.idb
 Debug/Jauntlet.lib
+Debug/Jauntlet Engine.vcxproj.FileListAbsolute.txt
+Jauntlet/Debug/Jauntlet.vcxproj.FileListAbsolute.txt
+Debug/Jauntlet Engine.exe.recipe
+x64/
