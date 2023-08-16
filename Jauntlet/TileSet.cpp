@@ -25,12 +25,15 @@ void TileSet::addConnectionRule(unsigned int rule) {
 }
 
 // used by tilemaps to find and display the correct tile based on surrounding tiles
-std::string TileSet::tileSetToTile(unsigned int layout) {
-	
+std::string TileSet::tileSetToTile(unsigned int layout) {	
 	// 1 = right side
 	// 2 = bottom
 	// 4 = top
 	// 8 = left
+	// 16 = top right
+	// 32 = top left
+	// 64 = bottom right
+	// 128 = bottom left
 
 	switch (layout) {
 		case 1:

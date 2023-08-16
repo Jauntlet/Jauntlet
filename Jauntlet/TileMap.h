@@ -69,4 +69,3 @@ private:
 	TextureCache& _textureCache;
 };
 }
-
