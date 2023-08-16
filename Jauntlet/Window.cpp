@@ -3,7 +3,7 @@
 
 using namespace Jauntlet;
 
-int Window::create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags)
+int Window::create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags /*= 0*/)
 {
 
 	Uint32 flags = SDL_WINDOW_OPENGL;

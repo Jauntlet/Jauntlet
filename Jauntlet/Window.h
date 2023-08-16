@@ -12,7 +12,7 @@ class Window
 {
 public:
 	// Creates a window using SDL and openGL
-	int create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
+	int create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags = 0);
 	// Swaps the windows buffer
 	void swapBuffer();
 	// getters
