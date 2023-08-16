@@ -77,6 +77,6 @@ CREATING A NEW GAME:
   - create a new C++ empty project
   - copy the "Jauntlet" folder from here to the new project folder.
   - copy dependencies folder from main project TODO: MAKE THIS NOT STUPID LOL
-  - in the new porjects library directories (VC++ Directories > Library Directories), add "$(SolutionDir)Debug"
+  - in the new projects library directories (VC++ Directories > Library Directories), add "$(SolutionDir)Debug"
   - still in the same project menu as before, add "$(SolutionDir)" to Include Directories
   - go to properties > Linker > Input > Additional Dependencies and add "Jauntlet.lib", "SDL2.lib", "SDL2main.lib", "opengl32.lib", "glew32.lib"
