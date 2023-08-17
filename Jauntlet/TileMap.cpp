@@ -12,14 +12,14 @@ using namespace Jauntlet;
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 }
 
-void TileMap::registerTile(char identifier, std::string filePath, TileCollision collisionType /*= TileCollision::SQUARE*/) {
-	tile tmp = tile(filePath, collisionType);
+void TileMap::registerTile(char identifier, std::string filePath) {
+	tile tmp = tile(filePath);
 	
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
 
-void TileMap::registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType /*= TileCollision::SQUARE*/) {
-	tile tmp = tile(&tileSet, collisionType);
+void TileMap::registerTileSet(char identifier, TileSet& tileSet) {
+	tile tmp = tile(&tileSet);
 
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
