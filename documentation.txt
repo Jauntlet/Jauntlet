@@ -3,16 +3,16 @@ Programming Standards:
 - We do not use namespace std
 
 Shaders:
-  Shaders are a complicated subject, and hard to understand under pretty much every circumstance. The shader files themselves are in a language called "GLSL"   (Open Graphics Library Shading language) and does not natively have any IDE support
+  Shaders are a complicated subject, and hard to understand in almost every circumstance. The shader files themselves are in a language called "GLSL"   (Open Graphics Library Shading language) and do not natively have any IDE support
 
-  Currently within Jauntlet you can create an instance of GLSLProgram to compile a vertex and fragment shader. Simply use     GLSLProgram.compileShaders("vertexShaderFilePath", "fragmentShaderFilePath") to create those two shaders. 
+  Currently, within Jauntlet you can create an instance of GLSLProgram to compile a vertex and fragment shader. Use     GLSLProgram.compileShaders("vertexShaderFilePath", "fragmentShaderFilePath") to create those two shaders. 
 
   You can add attributes to each shader by also adding GLSLProgram.addAttribute("Attribute") and then link them using GLSLProgram.linkShaders();
   To access any variables you add, you can use GLSLProgram.getUniformLocation("Attribute")
 
   * note GLSLProgram references whatever you named the actual program when creating it.
 
-  In the future there will be more ways to create and compile shaders but that will have to created seperately. As for actually making shaders,
+  In the future, there will be more ways to create and compile shaders but that will have to be created separately. As for actually making shaders,
   reference any in the "Shaders" folder and learn more about GLSL shader programming. 
 
 Sprites:
@@ -23,18 +23,18 @@ Sprites:
 
 Obtaining a Texture:
   (handled if you are just using a sprite!)
-  We use texture caching to make sure that we are efficentely allocating and reusing textures efficiently, We firstly have a global ResourceManager which stores the majority of the textures, which you can use with ResourceManager::getTexture(filePath);
-  if for some reason you need to make a new seperate cache of textures, you can create a new one with the TextureCache class.
+  We use texture caching to make sure that we are efficiently allocating and reusing textures efficiently, We first have a global ResourceManager which stores the majority of the textures, which you can use with ResourceManager::getTexture(filePath);
+  if for some reason you need to make a new separate cache of textures, you can create a new one with the TextureCache class.
 
 Tilesets:
-  Tilesets are handy for automatically letting Jauntlet understand how tiles should be oriented and placed dynamically based on its surroundings. 
+  Tilesets are handy for automatically letting Jauntlet understand how tiles should be oriented and placed dynamically based on their surroundings. 
   #include<Jauntlet/TileSet.h>
-  The constructor for the tilesets are very long and require filepaths for many different states. This should be visible within Visual Studio so GL!
+  The constructor for the tilesets are very long and require file paths for many different states. This should be visible within Visual Studio so GL!
 
   You can specify what the tileset will connect to when put into a tilemap. 
   addConnectionRule(unsigned int rule);
-  This function is expecting you to input a Connection rule like: Jauntlet::TileSet::ConnectionRules::CONDITION. Valid conditions are: NONE, TILESETS, TILES, EMPTY. 
-  Note: NONE means connect to nothing, EMPTY means connect to spaces that are empty.
+  This function is expecting you to input a Connection rule like Jauntlet::TileSet::ConnectionRules::CONDITION. Valid conditions are NONE, TILESETS, TILES, EMPTY. 
+  Note: NONE means to connect to nothing, and EMPTY means to connect to empty spaces.
 
 Tilemaps:
   Tilemaps are used for placing tiles into the world on a grid-based system. They load information from a text file using single-digit characters you define. 
@@ -43,7 +43,7 @@ Tilemaps:
   The constructor requires a global texture cache for storing its texture data, and you can define the size of its tiles.
   TileMap(TextureCache* textureCache, int tileSize);
 
-  Before you can load a level from a tilemap, you must first tell the tilemap what each character means and what it leads to. You can add either an individual tile texture, or a tileset to a character. 
+  Before you can load a level from a tilemap, you must tell the tilemap what each character means and what it leads to. You can add either an individual tile texture or a tileset to a character. 
   TileMap.registerTile(char identifier, std::string filePath);
   TileMap.registerTileSet(char identifier, TileSet& tileSet);
 
@@ -53,17 +53,17 @@ Tilemaps:
   You can load a level using the following method.
   TileMap.loadTileMap(std::string filePath, float offsetX, float offsetY);
 
-  Finally you just need to render the tilemap in your gameloop to see it in game.
+  Finally, you just need to render the tilemap in your game loop to see it in the game.
   TileMap.draw();
 Input Manager:
-	Inputs are obviously very important to making a game work so heres a guide on how to use our input Manager:
-	*Note: Input is currently detected outside of the engine, meaning if you didn't copy over the code than the input manager may not work properly. This will be changed eventually.
+	Inputs are very important to make a game work so heres a guide on how to use our input Manager:
+	*Note: Input is currently detected outside of the engine, meaning if you didn't copy over the code then the input manager may not work properly. This will be changed eventually.
 	
 	Detect if a key is pressed or not (returns bool):
 	inputManager.isKeyDown(keyValue);
 	Most keys are written like "SDLK_w" for the W key.
 	
-	Get the coords of the players mouse (Vec2)
+	Get the coords of the player's mouse (Vec2)
 	inputManager.getMouseCoords();
 
 Error Handling:
@@ -77,6 +77,6 @@ CREATING A NEW GAME:
   - create a new C++ empty project
   - copy the "Jauntlet" folder from here to the new project folder.
   - copy dependencies folder from main project TODO: MAKE THIS NOT STUPID LOL
-  - in the new porjects library directories (VC++ Directories > Library Directories), add "$(SolutionDir)Debug"
+  - in the new projects library directories (VC++ Directories > Library Directories), add "$(SolutionDir)Debug"
   - still in the same project menu as before, add "$(SolutionDir)" to Include Directories
   - go to properties > Linker > Input > Additional Dependencies and add "Jauntlet.lib", "SDL2.lib", "SDL2main.lib", "opengl32.lib", "glew32.lib"
