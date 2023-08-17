@@ -20,22 +20,15 @@ public:
 	// Used by TileMaps to correctly calculate the tile to display
 	std::string tileSetToTile(unsigned int layout);
 	// Get the ID for the tileset, meant to differientiate different TileSets.
-	int getID() {
+	const int getID() {
 		return _id;
 	}
 	unsigned int connectionRules;
 private:
 	int _id;
 	
-	std::string _allSidesCovered, _noSidesCovered;
-	// Everything below is named based on what sides are uncovered
-	std::string _right, _left, _bottom, _top;
-	std::string _bottomRight, _bottomLeft, _bottomTop;
-	std::string _topRight, _topLeft, _rightLeft;
-	std::string _bottomTopLeft, _bottomTopRight, _bottomLeftRight, _topRightLeft;
-
+	std::string _mainTiles[16];
 	// Corners. These are special case pieces.
 	// std::string _topLeftCorner, _topRightCorner, _bottomLeftCorner, _bottomRightCorner;
-
 };
 }
