@@ -68,7 +68,6 @@ void MainGame::gameLoop() {
 		drawGame();
 
 		_fps = Time.endFrame();
-		std::cout << Time.getDeltaTime()<<":"<<_fps<< "\n";
 	}
 }
 
