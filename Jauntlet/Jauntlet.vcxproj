@@ -164,7 +164,7 @@
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileSet.cpp" />
-    <ClCompile Include="Timing.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +183,7 @@
     <ClInclude Include="TextureCache.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TileSet.h" />
-    <ClInclude Include="Timing.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

@@ -54,7 +54,7 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Timing.cpp">
+    <ClCompile Include="Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
@@ -110,7 +110,7 @@
     <ClInclude Include="InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Timing.h">
+    <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">

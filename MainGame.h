@@ -11,7 +11,7 @@
 #include<Jauntlet/Camera2D.h>
 #include<Jauntlet/SpriteBatch.h>
 #include<Jauntlet/InputManager.h>
-#include<Jauntlet/Timing.h>
+#include<Jauntlet/Time.h>
 #include<Jauntlet/TileMap.h>
 #include<Jauntlet/TileSet.h>
 

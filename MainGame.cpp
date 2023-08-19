@@ -3,7 +3,7 @@
 #include<Jauntlet/Jauntlet.h>
 #include<Jauntlet/Errors.h>
 #include<Jauntlet/ResourceManager.h>
-#include<Jauntlet/Timing.h>
+#include<Jauntlet/Time.h>
 #include<Jauntlet/TileSet.h>
 
 #include<iostream>
@@ -53,11 +53,11 @@ void MainGame::initShaders() {
 
 void MainGame::gameLoop() {
 
-	Jauntlet::FpsLimiter fpsLimiter;
-	fpsLimiter.setMaxFPS(60);
+	Jauntlet::Time Time;
+	Time.setMaxFPS(60);
 
 	while (_gameState == GameState::PLAY) {
-		fpsLimiter.beginFrame();
+		Time.beginFrame();
 
 		// process all input and detect if the player hits quit
 		if (_inputManager.processInput()) {
@@ -67,7 +67,8 @@ void MainGame::gameLoop() {
 
 		drawGame();
 
-		_fps = fpsLimiter.endFrame();
+		_fps = Time.endFrame();
+		std::cout << Time.getDeltaTime()<<":"<<_fps<< "\n";
 	}
 }
 
