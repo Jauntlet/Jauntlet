@@ -4,15 +4,14 @@
 
 using namespace Jauntlet;
 
-Collision2D::Collision2D(Collider2D parent, Collider2D other)
+Collision2D::Collision2D(Collider2D parent, Collider2D other) //constructor
 {
-	_parent = parent;
-	_other = other;
+	_parent = parent; //the collider that did the check
+	_other = other; //the collided-with collider
 
-	//TODO: get the position of the collider parent and the position of the collider "other" and determine the other object's position RELATIVE to the parent (pretty sure its other.pos (x or y) minus parent.pos (also x or y)) and then calculate for magnitude = 1. 
 	//calculate normal
-	float _x = other.position[0] - parent.position[0]; //test value, will be other.x - parent.x
-	float _y = other.position[1] - parent.position[1]; //test value, will be other.y - parent.y
+	float _x = other.position[0] - parent.position[0]; //gets a relative distance between the colliders as a position
+	float _y = other.position[1] - parent.position[1]; //same for y
 
 	//get angle of the two values
 	unsigned float _angle = std::atan(_y / _x);
@@ -25,17 +24,17 @@ Collision2D::Collision2D(Collider2D parent, Collider2D other)
 	_normal = { _x, _y };
 }
 
-std::vector<std::array<float, 2>> Collision2D::GetCollisionPoints()
+std::vector<std::array<float, 2>> Collision2D::GetCollisionPoints() //NOT USED / CALCULATED YET
 {
-	return _collisionPoints;
+	return _collisionPoints; //very simple
 }
 
 std::array<float, 2> Collision2D::GetNormal()
 {
-	return _normal;
+	return _normal; //very simple
 }
 
-CircleCollider2D::CircleCollider2D(float radius, float offsetX = 0, float offsetY = 0)
+CircleCollider2D::CircleCollider2D(float radius, float offsetX = 0, float offsetY = 0) //
 {
 	_radius = radius;
 	_offsetX = offsetX;
@@ -44,7 +43,7 @@ CircleCollider2D::CircleCollider2D(float radius, float offsetX = 0, float offset
 	position = { _offsetX, _offsetY };
 }
 
-void CircleCollider2D::SetRadius(float value)
+void CircleCollider2D::SetRadius(float value) //allows for the changing of size for the circle collider
 {
-	_radius = value;
+	_radius = value; //set
 }
