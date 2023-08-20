@@ -4,7 +4,7 @@
 
 using namespace Jauntlet;
 
-JCollision2D::JCollision2D(JCollider2D parent, JCollider2D other) : _parent(parent), _other(other) //constructor
+Collision2D::Collision2D(Collider2D parent, Collider2D other) : _parent(parent), _other(other) //constructor
 {
 	//_parent = parent; //the collider that did the check
 	//_other = other; //the collided-with collider
@@ -24,18 +24,15 @@ JCollision2D::JCollision2D(JCollider2D parent, JCollider2D other) : _parent(pare
 	_normal = { _x, _y };
 }
 
-std::vector<std::vector<float>> JCollision2D::GetCollisionPoints() //NOT USED / CALCULATED YET
-{
-	return _collisionPoints; //very simple
+std::vector<std::vector<float>> Collision2D::GetCollisionPoints() { //NOT USED / CALCULATED YET
+	return _collisionPoints;
 }
 
-std::vector<float> JCollision2D::GetNormal()
-{
-	return _normal; //very simple
+std::vector<float> Collision2D::GetNormal() {
+	return _normal;
 }
 
-CircleJCollider2D::CircleJCollider2D(float radius, float offsetX, float offsetY) : _radius(radius), _offsetX(offsetX), _offsetY(offsetY)
-{
+CircleCollider2D::CircleCollider2D(float radius, float offsetX, float offsetY) : _radius(radius), _offsetX(offsetX), _offsetY(offsetY) {
 	//_radius = radius;
 	//_offsetX = offsetX;
 	//_offsetY = offsetY;
@@ -43,7 +40,6 @@ CircleJCollider2D::CircleJCollider2D(float radius, float offsetX, float offsetY)
 	position = { _offsetX, _offsetY };
 }
 
-void CircleJCollider2D::SetRadius(float value) //allows for the changing of size for the circle collider
-{
-	_radius = value; //set
+void CircleCollider2D::SetRadius(float value) { //allows for the changing of size for the circle collider
+	_radius = value;
 }
