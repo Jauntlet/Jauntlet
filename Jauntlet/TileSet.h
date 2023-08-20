@@ -6,7 +6,7 @@ class TileSet
 {
 
 public:
-	enum TileSides { RIGHT = 0x1, BOTTOM = 0x2, TOP = 0x4, LEFT = 0x8, TOPRIGHT = 0x16, TOPLEFT = 0x32, BOTTOMRIGHT = 0x64, BOTTOMLEFT = 0x128 };
+	enum TileSides { RIGHT = 0x1, BOTTOM = 0x2, TOP = 0x4, LEFT = 0x8 };
 	// The rules for Tilesets connecting to other tile types. NONE means it will only connect to itself.
 	enum ConnectionRules { NONE = 0x0, TILESETS = 0x1, TILES = 0x2, EMPTY = 0x4 };
 
@@ -28,7 +28,5 @@ private:
 	int _id;
 	
 	std::string _mainTiles[16];
-	// Corners. These are special case pieces.
-	// std::string _topLeftCorner, _topRightCorner, _bottomLeftCorner, _bottomRightCorner;
 };
 }
