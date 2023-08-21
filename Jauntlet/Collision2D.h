@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <glm/glm.hpp>
 
 namespace Jauntlet
 {
@@ -8,7 +9,7 @@ namespace Jauntlet
 class Collider2D {
 public:
 	//an array of 2 floats. [0] = X [1] = Y.
-	std::vector<float> position; 
+	glm::vec2 position; 
 protected:
 	//Sprite _linkedSprite;
 };
@@ -19,14 +20,14 @@ public:
 	//constructor (requires the two colliding objects)
 	Collision2D(Collider2D parent, Collider2D other); 
  //not functional yet
-	std::vector<std::vector<float>> GetCollisionPoints();
-	// returns a "vector 2" regarding a direction (0,0 would be dead center) with a magnitude of 1.
-	std::vector<float> GetNormal(); 
+	std::vector<glm::vec2> GetCollisionPoints();
+	// returns a vector2  regarding a direction (0,0 would be dead center) with a magnitude of 1.
+	glm::vec2 GetNormal(); 
 private:
 	//still not functional
 	//std::vector<std::vector<float>> _collisionPoints; 
 	//normal at the point of collision
-	std::vector<float> _normal;
+	glm::vec2 _normal;
 	//Main collider in calculation
 	Collider2D _parent; 
 	//the collider that collided with during the check
@@ -43,7 +44,6 @@ public:
 
 private:
 	float _radius; //determines how far out to check for collision
-	float _offsetX; //Offset from parent object (if we parent it to something) for now determines position
-	float _offsetY; //See above; works for Y values instead
+	glm::vec2 _offset; //Offset from parent object (if we parent it to something) for now determines position
 };
 }
