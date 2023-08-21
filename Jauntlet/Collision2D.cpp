@@ -24,9 +24,9 @@ Collision2D::Collision2D(Collider2D parent, Collider2D other) : _parent(parent),
 	_normal = { _x, _y };
 }
 
-std::vector<std::vector<float>> Collision2D::GetCollisionPoints() { //NOT USED / CALCULATED YET
-	return _collisionPoints;
-}
+//std::vector<std::vector<float>> Collision2D::GetCollisionPoints() { //NOT USED / CALCULATED YET
+//	return _collisionPoints;
+//}
 
 std::vector<float> Collision2D::GetNormal() {
 	return _normal;
@@ -36,10 +36,9 @@ CircleCollider2D::CircleCollider2D(float radius, float offsetX, float offsetY) :
 	//_radius = radius;
 	//_offsetX = offsetX;
 	//_offsetY = offsetY;
-
 	position = { _offsetX, _offsetY };
 }
-
-void CircleCollider2D::SetRadius(float value) { //allows for the changing of size for the circle collider
+//allows for the changing of size for the circle collider
+void CircleCollider2D::SetRadius(float value) {
 	_radius = value;
 }
