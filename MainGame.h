@@ -15,6 +15,8 @@
 #include<Jauntlet/TileMap.h>
 #include<Jauntlet/TileSet.h>
 
+#include"Player.h"
+
 enum class GameState {
 	PLAY, EXIT
 };
@@ -47,7 +49,10 @@ private:
 	float _fps;
 
 	// Temporary variables for testing
+	Jauntlet::SpriteBatch _playerSpriteBatch;
 
 	Jauntlet::TileMap _level;
 	Jauntlet::TileSet _bricks;
+
+	Player _player;
 };

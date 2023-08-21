@@ -16,7 +16,8 @@ MainGame::MainGame() :
 	_level(_textureCache, 32),
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
-		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png") {
+		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png"),
+	_player(-5 * 32, 0) {
 }
 
 void MainGame::run() {
@@ -33,6 +34,9 @@ void MainGame::initSystems() {
 	initShaders();
 
 	_camera.init(_screenWidth, _screenHeight);
+
+	// initialize player spriteBatch
+	_playerSpriteBatch.init();
 
 	// Temporary level loading
 	_level.registerTile('B', "Textures/Craig.png");
@@ -63,6 +67,10 @@ void MainGame::gameLoop() {
 		if (_inputManager.processInput()) {
 			_gameState = GameState::EXIT;
 		}
+		_player.update(_inputManager);
+		
+		_camera.setPosition(_player.getPosition());
+
 		_camera.update();
 
 		drawGame();
@@ -90,6 +98,12 @@ void MainGame::drawGame() {
 
 	// Draw Level
 	_level.draw();
+	// Draw the player using a spriteBatch
+	_playerSpriteBatch.begin();
+	_player.draw(_playerSpriteBatch);
+	_playerSpriteBatch.end();
+
+	_playerSpriteBatch.renderBatch();
 
 	_colorProgram.unuse();
 

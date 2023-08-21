@@ -11,7 +11,6 @@ class ResourceManager
 public:
 	// gets a texture from the texturecache
 	static GLTexture getTexture(std::string texturePath);
-
 private:
 	static TextureCache _textureCache;
 };
