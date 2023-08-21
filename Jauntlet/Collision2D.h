@@ -24,7 +24,7 @@ public:
 	std::vector<float> GetNormal(); 
 private:
 	//still not functional
-	std::vector<std::vector<float>> _collisionPoints; 
+	//std::vector<std::vector<float>> _collisionPoints; 
 	//normal at the point of collision
 	std::vector<float> _normal;
 	//Main collider in calculation
