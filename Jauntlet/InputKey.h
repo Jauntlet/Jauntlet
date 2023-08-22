@@ -18,6 +18,6 @@ public:
 private:
 	 std::vector<SDL_KeyCode> _keys;
 	 InputManager* _inputManager;
-}
+};
 };
 
