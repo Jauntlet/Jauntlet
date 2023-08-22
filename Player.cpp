@@ -25,9 +25,6 @@ void Player::update(Jauntlet::InputManager& inputManager) {
 }
 
 void Player::draw(Jauntlet::SpriteBatch& spriteBatch) {
-	// For some reason I am getting errors using ResourceManager currently. WILL BE LOOKED INTO SOON.
-	static int textureID = 0; //Jauntlet::ResourceManager::getTexture("Textures/Craig.png").id;
-
 	const glm::vec4 uvRect(0, 0, 1, 1);
 	glm::vec4 destRect;
 	// position to draw player
@@ -40,7 +37,7 @@ void Player::draw(Jauntlet::SpriteBatch& spriteBatch) {
 	static Jauntlet::Color color;
 	color.setColor(255, 255, 255, 255);
 
-	spriteBatch.draw(destRect, uvRect, textureID, 0, color);
+	spriteBatch.draw(destRect, uvRect, Jauntlet::ResourceManager::getTexture("Textures/Craig.png").id, 0, color);
 }
 
 void Player::setPosition(float x, float y) {

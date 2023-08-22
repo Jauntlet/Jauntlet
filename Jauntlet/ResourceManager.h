@@ -14,4 +14,4 @@ public:
 private:
 	static TextureCache _textureCache;
 };
-}
+};
