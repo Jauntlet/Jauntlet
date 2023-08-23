@@ -2,25 +2,26 @@
 #include<Jauntlet/ResourceManager.h>
 #include<Jauntlet/Vertex.h>
 #include<SDL/SDL.h>
+#include<Jauntlet/Time.h>
 
 Player::Player(float x, float y) {
 	_position = glm::vec2(x, y);
 }
 
 void Player::update(Jauntlet::InputManager& inputManager) {
-	const float SPEED = 3;
+	const float SPEED = 120;
 	
 	if (inputManager.isKeyDown(SDLK_w)) {
-		_position.y += SPEED;
+		_position.y += SPEED * Jauntlet::Time::getDeltaTime();
 	}
 	if (inputManager.isKeyDown(SDLK_s)) {
-		_position.y -= SPEED;
+		_position.y -= SPEED * Jauntlet::Time::getDeltaTime();
 	}
 	if (inputManager.isKeyDown(SDLK_a)) {
-		_position.x -= SPEED;
+		_position.x -= SPEED * Jauntlet::Time::getDeltaTime();
 	}
 	if (inputManager.isKeyDown(SDLK_d)) {
-		_position.x += SPEED;
+		_position.x += SPEED * Jauntlet::Time::getDeltaTime();
 	}
 }
 

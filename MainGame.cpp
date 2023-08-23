@@ -7,6 +7,7 @@
 #include<Jauntlet/TileSet.h>
 
 #include<iostream>
+
 MainGame::MainGame() : 
 	_screenWidth(1024), 
 	_screenHeight(768), 
@@ -29,7 +30,7 @@ void MainGame::run() {
 void MainGame::initSystems() {
 	Jauntlet::init();
 
-	_window.create("Jauntlet Game Engine", _screenWidth, _screenHeight, 0);
+	_window.create("Jauntlet Game Engine", _screenWidth, _screenHeight, Jauntlet::WindowFlags::FULLSCREEN);
 
 	initShaders();
 
@@ -56,12 +57,10 @@ void MainGame::initShaders() {
 }
 
 void MainGame::gameLoop() {
-
-	Jauntlet::Time Time;
-	Time.setMaxFPS(60);
+	Jauntlet::Time::setMaxFPS(60);
 
 	while (_gameState == GameState::PLAY) {
-		Time.beginFrame();
+		Jauntlet::Time::beginFrame();
 
 		// process all input and detect if the player hits quit
 		if (_inputManager.processInput()) {
@@ -75,7 +74,7 @@ void MainGame::gameLoop() {
 
 		drawGame();
 
-		_fps = Time.endFrame();
+		_fps = Jauntlet::Time::endFrame();
 	}
 }
 

@@ -2,30 +2,26 @@
 namespace Jauntlet{
 class Time {
 public:
-	//Time class constructor
-	Time();
 	//initialize fps
-	void init(int maxFPS);
-	void setMaxFPS(int maxFPS);
+	static void setMaxFPS(int maxFPS);
 
-	void beginFrame();
+	static void beginFrame();
 	// returns current FPS
-	float endFrame();
+	static float endFrame();
 	//returns time from last frame in seconds
-	float getDeltaTime();
-// returns how fast the game is running (1 is default)
-   float getTimeScale();
-   //get game speed
-	void setTimeScale(float newScale);
-
+	static float getDeltaTime();
+	// returns how fast the game is running (1 is default)
+    static float getTimeScale();
+    //get game speed
+	static void setTimeScale(float newScale);
 
 private:
-	void calculateFPS();
+	static void calculateFPS();
 
-	float _fps;
-	float _maxFPS;
-	float _deltaTime;
-	float _timeScale;
-	unsigned int _startTicks;
+	static float _fps;
+	static float _maxFPS;
+	static float _deltaTime;
+	static float _timeScale;
+	static unsigned int _startTicks;
 };
 }

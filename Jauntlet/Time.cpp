@@ -5,13 +5,12 @@
 
 namespace Jauntlet
 {
-// all of the initialized variables are instantly overwritten, so don't worry about them (its to remove warnings)
-Time::Time() : _fps(0), _deltaTime(0), _maxFPS(120), _startTicks(0) {
 
-}
-void Time::init(int maxFPS) {
-	setMaxFPS(maxFPS);
-}
+	float Time::_fps = 0;
+	float Time::_maxFPS = -1;
+	float Time::_deltaTime = 0;
+	float Time::_timeScale = 1;
+	unsigned int Time::_startTicks;
 
 void Time::setMaxFPS(int maxFPS) {
 	_maxFPS = maxFPS;
