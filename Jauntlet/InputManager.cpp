@@ -30,6 +30,10 @@ bool InputManager::processInput() {
 		case SDL_MOUSEMOTION:
 			setMouseCoords(evnt.motion.x, evnt.motion.y);
 			break;
+		case SDL_WINDOWEVENT:
+			if (evnt.window.event == SDL_WINDOWEVENT_RESIZED) {
+				// window has been resized
+			}
 		}
 	}
 
