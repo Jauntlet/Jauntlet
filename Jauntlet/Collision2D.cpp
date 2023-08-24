@@ -29,16 +29,20 @@ Collision2D::Collision2D(Collider2D parent, Collider2D other) : _parent(parent),
 //	return _collisionPoints;
 //}
 
+//returns a vector2 regarding a direction (0,0 would be dead center) with a magnitude of 1.
 glm::vec2 Collision2D::GetNormal() {
 	return _normal;
 }
 
-CircleCollider2D::CircleCollider2D(float radius, float offsetX, float offsetY) : _radius(radius) {
+//constructor; requires at least a radius and position x & y.
+CircleCollider2D::CircleCollider2D(float radius, float x, float y, float offsetX, float offsetY) : _radius(radius) {
 	//_radius = radius;
 	//_offsetX = offsetX;
 	//_offsetY = offsetY;
-	position = glm::vec2(offsetX, offsetY);
+	position = glm::vec2(x, y);
+	_offset = glm::vec2(offsetX, offsetY);
 }
+
 //allows for the changing of size for the circle collider
 void CircleCollider2D::SetRadius(float value) {
 	_radius = value;

@@ -19,9 +19,11 @@ class Collision2D //the returned class for collision data
 public:
 	//constructor (requires the two colliding objects)
 	Collision2D(Collider2D parent, Collider2D other); 
- //not functional yet
-	std::vector<glm::vec2> GetCollisionPoints();
-	// returns a vector2  regarding a direction (0,0 would be dead center) with a magnitude of 1.
+	
+	//not functional yet
+	//std::vector<glm::vec2> GetCollisionPoints();
+	
+	//returns a vector2  regarding a direction (0,0 would be dead center) with a magnitude of 1.
 	glm::vec2 GetNormal(); 
 private:
 	//still not functional
@@ -33,12 +35,12 @@ private:
 	//the collider that collided with during the check
 	Collider2D _other;
 };
-//Circle Collider, has a radius and otherwise is fairly simple. Collision determined by distance from center
+//Circle Collider, has a radius and position x & y. Collision determined by distance from center.
 class CircleCollider2D : Collider2D 
 {
 public:
-	//constructor; only radius is required but it will spawn at 0,0.
-	CircleCollider2D(float radius, float offsetX = 0, float offsetY = 0);
+	//constructor; requires at least a radius and position x & y.
+	CircleCollider2D(float radius, float x, float y, float offsetX = 0, float offsetY = 0);
 	//allows the changing of the radius
 	void SetRadius(float value);
 
