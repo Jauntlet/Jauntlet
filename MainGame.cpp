@@ -70,6 +70,11 @@ void MainGame::gameLoop() {
 		
 		_camera.setPosition(_player.getPosition());
 
+		if (_inputManager.windowResized()) {
+			_window.getWindowSize();
+			_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
+		}
+
 		_camera.update();
 
 		drawGame();
