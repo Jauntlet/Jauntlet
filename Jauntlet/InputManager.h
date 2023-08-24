@@ -17,6 +17,8 @@ public:
 	SDL_KeyCode lastButtonPressed();
 	// sets the last button pressed to the ESCAPE key.
 	void clearLastButtonPressed();
+	// returns true if the window has been resized since the last time the method was called.
+	bool windowResized();
 
 	// getters
 	glm::vec2 getMouseCoords() const { return _mouseCoords; }
@@ -29,5 +31,7 @@ private:
 	glm::vec2 _mouseCoords;
 
 	SDL_KeyCode _lastInput;
+
+	bool _windowResized;
 };
 }

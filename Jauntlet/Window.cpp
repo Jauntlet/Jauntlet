@@ -17,6 +17,9 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 	if (currentFlags & BORDERLESS) {
 		flags |= SDL_WINDOW_BORDERLESS;
 	}
+	if (currentFlags & RESIZEABLE) {
+		flags |= SDL_WINDOW_RESIZABLE;
+	}
 
 	// create the window
 	_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);
@@ -53,4 +56,30 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 
 void Window::swapBuffer() {
 	SDL_GL_SwapWindow(_sdlWindow);
+}
+
+void Window::setWindowSize(glm::ivec2 size) {
+	_screenWidth = size.x;
+	_screenWidth = size.y;
+	SDL_SetWindowSize(_sdlWindow, size.x, size.y);
+}
+void Window::setWindowSize(int width, int height) {
+	_screenWidth = width;
+	_screenHeight = height;
+	SDL_SetWindowSize(_sdlWindow, width, height);
+}
+
+// get the width of the screen
+int Window::getWindowWidth() {
+	return _screenWidth; 
+}
+
+int Window::getWindowHeight() {
+	return _screenHeight; 
+}
+
+glm::ivec2 Window::getWindowSize() {
+	SDL_GetWindowSize(_sdlWindow, &_screenWidth, &_screenHeight);
+	
+	return glm::ivec2(_screenWidth, _screenHeight); 
 }

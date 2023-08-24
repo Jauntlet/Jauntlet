@@ -2,7 +2,7 @@
 #include<SDL/SDL.h>
 using namespace Jauntlet;
 
-InputManager::InputManager(): _mouseCoords(0), _lastInput(SDLK_ESCAPE) {
+InputManager::InputManager(): _mouseCoords(0), _lastInput(SDLK_ESCAPE), _windowResized(false) {
 
 }
 
@@ -32,7 +32,7 @@ bool InputManager::processInput() {
 			break;
 		case SDL_WINDOWEVENT:
 			if (evnt.window.event == SDL_WINDOWEVENT_RESIZED) {
-				// window has been resized
+				_windowResized = true;
 			}
 		}
 	}
@@ -50,6 +50,14 @@ SDL_KeyCode InputManager::lastButtonPressed() {
 void InputManager::clearLastButtonPressed() {
 	_lastInput = SDLK_ESCAPE;
 };
+
+bool InputManager::windowResized() {
+	if (_windowResized) {
+		_windowResized = false;
+		return true;
+	}
+	return false;
+}
 
 void InputManager::pressKey(unsigned int keyID) {
 	_keyMap[keyID] = true;
