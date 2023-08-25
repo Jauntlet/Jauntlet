@@ -12,6 +12,9 @@ struct Color {
 	GLubyte b;
 	GLubyte a;
 
+	Color() : r(0), g(0), b(0), a(255) { }
+	Color(GLubyte R, GLubyte G, GLubyte B, GLubyte A) : r(R), g(G), b(B), a(A) { }
+
 	void setColor(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha) {
 		r = red;
 		g = green;
