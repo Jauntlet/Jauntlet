@@ -9,6 +9,11 @@ InputManager::InputManager(): _mouseCoords(0), _lastInput(SDLK_ESCAPE), _windowR
 bool InputManager::processInput() {
 	SDL_Event evnt;
 
+	// updates previous key map via foreach loop
+	for (auto& it : _keyMap) {
+		_previousKeyMap[it.first] = it.second;
+	}
+
 	while (SDL_PollEvent(&evnt))
 	{
 		switch (evnt.type)
@@ -31,7 +36,7 @@ bool InputManager::processInput() {
 			setMouseCoords(evnt.motion.x, evnt.motion.y);
 			break;
 		case SDL_WINDOWEVENT:
-			if (evnt.window.event == SDL_WINDOWEVENT_RESIZED) {
+			if (evnt.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
 				_windowResized = true;
 			}
 		}
@@ -42,6 +47,10 @@ bool InputManager::processInput() {
 
 bool InputManager::isKeyDown(unsigned int keyID) {
 	return _keyMap[keyID];
+}
+
+bool InputManager::isKeyPressed(unsigned int keyID) {
+	return _keyMap[keyID] ? !_previousKeyMap[keyID] : false;
 }
 
 SDL_KeyCode InputManager::lastButtonPressed() {

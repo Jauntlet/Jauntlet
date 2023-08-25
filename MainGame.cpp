@@ -70,11 +70,12 @@ void MainGame::gameLoop() {
 		
 		_camera.setPosition(_player.getPosition());
 
-		if (_inputManager.isKeyDown(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) && _inputManager.isKeyDown(SDLK_RETURN))) {
+		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) && _inputManager.isKeyPressed(SDLK_RETURN))) {
 			_window.toggleFullscreen();
 		}
 
 		if (_inputManager.windowResized()) {
+			std::cout << "Window resize event called\n";
 			_window.getWindowSize();
 			_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
 		}
