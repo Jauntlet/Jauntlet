@@ -12,16 +12,17 @@ void InputKey::addKey(SDL_KeyCode key) {
 	_keys.push_back(key);
 }
 void InputKey::removeKey(SDL_KeyCode key) {
-	for (std::vector<SDL_KeyCode>::iterator i = _keys.begin(); i != _keys.end(); ++i) {
-		if (_keys[i - _keys.begin()] == key) {
-			_keys.erase(i);
+	for (int i = 0; i < _keys.size(); i++) {
+		if (_keys[i] == key) {
+			_keys[i] = _keys.back();
+			_keys.pop_back();
 			return;
 		}
 	}
 }
 
 bool InputKey::isPressed() {
-	for (int i = 0; i < _keys.size(); ++i) {
+	for (int i = 0; i < _keys.size(); i++) {
 	  if (_inputManager->isKeyDown(_keys[i])) {
 		  return true;
 	  }
