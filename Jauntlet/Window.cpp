@@ -67,6 +67,7 @@ void Window::setWindowSize(int width, int height) {
 	_screenWidth = width;
 	_screenHeight = height;
 	SDL_SetWindowSize(_sdlWindow, width, height);
+	glViewport(0, 0, _screenWidth, _screenHeight);
 }
 
 // get the width of the screen
@@ -80,6 +81,7 @@ int Window::getWindowHeight() {
 
 glm::ivec2 Window::getWindowSize() {
 	SDL_GetWindowSize(_sdlWindow, &_screenWidth, &_screenHeight);
-	
+	glViewport(0, 0, _screenWidth, _screenHeight);
+
 	return glm::ivec2(_screenWidth, _screenHeight); 
 }
