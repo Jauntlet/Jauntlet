@@ -4,6 +4,7 @@
 #include <SDL/SDL.h>
 
 namespace Jauntlet {
+// Stores and manages the state of keys, aswell as other SDL events
 class InputManager
 {
 public:

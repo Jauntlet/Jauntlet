@@ -7,10 +7,9 @@ namespace Jauntlet {
 class GLSLProgram
 {
 public:
-	// constructor
 	GLSLProgram();
 
-	// creates both a vertex and fragment shader, as you need both.
+	// creates both a vertex and fragment shader.
 	void compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath);
 
 	// links the two shaders to the program
@@ -22,8 +21,9 @@ public:
 	// returns the GLint of the location of a uniform
 	GLint getUniformLocation(const std::string& uniformName);
 
-	// functions to enable / disable the use of the program
+	// enable the use of the program
 	void use();
+	// disable the use of the program
 	void unuse();
 private:
 

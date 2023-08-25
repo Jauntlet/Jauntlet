@@ -3,6 +3,7 @@
 #include<glm/gtc/matrix_transform.hpp>
 
 namespace Jauntlet {
+// Camera with a 2D perspective
 class Camera2D
 {
 public:
@@ -11,8 +12,10 @@ public:
 	void init(int screenWidth, int screenHeight);
 	// update the camera
 	void update();
+	
 	// converts from a position on the cameras screen to a position in world space
 	glm::vec2 convertScreenToWorld(glm::vec2 screenCoords);
+	
 	// update the cameras size. This is meant for if the size of the Window is updated.
 	void updateCameraSize(int screenWidth, int screenHeight);
 	

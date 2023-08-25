@@ -4,6 +4,7 @@
 
 #include"InputManager.h"
 namespace Jauntlet {
+// Stores multiple keycodes together that have the same functionality
 class InputKey
 {
 public:

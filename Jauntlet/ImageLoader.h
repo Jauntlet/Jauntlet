@@ -4,6 +4,7 @@
 #include"GLTexture.h"
 
 namespace Jauntlet {
+// Load images
 class ImageLoader
 {
 public:

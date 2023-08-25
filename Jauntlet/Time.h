@@ -4,9 +4,9 @@ class Time {
 public:
 	//initialize fps
 	static void setMaxFPS(int maxFPS);
-
+	// put at the start of a frame to find the length of a frame
 	static void beginFrame();
-	// returns current FPS
+	// put at the end of a frame to calculate and return current FPS
 	static float endFrame();
 	//returns time from last frame in seconds
 	static float getDeltaTime();

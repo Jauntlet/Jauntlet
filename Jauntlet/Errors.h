@@ -2,6 +2,6 @@
 #include<string>
 
 namespace Jauntlet {
-	// fatalErrors output the error string and then closes the game
+	// Crashes the game with the reason provided
 	extern void fatalError(std::string errorString);
 }
