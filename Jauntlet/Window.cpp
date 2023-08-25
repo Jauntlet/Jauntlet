@@ -70,6 +70,15 @@ void Window::setWindowSize(int width, int height) {
 	glViewport(0, 0, _screenWidth, _screenHeight);
 }
 
+void Window::toggleFullscreen() {
+	bool isFullscreen = SDL_GetWindowFlags(_sdlWindow) & SDL_WINDOW_FULLSCREEN_DESKTOP;
+
+	SDL_SetWindowFullscreen(_sdlWindow, isFullscreen ? 0 : SDL_WINDOW_FULLSCREEN_DESKTOP);
+}
+void Window::toggleFullscreen(bool fullscreen) {
+	SDL_SetWindowFullscreen(_sdlWindow, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+}
+
 // get the width of the screen
 int Window::getWindowWidth() {
 	return _screenWidth; 

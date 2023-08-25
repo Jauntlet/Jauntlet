@@ -22,7 +22,12 @@ public:
 	void setWindowSize(glm::ivec2 size);
 	// Sets the size of the window
 	void setWindowSize(int width, int height);
-
+	
+	// Toggles fullscreen
+	void toggleFullscreen();
+	// Toggles fullscreen, true = fullscreen
+	void toggleFullscreen(bool fullscreen);
+	
 	// get the width of the window
 	int getWindowWidth();
 	// get the height of the window
