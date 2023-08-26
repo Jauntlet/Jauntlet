@@ -11,7 +11,29 @@ enum class GlyphSortType {
 	NONE, FRONT_TO_BACK, BACK_TO_FRONT, TEXTURE
 };
 // stores the information needed to render a texture
-struct Glyph {
+class Glyph {
+public:
+	Glyph() {};
+	Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, GLuint Texture, float Depth, const Color& Color) :
+	texture(Texture), depth(Depth) {
+
+		topLeft.color = Color;
+		topLeft.setPosition(DestRect.x, DestRect.y + DestRect.w);
+		topLeft.setUV(UvRect.x, UvRect.y + UvRect.w);
+
+		bottomLeft.color = Color;
+		bottomLeft.setPosition(DestRect.x, DestRect.y);
+		bottomLeft.setUV(UvRect.x, UvRect.y);
+
+		bottomRight.color = Color;
+		bottomRight.setPosition(DestRect.x + DestRect.z, DestRect.y);
+		bottomRight.setUV(UvRect.x + UvRect.z, UvRect.y);
+		
+		topRight.color = Color;
+		topRight.setPosition(DestRect.x + DestRect.z, DestRect.y + DestRect.w);
+		topRight.setUV(UvRect.x + UvRect.z, UvRect.y + UvRect.w);
+	};
+
 	GLuint texture;
 	float depth;
 
@@ -57,7 +79,11 @@ private:
 
 	GlyphSortType _sortType;
 
-	std::vector<Glyph*> _glyphs;
+	std::vector<Glyph> _glyphs;
+	// The reason why we have a seperate vector for pointing to the glyphs, is so that we can easily sort them to be rendered, without the negative performance
+	// boost of having to allocate and unallocate memory
+	std::vector<Glyph*> _glyphPointers;
+
 	std::vector<RenderBatch> _renderBatches;
 };
 }
