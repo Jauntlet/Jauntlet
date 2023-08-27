@@ -21,11 +21,19 @@ void InputKey::removeKey(SDL_KeyCode key) {
 	}
 }
 
+bool InputKey::isDown() {
+	for (int i = 0; i < _keys.size(); i++) {
+		if (_inputManager->isKeyDown(_keys[i])) {
+			return true;
+		}
+	}
+	return false;
+}
 bool InputKey::isPressed() {
 	for (int i = 0; i < _keys.size(); i++) {
-	  if (_inputManager->isKeyDown(_keys[i])) {
-		  return true;
-	  }
+		if (_inputManager->isKeyPressed(_keys[i])) {
+			return true;
+		}
 	}
 	return false;
 }

@@ -14,6 +14,8 @@ public:
 	void addKey(SDL_KeyCode key);
 	// remove a key from the input
 	void removeKey(SDL_KeyCode key);
+	// check if any of the keys are down
+	bool isDown();
 	// check if any of the keys are pressed
 	bool isPressed();
 private:
