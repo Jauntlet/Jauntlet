@@ -6,10 +6,10 @@
 
 Player::Player(float x, float y) {
 	_position = glm::vec2(x, y);
+	_speed = 120;
 }
 
 void Player::update(Jauntlet::InputManager& inputManager) {
-	const float SPEED = 120;
 	
 	glm::vec2 velocity(0, 0);
 
@@ -54,6 +54,14 @@ void Player::setPosition(float x, float y) {
 void Player::setPosition(glm::vec2 pos) {
 	_position = pos;
 }
+
+void Player::setSpeed(float newSpeed) {
+	_speed = newSpeed;
+}
+float Player::getSpeed() {
+	return _speed;
+}
+
 glm::vec2 Player::getPosition() {
 	return _position;
 }
