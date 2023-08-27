@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{311b686f-e0b7-4032-b8a9-a535f1889d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{af9a6359-869c-4bae-a3ef-aa8fd6f91984}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Errors.cpp">
@@ -63,14 +69,14 @@
     <ClCompile Include="TileSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collision2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputKey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collider2D.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Collision\Collider2D.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\Collision2D.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,14 +134,14 @@
     <ClInclude Include="TileSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collision2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputKey.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collider2D.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Collision\Collider2D.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Collision2D.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
