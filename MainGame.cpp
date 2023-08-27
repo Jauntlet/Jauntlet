@@ -66,16 +66,24 @@ void MainGame::gameLoop() {
 		if (_inputManager.processInput()) {
 			_gameState = GameState::EXIT;
 		}
+		
+		if (_inputManager.isKeyDown(SDLK_LSHIFT)) {
+			_player.setSpeed(300);
+		}
+		else {
+			_player.setSpeed(120);
+		}
+		
 		_player.update(_inputManager);
 		
 		_camera.setPosition(_player.getPosition());
 
-		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) && _inputManager.isKeyPressed(SDLK_RETURN))) {
+		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) && _inputManager.isKeyPressed(SDLK_RETURN)) ) {
+			
 			_window.toggleFullscreen();
 		}
 
 		if (_inputManager.windowResized()) {
-			std::cout << "Window resize event called\n";
 			_window.getWindowSize();
 			_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
 		}

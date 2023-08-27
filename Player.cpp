@@ -6,22 +6,29 @@
 
 Player::Player(float x, float y) {
 	_position = glm::vec2(x, y);
+	_speed = 120;
 }
 
 void Player::update(Jauntlet::InputManager& inputManager) {
-	const float SPEED = 120;
 	
+	glm::vec2 velocity(0, 0);
+
 	if (inputManager.isKeyDown(SDLK_w)) {
-		_position.y += SPEED * Jauntlet::Time::getDeltaTime();
+		velocity.y += 1; //_speed * Jauntlet::Time::getDeltaTime();
 	}
 	if (inputManager.isKeyDown(SDLK_s)) {
-		_position.y -= SPEED * Jauntlet::Time::getDeltaTime();
+		velocity.y -= 1; //_speed * Jauntlet::Time::getDeltaTime();
 	}
 	if (inputManager.isKeyDown(SDLK_a)) {
-		_position.x -= SPEED * Jauntlet::Time::getDeltaTime();
+		velocity.x -= 1; //_speed * Jauntlet::Time::getDeltaTime();
 	}
 	if (inputManager.isKeyDown(SDLK_d)) {
-		_position.x += SPEED * Jauntlet::Time::getDeltaTime();
+		velocity.x += 1; //_speed * Jauntlet::Time::getDeltaTime();
+	}
+	
+	// for some reason position breaks if it runs while velocity is 0????
+	if (velocity != glm::vec2(0, 0)) {
+		_position += glm::normalize(velocity) * (_speed * Jauntlet::Time::getDeltaTime());
 	}
 }
 
@@ -47,6 +54,14 @@ void Player::setPosition(float x, float y) {
 void Player::setPosition(glm::vec2 pos) {
 	_position = pos;
 }
+
+void Player::setSpeed(float newSpeed) {
+	_speed = newSpeed;
+}
+float Player::getSpeed() {
+	return _speed;
+}
+
 glm::vec2 Player::getPosition() {
 	return _position;
 }
