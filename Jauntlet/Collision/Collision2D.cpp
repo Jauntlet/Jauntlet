@@ -5,14 +5,19 @@
 
 using namespace Jauntlet;
 
-Collision2D::Collision2D(Collider2D parent, Collider2D other) : _parent(parent), _other(other) //constructor
+Collision2D::Collision2D() : _parent(nullptr), _other(nullptr)
+{
+	//not much here
+}
+
+Collision2D::Collision2D(Collider2D* parent, Collider2D* other) : _parent(parent), _other(other) //constructor
 {
 	//_parent = parent; //the collider that did the check
 	//_other = other; //the collided-with collider
 
 	//calculate normal
-	float _x = other.position.x - parent.position.x; //gets a relative distance between the colliders as a position
-	float _y = other.position.y - parent.position.y; //same for y
+	float _x = other->position.x - parent->position.x; //gets a relative distance between the colliders as a position
+	float _y = other->position.y - parent->position.y; //same for y
 
 	//get angle of the two values
 	float _angle = std::atan(_y / _x);

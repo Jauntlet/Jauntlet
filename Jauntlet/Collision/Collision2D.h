@@ -10,8 +10,9 @@ namespace Jauntlet
 	class Collision2D //the returned class for collision data
 	{
 	public:
+		Collision2D();
 		//constructor (requires the two colliding objects)
-		Collision2D(Collider2D parent, Collider2D other);
+		Collision2D(Collider2D* parent, Collider2D* other);
 
 		//not functional yet
 		//std::vector<glm::vec2> GetCollisionPoints();
@@ -24,8 +25,8 @@ namespace Jauntlet
 		//normal at the point of collision
 		glm::vec2 _normal;
 		//Main collider in calculation
-		Collider2D _parent;
+		Collider2D* _parent;
 		//the collider that collided with during the check
-		Collider2D _other;
+		Collider2D* _other;
 	};
 }
