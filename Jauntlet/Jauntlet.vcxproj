@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Collision2D.cpp" />
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="Collider2D.h" />
     <ClInclude Include="Collision2D.h" />
     <ClInclude Include="Errors.h" />
     <ClInclude Include="GLSLProgram.h" />
