@@ -14,6 +14,7 @@
 #include<Jauntlet/Time.h>
 #include<Jauntlet/TileMap.h>
 #include<Jauntlet/TileSet.h>
+#include<Jauntlet/Rendering/LineRenderer.h>
 
 #include"Player.h"
 
@@ -53,6 +54,8 @@ private:
 
 	Jauntlet::TileMap _level;
 	Jauntlet::TileSet _bricks;
+
+	Jauntlet::LineRenderer _lineRenderer;
 
 	Player _player;
 };
