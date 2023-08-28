@@ -2,7 +2,7 @@
 
 #include<Jauntlet/Jauntlet.h>
 #include<Jauntlet/Errors.h>
-#include<Jauntlet/ResourceManager.h>
+#include<Jauntlet/Rendering/ResourceManager.h>
 #include<Jauntlet/Time.h>
 #include<Jauntlet/TileSet.h>
 

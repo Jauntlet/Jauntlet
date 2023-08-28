@@ -1,5 +1,5 @@
 #pragma once
-#include<Jauntlet/SpriteBatch.h>
+#include<Jauntlet/Rendering/SpriteBatch.h>
 #include<Jauntlet/InputManager.h>
 class Player
 {

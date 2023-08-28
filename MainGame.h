@@ -3,13 +3,13 @@
 #include<SDL/SDL.h>
 #include<GL/glew.h>
 
-#include<Jauntlet/GLSLProgram.h>
-#include<Jauntlet/Sprite.h>
-#include<Jauntlet/GLTexture.h>
+#include<Jauntlet/Rendering/GLSLProgram.h>
+#include<Jauntlet/Rendering/Sprite.h>
+#include<Jauntlet/Rendering/GLTexture.h>
 #include<Jauntlet/Window.h>
 #include<Jauntlet/Jauntlet.h>
 #include<Jauntlet/Camera2D.h>
-#include<Jauntlet/SpriteBatch.h>
+#include<Jauntlet/Rendering/SpriteBatch.h>
 #include<Jauntlet/InputManager.h>
 #include<Jauntlet/Time.h>
 #include<Jauntlet/TileMap.h>

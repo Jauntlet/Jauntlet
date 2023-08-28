@@ -1,6 +1,6 @@
 #include "Player.h"
-#include<Jauntlet/ResourceManager.h>
-#include<Jauntlet/Vertex.h>
+#include<Jauntlet/Rendering/ResourceManager.h>
+#include<Jauntlet/Rendering/Vertex.h>
 #include<SDL/SDL.h>
 #include<Jauntlet/Time.h>
 

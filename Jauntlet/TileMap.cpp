@@ -3,8 +3,8 @@
 #include <fstream>
 
 #include "Errors.h"
-#include "ResourceManager.h"
-#include "ImageLoader.h"
+#include "Rendering/ResourceManager.h"
+#include "Rendering/ImageLoader.h"
 #include "TileSet.h"
 
 using namespace Jauntlet;

@@ -4,9 +4,9 @@
 #include<map>
 #include<functional>
 
-#include "SpriteBatch.h"
-#include "GLTexture.h"
-#include "TextureCache.h"
+#include "Rendering/SpriteBatch.h"
+#include "Rendering/GLTexture.h"
+#include "Rendering/TextureCache.h"
 #include "TileSet.h"
 namespace Jauntlet {
 	
