@@ -19,6 +19,8 @@ namespace Jauntlet
 
 		//returns a vector2  regarding a direction (0,0 would be dead center) with a magnitude of 1.
 		glm::vec2 GetNormal();
+
+		bool getCollision(CircleCollider2D* parent, CircleCollider2D* other); //TODO: determine if using base class and InstanceOf works?
 	private:
 		//still not functional
 		//std::vector<std::vector<float>> _collisionPoints; 

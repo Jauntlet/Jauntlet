@@ -8,6 +8,7 @@ using namespace Jauntlet;
 Collision2D::Collision2D() : _parent(nullptr), _other(nullptr)
 {
 	//not much here
+	_normal = glm::vec2();
 }
 
 Collision2D::Collision2D(Collider2D* parent, Collider2D* other) : _parent(parent), _other(other) //constructor
@@ -37,4 +38,25 @@ Collision2D::Collision2D(Collider2D* parent, Collider2D* other) : _parent(parent
 //returns a vector2 regarding a direction (0,0 would be dead center) with a magnitude of 1.
 glm::vec2 Collision2D::GetNormal() {
 	return _normal;
+}
+
+//Circle on Circle collision check
+bool Collision2D::getCollision(CircleCollider2D* parent, CircleCollider2D* other) {
+	float dist = glm::sqrt(glm::pow(other->position.x - parent->position.x, 2)
+			   + glm::pow(other->position.y - parent->position.y, 2));
+	float totlR = parent->GetRadius() + other->GetRadius();
+	
+	if (dist <= totlR) {
+		//set parent & other
+		_parent = parent;
+		_other = other;
+		
+		//maybe normal?
+		_normal = glm::vec2(); //temporary
+
+		//return the collision happened
+		return true;
+	}
+
+	return false; //no collision
 }
