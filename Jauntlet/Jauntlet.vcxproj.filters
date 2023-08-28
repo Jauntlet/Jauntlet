@@ -84,7 +84,7 @@
     <ClCompile Include="Rendering\TextureCache.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\lineRenderer.cpp">
+    <ClCompile Include="Rendering\LineRenderer.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,7 +152,7 @@
     <ClInclude Include="Rendering\TextureCache.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\lineRenderer.h">
+    <ClInclude Include="Rendering\LineRenderer.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

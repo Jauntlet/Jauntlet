@@ -164,7 +164,7 @@
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
     <ClCompile Include="Rendering\ImageLoader.cpp" />
-    <ClCompile Include="Rendering\lineRenderer.cpp" />
+    <ClCompile Include="Rendering\LineRenderer.cpp" />
     <ClCompile Include="Rendering\picoPNG.cpp" />
     <ClCompile Include="Rendering\ResourceManager.cpp" />
     <ClCompile Include="Rendering\Sprite.cpp" />
@@ -187,7 +187,7 @@
     <ClInclude Include="Rendering\GLSLProgram.h" />
     <ClInclude Include="Rendering\GLTexture.h" />
     <ClInclude Include="Rendering\ImageLoader.h" />
-    <ClInclude Include="Rendering\lineRenderer.h" />
+    <ClInclude Include="Rendering\LineRenderer.h" />
     <ClInclude Include="Rendering\picoPNG.h" />
     <ClInclude Include="Rendering\ResourceManager.h" />
     <ClInclude Include="Rendering\Sprite.h" />
