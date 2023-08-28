@@ -16,7 +16,7 @@ void InputKey::removeKey(SDL_KeyCode key) {
 		if (_keys[i] == key) {
 			_keys[i] = _keys.back();
 			_keys.pop_back();
-			return;
+			return; // This return could be problematic if multiple of the same key get added by mistake.
 		}
 	}
 }
