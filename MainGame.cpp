@@ -18,7 +18,7 @@ MainGame::MainGame() :
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
 		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png"),
-	_player(-5 * 32, 0) {
+	_player(-5 * 32, 0, &_inputManager) {
 }
 
 void MainGame::run() {
@@ -33,6 +33,8 @@ void MainGame::initSystems() {
 	_window.create("Jauntlet Game Engine", _screenWidth, _screenHeight, Jauntlet::WindowFlags::RESIZEABLE);
 
 	initShaders();
+
+	_lineRenderer.init();
 
 	_camera.init(_screenWidth, _screenHeight);
 
@@ -74,7 +76,7 @@ void MainGame::gameLoop() {
 			_player.setSpeed(120);
 		}
 		
-		_player.update(_inputManager);
+		_player.update();
 		
 		_camera.setPosition(_player.getPosition());
 
@@ -121,6 +123,9 @@ void MainGame::drawGame() {
 	_playerSpriteBatch.end();
 
 	_playerSpriteBatch.renderBatch();
+
+	_lineRenderer.setColor(glm::vec3(255, 0, 0));
+	_lineRenderer.drawLine(glm::vec2(-100, -100), glm::vec2(100, 100));
 
 	_colorProgram.unuse();
 
