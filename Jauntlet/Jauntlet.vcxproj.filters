@@ -84,6 +84,9 @@
     <ClCompile Include="Rendering\TextureCache.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\lineRenderer.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Errors.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\TextureCache.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\lineRenderer.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
