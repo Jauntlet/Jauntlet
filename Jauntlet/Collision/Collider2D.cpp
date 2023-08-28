@@ -1,17 +1,27 @@
 #include "Collider2D.h"
 
-//constructor; requires at least a radius and position x & y.
-CircleCollider2D::CircleCollider2D(float radius, float x, float y, float offsetX, float offsetY) : _radius(radius) {
+//constructor; requires a radius and position (x & y).
+CircleCollider2D::CircleCollider2D(float radius, float x, float y, glm::vec2 offset) : _radius(radius) {
 	//_radius = radius;
 	//_offsetX = offsetX;
 	//_offsetY = offsetY;
 	position = glm::vec2(x, y);
-	_offset = glm::vec2(offsetX, offsetY);
+	_offset = offset;
+}
+
+//constructor; requires a radius and position (vec2).
+CircleCollider2D::CircleCollider2D(float radius, glm::vec2 pos, glm::vec2 offset) : _radius(radius), _offset(offset) {
+	position = pos;
 }
 
 //allows for the changing of size for the circle collider
 void CircleCollider2D::SetRadius(float value) {
 	_radius = value;
+}
+
+float CircleCollider2D::GetRadius() {
+	return _radius;
+}
 
 BoxCollider2D::BoxCollider2D(float width, float height, float x, float y, float offsetX = 0, float offsetY = 0) {
 	position = glm::vec2(x, y);
