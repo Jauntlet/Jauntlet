@@ -4,28 +4,41 @@
 #include<SDL/SDL.h>
 #include<Jauntlet/Time.h>
 
-Player::Player(float x, float y) {
+Player::Player(float x, float y, Jauntlet::InputManager* inputManager) : _inputManager(inputManager), _moveUp(_inputManager), _moveLeft(_inputManager),
+																	     _moveRight(_inputManager), _moveDown(_inputManager) {
 	_position = glm::vec2(x, y);
 	_speed = 120;
+
+	_moveUp.addKey(SDLK_w);
+	_moveUp.addKey(SDLK_UP);
+
+	_moveLeft.addKey(SDLK_a);
+	_moveLeft.addKey(SDLK_LEFT);
+
+	_moveRight.addKey(SDLK_d);
+	_moveRight.addKey(SDLK_RIGHT);
+
+	_moveDown.addKey(SDLK_s);
+	_moveDown.addKey(SDLK_DOWN);
 }
 
-void Player::update(Jauntlet::InputManager& inputManager) {
+void Player::update() {
 	
 	glm::vec2 velocity(0, 0);
 
-	if (inputManager.isKeyDown(SDLK_w)) {
-		velocity.y += 1; //_speed * Jauntlet::Time::getDeltaTime();
+	if (_moveUp.isDown()) {
+		velocity.y += 1;
 	}
-	if (inputManager.isKeyDown(SDLK_s)) {
-		velocity.y -= 1; //_speed * Jauntlet::Time::getDeltaTime();
+	if (_moveDown.isDown()) {
+		velocity.y -= 1;
 	}
-	if (inputManager.isKeyDown(SDLK_a)) {
-		velocity.x -= 1; //_speed * Jauntlet::Time::getDeltaTime();
+	if (_moveLeft.isDown()) {
+		velocity.x -= 1;
 	}
-	if (inputManager.isKeyDown(SDLK_d)) {
-		velocity.x += 1; //_speed * Jauntlet::Time::getDeltaTime();
+	if (_moveRight.isDown()) {
+		velocity.x += 1;
 	}
-	
+
 	// for some reason position breaks if it runs while velocity is 0????
 	if (velocity != glm::vec2(0, 0)) {
 		_position += glm::normalize(velocity) * (_speed * Jauntlet::Time::getDeltaTime());

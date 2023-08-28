@@ -1,12 +1,13 @@
 #pragma once
 #include<Jauntlet/Rendering/SpriteBatch.h>
 #include<Jauntlet/InputManager.h>
+#include<Jauntlet/InputKey.h>
 class Player
 {
 public:
-	Player(float x, float y);
+	Player(float x, float y, Jauntlet::InputManager* inputManager);
 
-	void update(Jauntlet::InputManager& inputManager);
+	void update();
 
 	void draw(Jauntlet::SpriteBatch& spriteBatch);
 
@@ -21,4 +22,11 @@ private:
 	glm::vec2 _position;
 
 	float _speed;
+
+	Jauntlet::InputManager* _inputManager;
+
+	Jauntlet::InputKey _moveUp;
+	Jauntlet::InputKey _moveLeft;
+	Jauntlet::InputKey _moveRight;
+	Jauntlet::InputKey _moveDown;
 };
