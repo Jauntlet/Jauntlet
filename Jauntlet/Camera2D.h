@@ -15,7 +15,7 @@ public:
 	
 	// converts from a position on the cameras screen to a position in world space
 	glm::vec2 convertScreenToWorld(glm::vec2 screenCoords);
-
+	// does nothing currently
 	glm::vec2 convertWorldToScreen(glm::vec2 worldCoords);
 	
 	// update the cameras size. This is meant for if the size of the Window is updated.
