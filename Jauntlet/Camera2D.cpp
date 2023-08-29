@@ -37,12 +37,6 @@ glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
 	return screenCoords;
 }
 glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
-	worldCoords -= _position; 
-	
-	worldCoords *= _scale; 
-	
-	worldCoords += glm::vec2(_screenWidth / 2, (_screenHeight + worldCoords.y) / 2);
-
 	return worldCoords;
 }
 
