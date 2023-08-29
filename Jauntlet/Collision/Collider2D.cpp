@@ -23,7 +23,7 @@ float CircleCollider2D::GetRadius() {
 	return _radius;
 }
 
-BoxCollider2D::BoxCollider2D(float width, float height, float x, float y, float offsetX = 0, float offsetY = 0) {
+BoxCollider2D::BoxCollider2D(float width, float height, float x, float y, float offsetX , float offsetY) {
 	position = glm::vec2(x, y);
 	_size = glm::vec2(width, height);
 	_offset = glm::vec2(offsetX, offsetY);
