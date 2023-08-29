@@ -123,8 +123,8 @@ void MainGame::drawGame() {
 
 	_playerSpriteBatch.renderBatch();
 
-	_lineRenderer.setColor(glm::vec3(255, 0, 0));
-	_lineRenderer.drawLine(glm::vec2(-100, -100), glm::vec2(100, 100));
+	_lineRenderer.setColor(glm::vec3(1, 0, 0));
+	_lineRenderer.drawLine(glm::vec2(-1, 0), glm::vec2(1, 0));
 
 	_colorProgram.unuse();
 
