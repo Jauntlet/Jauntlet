@@ -80,7 +80,7 @@ void MainGame::gameLoop() {
 		// centers the camera on the player (16 is half the player width)
 		_camera.setPosition(_player.getPosition() + glm::vec2(16,16));
 
-		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) ) {		
+		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {		
 			_window.toggleFullscreen();
 		}
 
