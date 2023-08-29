@@ -78,7 +78,7 @@ void MainGame::gameLoop() {
 		
 		_player.update();
 		
-		_camera.setPosition(_player.getPosition());
+		_camera.setPosition(_player.getPosition() + glm::vec2(16,16));
 
 		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) && _inputManager.isKeyPressed(SDLK_RETURN)) ) {
 			
