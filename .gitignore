@@ -24,7 +24,6 @@
 *.la
 *.a
 
-
 # Executables
 *.exe
 *.out
@@ -32,6 +31,12 @@
 
 # Visual studio
 .vs/
+
+# build cmake files
+build/CMakeFiles/*
+build/CMakeCache.txt
+build/cmake_install.cmake
+build/Makefile
 
 # other
 *.tlog
