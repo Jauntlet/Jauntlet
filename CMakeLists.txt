@@ -29,7 +29,7 @@ find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
 # Create a library from the "Jauntlet" source files
-add_library(jauntlet SHARED ${JAUNTLET_FILES})
+add_library(jauntlet ${JAUNTLET_FILES})
 
 # Specify include directories for the "Jauntlet" library
 target_include_directories(jauntlet PUBLIC "${CMAKE_SOURCE_DIR}/dependencies/include")
