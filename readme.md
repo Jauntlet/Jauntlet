@@ -1,6 +1,6 @@
 # game
 
-<h2> compilation </h2>
+<h2>compilation</h2>
 
 <h3>windows</h3>
 
@@ -31,6 +31,6 @@ the executable is called "game", so run this command to launch it
 ./game
 ```
 
-<h3>mac</h3>
+<h3>macos</h3>
 
-mac is currently unsupported, although eventually cmake will be changed to work with mac as well. none of us currently own a computer running MacOS, so this may take some time.
+macos is currently unsupported, although eventually cmake will be changed to work with mac as well. none of us currently own a computer running macos, so this may take some time.
