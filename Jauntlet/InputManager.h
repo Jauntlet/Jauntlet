@@ -10,7 +10,7 @@ class InputManager
 public:
 	InputManager();
 	// processes all potential inputs. Returns true if the player presses QUIT
-	bool processInput();
+	void processInput();
 	
 	// checks if a specific key is pressed down
 	bool isKeyDown(unsigned int keyID);
@@ -24,6 +24,8 @@ public:
 	
 	// returns true if the window has been resized since the last time the method was called.
 	bool windowResized();
+	// returns true if the user has pressed a button to quit the game.
+	bool quitGameCalled();
 
 	// getters
 	glm::vec2 getMouseCoords() const { return _mouseCoords; }
@@ -39,5 +41,6 @@ private:
 	SDL_KeyCode _lastInput;
 
 	bool _windowResized;
+	bool _quitGameCalled;
 };
 }

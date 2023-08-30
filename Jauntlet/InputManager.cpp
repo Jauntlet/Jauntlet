@@ -2,11 +2,11 @@
 #include<SDL/SDL.h>
 using namespace Jauntlet;
 
-InputManager::InputManager(): _mouseCoords(0), _lastInput(SDLK_ESCAPE), _windowResized(false) {
+InputManager::InputManager(): _mouseCoords(0), _lastInput(SDLK_ESCAPE), _windowResized(false), _quitGameCalled(false) {
 
 }
 
-bool InputManager::processInput() {
+void InputManager::processInput() {
 	SDL_Event evnt;
 
 	// updates previous key map via foreach loop
@@ -19,7 +19,8 @@ bool InputManager::processInput() {
 		switch (evnt.type)
 		{
 		case SDL_QUIT:
-			return true;
+			_quitGameCalled = true;
+			break;
 		case SDL_KEYDOWN:
 			pressKey(evnt.key.keysym.sym);
 			break;
@@ -42,7 +43,6 @@ bool InputManager::processInput() {
 		}
 	}
 
-	return false;
 }
 
 bool InputManager::isKeyDown(unsigned int keyID) {
@@ -66,6 +66,10 @@ bool InputManager::windowResized() {
 		return true;
 	}
 	return false;
+}
+
+bool InputManager::quitGameCalled() {
+	return _quitGameCalled;
 }
 
 void InputManager::pressKey(unsigned int keyID) {

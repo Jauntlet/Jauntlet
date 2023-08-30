@@ -65,7 +65,9 @@ void MainGame::gameLoop() {
 		Jauntlet::Time::beginFrame();
 
 		// process all input and detect if the player hits quit
-		if (_inputManager.processInput()) {
+		_inputManager.processInput();
+		
+		if (_inputManager.quitGameCalled()) {
 			_gameState = GameState::EXIT;
 		}
 		
