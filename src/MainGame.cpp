@@ -77,6 +77,16 @@ void MainGame::gameLoop() {
 		}
 		
 		_player.update();
+
+		//debug - send debug message when collision happens
+		std::vector<BoxCollider2D> levelColliders = _level.collectCollidingTiles(_player.getPosition());
+		Jauntlet::Collision2D collision = Jauntlet::Collision2D();
+		for (int j = 0; j < levelColliders.size(); ++j) {
+			if (collision.getCollision(&_player.collider, &levelColliders[j])) {
+				std::cout << "Collision Detected (player @ " << _player.getPosition().x << ", " << _player.getPosition().y << ")\n";
+			}
+		}
+
 		// centers the camera on the player (16 is half the player width)
 		_camera.setPosition(_player.getPosition() + glm::vec2(16,16));
 

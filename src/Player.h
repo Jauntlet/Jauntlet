@@ -2,6 +2,7 @@
 #include<Jauntlet/Rendering/SpriteBatch.h>
 #include<Jauntlet/InputManager.h>
 #include<Jauntlet/InputKey.h>
+#include<Jauntlet/Collision/Collision2D.h>
 class Player
 {
 public:
@@ -18,6 +19,8 @@ public:
 	float getSpeed();
 
 	glm::vec2 getPosition();
+
+	CircleCollider2D collider;
 private:
 	glm::vec2 _position;
 

@@ -5,7 +5,7 @@
 #include<Jauntlet/Time.h>
 
 Player::Player(float x, float y, Jauntlet::InputManager* inputManager) : _inputManager(inputManager), _moveUp(_inputManager), _moveLeft(_inputManager),
-																	     _moveRight(_inputManager), _moveDown(_inputManager) {
+																	     _moveRight(_inputManager), _moveDown(_inputManager), collider(CircleCollider2D(16.0f, _position)) {
 	_position = glm::vec2(x, y);
 	_speed = 120;
 
@@ -43,6 +43,9 @@ void Player::update() {
 	if (velocity != glm::vec2(0, 0)) {
 		_position += glm::normalize(velocity) * (_speed * Jauntlet::Time::getDeltaTime());
 	}
+
+	//update collider
+	collider.position = _position;
 }
 
 void Player::draw(Jauntlet::SpriteBatch& spriteBatch) {
