@@ -20,6 +20,8 @@ public:
 	
 	// update the cameras size. This is meant for if the size of the Window is updated.
 	void updateCameraSize(int screenWidth, int screenHeight);
+
+	bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions);
 	
 	// defines a new position for the camera to be
 	void setPosition(const glm::vec2& newPosition) { 
