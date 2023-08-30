@@ -39,6 +39,14 @@ add_executable(game ${SRC_FILES})
 
 # Link the "game" executable with SDL2, GLEW, and OpenGL
 target_link_libraries(game PRIVATE jauntlet SDL2::SDL2 GLEW::GLEW OpenGL::OpenGL)
+if(WIN32)
+    # On Windows, link with .lib files in [project root]/dependencies/lib/
+    file(GLOB WIN_LIB_FILES "${CMAKE_SOURCE_DIR}/dependencies/lib/*.lib")
+    target_link_libraries(game PRIVATE ${WIN_LIB_FILES})
+else()
+    # On Unix, use SDL2::SDL2, GLEW::GLEW and OpenGL::OpenGL, the installed dependencies.
+    target_link_libraries(game PRIVATE SDL2::SDL2 GLEW::GLEW OpenGL::OpenGL)
+endif()
 
 # Specify include directories for the "Jauntlet" directory (outside of it)
 target_include_directories(game PRIVATE "${CMAKE_SOURCE_DIR}")
