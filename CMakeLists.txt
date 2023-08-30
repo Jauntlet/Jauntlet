@@ -37,6 +37,14 @@ target_include_directories(jauntlet PUBLIC "${CMAKE_SOURCE_DIR}/dependencies/inc
 # Create an executable from the "src" source files
 add_executable(game ${SRC_FILES})
 
+if(WIN32)
+    # On Windows, use MSVC
+    set(CMAKE_CXX_COMPILER "cl")
+elseif(UNIX)
+    # On Unix, use g++
+    set(CMAKE_CXX_COMPILER "g++")
+endif()
+
 # On all platforms, link the jauntlet library with our executable.
 target_link_libraries(game PRIVATE jauntlet)
 
