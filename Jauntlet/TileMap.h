@@ -58,8 +58,10 @@ public:
 	// draw the tilemap on screen
 	void draw();
 
-	// Grabs adjacent tiles to position and returns colliders from the tilemap
+	// returns adjacent tiles to position with collision. This is assuming the position is the top-left position on a square.
 	std::vector<BoxCollider2D> collectCollidingTiles(glm::vec2 position);
+	// returns all tiles with collision within the bounds of the box collider
+	std::vector<BoxCollider2D> collectCollidingTiles(BoxCollider2D collider);
 private:
 	// checks whether or not a tileset would connect to the specified tile position.
 	bool testTileSetRules(TileSet tile, int x, int y);

@@ -107,7 +107,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 	std::vector<BoxCollider2D> colliders;
 
 	// convert position to be a similar index to the levelData
-	glm::ivec2 newPos = position -= _offset;
+	glm::ivec2 newPos = position - _offset;
 	newPos /= _tileSize;
 
 	for (int x = -1; x < 2; x++) {
@@ -129,6 +129,36 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 
 			if (iterator->second.tileCollision == TileCollision::SQUARE) {
 				colliders.emplace_back(_tileSize, _tileSize, xPos * _tileSize + _offset.x, -yPos * _tileSize + _offset.y);
+			}
+		}
+	}
+	return colliders;
+}
+
+std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider) {
+	glm::ivec2 lowerBound = collider.position - _offset;
+	lowerBound /= _tileSize;
+
+	glm::ivec2 upperBound = collider.position + collider.GetSize() - _offset;
+	upperBound /= _tileSize;
+
+	std::vector<BoxCollider2D> colliders;
+
+	for (int x = lowerBound.x; x < upperBound.x + 1; x++) {
+		for (int y = lowerBound.y; y < upperBound.y + 1; y++) {
+			// if true, the tile position doesn't exist
+			if (y < 0 || y >= _levelData.size() || x >= _levelData[y].size() || x < 0) {
+				continue;
+			}
+
+			auto iterator = _tiles.find(_levelData[y][x]);
+
+			if (iterator == _tiles.end()) {
+				continue;
+			}
+
+			if (iterator->second.tileCollision == TileCollision::SQUARE) {
+				colliders.emplace_back(_tileSize, _tileSize, x * _tileSize + _offset.x, -y * _tileSize + _offset.y);
 			}
 		}
 	}
