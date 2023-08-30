@@ -28,6 +28,14 @@ include_directories(${SDL2_INCLUDE_DIRS})
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
+# Find and configure SDL2_ttf
+find_package(SDL2_ttf REQUIRED)
+include_directories(${SDL2TTF_INCLUDE_DIRS})
+
+# Find and configure GLM
+find_package(glm REQUIRED)
+include_directories(${GLM_INCLUDE_DIRS})
+
 # Create a library from the "Jauntlet" source files
 add_library(jauntlet ${JAUNTLET_FILES})
 
@@ -53,8 +61,8 @@ if(WIN32)
     file(GLOB WIN_LIB_FILES "${CMAKE_SOURCE_DIR}/dependencies/lib/*.lib")
     target_link_libraries(game PRIVATE ${WIN_LIB_FILES})
 elseif(UNIX)
-    # On Unix, use SDL2::SDL2, GLEW::GLEW and OpenGL::OpenGL, the installed dependencies.
-    target_link_libraries(game PRIVATE SDL2::SDL2 GLEW::GLEW OpenGL::OpenGL)
+    # On Unix, use SDL2::SDL2, SDL2_ttf::SDL2_ttf, GLEW::GLEW, and OpenGL::OpenGL
+    target_link_libraries(game PRIVATE SDL2::SDL2 SDL2_ttf::SDL2_ttf GLEW::GLEW OpenGL::OpenGL)
 endif()
 
 # Specify include directories for the "Jauntlet" directory (outside of it)
