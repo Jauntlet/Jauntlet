@@ -67,6 +67,3 @@ endif()
 
 # Specify include directories for the "Jauntlet" directory (outside of it)
 target_include_directories(game PRIVATE "${CMAKE_SOURCE_DIR}")
-
-# Specify include directories for SDL2, GLEW, and GLM
-target_include_directories(game PRIVATE "${CMAKE_SOURCE_DIR}/dependencies/include")
