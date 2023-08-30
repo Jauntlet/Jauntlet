@@ -119,7 +119,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 			std::cout << xPos << " " << yPos << std::endl;
 			
 			// if true, the tile position doesn't exist
-			if (yPos < 0 || yPos >= _levelData.size() || xPos >= _levelData[y].size() || xPos < 0) {
+			if (yPos < 0 || yPos >= _levelData.size() || xPos >= _levelData[yPos].size() || xPos < 0) {
 				continue;
 			}
 
