@@ -46,11 +46,11 @@ glm::vec2 BoxCollider2D::GetSize() {
 }
 
 void BoxCollider2D::SetWidth(float width) {
-	_size = glm::vec2(width, _size.y);
+	_size.x = width;
 }
 
 void BoxCollider2D::SetHeight(float height) {
-	_size = glm::vec2(_size.x, height);
+	_size.y = height;
 }
 
 void BoxCollider2D::SetSize(float width, float height) {
