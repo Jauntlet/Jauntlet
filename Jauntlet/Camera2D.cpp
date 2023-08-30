@@ -26,18 +26,25 @@ void Camera2D::update() {
 	}
 }
 
-glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
+glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
 	// make 0 the center of the screen and invert the Y axis
+	worldCoords += glm::vec2(_screenWidth / 2, _screenHeight / 2);
+	// scale the coords
+	worldCoords /= _scale;
+	// Translate based on camera position
+	worldCoords -= _position;
+
+	return worldCoords;
+}
+glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
+	// make 0 the center of the screen and invert the Y axisglm::vec2(16,16)
 	screenCoords += glm::vec2(_screenWidth / 2, _screenHeight / 2);
 	// scale the coords
-	screenCoords /= _scale;
+	screenCoords *= _scale;
 	// Translate based on camera position
-	screenCoords += _position;
-
+	screenCoords -= _position;
+	
 	return screenCoords;
-}
-glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
-	return worldCoords;
 }
 
 void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {

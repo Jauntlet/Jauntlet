@@ -13,10 +13,10 @@ public:
 	// update the camera
 	void update();
 	
-	// converts from a position on the cameras screen to a position in world space
-	glm::vec2 convertScreenToWorld(glm::vec2 screenCoords);
-	// does nothing currently
+	// converts from a position in world space to a position on the screen
 	glm::vec2 convertWorldToScreen(glm::vec2 worldCoords);
+	// converts from a position on the screen to a position in world space
+	glm::vec2 convertScreenToWorld(glm::vec2 screenCoords);
 	
 	// update the cameras size. This is meant for if the size of the Window is updated.
 	void updateCameraSize(int screenWidth, int screenHeight);
