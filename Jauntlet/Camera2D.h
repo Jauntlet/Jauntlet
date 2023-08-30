@@ -21,6 +21,7 @@ public:
 	// update the cameras size. This is meant for if the size of the Window is updated.
 	void updateCameraSize(int screenWidth, int screenHeight);
 
+	// Test to see if bounding box is within the cameras dimensions; good for culling
 	bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions);
 	
 	// defines a new position for the camera to be
