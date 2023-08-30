@@ -12,14 +12,14 @@ using namespace Jauntlet;
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 }
 
-void TileMap::registerTile(char identifier, std::string filePath) {
-	tile tmp = tile(filePath);
+void TileMap::registerTile(char identifier, std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
+	tile tmp = tile(filePath, collisionType);
 	
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
 
-void TileMap::registerTileSet(char identifier, TileSet& tileSet) {
-	tile tmp = tile(&tileSet);
+void TileMap::registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
+	tile tmp = tile(&tileSet, collisionType);
 
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
@@ -30,6 +30,8 @@ void TileMap::registerFunction(char identifier, std::function<void(int, int)> cu
 }
 
 void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
+	_offset = glm::vec2(offsetX, offsetY);
+	
 	std::ifstream file;
 	file.open(filePath);
 
@@ -95,6 +97,37 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 
 void TileMap::draw() {
 	_spriteBatch.renderBatch();
+}
+
+std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
+	
+	std::vector<BoxCollider2D> colliders;
+
+	// convert position to be a similar index to the levelData
+	glm::ivec2 newPos = position -= _offset;
+	newPos /= _tileSize;
+
+	for (int x = -1; x < 2; x++) {
+		for (int y = -1; y < 2; y++) {
+			int xPos = newPos.x + x;
+			int yPos = newPos.y + y;
+			// if true, the tile position doesn't exist
+			if (yPos < 0 || yPos >= _levelData.size() || xPos >= _levelData[y].size() || xPos < 0) {
+				continue;
+			}
+
+			auto iterator = _tiles.find(_levelData[yPos][xPos]);
+
+			if (iterator == _tiles.end()) {
+					continue;
+			}
+
+			if (iterator->second.tileCollision == TileCollision::SQUARE) {
+				colliders.emplace_back(_tileSize, _tileSize, xPos * _tileSize + _offset.x, yPos * _tileSize + _offset.y);
+			}
+		}
+	}
+	return colliders;
 }
 
 bool TileMap::testTileSetRules(TileSet tile, int x, int y) {

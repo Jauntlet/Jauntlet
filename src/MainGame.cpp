@@ -44,7 +44,7 @@ void MainGame::initSystems() {
 	// Temporary level loading
 	_level.registerTile('B', "Textures/Craig.png");
 	_bricks.addConnectionRule(Jauntlet::TileSet::ConnectionRules::TILES);
-	_level.registerTileSet('T', _bricks);
+	_level.registerTileSet('T', _bricks, Jauntlet::TileCollision::SQUARE);
 
 	//_level.loadTileMap("Levels/level0.txt");
 	_level.loadTileMap("Levels/testAllTiles.txt");
