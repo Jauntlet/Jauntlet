@@ -2,6 +2,10 @@
 
 <h2> compilation </h2>
 
+<h3>windows</h3>
+
+currently working on compiling using cmake with windows, but for now you can open up the solution with visual studio 2019 and compile. eventually, this will be unsupported in favor of a cross platform cmake solution.
+
 <h3>linux</h3>
 
 to compile on debian:
@@ -26,7 +30,7 @@ the executable is called "game", so run this command to launch it
 ```
 ./game
 ```
-<h3>windows</h3>
-coming soon!
+
 <h3>mac</h3>
-coming soon!
+
+mac is currently unsupported, although eventually cmake will be changed to work with mac as well. none of us currently own a computer running MacOS, so this may take some time.
