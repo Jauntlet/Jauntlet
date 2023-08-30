@@ -7,6 +7,9 @@
 #include "Rendering/ImageLoader.h"
 #include "TileSet.h"
 
+
+#include<iostream>
+
 using namespace Jauntlet;
 
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
@@ -109,12 +112,17 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 
 	for (int x = -1; x < 2; x++) {
 		for (int y = -1; y < 2; y++) {
+			
 			int xPos = newPos.x + x;
-			int yPos = newPos.y + y;
+			int yPos = -newPos.y + y;
+			
+			std::cout << xPos << " " << yPos << std::endl;
+			
 			// if true, the tile position doesn't exist
 			if (yPos < 0 || yPos >= _levelData.size() || xPos >= _levelData[y].size() || xPos < 0) {
 				continue;
 			}
+
 
 			auto iterator = _tiles.find(_levelData[yPos][xPos]);
 
@@ -123,7 +131,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 			}
 
 			if (iterator->second.tileCollision == TileCollision::SQUARE) {
-				colliders.emplace_back(_tileSize, _tileSize, xPos * _tileSize + _offset.x, yPos * _tileSize + _offset.y);
+				colliders.emplace_back(_tileSize, _tileSize, xPos * _tileSize + _offset.x, -yPos * _tileSize + _offset.y);
 			}
 		}
 	}
