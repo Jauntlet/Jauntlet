@@ -52,7 +52,7 @@ if(WIN32)
     # On Windows, link with .lib files in [project root]/dependencies/lib/
     file(GLOB WIN_LIB_FILES "${CMAKE_SOURCE_DIR}/dependencies/lib/*.lib")
     target_link_libraries(game PRIVATE ${WIN_LIB_FILES})
-else()
+elseif(UNIX)
     # On Unix, use SDL2::SDL2, GLEW::GLEW and OpenGL::OpenGL, the installed dependencies.
     target_link_libraries(game PRIVATE SDL2::SDL2 GLEW::GLEW OpenGL::OpenGL)
 endif()
