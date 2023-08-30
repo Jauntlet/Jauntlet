@@ -33,7 +33,7 @@ class BoxCollider2D : public Collider2D
 {
 public:
 	BoxCollider2D(float width, float height, float x, float y, float offsetX = 0, float offsetY = 0);
-	BoxCollider2D(glm::vec2 size, glm::vec2 pos, glm::vec2 offset);
+	BoxCollider2D(glm::vec2 size, glm::vec2 pos, glm::vec2 offset = glm::vec2(0, 0));
 
 	float GetWidth();
 	float GetHeight();
