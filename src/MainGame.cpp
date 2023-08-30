@@ -85,7 +85,7 @@ void MainGame::gameLoop() {
 		Jauntlet::Collision2D collision = Jauntlet::Collision2D();
 		for (int j = 0; j < levelColliders.size(); ++j) {
 			if (collision.getCollision(&_player.collider, &levelColliders[j])) {
-				//std::cout << "Collision Detected (player @ " << _player.getPosition().x << ", " << _player.getPosition().y << ")\n";
+				std::cout << "Collision Detected (player @ " << _player.getPosition().x << ", " << _player.getPosition().y << ")\n";
 			}
 		}
 
