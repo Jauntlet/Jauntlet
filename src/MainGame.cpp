@@ -91,6 +91,13 @@ void MainGame::gameLoop() {
 			}
 		}
 
+		if (_inputManager.isKeyPressed(SDLK_q)) {
+			_camera.setScale(_camera.getScale() + .5);
+		}
+		if (_inputManager.isKeyPressed(SDLK_e)) {
+			_camera.setScale(_camera.getScale() - .5);
+		}
+
 		// centers the camera on the player (16 is half the player width)
 		_camera.setPosition((_player.getPosition() + glm::vec2(16,16)) * _camera.getScale());
 
@@ -101,13 +108,6 @@ void MainGame::gameLoop() {
 		if (_inputManager.windowResized()) {
 			_window.getWindowSize();
 			_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
-		}
-
-		if (_inputManager.isKeyPressed(SDLK_q)) {
-			_camera.setScale(_camera.getScale() + .5);
-		}
-		if (_inputManager.isKeyPressed(SDLK_e)) {
-			_camera.setScale(_camera.getScale() - .5);
 		}
 
 		_camera.update();
