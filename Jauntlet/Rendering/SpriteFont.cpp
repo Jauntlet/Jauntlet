@@ -3,6 +3,7 @@
 
 #include<SDL/SDL.h>
 #include<cstring>
+#include <iostream>
 
 using namespace Jauntlet;
 
@@ -83,7 +84,7 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 		}
 	}
 
-	if (!bestPartition) {
+	if (bestPartition == nullptr) {
 		fprintf(stderr, "Failed to Map TTF font %s to a texture. Resolution may be too large.", font);
 		fflush(stderr);
 		fatalError("");
@@ -100,7 +101,7 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 	int lineY = padding;
 	for (int y = 0; y < bestRows; y++) {
 		int lineX = padding;
-		for (size_t x = 0; x< bestPartition[y].size(); x++) {
+		for (size_t x = 0; x < bestPartition[y].size(); x++) {
 			int glyphIndex = bestPartition[y][x];
 
 			SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(ttfFont, (char)(startChar + glyphIndex), color);
@@ -132,6 +133,7 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 	int rs = padding - 1;
 	int* pureWhiteSquare = new int[rs * rs];
 	memset(pureWhiteSquare, 0xffffffff, rs * rs * sizeof(int));
+
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, rs, rs, GL_RGBA, GL_UNSIGNED_BYTE, pureWhiteSquare);
 	delete[] pureWhiteSquare;
 	pureWhiteSquare = nullptr;
