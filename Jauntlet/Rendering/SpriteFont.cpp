@@ -2,6 +2,7 @@
 #include "../Errors.h"
 
 #include<SDL/SDL.h>
+#include<cstring>
 
 using namespace Jauntlet;
 
