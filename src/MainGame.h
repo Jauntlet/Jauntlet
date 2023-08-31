@@ -15,6 +15,7 @@
 #include<Jauntlet/TileMap.h>
 #include<Jauntlet/TileSet.h>
 #include<Jauntlet/Rendering/LineRenderer.h>
+#include<Jauntlet/Rendering/SpriteFont.h>
 
 #include"Player.h"
 
@@ -44,6 +45,7 @@ private:
 
 	Jauntlet::TextureCache _textureCache;
 
+	Jauntlet::SpriteFont _spriteFont;
 	GameState _gameState;
 
 	int _screenWidth, _screenHeight;

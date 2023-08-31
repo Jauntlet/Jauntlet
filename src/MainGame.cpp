@@ -41,6 +41,8 @@ void MainGame::initSystems() {
 	// initialize player spriteBatch
 	_playerSpriteBatch.init();
 
+	_spriteFont.init("Fonts/HandelGo.ttf", 32);
+
 	// Temporary level loading
 	_level.registerTile('B', "Textures/Craig.png");
 	_bricks.addConnectionRule(Jauntlet::TileSet::ConnectionRules::TILES);
@@ -85,12 +87,12 @@ void MainGame::gameLoop() {
 		Jauntlet::Collision2D collision = Jauntlet::Collision2D();
 		for (int j = 0; j < levelColliders.size(); ++j) {
 			if (collision.getCollision(&_player.collider, &levelColliders[j])) {
-				std::cout << "Collision Detected (player @ " << _player.getPosition().x << ", " << _player.getPosition().y << ")\n";
+				//std::cout << "Collision Detected (player @ " << _player.getPosition().x << ", " << _player.getPosition().y << ")\n";
 			}
 		}
 
 		// centers the camera on the player (16 is half the player width)
-		_camera.setPosition(_player.getPosition() + glm::vec2(16,16));
+		_camera.setPosition((_player.getPosition() + glm::vec2(16,16)) * _camera.getScale());
 
 		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {		
 			_window.toggleFullscreen();
@@ -99,6 +101,13 @@ void MainGame::gameLoop() {
 		if (_inputManager.windowResized()) {
 			_window.getWindowSize();
 			_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
+		}
+
+		if (_inputManager.isKeyPressed(SDLK_q)) {
+			_camera.setScale(_camera.getScale() + .5);
+		}
+		if (_inputManager.isKeyPressed(SDLK_e)) {
+			_camera.setScale(_camera.getScale() - .5);
 		}
 
 		_camera.update();
@@ -126,11 +135,14 @@ void MainGame::drawGame() {
 	GLint pUniform = _colorProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
+	std::string str = "i";
+
 	// Draw Level
 	_level.draw();
 	// Draw the player using a spriteBatch
 	_playerSpriteBatch.begin();
 	_player.draw(_playerSpriteBatch);
+	_spriteFont.draw(_playerSpriteBatch, str.c_str(), glm::vec2(32,32), glm::vec2(1,1), 0, Jauntlet::Color(255,255,255,255));
 	_playerSpriteBatch.end();
 
 	_playerSpriteBatch.renderBatch();
