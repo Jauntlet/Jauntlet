@@ -36,8 +36,8 @@ bool Collision2D::getCollision(CircleCollider2D* parent, CircleCollider2D* other
 		_parent = parent;
 		_other = other;
 		
-		//maybe normal?
-		_normal = glm::vec2(); //temporary
+		//find and set normal
+		_normal = glm::normalize(other->position - parent->position);
 
 		//set overlap
 		_overlap = glm::sqrt(glm::pow(other->position.x - parent->position.x, 2)
@@ -62,8 +62,15 @@ bool Collision2D::getCollision(CircleCollider2D* parent, BoxCollider2D* other) {
 		_parent = parent;
 		_other = other;
 
-		//initialize normal for now
-		_normal = glm::vec2();
+		//find and set normal
+		glm::vec2 newNormal;
+
+		if (relCenter.x == relCenter.y) newNormal = glm::normalize(relCenter);
+
+		if (glm::abs(relCenter.x) > glm::abs(relCenter.y)) newNormal = glm::normalize(glm::vec2(relCenter.x, 0));
+		else newNormal = glm::normalize(glm::vec2(0, relCenter.y));
+
+		_normal = newNormal;
 
 		//set overlap
 		_overlap = glm::abs(testValue);
@@ -88,7 +95,7 @@ bool Collision2D::getCollision(BoxCollider2D* parent, CircleCollider2D* other) {
 		_other = other;
 
 		//initialize normal for now
-		_normal = glm::vec2();
+		_normal = glm::normalize(other->position - parent->position);
 
 		//set overlap
 		_overlap = glm::abs(testValue);
@@ -110,8 +117,17 @@ bool Collision2D::getCollision(BoxCollider2D* parent, BoxCollider2D* other) {
 		_parent = parent;
 		_other = other;
 
-		//init normal
-		_normal = glm::vec2();
+		//find and set normal
+		glm::vec2 newNormal;
+
+		glm::vec2 relCenter = other->position - parent->position;
+
+		if (relCenter.x == relCenter.y) newNormal = glm::normalize(relCenter);
+
+		if (glm::abs(relCenter.x) > glm::abs(relCenter.y)) newNormal = glm::normalize(glm::vec2(relCenter.x, 0));
+		else newNormal = glm::normalize(glm::vec2(0, relCenter.y));
+
+		_normal = newNormal;
 
 		//set overlap
 		_overlap = glm::sqrt(glm::pow(other->position.x - parent->position.x, 2) //a^2 + b^2 = c^2 a/b being width/height and c being the line to the circle hypothetically
