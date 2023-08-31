@@ -18,6 +18,8 @@ namespace Jauntlet
 		//returns a vector2  regarding a direction (0,0 would be dead center) with a magnitude of 1.
 		glm::vec2 GetNormal();
 
+		float GetOverlap();
+
 		bool getCollision(CircleCollider2D* parent, CircleCollider2D* other); //TODO: determine if using base class and InstanceOf works?
 		bool getCollision(CircleCollider2D* parent, BoxCollider2D* other);
 		bool getCollision(BoxCollider2D* parent, CircleCollider2D* other);
@@ -25,11 +27,13 @@ namespace Jauntlet
 	private:
 		//still not functional
 		//std::vector<std::vector<float>> _collisionPoints; 
-		//normal at the point of collision
-		glm::vec2 _normal;
 		//Main collider in calculation
 		Collider2D* _parent;
 		//the collider that collided with during the check
 		Collider2D* _other;
+		//normal at the point of collision
+		glm::vec2 _normal;
+		//overlap at point of collision
+		float _overlap;
 	};
 }
