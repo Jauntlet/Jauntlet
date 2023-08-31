@@ -11,8 +11,6 @@ namespace Jauntlet
 	{
 	public:
 		Collision2D();
-		//constructor (requires the two colliding objects)
-		Collision2D(Collider2D* parent, Collider2D* other);
 
 		//not functional yet
 		//std::vector<glm::vec2> GetCollisionPoints();
