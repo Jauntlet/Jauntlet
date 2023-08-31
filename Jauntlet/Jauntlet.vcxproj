@@ -169,6 +169,7 @@
     <ClCompile Include="Rendering\ResourceManager.cpp" />
     <ClCompile Include="Rendering\Sprite.cpp" />
     <ClCompile Include="Rendering\SpriteBatch.cpp" />
+    <ClCompile Include="Rendering\SpriteFont.cpp" />
     <ClCompile Include="Rendering\TextureCache.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileSet.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Rendering\ResourceManager.h" />
     <ClInclude Include="Rendering\Sprite.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
+    <ClInclude Include="Rendering\SpriteFont.h" />
     <ClInclude Include="Rendering\TextureCache.h" />
     <ClInclude Include="Rendering\Vertex.h" />
     <ClInclude Include="TileMap.h" />
