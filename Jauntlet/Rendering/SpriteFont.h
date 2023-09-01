@@ -53,7 +53,6 @@ public:
 		float depth, Color tint, Align alignment = Align::LEFT);
 private:
 	static std::vector<int>* createRows(glm::ivec4* rects, int rectsLength, int rows, int padding, int& w);
-	int closestPow2(int i);
 
 	int _fontHeight;
 	int _regStart, _regLength;

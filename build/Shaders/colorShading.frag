@@ -9,9 +9,6 @@ out vec4 color;
 // uniform float time;
 uniform sampler2D imageTexture;
 
-void main() {
-
-	vec4 textureColor = texture(imageTexture, fragmentUV);
-	
-	color = textureColor; //* fragmentColor;
+void main() {	
+	color = texture(imageTexture, fragmentUV) * fragmentColor;
 }
