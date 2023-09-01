@@ -40,8 +40,10 @@ void MainGame::initSystems() {
 
 	// initialize player spriteBatch
 	_playerSpriteBatch.init();
+	_HUDSpriteBatch.init();
 
-	_spriteFont.init("Fonts/HandelGo.ttf", 32);
+	// initializes spritefont
+	_spriteFont = new Jauntlet::SpriteFont("Fonts/chintzy.ttf", 64);
 
 	// Temporary level loading
 	_level.registerTile('B', "Textures/Craig.png");
@@ -136,17 +138,16 @@ void MainGame::drawGame() {
 	GLint pUniform = _colorProgram.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-	std::string str = "i";
-
 	// Draw Level
 	_level.draw();
 	// Draw the player using a spriteBatch
 	_playerSpriteBatch.begin();
 	_player.draw(_playerSpriteBatch);
-	_spriteFont.draw(_playerSpriteBatch, str.c_str(), glm::vec2(32,32), glm::vec2(1,1), 0, Jauntlet::Color(255,255,255,255));
 	_playerSpriteBatch.end();
 
 	_playerSpriteBatch.renderBatch();
+
+	drawHUD();
 
 	_lineRenderer.setColor(glm::vec3(1, 0, 0));
 	_lineRenderer.drawLine(glm::vec2(-1, 0), glm::vec2(1, 0));
@@ -154,4 +155,17 @@ void MainGame::drawGame() {
 	_colorProgram.unuse();
 
 	_window.swapBuffer();
+}
+
+void MainGame::drawHUD() {
+	char buffer[256];
+	
+	sprintf_s(buffer, "Framerate: %i", (int)_fps);
+	std::cout << (int)_fps << std::endl;
+	_HUDSpriteBatch.begin();
+
+	_spriteFont->draw(_HUDSpriteBatch, buffer, glm::vec2(32), glm::vec2(1), 0, Jauntlet::Color(255,255,255,255));
+
+	_HUDSpriteBatch.end();
+	_HUDSpriteBatch.renderBatch();
 }

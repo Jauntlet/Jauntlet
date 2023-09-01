@@ -34,6 +34,7 @@ private:
 	void initShaders();
 	void gameLoop();
 	void drawGame();
+	void drawHUD();
 
 	Jauntlet::Window _window;
 
@@ -45,7 +46,6 @@ private:
 
 	Jauntlet::TextureCache _textureCache;
 
-	Jauntlet::SpriteFont _spriteFont;
 	GameState _gameState;
 
 	int _screenWidth, _screenHeight;
@@ -57,6 +57,9 @@ private:
 	Jauntlet::TileMap _level;
 	Jauntlet::TileSet _bricks;
 
+	Jauntlet::SpriteBatch _HUDSpriteBatch;
+	Jauntlet::SpriteFont* _spriteFont;
+	
 	Jauntlet::LineRenderer _lineRenderer;
 
 	Player _player;
