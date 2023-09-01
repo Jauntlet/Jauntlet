@@ -69,6 +69,7 @@ void Player::setPosition(float x, float y) {
 }
 void Player::setPosition(glm::vec2 pos) {
 	_position = pos;
+	collider.position = pos;
 }
 
 void Player::setSpeed(float newSpeed) {
