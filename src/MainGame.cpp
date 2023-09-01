@@ -160,7 +160,7 @@ void MainGame::drawGame() {
 void MainGame::drawHUD() {
 	char buffer[256];
 	
-	sprintf_s(buffer, "Framerate: %i", (int)_fps);
+	sprintf(buffer, "Framerate: %i", (int)_fps);
 	std::cout << (int)_fps << std::endl;
 	_HUDSpriteBatch.begin();
 

@@ -5,6 +5,7 @@
 #include<map>
 #include"./Vertex.h"
 #include "SpriteBatch.h"
+#include<cstring>
 
 namespace Jauntlet {
 #define FIRST_PRINTABLE_CHAR (char)32

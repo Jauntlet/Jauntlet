@@ -3,6 +3,7 @@
 #include "SpriteBatch.h"
 
 #include <SDL/SDL.h>
+#include <cstdio>
 
 int closestPow2(int i) {
     i--;
