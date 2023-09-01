@@ -67,3 +67,6 @@ endif()
 
 # Specify include directories for the "Jauntlet" directory (outside of it)
 target_include_directories(game PRIVATE "${CMAKE_SOURCE_DIR}")
+
+# Generate compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
