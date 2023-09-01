@@ -3,6 +3,7 @@
 #include<vector>
 #include<map>
 #include<functional>
+#include<utility>
 
 #include "Rendering/SpriteBatch.h"
 #include "Rendering/GLTexture.h"
@@ -65,6 +66,8 @@ public:
 private:
 	// checks whether or not a tileset would connect to the specified tile position.
 	bool testTileSetRules(TileSet tile, int x, int y);
+	// for sorting tiles via distance
+	static bool shortestDist(std::pair<float, glm::vec2>& a, std::pair<float, glm::vec2>& b);
 
 	std::vector<std::string> _levelData;
 	SpriteBatch _spriteBatch;

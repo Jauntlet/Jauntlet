@@ -1,12 +1,12 @@
 #include "TileMap.h"
 
 #include <fstream>
+#include <algorithm>
 
 #include "Errors.h"
 #include "Rendering/ResourceManager.h"
 #include "Rendering/ImageLoader.h"
 #include "TileSet.h"
-
 
 #include<iostream>
 
@@ -104,7 +104,9 @@ void TileMap::draw() {
 
 std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 	
+	
 	std::vector<BoxCollider2D> colliders;
+	std::vector<std::pair<float, glm::vec2>> colliderMap;
 
 	// convert position to be a similar index to the levelData
 	glm::ivec2 newPos = position - _offset;
@@ -128,10 +130,21 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 			}
 
 			if (iterator->second.tileCollision == TileCollision::SQUARE) {
-				colliders.emplace_back(_tileSize, _tileSize, xPos * _tileSize + _offset.x, -yPos * _tileSize + _offset.y);
+				glm::vec2 tilePos = glm::vec2(xPos * _tileSize + _offset.x, -yPos * _tileSize + _offset.y);
+				
+				float dist = glm::sqrt(glm::pow(tilePos.x - position.x, 2) + glm::pow(tilePos.y - position.y, 2));
+
+				std::cout << "Tile at: " << tilePos.x << " " << tilePos.y << " is " << dist  << " away" << std::endl;
+				colliderMap.emplace_back(dist, glm::vec2(xPos, yPos));
 			}
 		}
 	}
+	std::sort(colliderMap.begin(), colliderMap.end(), &TileMap::shortestDist);
+
+	for (auto& it : colliderMap) {
+		colliders.emplace_back(_tileSize, _tileSize, it.second.x * _tileSize + _offset.x, -it.second.y * _tileSize + _offset.y);
+	}
+
 	return colliders;
 }
 
@@ -190,4 +203,8 @@ bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 	}
 	// The only remaining condition is if the tile is a regular tile.
 	return (tile.connectionRules & TileSet::ConnectionRules::TILES) ? true : false;
+}
+
+bool TileMap::shortestDist(std::pair<float, glm::vec2>& a, std::pair<float, glm::vec2>& b) {
+	return a.first < b.first;
 }
