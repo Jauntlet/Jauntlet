@@ -24,9 +24,9 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 
 	TTF_Font* ttfFont = TTF_OpenFont(font, size);
 
-	if (ttfFont == nullptr) {
+	if (!ttfFont) {
 		fprintf(stderr, "Failed to open TTF font file \"%s\"\n", font);
-		fflush(stderr);
+		std::cout << TTF_GetError() << std::endl;
 		fatalError("");
 	}
 	_fontHeight = TTF_FontHeight(ttfFont);
@@ -84,10 +84,8 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 		}
 	}
 
-	if (bestPartition == nullptr) {
-		fprintf(stderr, "Failed to Map TTF font %s to a texture. Resolution may be too large.", font);
-		fflush(stderr);
-		fatalError("");
+	if (!bestPartition) {
+		return;
 	}
 
 	// The font data was successfully created and the font is valid. Create the texture now
@@ -101,7 +99,7 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 	int lineY = padding;
 	for (int y = 0; y < bestRows; y++) {
 		int lineX = padding;
-		for (size_t x = 0; x < bestPartition[y].size(); x++) {
+		for (int x = 0; x < bestPartition[y].size(); x++) {
 			int glyphIndex = bestPartition[y][x];
 
 			SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(ttfFont, (char)(startChar + glyphIndex), color);
@@ -109,13 +107,13 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 			unsigned char* surfacePixels = (unsigned char*)glyphSurface->pixels;
 
 			for (int i = 0; i < (glyphSurface->w * glyphSurface->h * 4); i += 4) {
-				surfacePixels[i] = (unsigned char)((float)surfacePixels[i] * (surfacePixels[i + 3] / 255));
+				surfacePixels[i] *= (unsigned char)(surfacePixels[i + 3] / 255);
 				surfacePixels[i + 1] = surfacePixels[i];
 				surfacePixels[i + 2] = surfacePixels[i];
 			}
 
 			// Saving glyph image and coordinates
-			glTexSubImage2D(GL_TEXTURE_2D, 0, lineX, bestHeight - lineY - 1 - glyphSurface->h, glyphSurface->w, glyphSurface->h, GL_BGRA, GL_UNSIGNED_BYTE, glyphSurface->pixels);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, lineX, lineY, glyphSurface->w, glyphSurface->h, GL_BGRA, GL_UNSIGNED_BYTE, surfacePixels);
 			glyphRects[glyphIndex].x = lineX;
 			glyphRects[glyphIndex].y = lineY;
 			glyphRects[glyphIndex].z = glyphSurface->w;
@@ -132,7 +130,7 @@ void SpriteFont::init(const char* font, int size, char startChar, char endChar) 
 	// Draw the unsupported glyph
 	int rs = padding - 1;
 	int* pureWhiteSquare = new int[rs * rs];
-	memset(pureWhiteSquare, 0xffffffff, rs * rs * sizeof(int));
+	memset(pureWhiteSquare, 0xffffffffu, rs * rs * sizeof(int));
 
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, rs, rs, GL_RGBA, GL_UNSIGNED_BYTE, pureWhiteSquare);
 	delete[] pureWhiteSquare;
@@ -220,7 +218,7 @@ void SpriteFont::draw(SpriteBatch& spritebatch, const char* string, glm::vec2 po
 		else {
 			// Check for correct glyph
 			int glyphIndex = character - _regStart;
-			if (glyphIndex < 0 || glyphIndex >= _regLength) {
+			if (glyphIndex >= _regLength) {
 				glyphIndex = _regLength;
 			}
 			// Render the glyph
