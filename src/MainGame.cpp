@@ -43,7 +43,7 @@ void MainGame::initSystems() {
 	_HUDSpriteBatch.init();
 
 	// initializes spritefont
-	_spriteFont = new Jauntlet::SpriteFont("Fonts/chintzy.ttf", 64);
+	_spriteFont = new Jauntlet::SpriteFont("Fonts/HandelGo.ttf", 64);
 
 	// Temporary level loading
 	_level.registerTile('B', "Textures/Craig.png");
@@ -94,11 +94,11 @@ void MainGame::gameLoop() {
 			}
 		}
 
-		if (_inputManager.isKeyPressed(SDLK_q)) {
-			_camera.setScale(_camera.getScale() + .5);
+		if (_inputManager.isKeyDown(SDLK_q)) {
+			_camera.setScale(_camera.getScale() + .05);
 		}
-		if (_inputManager.isKeyPressed(SDLK_e)) {
-			_camera.setScale(_camera.getScale() - .5);
+		if (_inputManager.isKeyDown(SDLK_e)) {
+			_camera.setScale(_camera.getScale() - .05);
 		}
 
 		// centers the camera on the player (16 is half the player width)
