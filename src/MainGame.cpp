@@ -5,6 +5,8 @@
 #include<Jauntlet/Rendering/ResourceManager.h>
 #include<Jauntlet/Time.h>
 #include<Jauntlet/TileSet.h>
+#include<Jauntlet/JMath.h>
+
 
 #include<iostream>
 
@@ -89,7 +91,6 @@ void MainGame::gameLoop() {
 		Jauntlet::Collision2D collision = Jauntlet::Collision2D();
 		for (int j = 0; j < levelColliders.size(); ++j) {
 			if (collision.getCollision(&_player.collider, &levelColliders[j])) {
-				//std::cout << "Collision Detected (player @ " << _player.getPosition().x << ", " << _player.getPosition().y << ")\n";
 				_player.setPosition(_player.getPosition() + (collision.GetNormal() * collision.GetOverlap()));
 			}
 		}

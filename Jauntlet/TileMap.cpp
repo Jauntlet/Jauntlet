@@ -7,6 +7,7 @@
 #include "Rendering/ResourceManager.h"
 #include "Rendering/ImageLoader.h"
 #include "TileSet.h"
+#include "JMath.h"
 
 #include<iostream>
 
@@ -130,12 +131,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 			}
 
 			if (iterator->second.tileCollision == TileCollision::SQUARE) {
-				glm::vec2 tilePos = glm::vec2(xPos * _tileSize + _offset.x, -yPos * _tileSize + _offset.y);
-				
-				float dist = glm::sqrt(glm::pow(tilePos.x - position.x, 2) + glm::pow(tilePos.y - position.y, 2));
-
-				std::cout << "Tile at: " << tilePos.x << " " << tilePos.y << " is " << dist  << " away" << std::endl;
-				colliderMap.emplace_back(dist, glm::vec2(xPos, yPos));
+				colliderMap.emplace_back(JMath::Distance(glm::vec2(xPos * _tileSize + _offset.x, -yPos * _tileSize + _offset.y), position), glm::vec2(xPos, yPos));
 			}
 		}
 	}

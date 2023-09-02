@@ -1,5 +1,7 @@
 #include "Collision2D.h"
 
+#include "../JMath.h"
+
 #include <cmath>
 #include <glm/glm.hpp>
 
@@ -27,8 +29,8 @@ float Collision2D::GetOverlap() {
 
 //Circle on Circle collision check
 bool Collision2D::getCollision(CircleCollider2D* parent, CircleCollider2D* other) {
-	float dist = glm::sqrt(glm::pow(other->position.x - parent->position.x, 2)
-					+ glm::pow(other->position.y - parent->position.y, 2));
+	float dist = JMath::Distance(other->position, parent->position);;
+
 	float totlR = parent->GetRadius() + other->GetRadius();
 	
 	if (dist <= totlR) {
@@ -40,8 +42,7 @@ bool Collision2D::getCollision(CircleCollider2D* parent, CircleCollider2D* other
 		_normal = glm::normalize(other->position - parent->position);
 
 		//set overlap
-		_overlap = glm::sqrt(glm::pow(other->position.x - parent->position.x, 2)
-						+ glm::pow(other->position.y - parent->position.y, 2)) - (parent->GetRadius() + other->GetRadius());
+		_overlap = dist - (parent->GetRadius() + other->GetRadius());
 
 		//return the collision happened
 		return true;
