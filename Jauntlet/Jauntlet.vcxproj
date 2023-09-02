@@ -158,6 +158,7 @@
     <ClCompile Include="Collision\Collider2D.cpp" />
     <ClCompile Include="Collision\Collision2D.cpp" />
     <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="JMath.cpp" />
     <ClCompile Include="UiElement.cpp" />
     <ClCompile Include="InputKey.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Collision\Collider2D.h" />
     <ClInclude Include="Collision\Collision2D.h" />
     <ClInclude Include="Errors.h" />
+    <ClInclude Include="JMath.h" />
     <ClInclude Include="UiElement.h" />
     <ClInclude Include="InputKey.h" />
     <ClInclude Include="InputManager.h" />
