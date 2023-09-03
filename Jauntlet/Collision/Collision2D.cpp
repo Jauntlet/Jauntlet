@@ -94,10 +94,19 @@ bool Collision2D::getCollision(CircleCollider2D* parent, BoxCollider2D* other) {
 //Box on Circle collision check
 bool Collision2D::getCollision(BoxCollider2D* parent, CircleCollider2D* other) {
 	glm::vec2 relCenter = other->position - parent->position;
-	glm::vec2 cornerOffset = glm::abs(relCenter) - glm::vec2(parent->GetWidth() / 2, parent->GetHeight() / 2);
-	float testValue = glm::min(glm::max(cornerOffset.x, cornerOffset.y), 0.0f) + glm::length(glm::max(cornerOffset.x, cornerOffset.y)) - other->GetRadius();
+	//glm::vec2 cornerOffset = glm::abs(relCenter) - glm::vec2(parent->GetWidth() / 2, parent->GetHeight() / 2);
+	//float testValue = glm::min(glm::max(cornerOffset.x, cornerOffset.y), 0.0f) + glm::length(glm::max(cornerOffset.x, cornerOffset.y)) - other->GetRadius();
 	
-	if (testValue <= 0)
+	glm::vec2 t = other->position;
+
+	if (t.x < parent->position.x - parent->GetWidth() / 2) t.x = parent->position.x - parent->GetWidth() / 2;
+	else if (t.x > parent->position.x + parent->GetWidth() / 2) t.x = parent->position.x + parent->GetWidth() / 2;
+	if (t.y < parent->position.y - parent->GetHeight() / 2) t.y = parent->position.y - parent->GetHeight() / 2;
+	else if (t.y > parent->position.y + parent->GetHeight() / 2) t.y = parent->position.y + parent->GetHeight() / 2;
+
+	float tDist = JMath::Distance(other->position, t);
+
+	if (tDist <= other->GetRadius())
 	{
 		//set parent & other
 		_parent = parent;
@@ -107,7 +116,7 @@ bool Collision2D::getCollision(BoxCollider2D* parent, CircleCollider2D* other) {
 		_normal = glm::normalize(other->position - parent->position);
 
 		//set overlap
-		_overlap = glm::abs(testValue);
+		_overlap = glm::abs(tDist - other->GetRadius());
 
 		//return the collision happened
 		return true;
