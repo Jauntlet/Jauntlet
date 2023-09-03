@@ -54,10 +54,19 @@ bool Collision2D::getCollision(CircleCollider2D* parent, CircleCollider2D* other
 //Circle on Box collision check
 bool Collision2D::getCollision(CircleCollider2D* parent, BoxCollider2D* other) {
 	glm::vec2 relCenter = parent->position - other->position;
-	glm::vec2 cornerOffset = glm::abs(relCenter) - glm::vec2(other->GetWidth() / 2, other->GetHeight() / 2);
-	float testValue = glm::min(glm::max(cornerOffset.x, cornerOffset.y), 0.0f) + glm::length(glm::max(cornerOffset.x, cornerOffset.y)) - parent->GetRadius();
+	//glm::vec2 cornerOffset = glm::abs(relCenter) - glm::vec2(other->GetWidth() / 2, other->GetHeight() / 2);
+	//float testValue = glm::min(glm::max(cornerOffset.x, cornerOffset.y), 0.0f) + glm::length(glm::max(cornerOffset.x, cornerOffset.y)) - parent->GetRadius();
 
-	if (testValue <= 0)
+	glm::vec2 t = parent->position;
+
+	if (t.x < other->position.x - other->GetWidth()/2) t.x = other->position.x - other->GetWidth()/2;
+	else if (t.x > other->position.x + other->GetWidth()/2) t.x = other->position.x + other->GetWidth()/2;
+	if (t.y < other->position.y - other->GetHeight()/2) t.y = other->position.y - other->GetHeight()/2;
+	else if (t.y > other->position.y + other->GetHeight()/2) t.y = other->position.y + other->GetHeight()/2;
+
+	float tDist = JMath::Distance(parent->position, t);
+
+	if (tDist <= parent->GetRadius())
 	{
 		//set parent & other
 		_parent = parent;
@@ -67,14 +76,13 @@ bool Collision2D::getCollision(CircleCollider2D* parent, BoxCollider2D* other) {
 		glm::vec2 newNormal;
 
 		if (relCenter.x == relCenter.y) newNormal = glm::normalize(relCenter);
-
-		if (glm::abs(relCenter.x) > glm::abs(relCenter.y)) newNormal = glm::normalize(glm::vec2(relCenter.x, 0));
+		else if (glm::abs(relCenter.x) > glm::abs(relCenter.y)) newNormal = glm::normalize(glm::vec2(relCenter.x, 0));
 		else newNormal = glm::normalize(glm::vec2(0, relCenter.y));
 
 		_normal = newNormal;
 
 		//set overlap
-		_overlap = glm::abs(testValue);
+		_overlap = glm::abs(tDist - parent->GetRadius());
 
 		//return the collision happened
 		return true;
