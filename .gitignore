@@ -31,6 +31,7 @@
 
 # Visual studio
 .vs/
+.cache/
 
 # build cmake files
 build/CMakeFiles/*
@@ -38,6 +39,9 @@ build/CMakeCache.txt
 build/cmake_install.cmake
 build/Makefile
 build/game
+
+#remove clangd files
+build/compile_commands.json
 
 # other
 *.tlog

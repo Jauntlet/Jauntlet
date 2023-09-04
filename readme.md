@@ -10,20 +10,21 @@ currently working on compiling using cmake with windows, but for now you can ope
 
 to compile on debian:
 
-you have two options. either run the compile.sh file in the root of the program (`sh compile.sh`), or you can manually do the following:
-
 get dependencies
 ```
 sudo apt install make cmake libglm-dev libsdl2-dev libglew-dev g++
 ```
+
+from here you have two options. either run the compile.sh file in the root of the program (`sh compile.sh`), or you can manually do the following:
+
 create and move into "build" folder
 ```
 mkdir build
 cd build
 ```
-compile using cmake (run in build folder)
+compile using cmake (run in build folder). we export the compile commands for clangd, you can skip that argument step if you dont use anything like that.
 ```
-cmake ..
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 make
 ```
 the executable is called "game", so run this command to launch it
