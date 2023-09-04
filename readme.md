@@ -10,12 +10,13 @@ currently working on compiling using cmake with windows, but for now you can ope
 
 to compile on debian:
 
-you have two options. either run the compile.sh file in the root of the program (`sh compile.sh`), or you can manually do the following:
-
 get dependencies
 ```
 sudo apt install make cmake libglm-dev libsdl2-dev libglew-dev g++
 ```
+
+from here you have two options. either run the compile.sh file in the root of the program (`sh compile.sh`), or you can manually do the following:
+
 create and move into "build" folder
 ```
 mkdir build
