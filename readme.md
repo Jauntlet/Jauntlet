@@ -21,9 +21,9 @@ create and move into "build" folder
 mkdir build
 cd build
 ```
-compile using cmake (run in build folder)
+compile using cmake (run in build folder). we export the compile commands for clangd, you can skip that argument step if you dont use anything like that.
 ```
-cmake ..
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 make
 ```
 the executable is called "game", so run this command to launch it
