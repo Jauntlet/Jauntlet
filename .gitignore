@@ -40,6 +40,9 @@ build/cmake_install.cmake
 build/Makefile
 build/game
 
+#remove clangd files
+build/compile_commands.json
+
 # other
 *.tlog
 *.pdb
