@@ -72,6 +72,7 @@ bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimension
 }
 
 void Camera2D::setPosition(const glm::vec2& newPosition) { 
+	_position = round(newPosition); 
 	_needsMatrixUpdate = true;
 }
 
