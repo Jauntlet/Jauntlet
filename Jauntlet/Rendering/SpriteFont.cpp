@@ -1,5 +1,6 @@
 #include <SDL/SDL.h>
 #include <cstdio>
+#include <iostream>
 
 #include "../Errors.h"
 #include "SpriteBatch.h"
@@ -7,7 +8,6 @@
 
 using namespace Jauntlet;
 
-SpriteFont::SpriteFont(const char* font, int size, char startChar, char endChar) {
 void SpriteFont::init(const char* font, int size) {
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft)) {
