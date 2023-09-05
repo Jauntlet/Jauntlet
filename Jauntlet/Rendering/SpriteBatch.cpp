@@ -130,6 +130,8 @@ void SpriteBatch::sortGlyphs() {
 		case GlyphSortType::TEXTURE:
 			std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareTexture);
 			break;
+		case GlyphSortType::NONE:
+			break;
 		default:
 			throw("sort type not found");
 			break;

@@ -59,7 +59,7 @@ public:
 	// initializes the spritebatch
 	void init();
 	// Opens the spritebatch to be able to add textures to it
-	void begin(GlyphSortType sortType = GlyphSortType::TEXTURE);
+	void begin(GlyphSortType sortType = GlyphSortType::NONE);
 	// closes and sorts the spritebatch
 	void end();
 	// adds a texture and its information to the spritebatch
@@ -78,7 +78,7 @@ private:
 	GLuint _vboID = 0;
 	GLuint _vaoID = 0;
 
-	GlyphSortType _sortType = GlyphSortType::TEXTURE;
+	GlyphSortType _sortType = GlyphSortType::NONE;
 
 	std::vector<Glyph> _glyphs;
 	// The reason why we have a seperate vector for pointing to the glyphs, is so that we can easily sort them to be rendered, without the negative performance
