@@ -84,3 +84,7 @@ void InputManager::setMouseCoords(float x, float y) {
 	_mouseCoords.x = x;
 	_mouseCoords.y = y;
 }
+
+glm::vec2 InputManager::getMouseCoords() {
+	return _mouseCoords;
+}

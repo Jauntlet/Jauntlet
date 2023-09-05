@@ -28,7 +28,7 @@ public:
 	bool quitGameCalled();
 
 	// getters
-	glm::vec2 getMouseCoords() const { return _mouseCoords; }
+	glm::vec2 getMouseCoords();
 private:
 	void pressKey(unsigned int keyID);
 	void releaseKey(unsigned int keyID);	
