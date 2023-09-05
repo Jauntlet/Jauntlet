@@ -1,11 +1,17 @@
-#include "Player.h"
 #include <Jauntlet/Rendering/ResourceManager.h>
 #include <Jauntlet/Rendering/Vertex.h>
 #include <SDL/SDL.h>
 #include <Jauntlet/Time.h>
 
-Player::Player(float x, float y, Jauntlet::InputManager* inputManager) : _inputManager(inputManager), _moveUp(_inputManager), _moveLeft(_inputManager),
-																	     _moveRight(_inputManager), _moveDown(_inputManager), collider(CircleCollider2D(16.0f, _position)) {
+#include "Player.h"
+
+Player::Player(float x, float y, Jauntlet::InputManager* inputManager) :
+	_inputManager(inputManager),
+	_moveUp(_inputManager),
+	_moveLeft(_inputManager),
+	_moveRight(_inputManager),
+	_moveDown(_inputManager),
+	collider(CircleCollider2D(16.0f, Player::_position)) {
 	_position = glm::vec2(x, y);
 
 	_moveUp.addKey(SDLK_w);
