@@ -62,8 +62,8 @@ bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimension
 
 	glm::vec2 distVec = centerPos - _position;
 
-	float xDepth = MIN_DISTANCE_X - abs(distVec.x);
-	float yDepth = MIN_DISTANCE_Y - abs(distVec.y);
+	float xDepth = MIN_DISTANCE_X - std::abs(distVec.x);
+	float yDepth = MIN_DISTANCE_Y - std::abs(distVec.y);
 
 	if (xDepth > 0 && yDepth > 0) {
 		return true;
