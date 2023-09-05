@@ -49,6 +49,9 @@ private:
 
 	GameState _gameState = GameState::PLAY;
 
+	// this is faster to compile, but much less readable.
+	// arguably, we only *really* compile this once, and only recompile whenever we change constants. -jk
+
 	int _screenWidth = 1024, _screenHeight = 768;
 	float _fps = 0;
 

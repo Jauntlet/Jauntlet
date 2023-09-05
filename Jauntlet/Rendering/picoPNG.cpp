@@ -1,13 +1,15 @@
-// this code is a prebuilt PNG loader: we may want to look into our own in the future.
-
-// THIS CODE IS NOT OURS
-
 #include <vector>
 
 #pragma warning ( disable : 26495)
 #pragma warning ( disable : 6011)
 #pragma warning ( disable : 4244)
 #pragma warning ( disable : 6293)
+
+// ^  do these lines even do anything??  ^ -jk
+
+// this code is a prebuilt PNG loader: we may want to look into our own in the future.
+
+// THIS CODE IS NOT OURS
 
 namespace Jauntlet {
 
