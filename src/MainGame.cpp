@@ -1,4 +1,5 @@
 #include "MainGame.h"
+#include "SDL/SDL_keycode.h"
 #include "SDL/SDL_mouse.h"
 #include "glm/fwd.hpp"
 
@@ -104,15 +105,21 @@ void MainGame::gameLoop() {
 			_camera.setScale(_camera.getScale() - .05);
 		}
 
-		if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-			_intendedCameraPosition = (glm::vec2((_inputManager.getMouseCoords().x - (_screenWidth / 2)) * _CAMERA_MOVEMENT_SCALE, ((_screenHeight - _inputManager.getMouseCoords().y) - (_screenHeight / 2)) * _CAMERA_MOVEMENT_SCALE));
-		} else {
-			_intendedCameraPosition = glm::vec2(0,0);
+		if (_inputManager.isKeyDown(SDLK_r)) {
+			_intendedCameraPostition = glm::vec2(0,0);
 		}
 
-		_currentCameraPostition += (_intendedCameraPosition - _currentCameraPostition) / glm::vec2(2,2) * (Jauntlet::Time::getDeltaTime() * 2);
-		// blah
-		// the camera here is made to go halfway between the cursor and the center of the screen. adjust the final vec2 to adjust this, and
+		if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
+			
+			_deltaMouse = _inputManager.getMouseCoords() - _oldMouse;
+			_currentCameraPostition += glm::vec2(-_deltaMouse.x, _deltaMouse.y);
+			_intendedCameraPostition = _currentCameraPostition;
+		}
+
+		_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
+
+		_currentCameraPostition += (_intendedCameraPostition - _currentCameraPostition) * (Jauntlet::Time::getDeltaTime() * 4);
+
 		_camera.setPosition(_currentCameraPostition);
 
 		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {		
