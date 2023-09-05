@@ -37,6 +37,8 @@ void MainGame::initSystems() {
 
 	_window.create("Jauntlet Game Engine", _screenWidth, _screenHeight, Jauntlet::WindowFlags::RESIZEABLE);
 
+	SDL_ShowCursor(1); // show the mouse cursor. can be set to 0 later for replacements.
+
 	initShaders();
 
 	_lineRenderer.init();
