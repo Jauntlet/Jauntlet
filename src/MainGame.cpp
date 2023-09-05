@@ -155,7 +155,7 @@ void MainGame::drawGame() {
 	glUniform1i(textureUniform, 0);
 
 	glm::mat4 projectionMatrix = _camera.getCameraMatrix();
-	GLint pUniform = _colorProgram.getUniformLocation("P");
+	GLint pUniform = _colorProgram.getUniformLocation("Projection");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
 	// Draw Level

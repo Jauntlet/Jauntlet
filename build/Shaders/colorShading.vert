@@ -8,10 +8,10 @@ out vec2 fragmentPosition;
 out vec4 fragmentColor;
 out vec2 fragmentUV;
 
-uniform mat4 P; // 'P' is the camera matrix position. Why is the standard 'P'? Ain't no clue.
+uniform mat4 Projection; // This is the projection matrix of your camera.
 
 void main() {
-	gl_Position.xy = (P * vec4(vertexPosition, 0.0, 1.0)).xy;
+	gl_Position.xy = (Projection * vec4(vertexPosition, 0.0, 1.0)).xy;
 	gl_Position.z = 0.0;
 	gl_Position.w = 1.0;
 	
