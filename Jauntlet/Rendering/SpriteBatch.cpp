@@ -121,15 +121,18 @@ void SpriteBatch::createVertexArray() {
 void SpriteBatch::sortGlyphs() {
 	
 	switch (_sortType) {
-	case GlyphSortType::BACK_TO_FRONT:
-		std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareBackToFront);
-		break;
-	case GlyphSortType::FRONT_TO_BACK:
-		std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareFrontToBack);
-		break;
-	case GlyphSortType::TEXTURE:
-		std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareTexture);
-		break;
+		case GlyphSortType::BACK_TO_FRONT:
+			std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareBackToFront);
+			break;
+		case GlyphSortType::FRONT_TO_BACK:
+			std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareFrontToBack);
+			break;
+		case GlyphSortType::TEXTURE:
+			std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareTexture);
+			break;
+		default:
+			throw("sort type not found");
+			break;
 	}
 }
 
