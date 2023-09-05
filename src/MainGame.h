@@ -33,6 +33,7 @@ private:
 	void initSystems();
 	void initShaders();
 	void gameLoop();
+	void processInput();
 	void drawGame();
 	void drawHUD();
 

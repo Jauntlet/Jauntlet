@@ -72,19 +72,7 @@ void MainGame::gameLoop() {
 	while (_gameState == GameState::PLAY) {
 		Jauntlet::Time::beginFrame();
 
-		// process all input and detect if the player hits quit
-		_inputManager.processInput();
-		
-		if (_inputManager.quitGameCalled()) {
-			_gameState = GameState::EXIT;
-		}
-		
-		if (_inputManager.isKeyDown(SDLK_LSHIFT)) {
-			_player.setSpeed(300);
-		}
-		else {
-			_player.setSpeed(120);
-		}
+		processInput();
 		
 		_player.update();
 
@@ -97,44 +85,60 @@ void MainGame::gameLoop() {
 			}
 		}
 
-		if (_inputManager.isKeyDown(SDLK_q)) {
-			_camera.setScale(_camera.getScale() + .05);
-		}
-		if (_inputManager.isKeyDown(SDLK_e)) {
-			_camera.setScale(_camera.getScale() - .05);
-		}
-
-		if (_inputManager.isKeyDown(SDLK_r)) {
-			_intendedCameraPostition = glm::vec2(0,0);
-		}
-
-		if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-			
-			_deltaMouse = _inputManager.getMouseCoords() - _oldMouse;
-			_currentCameraPostition += glm::vec2(-_deltaMouse.x, _deltaMouse.y);
-			_intendedCameraPostition = _currentCameraPostition;
-		}
-
 		_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
 
 		_currentCameraPostition += (_intendedCameraPostition - _currentCameraPostition) * (Jauntlet::Time::getDeltaTime() * 4);
 
 		_camera.setPosition(_currentCameraPostition);
 
-		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {		
-			_window.toggleFullscreen();
-		}
-
-		if (_inputManager.windowResized()) {
-			_window.getWindowSize();
-			_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
-		}
-
 		_camera.update();
 
 		drawGame();
 
 		_fps = Jauntlet::Time::endFrame();
+	}
+}
+
+void MainGame::processInput() {
+	// process all input and detect if the player hits quit
+	_inputManager.processInput();
+
+	if (_inputManager.quitGameCalled()) {
+		_gameState = GameState::EXIT;
+	}
+
+	if (_inputManager.isKeyDown(SDLK_LSHIFT)) {
+		_player.setSpeed(300);
+	}
+	else {
+		_player.setSpeed(120);
+	}
+
+	if (_inputManager.isKeyDown(SDLK_q)) {
+		_camera.setScale(_camera.getScale() + .05);
+	}
+	if (_inputManager.isKeyDown(SDLK_e)) {
+		_camera.setScale(_camera.getScale() - .05);
+	}
+
+	if (_inputManager.isKeyDown(SDLK_r)) {
+		_intendedCameraPostition = glm::vec2(0, 0);
+	}
+
+	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
+
+		_deltaMouse = _inputManager.getMouseCoords() - _oldMouse;
+		_currentCameraPostition += glm::vec2(-_deltaMouse.x, _deltaMouse.y);
+		_intendedCameraPostition = _currentCameraPostition;
+	}
+
+	if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {
+		_window.toggleFullscreen();
+	}
+
+	if (_inputManager.windowResized()) {
+		_window.getWindowSize();
+		_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
 	}
 }
 
