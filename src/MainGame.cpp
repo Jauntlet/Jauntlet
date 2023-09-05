@@ -13,12 +13,7 @@
 // defines scale of movement for the camera. if set to 1, the camera will follow the mouse, if set to 0, the mouse has no control over the camera.
 const glm::vec2 _CAMERA_MOVEMENT_SCALE =  glm::vec2(0.5, 0.5);
 
-MainGame::MainGame() : 
-	_screenWidth(1024), 
-	_screenHeight(768), 
-	_gameState(GameState::PLAY),
-	_fps(0),
-	_window(),
+MainGame::MainGame() :  
 	_level(_textureCache, 32),
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
