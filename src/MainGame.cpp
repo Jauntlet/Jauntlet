@@ -11,7 +11,7 @@
 #include<iostream>
 
 // defines scale of movement for the camera. if set to 1, the camera will follow the mouse, if set to 0, the mouse has no control over the camera.
-const glm::vec2 _CAMERA_MOVEMENT_SCALE =  glm::vec2(0.5, 0.5);
+const glm::vec2 _CAMERA_MOVEMENT_SCALE =  glm::vec2(0.5, 0.5); // DO NOT DEFINE IN HEADER, BREAKS CONST -jk
 
 MainGame::MainGame() : 
 	_screenWidth(1024), 
