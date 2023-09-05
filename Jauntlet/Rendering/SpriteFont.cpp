@@ -20,6 +20,7 @@ void SpriteFont::init(const char* font, int size) {
 	}
 	// setting width to 0 lets the function dynamically determine the width.
 	FT_Set_Pixel_Sizes(face, 0, size);
+	_fontHeight = size;
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // This disables byte-alignment restrictions.
 
@@ -37,10 +38,35 @@ void SpriteFont::init(const char* font, int size) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		CharGlyph character = { texture, glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows), 
+								glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap_top), face->glyph->advance.x 
+		};
+		Characters.insert(std::pair<char, CharGlyph>(c, character));
 	}
+	
+	// Clear memory for face and ft
+	FT_Done_Face(face);
+	FT_Done_FreeType(ft);
 }
 
-void SpriteFont::draw(SpriteBatch& spritebatch, const char* string, glm::vec2 position, glm::vec2 scaling,
+void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
 	float depth, Color tint) {
 
+	glm::vec2 totalPos = position;
+
+	for (auto c = string.begin(); c != string.end(); c++) {
+		CharGlyph currentGlyph = Characters[*c];
+
+		if (*c == '\n') {
+			totalPos.y += _fontHeight * scaling.y;
+			totalPos.x = position.x;
+		}
+
+		glm::vec4 destRect(totalPos, currentGlyph.Bearing);
+
+		spritebatch.draw(destRect, { 0,0,1,1 }, currentGlyph.TextureID, 0, { 255,255,255,255 });
+
+		totalPos.x += (currentGlyph.Advance >> 6) * scaling.x;
+	}
 }

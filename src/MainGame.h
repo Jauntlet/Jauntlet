@@ -68,7 +68,7 @@ private:
 	Jauntlet::TileSet _bricks;
 
 	Jauntlet::SpriteBatch _HUDSpriteBatch;
-	Jauntlet::SpriteFont* _spriteFont;
+	Jauntlet::SpriteFont _spriteFont;
 	
 	Jauntlet::LineRenderer _lineRenderer;
 

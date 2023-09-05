@@ -30,11 +30,12 @@ public:
 	void init(const char* font, int size);
 	
 	// Draws the spritefont using a spritebatch
-	void draw(SpriteBatch& spritebatch, const char* string, glm::vec2 position, glm::vec2 scaling,
+	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
 			  float depth, Color tint);
 private:
 	std::map<char, CharGlyph> Characters;
 
+	int _fontHeight;
 };
 }
 
