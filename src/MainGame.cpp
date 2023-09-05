@@ -74,7 +74,9 @@ void MainGame::gameLoop() {
 
 		processInput();
 		
-		// collision checking between Craig and the tilemap
+		_player.update();
+		
+		// collision checking between Craig and the tilemap, done after player update
 		std::vector<BoxCollider2D> levelColliders = _level.collectCollidingTiles(_player.getPosition());
 		Jauntlet::Collision2D collision = Jauntlet::Collision2D();
 		for (int j = 0; j < levelColliders.size(); ++j) {
@@ -89,7 +91,6 @@ void MainGame::gameLoop() {
 
 		_camera.setPosition(_currentCameraPostition);
 
-		_player.update();
 		_camera.update();
 
 		drawGame();
