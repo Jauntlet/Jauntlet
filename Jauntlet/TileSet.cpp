@@ -8,7 +8,7 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 	std::string Right, std::string Left, std::string Bottom, std::string Top,
 	std::string BottomRight, std::string BottomLeft, std::string BottomTop,
 	std::string TopRight, std::string TopLeft, std::string RightLeft,
-	std::string BottomTopLeft, std::string BottomTopRight, std::string BottomLeftRight, std::string TopRightLeft) : connectionRules(0) {
+	std::string BottomTopLeft, std::string BottomTopRight, std::string BottomLeftRight, std::string TopRightLeft) {
 	_id = _lastestID;
 	_lastestID++;
 	_mainTiles[0] = NoSidesCovered;

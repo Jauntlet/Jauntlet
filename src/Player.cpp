@@ -7,7 +7,6 @@
 Player::Player(float x, float y, Jauntlet::InputManager* inputManager) : _inputManager(inputManager), _moveUp(_inputManager), _moveLeft(_inputManager),
 																	     _moveRight(_inputManager), _moveDown(_inputManager), collider(CircleCollider2D(16.0f, _position)) {
 	_position = glm::vec2(x, y);
-	_speed = 120;
 
 	_moveUp.addKey(SDLK_w);
 	_moveUp.addKey(SDLK_UP);

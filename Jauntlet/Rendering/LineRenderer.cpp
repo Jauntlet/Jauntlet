@@ -7,9 +7,8 @@
 #include<iostream>
 using namespace Jauntlet;
 
-LineRenderer::LineRenderer() : _VAO(0), _VBO(0), _shaderProgram(0) {
-    _MVP = glm::mat4(1.0f);
-    _color = glm::vec3(255, 255, 255);
+LineRenderer::LineRenderer() {
+    // Empty
 }
 
 void LineRenderer::init() {

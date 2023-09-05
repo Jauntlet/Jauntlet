@@ -30,10 +30,10 @@ private:
 	// function to compile an individual shader
 	void compileShader(const std::string& filePath, GLuint id);
 
-	int _numAttributes;
+	int _numAttributes = 0;
 
-	GLuint _programID;
-	GLuint _vertexShaderID;
-	GLuint _fragmentShaderID;
+	GLuint _programID = 0;
+	GLuint _vertexShaderID = 0;
+	GLuint _fragmentShaderID = 0;
 };
 }

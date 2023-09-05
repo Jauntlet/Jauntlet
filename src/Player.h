@@ -24,7 +24,7 @@ public:
 private:
 	glm::vec2 _position;
 
-	float _speed;
+	float _speed = 120;
 
 	Jauntlet::InputManager* _inputManager;
 

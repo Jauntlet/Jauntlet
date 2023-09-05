@@ -2,8 +2,8 @@
 
 using namespace Jauntlet;
 
-Camera2D::Camera2D() : _scale(1), _position(0,0), _cameraMatrix(1), _orthoMatrix(1), _needsMatrixUpdate(true), _screenWidth(500), _screenHeight(500) {
-
+Camera2D::Camera2D() {
+	// Empty
 }
 
 void Camera2D::init(int screenWidth, int screenHeight) {

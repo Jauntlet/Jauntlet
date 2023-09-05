@@ -1,3 +1,7 @@
+// THIS CLASS IS OLD AND DOESNT WORK WITH SPRITEBATCHING, SO IT SHOULD NOT BE USED: READ DOCS FOR MORE INFO
+// THIS CLASS IS OLD AND DOESNT WORK WITH SPRITEBATCHING, SO IT SHOULD NOT BE USED: READ DOCS FOR MORE INFO
+// THIS CLASS IS OLD AND DOESNT WORK WITH SPRITEBATCHING, SO IT SHOULD NOT BE USED: READ DOCS FOR MORE INFO
+
 #include "Sprite.h"
 #include "Vertex.h"
 #include "ResourceManager.h"
@@ -5,7 +9,7 @@
 #include<cstddef>
 using namespace Jauntlet;
 
-Sprite::Sprite(float x, float y, float width, float height, std::string texturePath) : _x(x), _y(y), _width(width), _height(height), _vboID(0) {
+Sprite::Sprite(float x, float y, float width, float height, std::string texturePath) : _x(x), _y(y), _width(width), _height(height) {
 	_texture = ResourceManager::getTexture(texturePath);
 
 	if (_vboID == 0) {
