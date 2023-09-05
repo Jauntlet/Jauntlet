@@ -36,30 +36,32 @@ public:
 	// initialize a SpriteFont that uses all ascii characters
 	void init(const char* font, int size);
 	// intialize a SpriteFont with set start and ending ascii characters
-	void init(const char* font, int size, char startChar, char endChar);
+	//void init(const char* font, int size, char startChar, char endChar);
 
 	// Destroys the font resources
-	void dispose();
+	//void dispose();
 	
 	// Get the height of the font
-	int getFontHeight() const {
+	/*int getFontHeight() const {
 		return _fontHeight;
-	}
+	}*/
 
 	// Measures the dimensions of the text
-	glm::vec2 measure(const char* string);
+	//glm::vec2 measure(const char* string);
 	
 	// Draws the spritefont using a spritebatch
 	void draw(SpriteBatch& spritebatch, const char* string, glm::vec2 position, glm::vec2 scaling,
-		float depth, Color tint, Align alignment = Align::LEFT);
+			  float depth, Color tint, Align alignment = Align::LEFT);
 private:
-	static std::vector<int>* createRows(glm::ivec4* rects, int rectsLength, int rows, int padding, int& w);
+	//static std::vector<int>* createRows(glm::ivec4* rects, int rectsLength, int rows, int padding, int& w);
 
-	int _fontHeight;
+	/*int _fontHeight;
 	int _regStart, _regLength;
 	CharGlyph* _glyphs;
 
-	unsigned int _texID;
+	unsigned int _texID;*/
+
+	SDL_Renderer* _renderer;
 };
 }
 

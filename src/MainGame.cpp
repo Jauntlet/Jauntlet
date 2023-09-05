@@ -45,7 +45,7 @@ void MainGame::initSystems() {
 	_HUDSpriteBatch.init();
 
 	// initializes spritefont
-	_spriteFont = new Jauntlet::SpriteFont("Fonts/HandelGo.ttf", 64);
+	_spriteFont = new Jauntlet::SpriteFont("Fonts/chintzy.ttf", 64);
 
 	// Temporary level loading
 	_level.registerTile('B', "Textures/Craig.png");
@@ -163,7 +163,7 @@ void MainGame::drawHUD() {
 
 	_HUDSpriteBatch.begin();
 
-	_spriteFont->draw(_HUDSpriteBatch, output.c_str(), glm::vec2(32), glm::vec2(1), 0, Jauntlet::Color(255,255,255,255));
+	//_spriteFont->draw(_HUDSpriteBatch, output.c_str(), glm::vec2(32), glm::vec2(1), 0, Jauntlet::Color(255,255,255,255));
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();
