@@ -26,15 +26,9 @@ public:
 	bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions);
 	
 	// defines a new position for the camera to be
-	void setPosition(const glm::vec2& newPosition) { 
-		_position = newPosition; 
-		_needsMatrixUpdate = true;
-	}
+	void setPosition(const glm::vec2& newPosition);
 	// sets the cameras zoom on the screen (default: 1)
-	void setScale(float newScale) { 
-		_scale = newScale; 
-		_needsMatrixUpdate = true;
-	}
+	void setScale(float newScale);
 	
 	// get the position of the camera
 	glm::vec2 getPosition() { return _position; }

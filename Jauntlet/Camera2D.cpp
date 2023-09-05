@@ -70,3 +70,12 @@ bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimension
 	}
 	return false;
 }
+
+void Camera2D::setPosition(const glm::vec2& newPosition) { 
+	_needsMatrixUpdate = true;
+}
+
+void Camera2D::setScale(float newScale) { 
+	_scale = newScale; 
+	_needsMatrixUpdate = true;
+}
