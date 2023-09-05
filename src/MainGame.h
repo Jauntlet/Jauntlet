@@ -46,10 +46,10 @@ private:
 
 	Jauntlet::TextureCache _textureCache;
 
-	GameState _gameState;
+	GameState _gameState = GameState::PLAY;
 
-	int _screenWidth, _screenHeight;
-	float _fps;
+	int _screenWidth = 1024, _screenHeight = 768;
+	float _fps = 0;
 
 	// Temporary variables for testing
 	Jauntlet::SpriteBatch _playerSpriteBatch;
