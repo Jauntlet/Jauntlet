@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+
 #include "Camera2D.h"
 
 namespace Jauntlet {

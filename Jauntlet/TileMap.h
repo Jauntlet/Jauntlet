@@ -1,16 +1,16 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <map>
 #include <functional>
+#include <map>
+#include <string>
 #include <utility>
+#include <vector>
 
-#include "Rendering/SpriteBatch.h"
+#include "Collision/Collider2D.h"
 #include "Rendering/GLTexture.h"
+#include "Rendering/SpriteBatch.h"
 #include "Rendering/TextureCache.h"
 #include "TileSet.h"
-#include "Collision/Collider2D.h"
 
 namespace Jauntlet {
 

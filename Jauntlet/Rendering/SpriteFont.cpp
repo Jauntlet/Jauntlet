@@ -1,10 +1,9 @@
-#include "SpriteFont.h"
-
-#include "SpriteBatch.h"
-#include"../Errors.h"
-
 #include <SDL/SDL.h>
 #include <cstdio>
+
+#include "../Errors.h"
+#include "SpriteBatch.h"
+#include "SpriteFont.h"
 
 using namespace Jauntlet;
 

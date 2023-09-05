@@ -1,8 +1,8 @@
-#include "GLSLProgram.h"
-#include "../Errors.h"
-
 #include <fstream>
 #include <vector>
+
+#include "../Errors.h"
+#include "GLSLProgram.h"
 
 using namespace Jauntlet;
 

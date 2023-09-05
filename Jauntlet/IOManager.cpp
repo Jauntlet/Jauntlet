@@ -1,6 +1,7 @@
-#include "IOManager.h"
-#include <vector>
 #include <fstream>
+#include <vector>
+
+#include "IOManager.h"
 
 using namespace Jauntlet;
 

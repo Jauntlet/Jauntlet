@@ -1,15 +1,13 @@
-#include "TileMap.h"
-
-#include <fstream>
 #include <algorithm>
+#include <fstream>
+#include <iostream>
 
 #include "Errors.h"
-#include "Rendering/ResourceManager.h"
-#include "Rendering/ImageLoader.h"
-#include "TileSet.h"
 #include "JMath.h"
-
-#include <iostream>
+#include "Rendering/ImageLoader.h"
+#include "Rendering/ResourceManager.h"
+#include "TileMap.h"
+#include "TileSet.h"
 
 using namespace Jauntlet;
 

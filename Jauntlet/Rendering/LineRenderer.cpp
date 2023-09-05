@@ -1,10 +1,9 @@
 #include <GL/glew.h>
+#include <iostream> //TODO:removeme
 
-#include "LineRenderer.h"
 #include "../Errors.h"
+#include "LineRenderer.h"
 
-// Remove after done debugging
-#include<iostream>
 using namespace Jauntlet;
 
 LineRenderer::LineRenderer() {

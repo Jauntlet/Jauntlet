@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include <GL/glew.h>
+#include <string>
 
 namespace Jauntlet {
 // GLSLProgram is the main shader used by the program, using a vertex and fragment shader

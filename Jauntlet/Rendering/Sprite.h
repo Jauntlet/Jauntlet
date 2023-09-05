@@ -6,6 +6,7 @@
 #include<string>
 
 #include"GLTexture.h"
+
 namespace Jauntlet {
 	class Sprite
 	{

@@ -1,6 +1,6 @@
-#include "Time.h"
-
 #include <SDL/SDL.h>
+
+#include "Time.h"
 
 namespace Jauntlet
 {

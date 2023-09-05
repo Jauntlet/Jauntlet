@@ -1,8 +1,8 @@
-#include "Errors.h"
-
+#include <SDL/SDL.h>
 #include <cstdlib>
 #include <iostream>
-#include <SDL/SDL.h>
+
+#include "Errors.h"
 
 namespace Jauntlet {
 	void fatalError(std::string errorString) {

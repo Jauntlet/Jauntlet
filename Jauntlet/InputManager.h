@@ -1,8 +1,8 @@
 #pragma once
 
-#include <unordered_map>
-#include <glm/glm.hpp>
 #include <SDL/SDL.h>
+#include <glm/glm.hpp>
+#include <unordered_map>
 
 namespace Jauntlet {
 // Stores and manages the state of keys, aswell as other SDL events

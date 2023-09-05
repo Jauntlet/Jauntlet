@@ -1,7 +1,7 @@
-#include"Jauntlet.h"
-
-#include <SDL/SDL.h>
 #include <GL/glew.h>
+#include <SDL/SDL.h>
+
+#include "Jauntlet.h"
 
 namespace Jauntlet {
 	int init() {

@@ -1,9 +1,8 @@
 #pragma once
 // JMath is purposefully left out of the Jauntlet Namespace to shorten the syntax to call it.
 // we want: JMath::Function(), not Jauntlet::JMath::Function().
-#include <glm/glm.hpp>
 #include <cstddef>
-
+#include <glm/glm.hpp>
 
 class JMath
 {

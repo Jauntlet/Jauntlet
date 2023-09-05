@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include"GLTexture.h"
+#include "GLTexture.h"
 
 namespace Jauntlet {
 // Load images

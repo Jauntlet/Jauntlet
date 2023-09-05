@@ -1,5 +1,6 @@
-#include "InputManager.h"
 #include <SDL/SDL.h>
+
+#include "InputManager.h"
 
 using namespace Jauntlet;
 
