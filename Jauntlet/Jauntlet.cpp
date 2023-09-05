@@ -1,6 +1,6 @@
 #include"Jauntlet.h"
 
-#include<SDL/SDL.h>
+#include <SDL/SDL.h>
 #include <GL/glew.h>
 
 namespace Jauntlet {

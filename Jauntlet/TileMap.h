@@ -1,15 +1,17 @@
 #pragma once
-#include<string>
-#include<vector>
-#include<map>
-#include<functional>
-#include<utility>
+
+#include <string>
+#include <vector>
+#include <map>
+#include <functional>
+#include <utility>
 
 #include "Rendering/SpriteBatch.h"
 #include "Rendering/GLTexture.h"
 #include "Rendering/TextureCache.h"
 #include "TileSet.h"
 #include "Collision/Collider2D.h"
+
 namespace Jauntlet {
 
 enum TileCollision { NONE = 0, SQUARE = 1};

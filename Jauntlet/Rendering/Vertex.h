@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL/glew.h>
+
 namespace Jauntlet {
 struct Position {
 	float x;

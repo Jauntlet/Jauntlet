@@ -1,8 +1,9 @@
+#include <cstddef>
+
 #include "Sprite.h"
 #include "Vertex.h"
 #include "ResourceManager.h"
 
-#include<cstddef>
 using namespace Jauntlet;
 
 Sprite::Sprite(float x, float y, float width, float height, std::string texturePath) : _x(x), _y(y), _width(width), _height(height), _vboID(0) {

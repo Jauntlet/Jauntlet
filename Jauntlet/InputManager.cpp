@@ -1,5 +1,6 @@
 #include "InputManager.h"
-#include<SDL/SDL.h>
+#include <SDL/SDL.h>
+
 using namespace Jauntlet;
 
 InputManager::InputManager(): _mouseCoords(0), _lastInput(SDLK_ESCAPE), _windowResized(false), _quitGameCalled(false) {

@@ -1,7 +1,7 @@
+#include <GL/glew.h>
+
 #include "LineRenderer.h"
 #include "../Errors.h"
-
-#include <GL/glew.h>
 
 // Remove after done debugging
 #include<iostream>

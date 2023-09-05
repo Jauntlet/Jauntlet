@@ -1,8 +1,10 @@
 #pragma once
-#include<Jauntlet/Rendering/SpriteBatch.h>
-#include<Jauntlet/InputManager.h>
-#include<Jauntlet/InputKey.h>
-#include<Jauntlet/Collision/Collision2D.h>
+
+#include <Jauntlet/Rendering/SpriteBatch.h>
+#include <Jauntlet/InputManager.h>
+#include <Jauntlet/InputKey.h>
+#include <Jauntlet/Collision/Collision2D.h>
+
 class Player
 {
 public:

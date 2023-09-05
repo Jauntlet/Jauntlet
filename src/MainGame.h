@@ -1,23 +1,24 @@
 #pragma once
 
-#include<SDL/SDL.h>
-#include<GL/glew.h>
+#include <SDL/SDL.h>
+#include <GL/glew.h>
 
-#include<Jauntlet/Rendering/GLSLProgram.h>
-#include<Jauntlet/Rendering/Sprite.h>
-#include<Jauntlet/Rendering/GLTexture.h>
-#include<Jauntlet/Window.h>
-#include<Jauntlet/Jauntlet.h>
-#include<Jauntlet/Camera2D.h>
-#include<Jauntlet/Rendering/SpriteBatch.h>
-#include<Jauntlet/InputManager.h>
-#include<Jauntlet/Time.h>
-#include<Jauntlet/TileMap.h>
-#include<Jauntlet/TileSet.h>
-#include<Jauntlet/Rendering/LineRenderer.h>
-#include<Jauntlet/Rendering/SpriteFont.h>
+#include <Jauntlet/Rendering/GLSLProgram.h>
+#include <Jauntlet/Rendering/Sprite.h>
+#include <Jauntlet/Rendering/GLTexture.h>
+#include <Jauntlet/Window.h>
+#include <Jauntlet/Jauntlet.h>
+#include <Jauntlet/Camera2D.h>
+#include <Jauntlet/Rendering/SpriteBatch.h>
+#include <Jauntlet/InputManager.h>
+#include <Jauntlet/Time.h>
+#include <Jauntlet/TileMap.h>
+#include <Jauntlet/TileSet.h>
+#include <Jauntlet/Rendering/LineRenderer.h>
+#include <Jauntlet/Rendering/SpriteFont.h>
 
-#include"Player.h"
+#include "Player.h"
+#include "glm/fwd.hpp"
 
 enum class GameState {
 	PLAY, EXIT
@@ -50,6 +51,8 @@ private:
 
 	int _screenWidth = 1024, _screenHeight = 768;
 	float _fps = 0;
+
+	glm::vec2 _intendedCameraPosition;
 
 	// Temporary variables for testing
 	Jauntlet::SpriteBatch _playerSpriteBatch;

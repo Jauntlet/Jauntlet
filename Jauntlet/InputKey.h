@@ -1,8 +1,10 @@
 #pragma once
-#include<SDL/SDL.h>
-#include<vector>
 
-#include"InputManager.h"
+#include <SDL/SDL.h>
+#include <vector>
+
+#include "InputManager.h"
+
 namespace Jauntlet {
 // Stores multiple keycodes together that have the same functionality
 class InputKey

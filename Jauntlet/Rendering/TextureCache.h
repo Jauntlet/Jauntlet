@@ -1,6 +1,7 @@
 #pragma once
-#include<map>
-#include<string>
+
+#include <map>
+#include <string>
 
 #include "GLTexture.h"
 

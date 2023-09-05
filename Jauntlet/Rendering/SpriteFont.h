@@ -1,11 +1,12 @@
 #pragma once
 
-#include<SDL_TTF/SDL_ttf.h>
-#include<glm/glm.hpp>
-#include<map>
-#include"./Vertex.h"
+#include <SDL_TTF/SDL_ttf.h>
+#include <glm/glm.hpp>
+#include <map>
+#include <cstring>
+
+#include "./Vertex.h"
 #include "SpriteBatch.h"
-#include<cstring>
 
 namespace Jauntlet {
 #define FIRST_PRINTABLE_CHAR (char)32

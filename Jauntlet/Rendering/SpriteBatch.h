@@ -1,9 +1,10 @@
 #pragma once
-#include<GL/glew.h>
-#include<glm/glm.hpp>
-#include<vector>
 
-#include"Vertex.h"
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <vector>
+
+#include "Vertex.h"
 
 namespace Jauntlet {
 // defines the order for sprites to be drawn

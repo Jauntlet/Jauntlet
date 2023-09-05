@@ -1,5 +1,6 @@
 #pragma once
-#include<GL/glew.h>
+
+#include <GL/glew.h>
 
 namespace Jauntlet {
 // struct for Textures

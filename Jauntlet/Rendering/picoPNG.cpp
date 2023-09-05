@@ -3,6 +3,7 @@
 // THIS CODE IS NOT OURS
 
 #include <vector>
+
 #pragma warning ( disable : 26495)
 #pragma warning ( disable : 6011)
 #pragma warning ( disable : 4244)

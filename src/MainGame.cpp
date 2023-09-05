@@ -1,19 +1,19 @@
 #include "MainGame.h"
 
-#include<Jauntlet/Jauntlet.h>
-#include<Jauntlet/Errors.h>
-#include<Jauntlet/Rendering/ResourceManager.h>
-#include<Jauntlet/Time.h>
-#include<Jauntlet/TileSet.h>
-#include<Jauntlet/JMath.h>
+#include <Jauntlet/Jauntlet.h>
+#include <Jauntlet/Errors.h>
+#include <Jauntlet/Rendering/ResourceManager.h>
+#include <Jauntlet/Time.h>
+#include <Jauntlet/TileSet.h>
+#include <Jauntlet/JMath.h>
 
 
-#include<iostream>
+#include <iostream>
 
 // defines scale of movement for the camera. if set to 1, the camera will follow the mouse, if set to 0, the mouse has no control over the camera.
 const float _CAMERA_MOVEMENT_SCALE =  0.5f; // DO NOT DEFINE IN HEADER, BREAKS CONST -jk
 
-MainGame::MainGame() :  
+MainGame::MainGame() :
 	_level(_textureCache, 32),
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
@@ -102,8 +102,10 @@ void MainGame::gameLoop() {
 			_camera.setScale(_camera.getScale() - .05);
 		}
 
+		_intendedCameraPosition = (glm::vec2((_inputManager.getMouseCoords().x - (_screenWidth / 2)) * _CAMERA_MOVEMENT_SCALE, ((_screenHeight - _inputManager.getMouseCoords().y) - (_screenHeight / 2)) * _CAMERA_MOVEMENT_SCALE));
+
 		// the camera here is made to go halfway between the cursor and the center of the screen. adjust the final vec2 to adjust this, and
-		_camera.setPosition((glm::vec2((_inputManager.getMouseCoords().x - (_screenWidth / 2)) * _CAMERA_MOVEMENT_SCALE, ((_screenHeight - _inputManager.getMouseCoords().y) - (_screenHeight / 2)) * _CAMERA_MOVEMENT_SCALE)));
+		_camera.setPosition();
 
 		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {		
 			_window.toggleFullscreen();

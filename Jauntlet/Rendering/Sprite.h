@@ -1,8 +1,10 @@
 #pragma once
-#include<GL/glew.h>
-#include<string>
 
-#include"GLTexture.h"
+#include <GL/glew.h>
+#include <string>
+
+#include "GLTexture.h"
+
 namespace Jauntlet {
 	class Sprite
 	{

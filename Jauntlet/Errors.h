@@ -1,5 +1,6 @@
 #pragma once
-#include<string>
+
+#include <string>
 
 namespace Jauntlet {
 	// Crashes the game with the reason provided

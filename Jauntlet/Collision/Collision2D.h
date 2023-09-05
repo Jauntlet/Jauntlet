@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Collider2D.h"
-
 #include <vector>
 #include <glm/glm.hpp>
+
+#include "Collider2D.h"
 
 namespace Jauntlet
 {

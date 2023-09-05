@@ -1,6 +1,7 @@
-#include<algorithm>
+#include <algorithm>
 
 #include "SpriteBatch.h"
+
 using namespace Jauntlet;
 
 SpriteBatch::SpriteBatch() : _vboID(0), _vaoID(0), _sortType(GlyphSortType::TEXTURE) {

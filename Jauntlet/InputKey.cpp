@@ -1,4 +1,5 @@
 #include "InputKey.h"
+
 using namespace Jauntlet;
 
 InputKey::InputKey(InputManager* inputManager) : _inputManager(inputManager) {

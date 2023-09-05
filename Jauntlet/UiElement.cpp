@@ -1,4 +1,5 @@
-#include"UiElement.h"
+#include "UiElement.h"
+
 namespace Jauntlet {
 	UiElement::UiElement()
 	{

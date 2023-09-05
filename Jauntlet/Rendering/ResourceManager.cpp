@@ -1,4 +1,5 @@
 #include "ResourceManager.h"
+
 using namespace Jauntlet;
 
 TextureCache ResourceManager::_textureCache;

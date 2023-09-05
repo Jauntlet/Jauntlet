@@ -9,7 +9,7 @@
 #include "TileSet.h"
 #include "JMath.h"
 
-#include<iostream>
+#include <iostream>
 
 using namespace Jauntlet;
 

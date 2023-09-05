@@ -1,6 +1,7 @@
 #include "IOManager.h"
-#include<vector>
-#include<fstream>
+#include <vector>
+#include <fstream>
+
 using namespace Jauntlet;
 
 bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer) {
