@@ -24,7 +24,7 @@ public:
 	const int getID() {
 		return _id;
 	}
-	unsigned int connectionRules;
+	unsigned int connectionRules = 0;
 private:
 	int _id;
 	

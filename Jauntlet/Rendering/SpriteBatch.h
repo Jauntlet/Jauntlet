@@ -75,10 +75,10 @@ private:
 	static bool compareBackToFront(Glyph* a, Glyph* b);
 	static bool compareTexture(Glyph* a, Glyph* b);
 
-	GLuint _vboID;
-	GLuint _vaoID;
+	GLuint _vboID = 0;
+	GLuint _vaoID = 0;
 
-	GlyphSortType _sortType;
+	GlyphSortType _sortType = GlyphSortType::TEXTURE;
 
 	std::vector<Glyph> _glyphs;
 	// The reason why we have a seperate vector for pointing to the glyphs, is so that we can easily sort them to be rendered, without the negative performance

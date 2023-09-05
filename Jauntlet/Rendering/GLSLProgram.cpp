@@ -6,7 +6,8 @@
 
 using namespace Jauntlet;
 
-GLSLProgram::GLSLProgram() : _numAttributes(0), _programID(0), _vertexShaderID(0), _fragmentShaderID(0) {
+GLSLProgram::GLSLProgram() {
+	// Empty
 }
 
 void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {

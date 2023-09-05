@@ -43,12 +43,12 @@ public:
 	// get the scale of the camera
 	float getScale() { return _scale; }
 private:
-	float _scale;
-	glm::vec2 _position;
-	glm::mat4 _cameraMatrix;
-	glm::mat4 _orthoMatrix;
-	int _screenWidth, _screenHeight;
+	float _scale = 1;
+	glm::vec2 _position = glm::vec2(0);
+	glm::mat4 _cameraMatrix = glm::mat4(1);
+	glm::mat4 _orthoMatrix = glm::mat4(1);
+	int _screenWidth = 500, _screenHeight = 500;
 	
-	bool _needsMatrixUpdate;
+	bool _needsMatrixUpdate = true;
 };
 }

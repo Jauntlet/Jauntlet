@@ -28,12 +28,12 @@ namespace Jauntlet
 		//still not functional
 		//std::vector<std::vector<float>> _collisionPoints; 
 		//Main collider in calculation
-		Collider2D* _parent;
+		Collider2D* _parent = nullptr;
 		//the collider that collided with during the check
-		Collider2D* _other;
+		Collider2D* _other = nullptr;
 		//normal at the point of collision
-		glm::vec2 _normal;
+		glm::vec2 _normal = glm::vec2();
 		//overlap at point of collision
-		float _overlap;
+		float _overlap = 0;
 	};
 }

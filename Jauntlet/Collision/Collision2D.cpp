@@ -6,11 +6,8 @@
 
 using namespace Jauntlet;
 
-Collision2D::Collision2D() : _parent(nullptr), _other(nullptr)
-{
-	//not much here
-	_normal = glm::vec2();
-	_overlap = 0;
+Collision2D::Collision2D() {
+	// Empty
 }
 
 //std::vector<std::vector<float>> Collision2D::GetCollisionPoints() { //NOT USED / CALCULATED YET

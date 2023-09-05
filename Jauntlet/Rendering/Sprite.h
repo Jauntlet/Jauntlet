@@ -1,10 +1,11 @@
 #pragma once
+// THIS CLASS IS OLD AND DOESNT WORK WITH SPRITEBATCHING, SO IT SHOULD NOT BE USED: READ DOCS FOR MORE INFO
+// THIS CLASS IS OLD AND DOESNT WORK WITH SPRITEBATCHING, SO IT SHOULD NOT BE USED: READ DOCS FOR MORE INFO
+// THIS CLASS IS OLD AND DOESNT WORK WITH SPRITEBATCHING, SO IT SHOULD NOT BE USED: READ DOCS FOR MORE INFO
+#include<GL/glew.h>
+#include<string>
 
-#include <GL/glew.h>
-#include <string>
-
-#include "GLTexture.h"
-
+#include"GLTexture.h"
 namespace Jauntlet {
 	class Sprite
 	{
@@ -21,7 +22,7 @@ namespace Jauntlet {
 		float _y;
 		float _width;
 		float _height;
-		GLuint _vboID;
+		GLuint _vboID = 0;
 
 		GLTexture _texture;
 	};

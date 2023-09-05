@@ -37,11 +37,11 @@ private:
 	
 	std::unordered_map<unsigned int, bool> _keyMap;
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
-	glm::vec2 _mouseCoords;
+	glm::vec2 _mouseCoords = glm::vec2(0);
 
-	SDL_KeyCode _lastInput;
+	SDL_KeyCode _lastInput = SDLK_ESCAPE;
 
-	bool _windowResized;
-	bool _quitGameCalled;
+	bool _windowResized = false;
+	bool _quitGameCalled = false;
 };
 }
