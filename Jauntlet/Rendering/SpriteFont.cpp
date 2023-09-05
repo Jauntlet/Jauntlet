@@ -9,6 +9,9 @@
 using namespace Jauntlet;
 
 void SpriteFont::init(const char* font, int size) {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft)) {
 		fatalError("FREETYPE library failed to initialize!");
@@ -34,8 +37,8 @@ void SpriteFont::init(const char* font, int size) {
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width, face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -53,20 +56,21 @@ void SpriteFont::init(const char* font, int size) {
 void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
 	float depth, Color tint) {
 
-	glm::vec2 totalPos = position;
-
 	for (auto c = string.begin(); c != string.end(); c++) {
 		CharGlyph currentGlyph = Characters[*c];
 
 		if (*c == '\n') {
-			totalPos.y += _fontHeight * scaling.y;
-			totalPos.x = position.x;
+			position.y += _fontHeight * scaling.y;
+			position.x = position.x;
 		}
 
-		glm::vec4 destRect(totalPos, currentGlyph.Bearing);
+		float x = position.x; //+ currentGlyph.Bearing.x * scaling.x; 
+		float y = position.y - (currentGlyph.Size.y - currentGlyph.Bearing.y) * scaling.y;
 
-		spritebatch.draw(destRect, { 0,0,1,1 }, currentGlyph.TextureID, 0, { 255,255,255,255 });
+		glm::vec4 destRect(x,y, currentGlyph.Bearing);
 
-		totalPos.x += (currentGlyph.Advance >> 6) * scaling.x;
+		spritebatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, {255,255,255,255});
+
+		position.x += (currentGlyph.Advance >> 6) * scaling.x;
 	}
 }

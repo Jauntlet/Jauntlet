@@ -49,6 +49,7 @@ void MainGame::initSystems() {
 
 	// initializes spritefont
 	_spriteFont.init("Fonts/HandelGo.ttf", 64);
+	//_spriteFont.init("Fonts/chintzy.ttf", 64);
 
 	// Temporary level loading
 	_bricks.addConnectionRule(Jauntlet::TileSet::ConnectionRules::TILES);
