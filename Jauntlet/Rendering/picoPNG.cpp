@@ -6,6 +6,7 @@
 #pragma warning ( disable : 6293)
 
 // ^  do these lines even do anything??  ^ -jk
+// They disable warnings in VS, not our code not our problem. -xm
 
 // this code is a prebuilt PNG loader: we may want to look into our own in the future.
 
