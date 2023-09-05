@@ -66,7 +66,7 @@ if(WIN32)
     target_link_libraries(game PRIVATE ${WIN_LIB_FILES})
 elseif(UNIX)
     # On Unix, use SDL2::SDL2, SDL2_ttf::SDL2_ttf, GLEW::GLEW, OpenGL::OpenGL, and FreeType::FreeType
-    target_link_libraries(game PRIVATE SDL2::SDL2 SDL2_ttf::SDL2_ttf GLEW::GLEW OpenGL::OpenGL FreeType)
+    target_link_libraries(game PRIVATE SDL2::SDL2 SDL2_ttf::SDL2_ttf GLEW::GLEW OpenGL::OpenGL Freetype::Freetype)
 endif()
 
 # Specify include directories for the "Jauntlet" directory (outside of it)
