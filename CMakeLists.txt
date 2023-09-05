@@ -36,6 +36,10 @@ include_directories(${SDL2TTF_INCLUDE_DIRS})
 find_package(glm REQUIRED)
 include_directories(${GLM_INCLUDE_DIRS})
 
+# Find and configure FreeType
+find_package(Freetype REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
+
 # Create a library from the "Jauntlet" source files
 add_library(jauntlet ${JAUNTLET_FILES})
 
@@ -61,8 +65,8 @@ if(WIN32)
     file(GLOB WIN_LIB_FILES "${CMAKE_SOURCE_DIR}/dependencies/lib/*.lib")
     target_link_libraries(game PRIVATE ${WIN_LIB_FILES})
 elseif(UNIX)
-    # On Unix, use SDL2::SDL2, SDL2_ttf::SDL2_ttf, GLEW::GLEW, and OpenGL::OpenGL
-    target_link_libraries(game PRIVATE SDL2::SDL2 SDL2_ttf::SDL2_ttf GLEW::GLEW OpenGL::OpenGL)
+    # On Unix, use SDL2::SDL2, SDL2_ttf::SDL2_ttf, GLEW::GLEW, OpenGL::OpenGL, and FreeType::FreeType
+    target_link_libraries(game PRIVATE SDL2::SDL2 SDL2_ttf::SDL2_ttf GLEW::GLEW OpenGL::OpenGL FreeType)
 endif()
 
 # Specify include directories for the "Jauntlet" directory (outside of it)
