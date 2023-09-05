@@ -10,6 +10,9 @@
 
 #include<iostream>
 
+// defines scale of movement for the camera. if set to 1, the camera will follow the mouse, if set to 0, the mouse has no control over the camera.
+const glm::vec2 _CAMERA_MOVEMENT_SCALE =  glm::vec2(0.5, 0.5);
+
 MainGame::MainGame() : 
 	_screenWidth(1024), 
 	_screenHeight(768), 
@@ -102,8 +105,8 @@ void MainGame::gameLoop() {
 			_camera.setScale(_camera.getScale() - .05);
 		}
 
-		// centers the camera on the player (16 is half the player width)
-		_camera.setPosition((_player.getPosition() + glm::vec2(16,16)) * _camera.getScale());
+		// the camera here is made to go halfway between the cursor and the center of the screen. adjust the final vec2 to adjust this, and
+		_camera.setPosition((glm::vec2(_inputManager.getMouseCoords().x, _screenHeight - _inputManager.getMouseCoords().y) - (glm::vec2(_screenWidth / 2, _screenHeight / 2))) * _CAMERA_MOVEMENT_SCALE);
 
 		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {		
 			_window.toggleFullscreen();
