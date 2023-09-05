@@ -102,10 +102,12 @@ void MainGame::gameLoop() {
 			_camera.setScale(_camera.getScale() - .05);
 		}
 
-		_intendedCameraPosition = (glm::vec2((_inputManager.getMouseCoords().x - (_screenWidth / 2)) * _CAMERA_MOVEMENT_SCALE, ((_screenHeight - _inputManager.getMouseCoords().y) - (_screenHeight / 2)) * _CAMERA_MOVEMENT_SCALE));
+		glm::vec2 _intendedCameraPosition = (glm::vec2((_inputManager.getMouseCoords().x - (_screenWidth / 2)) * _CAMERA_MOVEMENT_SCALE, ((_screenHeight - _inputManager.getMouseCoords().y) - (_screenHeight / 2)) * _CAMERA_MOVEMENT_SCALE));
 
+
+		// blah
 		// the camera here is made to go halfway between the cursor and the center of the screen. adjust the final vec2 to adjust this, and
-		_camera.setPosition();
+		_camera.setPosition(_intendedCameraPosition);
 
 		if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {		
 			_window.toggleFullscreen();
