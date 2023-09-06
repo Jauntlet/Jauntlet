@@ -138,6 +138,17 @@ void MainGame::processInput() {
 		_inputManager.deltaScroll = 0;
 	}
 
+	//test for collider-position code
+	if (_inputManager.isKeyPressed(SDL_BUTTON_RIGHT)) {
+		Jauntlet::Collision2D data = Jauntlet::Collision2D();
+		if (data.getCollision(&_player.collider, _camera.convertScreenToWorld(_inputManager.getMouseCoords()))) {
+			std::cout << "Jollision @ " << _inputManager.getMouseCoords().x << ", " << _inputManager.getMouseCoords().y << std::endl;
+		} else {
+			std::cout << _player.getPosition().x << ", " << _player.getPosition().y << std::endl;
+			std::cout << _camera.convertScreenToWorld(_inputManager.getMouseCoords()).x << ", " << _camera.convertScreenToWorld(_inputManager.getMouseCoords()).y << std::endl;
+		}
+	}
+
 	_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
 }
 
