@@ -116,12 +116,11 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.isKeyDown(SDLK_r)) {
-		_camera.transitionToPosition(glm::vec2(0,0));
+		_camera.transitionToPosition(glm::vec2(0));
 		_camera.transitionToScale(1);
 	}
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-
 		_camera.setPosition(_camera.getPosition() + glm::vec2(-_inputManager.getMouseCoords().x + _oldMouse.x, _inputManager.getMouseCoords().y - _oldMouse.y));
 	}
 
