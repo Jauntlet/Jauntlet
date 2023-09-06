@@ -29,6 +29,9 @@ public:
 	void setPosition(const glm::vec2& newPosition);
 	// sets the cameras zoom on the screen (default: 1)
 	void setScale(float newScale);
+	void setScale(float newScale, bool setIntended);
+
+	void setIntendedScale(float newscale);
 	
 	// get the position of the camera
 	glm::vec2 getPosition() { return _position; }
@@ -38,6 +41,7 @@ public:
 	float getScale() { return _scale; }
 private:
 	float _scale = 1;
+	float _intendedScale = 1;
 	glm::vec2 _position = glm::vec2(0);
 	glm::mat4 _cameraMatrix = glm::mat4(1);
 	glm::mat4 _orthoMatrix = glm::mat4(1);

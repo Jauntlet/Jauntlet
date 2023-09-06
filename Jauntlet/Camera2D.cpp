@@ -1,4 +1,5 @@
 #include "Camera2D.h"
+#include "Time.h"
 #include <algorithm>
 
 using namespace Jauntlet;
@@ -14,17 +15,29 @@ void Camera2D::init(int screenWidth, int screenHeight) {
 }
 
 void Camera2D::update() {
-	if (_needsMatrixUpdate) {
-		_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
 
-		glm::vec3 translate(-_position.x + _screenWidth / 2.0f, -_position.y + _screenHeight / 2.0f, 0.0f);
-		_cameraMatrix = glm::translate(_orthoMatrix, translate);
+	if (_intendedScale != _scale) {
+		_scale += (_intendedScale - _scale) * (Jauntlet::Time::getDeltaTime() * 4);
+		_needsMatrixUpdate = true;
 
-		glm::vec3 scale(_scale, _scale, 0.0f);
-		_cameraMatrix = glm::scale(_cameraMatrix, scale);
-
-		_needsMatrixUpdate = false;
+		if(std::fabs(_scale - _intendedScale) < 0.005f) {
+			_scale = _intendedScale;
+		}
 	}
+
+	if (!_needsMatrixUpdate) {
+		return;
+	}
+
+	_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
+
+	glm::vec3 translate(-_position.x + _screenWidth / 2.0f, -_position.y + _screenHeight / 2.0f, 0.0f);
+	_cameraMatrix = glm::translate(_orthoMatrix, translate);
+
+	glm::vec3 scale(_scale, _scale, 0.0f);
+	_cameraMatrix = glm::scale(_cameraMatrix, scale);
+
+	_needsMatrixUpdate = false;
 }
 
 glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
@@ -79,5 +92,19 @@ void Camera2D::setPosition(const glm::vec2& newPosition) {
 
 void Camera2D::setScale(float newScale) { 
 	_scale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
+	_needsMatrixUpdate = true;
+}
+
+void Camera2D::setScale(float newScale, bool setIntended) {
+	_scale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
+	_needsMatrixUpdate = true;
+
+	if (setIntended) {
+		_intendedScale = _scale;
+	}
+}
+
+void Camera2D::setIntendedScale(float newScale) { 
+	_intendedScale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
 	_needsMatrixUpdate = true;
 }

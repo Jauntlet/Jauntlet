@@ -123,6 +123,8 @@ void MainGame::processInput() {
 
 	if (_inputManager.isKeyDown(SDLK_r)) {
 		_intendedCameraPostition = glm::vec2(0, 0);
+
+		_camera.setIntendedScale(1);
 	}
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
@@ -141,9 +143,10 @@ void MainGame::processInput() {
 		_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
 	}
 
-	_camera.setScale(_camera.getScale() * pow(1.2f, _inputManager.deltaScroll));
-
-	_inputManager.deltaScroll = 0;
+	if (_inputManager.deltaScroll != 0) {
+		_camera.setScale(_camera.getScale() * pow(1.2f, _inputManager.deltaScroll), true);
+		_inputManager.deltaScroll = 0;
+	}
 }
 
 void MainGame::drawGame() {
