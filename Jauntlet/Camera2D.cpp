@@ -26,8 +26,13 @@ void Camera2D::update() {
 		}
 	}
 
+	/*
+	xander wants to remove unrounded positions from the camera, as they cause shimmering. to prevent this, we store a second variable
+
+	*/
+
 	if (_transitionPosition != _position) {
-		_position += (_transitionPosition - _position) * (Jauntlet::Time::getDeltaTime() * 4);
+		_position = _position + (_transitionPosition - _position) * (Jauntlet::Time::getDeltaTime() * 4);
 		_needsMatrixUpdate = true;
 
 		if(std::fabs(_position.x - _transitionPosition.x) < 0.005f && std::fabs(_position.y - _transitionPosition.y) < 0.005f) {
@@ -41,7 +46,7 @@ void Camera2D::update() {
 
 	_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
 
-	glm::vec3 translate(-_position.x + _screenWidth / 2.0f, -_position.y + _screenHeight / 2.0f, 0.0f);
+	glm::vec3 translate(-round(_position.x) + _screenWidth / 2.0f, - round(_position.y) + _screenHeight / 2.0f, 0.0f);
 	_cameraMatrix = glm::translate(_orthoMatrix, translate);
 
 	glm::vec3 scale(_scale, _scale, 0.0f);
