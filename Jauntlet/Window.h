@@ -1,9 +1,9 @@
 #pragma once
 
-#include <SDL/SDL.h>
 #include <GL/glew.h>
-#include <string>
+#include <SDL/SDL.h>
 #include <glm/glm.hpp>
+#include <string>
 
 namespace Jauntlet {
 // We are setting each ENUM to a different bit so that we can use bitwise operators to have multiple flags at once.

@@ -1,6 +1,7 @@
+#include <algorithm>
+
 #include "Camera2D.h"
 #include "Time.h"
-#include <algorithm>
 
 using namespace Jauntlet;
 
