@@ -81,6 +81,11 @@ GLint GLSLProgram::getUniformLocation(const std::string& uniformName) {
 }
 
 void GLSLProgram::use() {
+	if (this == nullptr) {
+		std::cout << "error: tried to use null program. returning without usage." << std::endl;
+		return;
+	}
+
 	if (currentProgram != nullptr) { // makes sure only one program is in use
 		currentProgram->unuse();
 	}
