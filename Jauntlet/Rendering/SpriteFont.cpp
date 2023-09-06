@@ -74,8 +74,6 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 	// Store last used program, and then use our program.
 	GLSLProgram* storedProg = GLSLProgram::currentProgram;
 	_textProgram.use();
-	
-	//std::cout << "rendering text" << std::endl;
 
 	glUniform3f(_textProgram.getUniformLocation("textColor"), tint.r, tint.g, tint.b);
 	glUniform1i(_textProgram.getUniformLocation("text"), 0);
