@@ -21,7 +21,7 @@ void Camera2D::update() {
 		_scale += (_transitionScale - _scale) * (Jauntlet::Time::getDeltaTime() * 4);
 		_needsMatrixUpdate = true;
 
-		if(std::fabs(_scale - _transitionScale) < 0.005f) {
+		if (std::fabs(_scale - _transitionScale) < 0.005f) {
 			_scale = _transitionScale;
 		}
 	}
@@ -30,7 +30,7 @@ void Camera2D::update() {
 		_position = _position + (_transitionPosition - _position) * (Jauntlet::Time::getDeltaTime() * 4);
 		_needsMatrixUpdate = true;
 
-		if(std::fabs(_position.x - _transitionPosition.x) < 0.005f && std::fabs(_position.y - _transitionPosition.y) < 0.005f) {
+		if (std::fabs(_position.x - _transitionPosition.x) < 0.005f && std::fabs(_position.y - _transitionPosition.y) < 0.005f) {
 			_position = _transitionPosition;
 		}
 	}
