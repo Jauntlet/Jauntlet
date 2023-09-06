@@ -17,12 +17,21 @@ void Camera2D::init(int screenWidth, int screenHeight) {
 
 void Camera2D::update() {
 
-	if (_intendedScale != _scale) {
-		_scale += (_intendedScale - _scale) * (Jauntlet::Time::getDeltaTime() * 4);
+	if (_transitionScale != _scale) {
+		_scale += (_transitionScale - _scale) * (Jauntlet::Time::getDeltaTime() * 4);
 		_needsMatrixUpdate = true;
 
-		if(std::fabs(_scale - _intendedScale) < 0.005f) {
-			_scale = _intendedScale;
+		if(std::fabs(_scale - _transitionScale) < 0.005f) {
+			_scale = _transitionScale;
+		}
+	}
+
+	if (_transitionPosition != _position) {
+		_position += (_transitionPosition - _position) * (Jauntlet::Time::getDeltaTime() * 4);
+		_needsMatrixUpdate = true;
+
+		if(std::fabs(_position.x - _transitionPosition.x) < 0.005f && std::fabs(_position.y - _transitionPosition.y) < 0.005f) {
+			_position = _transitionPosition;
 		}
 	}
 
@@ -86,8 +95,17 @@ bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimension
 	return false;
 }
 
-void Camera2D::setPosition(const glm::vec2& newPosition) { 
-	_position = round(newPosition); 
+void Camera2D::setPosition(const glm::vec2& newPosition, bool stopTransitions) { 
+	_position = round(newPosition);
+	_needsMatrixUpdate = true;
+
+	if (stopTransitions) {
+		_transitionPosition = _position;
+	}
+}
+
+void Camera2D::transitionToPosition(const glm::vec2& newPosition) { 
+	_transitionPosition = newPosition;
 	_needsMatrixUpdate = true;
 }
 
@@ -96,11 +114,11 @@ void Camera2D::setScale(float newScale, bool stopTransitions) {
 	_needsMatrixUpdate = true;
 
 	if (stopTransitions) {
-		_intendedScale = _scale;
+		_transitionScale = _scale;
 	}
 }
 
 void Camera2D::transitionToScale(float newScale) { 
-	_intendedScale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
+	_transitionScale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
 	_needsMatrixUpdate = true;
 }

@@ -25,9 +25,12 @@ public:
 	// Test to see if bounding box is within the cameras dimensions; good for culling
 	bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions);
 	
-	// defines a new position for the camera to be
-	void setPosition(const glm::vec2& newPosition);
-	// sets the cameras zoom on the screen (default: 1). the boolean sets if you want to set the intendedScale to the same zoom, meaning you wont get any camera movement afterwards.
+	// defines a new position for the camera to be. the boolean sets if you want to stop transitions on the position with this change.
+	void setPosition(const glm::vec2& newPosition, bool stopTransitions);
+	// makes the camera transition to this position smoothly over time.
+	void transitionToPosition(const glm::vec2& newPosition);
+
+	// sets the cameras zoom on the screen (default: 1). the boolean sets if you want to stop transitions on the scale with this change.
 	void setScale(float newScale, bool stopTransitions);
 	/// makes the camera transition to this scale smoothly over time.
 	void transitionToScale(float newscale);
@@ -40,8 +43,9 @@ public:
 	float getScale() { return _scale; }
 private:
 	float _scale = 1;
-	float _intendedScale = 1;
+	float _transitionScale = 1;
 	glm::vec2 _position = glm::vec2(0);
+	glm::vec2 _transitionPosition = glm::vec2(0);
 	glm::mat4 _cameraMatrix = glm::mat4(1);
 	glm::mat4 _orthoMatrix = glm::mat4(1);
 	int _screenWidth = 500, _screenHeight = 500;

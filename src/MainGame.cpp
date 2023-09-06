@@ -86,12 +86,6 @@ void MainGame::gameLoop() {
 			}
 		}
 
-		_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
-
-		_currentCameraPostition += (_intendedCameraPostition - _currentCameraPostition) * (Jauntlet::Time::getDeltaTime() * 4);
-
-		_camera.setPosition(_currentCameraPostition);
-
 		_camera.update();
 
 		drawGame();
@@ -122,16 +116,13 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.isKeyDown(SDLK_r)) {
-		_intendedCameraPostition = glm::vec2(0, 0);
-
+		_camera.transitionToPosition(glm::vec2(0,0));
 		_camera.transitionToScale(1);
 	}
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
 
-		_deltaMouse = _inputManager.getMouseCoords() - _oldMouse;
-		_currentCameraPostition += glm::vec2(-_deltaMouse.x, _deltaMouse.y);
-		_intendedCameraPostition = _currentCameraPostition;
+		_camera.setPosition(_camera.getPosition() + glm::vec2(-_inputManager.getMouseCoords().x + _oldMouse.x, _inputManager.getMouseCoords().y - _oldMouse.y), true);
 	}
 
 	if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {
@@ -147,6 +138,8 @@ void MainGame::processInput() {
 		_camera.setScale(_camera.getScale() * pow(1.2f, _inputManager.deltaScroll), true);
 		_inputManager.deltaScroll = 0;
 	}
+
+	_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
 }
 
 void MainGame::drawGame() {
