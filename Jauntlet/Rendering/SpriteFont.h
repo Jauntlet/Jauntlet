@@ -6,9 +6,10 @@
 #include <map>
 #include <cstring>
 
-#include "./Vertex.h"
+#include "../Camera2D.h"
 #include "GLSLProgram.h"
 #include "SpriteBatch.h"
+#include "Vertex.h"
 
 namespace Jauntlet {
 #define FIRST_PRINTABLE_CHAR (char)32
@@ -28,7 +29,7 @@ public:
 	SpriteFont() {};
 
 	// initialize a SpriteFont that uses all ascii characters
-	void init(const char* font, int size);
+	void init(Camera2D* camera, const char* font, int size);
 	
 	// Draws the spritefont using a spritebatch
 	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
@@ -37,7 +38,9 @@ private:
 	std::map<char, CharGlyph> Characters;
 	int _fontHeight;
 
-	static GLSLProgram _textProgram;
+	Camera2D* _camera = nullptr;
+
+	static GLSLProgram _textProgram; 
 };
 }
 

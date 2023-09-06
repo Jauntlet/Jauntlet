@@ -10,7 +10,10 @@ using namespace Jauntlet;
 
 GLSLProgram SpriteFont::_textProgram;
 
-void SpriteFont::init(const char* font, int size) {
+void SpriteFont::init(Camera2D* camera, const char* font, int size) {
+	_fontHeight = size;
+	_camera = camera;
+	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
@@ -25,7 +28,6 @@ void SpriteFont::init(const char* font, int size) {
 	}
 	// setting width to 0 lets the function dynamically determine the width.
 	FT_Set_Pixel_Sizes(face, 0, size);
-	_fontHeight = size;
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // This disables byte-alignment restrictions.
 
@@ -73,9 +75,11 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 	GLSLProgram* storedProg = GLSLProgram::currentProgram;
 	_textProgram.use();
 	
-	std::cout << "rendering text" << std::endl;
+	//std::cout << "rendering text" << std::endl;
 
 	glUniform3f(_textProgram.getUniformLocation("textColor"), tint.r, tint.g, tint.b);
+	glUniform1i(_textProgram.getUniformLocation("text"), 0);
+	glUniformMatrix4fv(_textProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_camera->getCameraMatrix()[0][0]);
 
 	for (auto c = string.begin(); c != string.end(); c++) {
 		CharGlyph currentGlyph = Characters[*c];
