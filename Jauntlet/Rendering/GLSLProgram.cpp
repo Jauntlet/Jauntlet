@@ -58,6 +58,8 @@ void GLSLProgram::linkShaders() {
 	glDetachShader(_programID, _fragmentShaderID);
 	glDeleteShader(_vertexShaderID);
 	glDeleteShader(_fragmentShaderID);
+
+	isLinked = true;
 }
 
 void GLSLProgram::addAttribute(const std::string& attributeName) {
