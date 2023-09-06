@@ -91,16 +91,11 @@ void Camera2D::setPosition(const glm::vec2& newPosition) {
 	_needsMatrixUpdate = true;
 }
 
-void Camera2D::setScale(float newScale) { 
-	_scale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
-	_needsMatrixUpdate = true;
-}
-
-void Camera2D::setScale(float newScale, bool setIntended) {
+void Camera2D::setScale(float newScale, bool stopTransitions) {
 	_scale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
 	_needsMatrixUpdate = true;
 
-	if (setIntended) {
+	if (stopTransitions) {
 		_intendedScale = _scale;
 	}
 }

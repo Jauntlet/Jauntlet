@@ -115,10 +115,10 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.isKeyDown(SDLK_q)) {
-		_camera.setScale(_camera.getScale() + .05);
+		_camera.setScale(_camera.getScale() + .05, true);
 	}
 	if (_inputManager.isKeyDown(SDLK_e)) {
-		_camera.setScale(_camera.getScale() - 0.05);
+		_camera.setScale(_camera.getScale() - 0.05, true);
 	}
 
 	if (_inputManager.isKeyDown(SDLK_r)) {
