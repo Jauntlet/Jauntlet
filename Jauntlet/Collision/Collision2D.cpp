@@ -156,7 +156,7 @@ bool Collision2D::getCollision(BoxCollider2D* parent, BoxCollider2D* other) {
 
 //Circle with given position collision check
 bool Collision2D::getCollision(CircleCollider2D* parent, glm::vec2 other) {
-	if (JMath::Distance(parent->position + glm::vec2(parent->GetRadius(), -parent->GetRadius()), other) <= parent->GetRadius()) return true;
+	if (JMath::Distance(parent->position + glm::vec2(parent->GetRadius()), other) <= parent->GetRadius()) return true;
 	return false;
 }
 
