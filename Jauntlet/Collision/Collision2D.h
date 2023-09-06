@@ -20,10 +20,13 @@ namespace Jauntlet
 
 		float GetOverlap();
 
-		bool getCollision(CircleCollider2D* parent, CircleCollider2D* other); //TODO: determine if using base class and InstanceOf works?
+		bool getCollision(CircleCollider2D* parent, CircleCollider2D* other);
 		bool getCollision(CircleCollider2D* parent, BoxCollider2D* other);
 		bool getCollision(BoxCollider2D* parent, CircleCollider2D* other);
 		bool getCollision(BoxCollider2D* parent, BoxCollider2D* other);
+
+		bool getCollision(CircleCollider2D* parent, glm::vec2 other); //Circle-Position collision
+		bool getCollision(BoxCollider2D* parent, glm::vec2 other); //Box-Position collision
 	private:
 		//still not functional
 		//std::vector<std::vector<float>> _collisionPoints; 
