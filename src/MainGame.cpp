@@ -152,12 +152,8 @@ void MainGame::drawGame() {
 	glActiveTexture(GL_TEXTURE0);
 
 	// Reading information into shaders
-	GLint textureUniform = _colorProgram.getUniformLocation("imageTexture");
-	glUniform1i(textureUniform, 0);
-
-	glm::mat4 projectionMatrix = _camera.getCameraMatrix();
-	GLint pUniform = _colorProgram.getUniformLocation("Projection");
-	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
+	glUniform1i(_colorProgram.getUniformLocation("imageTexture"), 0);
+	glUniformMatrix4fv(_colorProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_camera.getCameraMatrix()[0][0]);
 
 	// Draw Level
 	_level.draw();
