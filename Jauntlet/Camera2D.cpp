@@ -68,7 +68,9 @@ glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
 	// scale the coords
 	screenCoords *= _scale;
 	// Translate based on camera position
-	screenCoords -= _position;
+	screenCoords += glm::vec2(_position.x, -_position.y);
+
+	screenCoords.y *= -1;
 	
 	return screenCoords;
 }
