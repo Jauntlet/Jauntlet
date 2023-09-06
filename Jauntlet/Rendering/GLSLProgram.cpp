@@ -87,6 +87,9 @@ void GLSLProgram::use() {
 	}
 
 	if (currentProgram != nullptr) { // makes sure only one program is in use
+		if (currentProgram->_programID == _programID) {
+			return;
+		}
 		currentProgram->unuse();
 	}
 
