@@ -47,7 +47,7 @@ void SpriteFont::init(Camera2D* camera, const char* font, int size) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		CharGlyph character = { texture, glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows), 
-								glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap_top), face->glyph->advance.x
+								glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap_top), static_cast<unsigned int>(face->glyph->advance.x)
 		};
 		Characters.insert(std::pair<char, CharGlyph>(c, character));
 	}
@@ -99,5 +99,7 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 		position.x += (currentGlyph.Advance >> 6) * scaling.x;
 	}
 
-	storedProg->use();
+	if (storedProg != nullptr) {
+		storedProg->use();
+	}
 }

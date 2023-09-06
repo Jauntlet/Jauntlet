@@ -81,15 +81,6 @@ GLint GLSLProgram::getUniformLocation(const std::string& uniformName) {
 }
 
 void GLSLProgram::use() {
-	// While switching the used programs around a bit, somehow calls are made that makes "this" equal to a nullptr.
-	// how does this happen? No clue. Will we fix it? Well, you see this comment. 
-	// Thankfully, just error checking for it seems to fix the issue w/o causing rendering issues so its ignored for now. -xm
-
-	if (this == nullptr) {
-		//std::cout << "error: tried to use null program. returning without usage." << std::endl;
-		return;
-	}
-
 	if (currentProgram != nullptr) { // makes sure only one program is in use
 		if (currentProgram->_programID == _programID) {
 			return;
