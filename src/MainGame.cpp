@@ -124,7 +124,7 @@ void MainGame::processInput() {
 	if (_inputManager.isKeyDown(SDLK_r)) {
 		_intendedCameraPostition = glm::vec2(0, 0);
 
-		_camera.setIntendedScale(1);
+		_camera.transitionToScale(1);
 	}
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {

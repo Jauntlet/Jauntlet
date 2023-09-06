@@ -30,7 +30,7 @@ public:
 	// sets the cameras zoom on the screen (default: 1). the boolean sets if you want to set the intendedScale to the same zoom, meaning you wont get any camera movement afterwards.
 	void setScale(float newScale, bool stopTransitions);
 	/// makes the camera transition to this scale smoothly over time.
-	void setIntendedScale(float newscale);
+	void transitionToScale(float newscale);
 	
 	// get the position of the camera
 	glm::vec2 getPosition() { return _position; }

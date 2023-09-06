@@ -100,7 +100,7 @@ void Camera2D::setScale(float newScale, bool stopTransitions) {
 	}
 }
 
-void Camera2D::setIntendedScale(float newScale) { 
+void Camera2D::transitionToScale(float newScale) { 
 	_intendedScale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
 	_needsMatrixUpdate = true;
 }
