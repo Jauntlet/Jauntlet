@@ -9,39 +9,44 @@ InputManager::InputManager() {
 }
 
 void InputManager::processInput() {
-	SDL_Event evnt;
+	SDL_Event _event;
 
 	// updates previous key map via foreach loop
 	for (auto& it : _keyMap) {
 		_previousKeyMap[it.first] = it.second;
 	}
 
-	while (SDL_PollEvent(&evnt))
+	while (SDL_PollEvent(&_event))
 	{
-		switch (evnt.type)
+		switch (_event.type)
 		{
 		case SDL_QUIT:
 			_quitGameCalled = true;
 			break;
 		case SDL_KEYDOWN:
-			pressKey(evnt.key.keysym.sym);
+			pressKey(_event.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
-			releaseKey(evnt.key.keysym.sym);
+			releaseKey(_event.key.keysym.sym);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			pressKey(evnt.button.button);
+			pressKey(_event.button.button);
 			break;
 		case SDL_MOUSEBUTTONUP:
-			releaseKey(evnt.button.button);
+			releaseKey(_event.button.button);
 			break;
 		case SDL_MOUSEMOTION:
-			setMouseCoords(evnt.motion.x, evnt.motion.y);
+			_mouseCoords.x = _event.motion.x;
+			_mouseCoords.y = _event.motion.y;
 			break;
 		case SDL_WINDOWEVENT:
-			if (evnt.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+			if (_event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
 				_windowResized = true;
 			}
+			break;
+		case SDL_MOUSEWHEEL:
+			deltaScroll += _event.wheel.y;
+			break;
 		}
 	}
 
@@ -80,11 +85,6 @@ void InputManager::pressKey(unsigned int keyID) {
 
 void InputManager::releaseKey(unsigned int keyID) {
 	_keyMap[keyID] = false;
-}
-
-void InputManager::setMouseCoords(float x, float y) {
-	_mouseCoords.x = x;
-	_mouseCoords.y = y;
 }
 
 glm::vec2 InputManager::getMouseCoords() {
