@@ -1,4 +1,5 @@
 #include "Camera2D.h"
+#include <algorithm>
 
 using namespace Jauntlet;
 
@@ -77,6 +78,6 @@ void Camera2D::setPosition(const glm::vec2& newPosition) {
 }
 
 void Camera2D::setScale(float newScale) { 
-	_scale = newScale; 
+	_scale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
 	_needsMatrixUpdate = true;
 }

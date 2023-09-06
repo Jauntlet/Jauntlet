@@ -44,5 +44,8 @@ private:
 	int _screenWidth = 500, _screenHeight = 500;
 	
 	bool _needsMatrixUpdate = true;
+
+	const float _CAMERA_MIN_ZOOM = 0.05f;
+	const float _CAMERA_MAX_ZOOM = 3.50f;
 };
 }
