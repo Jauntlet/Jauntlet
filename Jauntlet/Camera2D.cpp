@@ -95,13 +95,9 @@ bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimension
 	return false;
 }
 
-void Camera2D::setPosition(const glm::vec2& newPosition, bool stopTransitions) { 
-	_position = round(newPosition);
+void Camera2D::setPosition(const glm::vec2& newPosition) { 
+	_position = _transitionPosition = round(newPosition);
 	_needsMatrixUpdate = true;
-
-	if (stopTransitions) {
-		_transitionPosition = _position;
-	}
 }
 
 void Camera2D::transitionToPosition(const glm::vec2& newPosition) { 
@@ -109,13 +105,9 @@ void Camera2D::transitionToPosition(const glm::vec2& newPosition) {
 	_needsMatrixUpdate = true;
 }
 
-void Camera2D::setScale(float newScale, bool stopTransitions) {
-	_scale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
+void Camera2D::setScale(float newScale) {
+	_scale = _transitionScale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
 	_needsMatrixUpdate = true;
-
-	if (stopTransitions) {
-		_transitionScale = _scale;
-	}
 }
 
 void Camera2D::transitionToScale(float newScale) { 

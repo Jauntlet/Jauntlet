@@ -109,10 +109,10 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.isKeyDown(SDLK_q)) {
-		_camera.setScale(_camera.getScale() + .05, true);
+		_camera.setScale(_camera.getScale() + .05);
 	}
 	if (_inputManager.isKeyDown(SDLK_e)) {
-		_camera.setScale(_camera.getScale() - 0.05, true);
+		_camera.setScale(_camera.getScale() - 0.05);
 	}
 
 	if (_inputManager.isKeyDown(SDLK_r)) {
@@ -122,7 +122,7 @@ void MainGame::processInput() {
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
 
-		_camera.setPosition(_camera.getPosition() + glm::vec2(-_inputManager.getMouseCoords().x + _oldMouse.x, _inputManager.getMouseCoords().y - _oldMouse.y), true);
+		_camera.setPosition(_camera.getPosition() + glm::vec2(-_inputManager.getMouseCoords().x + _oldMouse.x, _inputManager.getMouseCoords().y - _oldMouse.y));
 	}
 
 	if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {
@@ -135,7 +135,7 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.deltaScroll != 0) {
-		_camera.setScale(_camera.getScale() * pow(1.2f, _inputManager.deltaScroll), true);
+		_camera.setScale(_camera.getScale() * pow(1.2f, _inputManager.deltaScroll));
 		_inputManager.deltaScroll = 0;
 	}
 
