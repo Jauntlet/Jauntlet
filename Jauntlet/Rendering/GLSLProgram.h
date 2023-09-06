@@ -12,9 +12,11 @@ public:
 
 	// creates both a vertex and fragment shader.
 	void compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath);
-
 	// links the two shaders to the program
 	void linkShaders();
+	
+	// Checks if the Shaders are already linked
+	bool isLinked = false;
 
 	// allows you to add properties to the shaders that you can use in GLSL
 	void addAttribute(const std::string& attributeName);
@@ -26,6 +28,7 @@ public:
 	void use();
 	// disable the use of the program
 	void unuse();
+	
 private:
 
 	// function to compile an individual shader
@@ -36,5 +39,6 @@ private:
 	GLuint _programID = 0;
 	GLuint _vertexShaderID = 0;
 	GLuint _fragmentShaderID = 0;
+
 };
 }
