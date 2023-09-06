@@ -174,12 +174,9 @@ void MainGame::drawGame() {
 
 	_playerSpriteBatch.renderBatch();
 
-	drawHUD();
-
-	_lineRenderer.setColor(glm::vec3(1, 0, 0));
-	_lineRenderer.drawLine(glm::vec2(-1, 0), glm::vec2(1, 0));
-
 	_colorProgram.unuse();
+
+	drawHUD();
 
 	_window.swapBuffer();
 }

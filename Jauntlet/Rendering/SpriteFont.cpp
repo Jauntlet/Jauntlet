@@ -8,6 +8,8 @@
 
 using namespace Jauntlet;
 
+GLSLProgram SpriteFont::_textProgram;
+
 void SpriteFont::init(const char* font, int size) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -43,7 +45,7 @@ void SpriteFont::init(const char* font, int size) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		CharGlyph character = { texture, glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows), 
-								glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap_top), face->glyph->advance.x 
+								glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap_top), face->glyph->advance.x
 		};
 		Characters.insert(std::pair<char, CharGlyph>(c, character));
 	}
@@ -51,10 +53,29 @@ void SpriteFont::init(const char* font, int size) {
 	// Clear memory for face and ft
 	FT_Done_Face(face);
 	FT_Done_FreeType(ft);
+
+	// Setup shader
+	if (_textProgram.isLinked) {
+		return;
+	}
+
+	_textProgram.compileShaders("Shaders/text.vert", "Shaders/text.frag");
+	_textProgram.linkShaders();
 }
 
 void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
 	float depth, Color tint) {
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	// Store last used program, and then use our program.
+	GLSLProgram* storedProg = GLSLProgram::currentProgram;
+	_textProgram.use();
+	
+	std::cout << "rendering text" << std::endl;
+
+	glUniform3f(_textProgram.getUniformLocation("textColor"), tint.r, tint.g, tint.b);
 
 	for (auto c = string.begin(); c != string.end(); c++) {
 		CharGlyph currentGlyph = Characters[*c];
@@ -73,4 +94,6 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 
 		position.x += (currentGlyph.Advance >> 6) * scaling.x;
 	}
+
+	storedProg->use();
 }

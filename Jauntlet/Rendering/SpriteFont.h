@@ -7,6 +7,7 @@
 #include <cstring>
 
 #include "./Vertex.h"
+#include "GLSLProgram.h"
 #include "SpriteBatch.h"
 
 namespace Jauntlet {
@@ -34,8 +35,9 @@ public:
 			  float depth, Color tint);
 private:
 	std::map<char, CharGlyph> Characters;
-
 	int _fontHeight;
+
+	static GLSLProgram _textProgram;
 };
 }
 

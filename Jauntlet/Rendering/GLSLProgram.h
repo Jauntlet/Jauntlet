@@ -29,6 +29,7 @@ public:
 	// disable the use of the program
 	void unuse();
 	
+	static GLSLProgram* currentProgram;
 private:
 
 	// function to compile an individual shader
@@ -39,6 +40,5 @@ private:
 	GLuint _programID = 0;
 	GLuint _vertexShaderID = 0;
 	GLuint _fragmentShaderID = 0;
-
 };
 }
