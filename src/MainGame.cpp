@@ -48,7 +48,7 @@ void MainGame::initSystems() {
 	_HUDSpriteBatch.init();
 
 	// initializes spritefont
-	_spriteFont.init("Fonts/HandelGo.ttf", 64);
+	_spriteFont.init(&_camera, "Fonts/HandelGo.ttf", 64);
 	//_spriteFont.init("Fonts/chintzy.ttf", 64);
 
 	// Temporary level loading
