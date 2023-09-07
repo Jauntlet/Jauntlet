@@ -34,9 +34,15 @@ public:
 	// Draws the spritefont using a spritebatch
 	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
 			  float depth, Color tint);
+
+	// We only make a getter because we should not be able to set the fontHeight at any time. This would cause multiple issues when rendering
+	// due to how it is setup. -xm
+
+	// Get the height of the font
+	int getFontHeight(); 
 private:
-	std::map<char, CharGlyph> Characters;
 	int _fontHeight;
+	std::map<char, CharGlyph> Characters;
 
 	Camera2D* _camera = nullptr;
 

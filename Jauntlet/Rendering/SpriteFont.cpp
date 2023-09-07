@@ -27,7 +27,7 @@ void SpriteFont::init(Camera2D* camera, const char* font, int size) {
 		fatalError("FREETYPE failed to load font: " + (std::string)font);
 	}
 	// setting width to 0 lets the function dynamically determine the width.
-	FT_Set_Pixel_Sizes(face, 0, size);
+	FT_Set_Pixel_Sizes(face, 0, _fontHeight);
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // This disables byte-alignment restrictions.
 
@@ -112,4 +112,8 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
     	*/
     	storedProg->use();
 	}
+}
+
+int SpriteFont::getFontHeight() {
+	return _fontHeight;
 }
