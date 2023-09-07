@@ -98,6 +98,7 @@ void GLSLProgram::use() {
 }
 void GLSLProgram::unuse() {
 	glUseProgram(0);
+	
 	for (int i = 0; i < _numAttributes; ++i)
 	{
 		glDisableVertexAttribArray(i);

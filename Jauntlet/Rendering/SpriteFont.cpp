@@ -97,7 +97,15 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 		position.x += (currentGlyph.Advance >> 6) * scaling.x;
 	}
 
-	if (storedProg != nullptr) {
-		storedProg->use();
+    if (storedProg != nullptr) {
+		/*
+    		this if statement solves a frequent issue where there is no
+    		program currently in use, but we try to use it anyways. this
+    		obviously would cause a segmentation fault, as we are now trying to
+    		use a null address, and since we always assume use() takes a proper
+    		address, we access 0x00000000 and crash the program. technically, we
+    		could check this earlier, but this is likely the fastest solution. -jk
+    	*/
+    	storedProg->use();
 	}
 }
