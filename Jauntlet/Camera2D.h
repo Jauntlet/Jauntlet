@@ -8,6 +8,7 @@ namespace Jauntlet {
 class Camera2D
 {
 public:
+	enum TRANSITION_TYPE {POSITION, SCALE};
 	Camera2D();
 	// initialize the screen size of the camera
 	void init(int screenWidth, int screenHeight);
@@ -34,6 +35,14 @@ public:
 	void setScale(float newScale);
 	/// makes the camera transition to this scale smoothly over time.
 	void transitionToScale(float newscale);
+
+	// translates the camera
+	void translate(const glm::vec2& deltaPosition);
+
+	// clears a transition, takes enum TRANSITION_TYPE
+	void clearTransition(enum TRANSITION_TYPE transitionType);
+	// clears all transitions.
+	void clearTransitions();
 	
 	// get the position of the camera
 	glm::vec2 getPosition() { return _position; }
@@ -54,6 +63,9 @@ private:
 	int _screenWidth = 500, _screenHeight = 500;
 	
 	bool _needsMatrixUpdate = true;
+
+	bool _doTransitionPosition = false;
+	bool _doTransitionScale = false;
 
 	const float _CAMERA_MIN_ZOOM = 0.05f;
 	const float _CAMERA_MAX_ZOOM = 3.50f;

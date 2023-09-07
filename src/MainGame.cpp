@@ -121,8 +121,13 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-		_camera.setPosition(_camera.getPosition() + glm::vec2(-_inputManager.getMouseCoords().x + _oldMouse.x, _inputManager.getMouseCoords().y - _oldMouse.y));
+		_camera.clearTransition(_camera.POSITION);
+		_deltaMouse = glm::vec2(_oldMouse.x - _inputManager.getMouseCoords().x, _inputManager.getMouseCoords().y - _oldMouse.y);
+	} else {
+		_deltaMouse -= _deltaMouse * (Jauntlet::Time::getDeltaTime() * 10);
 	}
+
+	_camera.translate(_deltaMouse);
 
 	if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {
 		_window.toggleFullscreen();
