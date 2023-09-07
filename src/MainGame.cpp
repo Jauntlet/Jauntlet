@@ -191,7 +191,7 @@ void MainGame::drawHUD() {
 
 	_HUDSpriteBatch.begin();
 
-	_spriteFont.draw(_HUDSpriteBatch, output.c_str(), glm::vec2(32), glm::vec2(1), 0, Jauntlet::Color(0.5,1.0,0.69,1));
+	_spriteFont.draw(_HUDSpriteBatch, output, glm::vec2(32), glm::vec2(1), 0, Jauntlet::Color(1,1,1,1));
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();
