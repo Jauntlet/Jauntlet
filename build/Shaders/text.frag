@@ -8,11 +8,13 @@ out vec4 color;
 
 // uniform float time;
 uniform sampler2D imageTexture;
+uniform vec4 fontColor;
 
 void main() {	
 	color = texture(imageTexture, fragmentUV) * fragmentColor;
   color.a = color.r;
-  color.r = 1;
-  color.g = 1;
-  color.b = 1;
+  color.r = fontColor[0];
+  color.g = fontColor[1];
+  color.b = fontColor[2];
+  color.a *= fontColor[3];
 }
