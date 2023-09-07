@@ -75,8 +75,8 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 	GLSLProgram* storedProg = GLSLProgram::currentProgram;
 	_textProgram.use();
 
-	glUniform3f(_textProgram.getUniformLocation("textColor"), tint.r, tint.g, tint.b);
-	glUniform1i(_textProgram.getUniformLocation("text"), 0);
+	GLfloat color[4] = { tint.r, tint.g, tint.b, tint.a };
+	glUniform4fv(_textProgram.getUniformLocation("color"), 1, color);
 	glUniformMatrix4fv(_textProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_camera->getCameraMatrix()[0][0]);
 
 	for (auto c = string.begin(); c != string.end(); c++) {
