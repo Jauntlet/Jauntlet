@@ -55,11 +55,8 @@ private:
 	int _screenWidth = 1024, _screenHeight = 768;
 	float _fps = 0;
 
-	glm::vec2 _currentCameraPostition = glm::vec2(0,0);
-	glm::vec2 _intendedCameraPostition = glm::vec2(0,0);
-
-	glm::vec2 _oldMouse = glm::vec2(0,0);
-	glm::vec2 _deltaMouse = glm::vec2(0,0);
+	glm::vec2 _oldMouse = glm::vec2(0);
+	glm::vec2 _deltaMouse = glm::vec2(0);
 
 	// Temporary variables for testing
 	Jauntlet::SpriteBatch _playerSpriteBatch;
