@@ -1,9 +1,18 @@
 #version 450
 
-varying vec2 texcoord;
-uniform sampler2D tex;
-uniform vec4 color;
+in vec2 fragmentPosition;
+in vec4 fragmentColor;
+in vec2 fragmentUV;
 
-void main(void) {
-  gl_FragColor = vec4(1, 1, 1, texture2D(tex, texcoord).r) * color;
+out vec4 color;
+
+// uniform float time;
+uniform sampler2D imageTexture;
+
+void main() {	
+	color = texture(imageTexture, fragmentUV) * fragmentColor;
+  color.a = color.r;
+  color.r = 1;
+  color.g = 1;
+  color.b = 1;
 }
