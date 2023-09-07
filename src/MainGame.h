@@ -42,6 +42,7 @@ private:
 	Jauntlet::GLSLProgram _colorProgram;
 	
 	Jauntlet::Camera2D _camera;
+	Jauntlet::Camera2D _hudCamera;
 	
 	Jauntlet::InputManager _inputManager;
 
@@ -49,16 +50,12 @@ private:
 
 	GameState _gameState = GameState::PLAY;
 
-	// this is faster to compile, but much less readable.
-	// arguably, we only *really* compile this once, and only recompile whenever we change constants. -jk
-
 	int _screenWidth = 1024, _screenHeight = 768;
 	float _fps = 0;
 
 	glm::vec2 _oldMouse = glm::vec2(0);
 	glm::vec2 _deltaMouse = glm::vec2(0);
 
-	// Temporary variables for testing
 	Jauntlet::SpriteBatch _playerSpriteBatch;
 
 	Jauntlet::TileMap _level;

@@ -42,13 +42,14 @@ void MainGame::initSystems() {
 	_lineRenderer.init();
 
 	_camera.init(_screenWidth, _screenHeight);
+	_hudCamera.init(_screenWidth, _screenHeight);
 
 	// initialize player spriteBatch
 	_playerSpriteBatch.init();
 	_HUDSpriteBatch.init();
 
 	// initializes spritefont
-	_spriteFont.init(&_camera, "Fonts/HandelGo.ttf", 64);
+	_spriteFont.init(&_hudCamera, "Fonts/HandelGo.ttf", 64);
 	//_spriteFont.init("Fonts/chintzy.ttf", 64);
 
 	// Temporary level loading
@@ -87,6 +88,7 @@ void MainGame::gameLoop() {
 		}
 
 		_camera.update();
+		_hudCamera.update();
 
 		drawGame();
 
@@ -134,8 +136,11 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.windowResized()) {
-		_window.getWindowSize();
-		_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
+		_window.getWindowSize(); // This not only gets the window size, but also recalculates it incase of window resizing going unchecked.
+		_screenWidth = _window.getWindowWidth();
+		_screenHeight = _window.getWindowHeight();
+		_camera.updateCameraSize(_screenWidth, _screenHeight);
+		_hudCamera.updateCameraSize(_screenWidth, _screenHeight);
 	}
 
 	if (_inputManager.deltaScroll != 0) {
@@ -187,11 +192,12 @@ void MainGame::drawGame() {
 }
 
 void MainGame::drawHUD() {
-	std::string output = "Framerate: " + std::to_string((int)_fps);
+	glUniformMatrix4fv(_colorProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_hudCamera.getCameraMatrix()[0][0]);
 
 	_HUDSpriteBatch.begin();
 
-	_spriteFont.draw(_HUDSpriteBatch, output, glm::vec2(32), glm::vec2(1), 0, Jauntlet::Color(1,1,1,1));
+	std::string output = "Framerate: " + std::to_string((int)_fps);
+	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(0, _spriteFont.getFontHeight())), glm::vec2(1), 0, Jauntlet::Color(1,1,1,1));
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();
