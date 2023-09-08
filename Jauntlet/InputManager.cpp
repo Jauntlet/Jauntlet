@@ -1,4 +1,5 @@
 #include <SDL/SDL.h>
+#include <cstdio>
 
 #include "InputManager.h"
 

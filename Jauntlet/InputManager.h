@@ -3,6 +3,7 @@
 #include <SDL/SDL.h>
 #include <glm/glm.hpp>
 #include <unordered_map>
+#include <vector>
 
 namespace Jauntlet {
 // Stores and manages the state of keys, aswell as other SDL events
