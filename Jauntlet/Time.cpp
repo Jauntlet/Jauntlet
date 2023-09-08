@@ -2,14 +2,13 @@
 
 #include "Time.h"
 
-namespace Jauntlet
-{
+using namespace Jauntlet;
 
-	float Time::_fps = 0;
-	float Time::_maxFPS = -1;
-	float Time::_deltaTime = 0;
-	float Time::_timeScale = 1;
-	unsigned int Time::_startTicks;
+float Time::_fps = 0;
+float Time::_maxFPS = -1;
+float Time::_deltaTime = 0;
+float Time::_timeScale = 1;
+unsigned int Time::_startTicks;
 
 void Time::setMaxFPS(int maxFPS) {
 	_maxFPS = maxFPS;
@@ -69,5 +68,4 @@ void Time::calculateFPS() {
 	else {
 		_fps = 0;
 	}
-}
 }
