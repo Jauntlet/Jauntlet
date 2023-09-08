@@ -110,13 +110,6 @@ void MainGame::processInput() {
 		_player.setSpeed(120);
 	}
 
-	if (_inputManager.isKeyDown(SDLK_q)) {
-		_camera.setScale(_camera.getScale() + .05);
-	}
-	if (_inputManager.isKeyDown(SDLK_e)) {
-		_camera.setScale(_camera.getScale() - 0.05);
-	}
-
 	if (_inputManager.isKeyDown(SDLK_r)) {
 		_camera.transitionToPosition(glm::vec2(0));
 		_camera.transitionToScale(1);
