@@ -11,12 +11,13 @@ namespace Jauntlet {
 	class UIElement
 	{
 	public:
-		enum ELEMENT_TYPE {TEXT, SPRITE, BAR};
+		enum ELEMENT_TYPE {TEXT, SPRITE, BAR}; // TODO: delete this shit -jk
 		UIElement();
 		//constructor with _position; and camera
 		UIElement(Camera2D* camera);
 		//Update UI when camera is reized
-		virtual void update(Camera2D* camera, SpriteBatch& spriteBatch, float scale);
+		void update(Camera2D* camera, SpriteBatch& spriteBatch, float scale);
+		// crazy how this is both not defined in UIElement.cpp nor does it even have different arguments than its decendants, but i have to include it because c++ has mothingfucking trust issues -jk
 		
 		virtual void fixResolution();
 	protected:

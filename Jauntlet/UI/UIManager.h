@@ -20,6 +20,7 @@ namespace Jauntlet {
 		void addElement(UIElement* uiElement);
 		void removeElement(UIElement* uiElement);
 		void update();
+		void setScale(float scale);
 	private:
 		Camera2D* _camera;
 		SpriteBatch* _spriteBatch;

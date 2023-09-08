@@ -5,7 +5,7 @@ using namespace Jauntlet;
 
 UIManager::UIManager(Camera2D* camera, SpriteBatch& spriteBatch) {
 	_camera = camera;
-	_spriteBatch = &spriteBatch;
+	_spriteBatch = &spriteBatch; // please someone tell me why i have to do this -jk
 }
 
 void UIManager::fixResolution() {
@@ -33,8 +33,13 @@ void UIManager::removeElement(UIElement* uiElement) {
 	fatalError("error: unable to remove UIElement, dont try to do this!");
 }
 
+void UIManager::setScale(float scale) {
+	// considering using pointers of floats because maybe its faster idk i cant test that shit with a full time job -jk
+	_scale = scale;
+}
+
 void UIManager::update() {
 	for (int i = 0; i < _uiElements.size(); i++) {
-		_uiElements[i]->update(_camera, *_spriteBatch, _scale);
+		_uiElements[i]->update(_camera, *_spriteBatch, _scale); // does this dereference a point of a pointer? fuck you. -jk
 	}
 }
