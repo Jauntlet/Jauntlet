@@ -2,16 +2,8 @@
 
 #include "UIElement.h"
 
-namespace Jauntlet {
-	UIElement::UIElement(Camera2D* camera) {
-		_camera = camera;
-	}
+using namespace Jauntlet;
 
-	void UIElement::update() {
-		
-	}
-	void UIElement::fixResolution() {
-		
-	}
+UIElement::UIElement() {
+	// empty
 }
-

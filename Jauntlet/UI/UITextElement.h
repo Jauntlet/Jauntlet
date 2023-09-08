@@ -5,16 +5,19 @@
 
 #include "../Camera2D.h"
 #include "UIElement.h"
+#include "../Rendering/SpriteFont.h"
 
 namespace Jauntlet {
 	class UITextElement : UIElement
 	{
 	public:
 		//constructor with _position;
-		UITextElement(Camera2D* camera, std::string* text);
-		void update();
+		UITextElement(SpriteFont* spriteFont,  std::string* text, float tint[]);
+		void update(Camera2D* camera, SpriteBatch& spriteBatch, float scale);
 	private:
 		std::string* _text;
+        SpriteFont* _spriteFont;
+        GLfloat* _color;
 	};
 }
 

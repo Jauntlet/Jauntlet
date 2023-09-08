@@ -22,7 +22,7 @@ public:
 
 	glm::vec2 getPosition();
 
-	CircleCollider2D collider;
+	Jauntlet::CircleCollider2D collider;
 private:
 	glm::vec2 _position = glm::vec2(0,0);
 

@@ -4,6 +4,7 @@
 #include <string>
 
 #include "../Camera2D.h"
+#include "glm/fwd.hpp"
 
 namespace Jauntlet {
 	class UIElement
@@ -14,11 +15,12 @@ namespace Jauntlet {
 		//constructor with _position; and camera
 		UIElement(Camera2D* camera);
 		//Update UI when camera is reized
-		void update();
+		virtual void update();
 		
-		void fixResolution();
+		virtual void fixResolution();
 	protected:
 		Camera2D* _camera;
+		glm::vec2 _position;
 	};
 }
 
