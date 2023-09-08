@@ -82,22 +82,23 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 	glUniform1i(_textProgram.getUniformLocation("imageTexture"), 0);
 	glUniformMatrix4fv(_textProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_camera->getCameraMatrix()[0][0]);
 
+	float storedX = position.x;
 	for (auto c = string.begin(); c != string.end(); c++) {
 		CharGlyph currentGlyph = Characters[*c];
 
 		if (*c == '\n') {
-			position.y += _fontHeight * scaling.y;
-			position.x = position.x;
+			position.y -= _fontHeight * scaling.y;
+			storedX = position.x;
 		}
 
-		float x = position.x; //+ currentGlyph.Bearing.x * scaling.x; 
+		float x = storedX;// +currentGlyph.Bearing.x * scaling.x;
 		float y = position.y - (currentGlyph.Size.y - currentGlyph.Bearing.y) * scaling.y;
 
 		glm::vec4 destRect(x,y, currentGlyph.Bearing);
 
 		spritebatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, {255,255,255,255});
 
-		position.x += (currentGlyph.Advance >> 6) * scaling.x;
+		storedX += (currentGlyph.Advance >> 6) * scaling.x;
 	}
 
     if (storedProg != nullptr) {
