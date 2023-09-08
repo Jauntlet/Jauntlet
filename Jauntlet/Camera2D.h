@@ -44,12 +44,10 @@ public:
 	// clears all transitions.
 	void clearTransitions();
 	
-	// get the position of the camera
-	glm::vec2 getPosition() { return _position; }
 	// get the cameras matrix
 	glm::mat4 getCameraMatrix() { return _cameraMatrix; }
-	// get the scale of the camera
-	float getScale() { return _scale; }
+	// multiply the scale of the camera by a float
+	void multiplyScale(float scale);
 private:
 	float _scale = 1;
 	float _transitionScale = 1;

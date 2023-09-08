@@ -153,3 +153,7 @@ void Camera2D::clearTransitions() {
 	_doTransitionScale = false;
 	_doTransitionPosition = false;
 }
+
+void Camera2D::multiplyScale(float scale) {
+	_scale *= scale;
+}

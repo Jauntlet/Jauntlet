@@ -144,7 +144,7 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.deltaScroll != 0) {
-		_camera.setScale(_camera.getScale() * pow(1.2f, _inputManager.deltaScroll));
+		_camera.multiplyScale(pow(1.2f, _inputManager.deltaScroll));
 		_inputManager.deltaScroll = 0;
 	}
 
