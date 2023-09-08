@@ -4,15 +4,6 @@
 
 using namespace Jauntlet;
 
-UIElement::UIElement(Camera2D* camera) {
-	_camera = camera;
+UIElement::UIElement() {
+	// empty
 }
-
-void UIElement::update() {
-	
-}
-
-void UIElement::fixResolution() {
-	
-}
-
