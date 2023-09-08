@@ -197,7 +197,7 @@ void MainGame::drawHUD() {
 	_HUDSpriteBatch.begin();
 
 	std::string output = "Framerate: " + std::to_string((int)_fps);
-	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(0, _spriteFont.getFontHeight())), glm::vec2(1), 0, Jauntlet::Color(1,1,1,1));
+	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(1), 0, new GLfloat[]{0.1,0.5,0.1,0.5});
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();
