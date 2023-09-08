@@ -11,7 +11,7 @@ namespace Jauntlet {
 	}
 	void UIManager::fixResolution() {
 		for (int i = 0; i < _uiElements.size(); i++) {
-			_uiElements[i]->update();
+			_uiElements[i]->fixResolution();
 		}
 	}
 
@@ -35,7 +35,9 @@ namespace Jauntlet {
 	}
 
 	void UIManager::update() {
-
+		for (int i = 0; i < _uiElements.size(); i++) {
+			_uiElements[i]->update();
+		}
 	}
 	
 }
