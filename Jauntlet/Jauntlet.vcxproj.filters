@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Rendering">
       <UniqueIdentifier>{209b0171-5409-45be-be57-372f2b229809}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{110944d5-831f-4812-9104-b2a34fce7534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{7537eb3e-f1e4-4c80-9709-9317a45608e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Errors.cpp">
@@ -90,11 +96,14 @@
     <ClCompile Include="Rendering\SpriteFont.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="UiElement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="JMath.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIElement.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIManager.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,11 +176,14 @@
     <ClInclude Include="Rendering\SpriteFont.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="UiElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="JMath.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIManager.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIElement.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
