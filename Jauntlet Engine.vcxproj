@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainGame.cpp" />
     <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Navigation.h" />
     <ClInclude Include="src\MainGame.h" />
     <ClInclude Include="src\Player.h" />
   </ItemGroup>
