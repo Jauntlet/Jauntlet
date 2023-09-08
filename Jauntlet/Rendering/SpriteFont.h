@@ -33,7 +33,7 @@ public:
 	
 	// Draws the spritefont using a spritebatch
 	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
-			  float depth, GLfloat tint[4]);
+			  float depth, Color color);
 
 	// We only make a getter because we should not be able to set the fontHeight at any time. This would cause multiple issues when rendering
 	// due to how it is setup. -xm

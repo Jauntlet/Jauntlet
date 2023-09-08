@@ -69,7 +69,7 @@ void SpriteFont::init(Camera2D* camera, const char* font, int size) {
 }
 
 void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
-	float depth, GLfloat tint[4]) {
+	float depth, Color color) {
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -78,7 +78,6 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 	GLSLProgram* storedProg = GLSLProgram::currentProgram;
 	_textProgram.use();
 
-	glUniform4fv(_textProgram.getUniformLocation("fontColor"), 1, tint);
 	glUniform1i(_textProgram.getUniformLocation("imageTexture"), 0);
 	glUniformMatrix4fv(_textProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_camera->getCameraMatrix()[0][0]);
 
@@ -96,7 +95,7 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 
 		glm::vec4 destRect(x,y, currentGlyph.Bearing);
 
-		spritebatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, {255,255,255,255});
+		spritebatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, color);
 
 		storedX += (currentGlyph.Advance >> 6) * scaling.x;
 	}
