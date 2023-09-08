@@ -4,13 +4,13 @@
 
 #include "Errors.h"
 
-using namespace Jauntlet;
-
-void fatalError(std::string errorString) {
-	std::cout << errorString << std::endl;
-	std::cout << "Press ENTER to quit...";
-	int tmp;
-	std::cin >> tmp;
-	SDL_Quit();
-	exit(-1);
+namespace Jauntlet {
+	void fatalError(std::string errorString) {
+		std::cout << errorString << std::endl;
+		std::cout << "Press ENTER to quit...";
+		int tmp;
+		std::cin >> tmp;
+		SDL_Quit();
+		exit(-1);
+	}
 }
