@@ -3,12 +3,9 @@
 
 using namespace Jauntlet;
 
-UIManager::UIManager(Camera2D*  camera) {
-	if (camera != nullptr) {
-		_camera = camera;
-	} else {
-		fatalError("error: gave UIManager nonexistant camera or nullptr");
-	}
+UIManager::UIManager(Camera2D* camera, SpriteBatch& spriteBatch) {
+	_camera = camera;
+	_spriteBatch = &spriteBatch;
 }
 
 void UIManager::fixResolution() {
@@ -38,6 +35,6 @@ void UIManager::removeElement(UIElement* uiElement) {
 
 void UIManager::update() {
 	for (int i = 0; i < _uiElements.size(); i++) {
-		_uiElements[i]->update();
+		_uiElements[i]->update(_camera, *_spriteBatch, _scale);
 	}
 }

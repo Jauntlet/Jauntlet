@@ -13,7 +13,7 @@ namespace Jauntlet {
 	public:
 		//constructor with _position;
 		UITextElement(SpriteFont* spriteFont,  std::string* text, float tint[]);
-		void update(Camera2D* camera, SpriteBatch& spriteBatch, float scale);
+        void update(Camera2D* camera, SpriteBatch& spriteBatch, float scale);
 	private:
 		std::string* _text;
         SpriteFont* _spriteFont;
