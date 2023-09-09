@@ -21,7 +21,8 @@ MainGame::MainGame() :
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
 		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png"),
-	_player(-5 * 32, 0, &_inputManager) {
+	_player(-5 * 32, 0, &_inputManager),
+	_window() {
 }
 
 void MainGame::run() {
@@ -75,7 +76,7 @@ void MainGame::gameLoop() {
 		Jauntlet::Time::beginFrame();
 
 		processInput();
-		
+
 		_player.update();
 		
 		// collision checking between Craig and the tilemap, done after player update
@@ -146,10 +147,7 @@ void MainGame::processInput() {
 		Jauntlet::Collision2D data = Jauntlet::Collision2D();
 		if (data.getCollision(&_player.collider, _camera.convertScreenToWorld(_inputManager.getMouseCoords()))) {
 			std::cout << "Jollision @ " << _inputManager.getMouseCoords().x << ", " << _inputManager.getMouseCoords().y << std::endl;
-		} else {
-			std::cout << _player.getPosition().x << ", " << _player.getPosition().y << std::endl;
-			std::cout << _camera.convertScreenToWorld(_inputManager.getMouseCoords()).x << ", " << _camera.convertScreenToWorld(_inputManager.getMouseCoords()).y << std::endl;
-		}
+		} 
 	}
 
 	_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
