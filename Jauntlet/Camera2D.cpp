@@ -133,11 +133,9 @@ void Camera2D::translate(const glm::vec2& deltaPosition) {
 void Camera2D::clearTransition(enum TRANSITION_TYPE transitionType) {
 	switch (transitionType) {
 		case POSITION:
-			_transitionPosition = _position;
 			_doTransitionPosition = false;
 			break;
 		case SCALE:
-			_transitionScale = _scale;
 			_doTransitionScale = false;
 			break;
 		default:
@@ -147,9 +145,6 @@ void Camera2D::clearTransition(enum TRANSITION_TYPE transitionType) {
 }
 
 void Camera2D::clearTransitions() {
-	_transitionScale = _scale;
-	_transitionPosition = _position;
-
 	_doTransitionScale = false;
 	_doTransitionPosition = false;
 }
