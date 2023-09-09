@@ -6,8 +6,10 @@
 #include <map>
 #include <cstring>
 
-#include "./Vertex.h"
+#include "../Camera2D.h"
+#include "GLSLProgram.h"
 #include "SpriteBatch.h"
+#include "Vertex.h"
 
 namespace Jauntlet {
 #define FIRST_PRINTABLE_CHAR (char)32
@@ -27,15 +29,24 @@ public:
 	SpriteFont() {};
 
 	// initialize a SpriteFont that uses all ascii characters
-	void init(const char* font, int size);
+	void init(Camera2D* camera, const char* font, int size);
 	
 	// Draws the spritefont using a spritebatch
 	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
-			  float depth, Color tint);
+			  float depth, Color color);
+
+	// We only make a getter because we should not be able to set the fontHeight at any time. This would cause multiple issues when rendering
+	// due to how it is setup. -xm
+
+	// Get the height of the font
+	int getFontHeight(); 
 private:
+	int _fontHeight;
 	std::map<char, CharGlyph> Characters;
 
-	int _fontHeight;
+	Camera2D* _camera = nullptr;
+
+	static GLSLProgram _textProgram; 
 };
 }
 

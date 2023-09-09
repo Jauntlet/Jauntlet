@@ -21,7 +21,8 @@ MainGame::MainGame() :
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
 		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png"),
-	_player(-5 * 32, 0, &_inputManager) {
+	_player(-5 * 32, 0, &_inputManager),
+	_window() {
 }
 
 void MainGame::run() {
@@ -42,13 +43,14 @@ void MainGame::initSystems() {
 	_lineRenderer.init();
 
 	_camera.init(_screenWidth, _screenHeight);
+	_hudCamera.init(_screenWidth, _screenHeight);
 
 	// initialize player spriteBatch
 	_playerSpriteBatch.init();
 	_HUDSpriteBatch.init();
 
 	// initializes spritefont
-	_spriteFont.init("Fonts/HandelGo.ttf", 64);
+	_spriteFont.init(&_hudCamera, "Fonts/HandelGo.ttf", 64);
 	//_spriteFont.init("Fonts/chintzy.ttf", 64);
 
 	// Temporary level loading
@@ -74,11 +76,11 @@ void MainGame::gameLoop() {
 		Jauntlet::Time::beginFrame();
 
 		processInput();
-		
+
 		_player.update();
 		
 		// collision checking between Craig and the tilemap, done after player update
-		std::vector<BoxCollider2D> levelColliders = _level.collectCollidingTiles(_player.getPosition());
+		std::vector<Jauntlet::BoxCollider2D> levelColliders = _level.collectCollidingTiles(_player.getPosition());
 		Jauntlet::Collision2D collision = Jauntlet::Collision2D();
 		for (int j = 0; j < levelColliders.size(); ++j) {
 			if (collision.getCollision(&_player.collider, &levelColliders[j])) {
@@ -87,6 +89,7 @@ void MainGame::gameLoop() {
 		}
 
 		_camera.update();
+		_hudCamera.update();
 
 		drawGame();
 
@@ -108,34 +111,43 @@ void MainGame::processInput() {
 		_player.setSpeed(120);
 	}
 
-	if (_inputManager.isKeyDown(SDLK_q)) {
-		_camera.setScale(_camera.getScale() + .05);
-	}
-	if (_inputManager.isKeyDown(SDLK_e)) {
-		_camera.setScale(_camera.getScale() - 0.05);
-	}
-
 	if (_inputManager.isKeyDown(SDLK_r)) {
 		_camera.transitionToPosition(glm::vec2(0));
 		_camera.transitionToScale(1);
 	}
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-		_camera.setPosition(_camera.getPosition() + glm::vec2(-_inputManager.getMouseCoords().x + _oldMouse.x, _inputManager.getMouseCoords().y - _oldMouse.y));
+		_camera.clearTransition(_camera.POSITION);
+		_deltaMouse = glm::vec2(_oldMouse.x - _inputManager.getMouseCoords().x, _inputManager.getMouseCoords().y - _oldMouse.y);
+	} else {
+		_deltaMouse -= _deltaMouse * (Jauntlet::Time::getDeltaTime() * 10);
 	}
+
+	_camera.translate(_deltaMouse);
 
 	if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {
 		_window.toggleFullscreen();
 	}
 
 	if (_inputManager.windowResized()) {
-		_window.getWindowSize();
-		_camera.updateCameraSize(_window.getWindowWidth(), _window.getWindowHeight());
+		_window.getWindowSize(); // This not only gets the window size, but also recalculates it incase of window resizing going unchecked.
+		_screenWidth = _window.getWindowWidth();
+		_screenHeight = _window.getWindowHeight();
+		_camera.updateCameraSize(_screenWidth, _screenHeight);
+		_hudCamera.updateCameraSize(_screenWidth, _screenHeight);
 	}
 
 	if (_inputManager.deltaScroll != 0) {
-		_camera.setScale(_camera.getScale() * pow(1.2f, _inputManager.deltaScroll));
+		_camera.multiplyScale(pow(1.2f, _inputManager.deltaScroll));
 		_inputManager.deltaScroll = 0;
+	}
+
+	//test for collider-position code
+	if (_inputManager.isKeyPressed(SDL_BUTTON_RIGHT)) {
+		Jauntlet::Collision2D data = Jauntlet::Collision2D();
+		if (data.getCollision(&_player.collider, _camera.convertScreenToWorld(_inputManager.getMouseCoords()))) {
+			std::cout << "Jollision @ " << _inputManager.getMouseCoords().x << ", " << _inputManager.getMouseCoords().y << std::endl;
+		} 
 	}
 
 	_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
@@ -163,22 +175,20 @@ void MainGame::drawGame() {
 
 	_playerSpriteBatch.renderBatch();
 
-	drawHUD();
-
-	_lineRenderer.setColor(glm::vec3(1, 0, 0));
-	_lineRenderer.drawLine(glm::vec2(-1, 0), glm::vec2(1, 0));
-
 	_colorProgram.unuse();
+
+	drawHUD();
 
 	_window.swapBuffer();
 }
 
 void MainGame::drawHUD() {
-	std::string output = "Framerate: " + std::to_string((int)_fps);
+	glUniformMatrix4fv(_colorProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_hudCamera.getCameraMatrix()[0][0]);
 
 	_HUDSpriteBatch.begin();
 
-	_spriteFont.draw(_HUDSpriteBatch, output.c_str(), glm::vec2(32), glm::vec2(1), 0, Jauntlet::Color(255,255,255,255));
+	std::string output = "Framerate: " + std::to_string((int)_fps);
+	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(1), 0, Jauntlet::Color(255, 100, 100, 255));
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();

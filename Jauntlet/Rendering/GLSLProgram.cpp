@@ -1,10 +1,14 @@
 #include <fstream>
 #include <vector>
+#include <iostream> // remove when done debugging
 
 #include "../Errors.h"
 #include "GLSLProgram.h"
 
 using namespace Jauntlet;
+
+// initialize static member
+GLSLProgram* GLSLProgram::currentProgram = nullptr;
 
 GLSLProgram::GLSLProgram() {
 	// Empty
@@ -58,6 +62,8 @@ void GLSLProgram::linkShaders() {
 	glDetachShader(_programID, _fragmentShaderID);
 	glDeleteShader(_vertexShaderID);
 	glDeleteShader(_fragmentShaderID);
+
+	isLinked = true;
 }
 
 void GLSLProgram::addAttribute(const std::string& attributeName) {
@@ -75,18 +81,30 @@ GLint GLSLProgram::getUniformLocation(const std::string& uniformName) {
 }
 
 void GLSLProgram::use() {
+	if (currentProgram != nullptr) { // makes sure only one program is in use
+		if (currentProgram->_programID == _programID) {
+			return;
+		}
+		currentProgram->unuse();
+	}
+
 	glUseProgram(_programID);
 	for (int i = 0; i < _numAttributes; ++i)
 	{
 		glEnableVertexAttribArray(i);
 	}
+
+	currentProgram = this;
 }
 void GLSLProgram::unuse() {
 	glUseProgram(0);
+	
 	for (int i = 0; i < _numAttributes; ++i)
 	{
 		glDisableVertexAttribArray(i);
 	}
+
+	currentProgram = nullptr; // no program is in use
 }
 
 void GLSLProgram::compileShader(const std::string& filePath, GLuint id) {

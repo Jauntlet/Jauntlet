@@ -121,6 +121,7 @@ bool Collision2D::getCollision(BoxCollider2D* parent, CircleCollider2D* other) {
 	return false;
 }
 
+//Box on Box collision check
 bool Collision2D::getCollision(BoxCollider2D* parent, BoxCollider2D* other) {
 	if (parent->position.x < other->position.x + other->GetWidth() &&
 		 parent->position.x + parent->GetWidth() > other->position.x &&
@@ -150,5 +151,20 @@ bool Collision2D::getCollision(BoxCollider2D* parent, BoxCollider2D* other) {
 		return true;
 	}
 
+	return false;
+}
+
+//Circle with given position collision check
+bool Collision2D::getCollision(CircleCollider2D* parent, glm::vec2 other) {
+	if (JMath::Distance(parent->position + glm::vec2(parent->GetRadius()), other) <= parent->GetRadius()) return true;
+	return false;
+}
+
+//Box with given position collision check
+bool Collision2D::getCollision(BoxCollider2D* parent, glm::vec2 other) {
+	if (other.x >= parent->position.x &&
+		 other.x <= parent->position.x + parent->GetWidth() &&
+		 other.y >= parent->position.y &&
+		 other.y <= parent->position.y + parent->GetHeight()) return true;
 	return false;
 }
