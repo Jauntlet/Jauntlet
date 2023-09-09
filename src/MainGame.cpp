@@ -1,6 +1,5 @@
 #include "MainGame.h"
-#include "SDL/SDL_keycode.h"
-#include "SDL/SDL_mouse.h"
+#include "SDL/SDL.h"
 #include "glm/fwd.hpp"
 
 #include <Jauntlet/Jauntlet.h>
@@ -104,7 +103,7 @@ void MainGame::processInput() {
 		_gameState = GameState::EXIT;
 	}
 
-	if (_inputManager.isKeyDown(SDLK_LSHIFT)) {
+	if (_inputManager.isKeyDown(SDLK_LSHIFT) || _inputManager.isKeyDown(SDL_CONTROLLER_BUTTON_A)) {
 		_player.setSpeed(300);
 	}
 	else {

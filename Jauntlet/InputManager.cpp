@@ -2,6 +2,7 @@
 #include <cstdio>
 
 #include "InputManager.h"
+#include <string>
 
 using namespace Jauntlet;
 
@@ -80,6 +81,13 @@ void InputManager::processInput() {
 						continue;
 				}
 				break;
+			case SDL_JOYBUTTONDOWN:
+				printf(std::to_string(_event.cbutton.button).c_str());
+				printf("\n");
+				_keyMap[_event.cbutton.button] = true;
+				break;
+			case SDL_JOYBUTTONUP:
+				_keyMap[_event.cbutton.button] = false;
 			case SDL_MOUSEBUTTONDOWN:
 				_keyMap[_event.button.button] = true;
 				break;
@@ -90,13 +98,13 @@ void InputManager::processInput() {
 				_mouseCoords.x = _event.motion.x;
 				_mouseCoords.y = _event.motion.y;
 				break;
+			case SDL_MOUSEWHEEL:
+				deltaScroll += _event.wheel.y;
+				break;
 			case SDL_WINDOWEVENT:
 				if (_event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
 					_windowResized = true;
 				}
-				break;
-			case SDL_MOUSEWHEEL:
-				deltaScroll += _event.wheel.y;
 				break;
 		}
 	}
@@ -138,7 +146,6 @@ glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 		printf("Warning: Tried to get Axis on non-existant Controller");
 		return glm::vec2(0);
 	}
-	//printf("Controller %i has left stick of %f %f\n", controllerID, _controllers[controllerID].leftStick.x, _controllers[controllerID].leftStick.y);
 	switch (type) {
 		case Axis::LeftStick:
 			return _controllers[controllerID].leftStick;
