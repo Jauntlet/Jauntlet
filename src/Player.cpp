@@ -30,6 +30,7 @@ Player::Player(float x, float y, Jauntlet::InputManager* inputManager) :
 void Player::update() {
 	
 	glm::vec2 velocity(0, 0);
+	glm::vec2 leftStick = _inputManager->getControllerAxis(Jauntlet::Axis::LeftStick);
 
 	if (_moveUp.isDown()) {
 		velocity.y += 1;
@@ -37,11 +38,19 @@ void Player::update() {
 	if (_moveDown.isDown()) {
 		velocity.y -= 1;
 	}
+	if (leftStick.y > 0.2 || leftStick.y < -0.2) {
+		velocity.y -= leftStick.y;
+	}
+
+
 	if (_moveLeft.isDown()) {
 		velocity.x -= 1;
 	}
 	if (_moveRight.isDown()) {
 		velocity.x += 1;
+	}
+	if (leftStick.x > 0.2 || leftStick.x < -0.2) {
+		velocity.x += leftStick.x;
 	}
 
 	// for some reason position breaks if it runs while velocity is 0????
