@@ -64,13 +64,7 @@ void Player::update() {
 
 void Player::draw(Jauntlet::SpriteBatch& spriteBatch) {
 	const glm::vec4 uvRect(0, 0, 1, 1);
-	glm::vec4 destRect;
-	// position to draw player
-	destRect.x = _position.x;
-	destRect.y = _position.y;
-	// width / height of player
-	destRect.z = 32;
-	destRect.w = 32;
+	glm::vec4 destRect = glm::vec4(_position.x, _position.y, 32, 32);
 
 	static Jauntlet::Color color;
 	color.setColor(255, 255, 255, 255);
