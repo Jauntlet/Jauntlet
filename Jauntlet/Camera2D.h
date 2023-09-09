@@ -8,7 +8,7 @@ namespace Jauntlet {
 class Camera2D
 {
 public:
-	enum TRANSITION_TYPE {POSITION, SCALE};
+	enum class TRANSITION_TYPE {POSITION, SCALE};
 	Camera2D();
 	// initialize the screen size of the camera
 	void init(int screenWidth, int screenHeight);
