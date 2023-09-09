@@ -149,5 +149,5 @@ glm::vec2 InputManager::getAxis(Axis type, int controllerID) {
 	}
 }
 glm::vec2 InputManager::getAxis(Axis type) {
-
+	return glm::vec2(0);
 }
