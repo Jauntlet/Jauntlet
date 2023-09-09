@@ -3,6 +3,7 @@
 
 #include "InputManager.h"
 #include <string>
+#include <iostream>
 
 using namespace Jauntlet;
 
@@ -85,6 +86,41 @@ void InputManager::processInput() {
 				break;
 			case SDL_JOYBUTTONUP:
 				_keyMap[_event.cbutton.button] = false;
+			case SDL_JOYHATMOTION:
+				if (_event.jhat.type == 1538) { // this is the identifier for the D-pad of a controller
+					switch (_event.jhat.value) {
+						case SDL_HAT_LEFTUP:
+							_controllers[_event.jhat.which].dPad = glm::vec2(-1, 1);
+							break;
+						case SDL_HAT_UP:
+							_controllers[_event.jhat.which].dPad = glm::vec2(0, 1);
+							break;
+						case SDL_HAT_RIGHTUP:
+							_controllers[_event.jhat.which].dPad = glm::vec2(1, 1);
+							break;
+						case SDL_HAT_LEFT:
+							_controllers[_event.jhat.which].dPad = glm::vec2(-1, 0);
+							break;
+						case SDL_HAT_CENTERED:
+							_controllers[_event.jhat.which].dPad = glm::vec2(0, 0);
+							break;
+						case SDL_HAT_RIGHT:
+							_controllers[_event.jhat.which].dPad = glm::vec2(1, 0);
+							break;
+						case SDL_HAT_LEFTDOWN:
+							_controllers[_event.jhat.which].dPad = glm::vec2(-1, -1);
+							break;
+						case SDL_HAT_DOWN:
+							_controllers[_event.jhat.which].dPad = glm::vec2(0, -1);
+							break;
+						case SDL_HAT_RIGHTDOWN:
+							_controllers[_event.jhat.which].dPad = glm::vec2(1, -1);
+							break;
+						default:
+							_controllers[_event.jhat.which].dPad = glm::vec2(0, 0);
+					}
+				}
+				break;
 			case SDL_MOUSEBUTTONDOWN:
 				_keyMap[_event.button.button] = true;
 				break;
@@ -150,6 +186,8 @@ glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 			return _controllers[controllerID].rightStick;
 		case Axis::Triggers:
 			return _controllers[controllerID].triggers;
+		case Axis::dPad:
+			return _controllers[controllerID].dPad;
 	}
 }
 glm::vec2 InputManager::getControllerAxis(Axis type) {
@@ -171,6 +209,14 @@ glm::vec2 InputManager::getControllerAxis(Axis type) {
 			output += _controllers[i].triggers;
 		}
 		break;
+	case Axis::dPad:
+		for (int i = 0; i < _controllers.size(); i++) {
+			output += _controllers[i].dPad;
+		}
+		break;
+	default:
+		printf("WARNING: invalid parameter passed into getControllerAxis!");
+		return glm::vec2(0);
 	}
 	
 	return output /= _controllers.size();

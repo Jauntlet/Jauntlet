@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace Jauntlet {
-enum class Axis { LeftStick, RightStick, Triggers };
+enum class Axis { LeftStick, RightStick, Triggers, dPad };
 	
 // Stores and manages the state of keys, aswell as other SDL events
 class InputManager
@@ -59,12 +59,14 @@ private:
 		glm::vec2 leftStick;
 		glm::vec2 rightStick;
 		glm::vec2 triggers;
+		glm::vec2 dPad;
 
 		Controller() {
 			joystick = nullptr;
 			leftStick = glm::vec2(0);
 			rightStick = glm::vec2(0);
 			triggers = glm::vec2(0);
+			dPad = glm::vec2(0);
 		}
 	};
 
