@@ -137,6 +137,7 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.deltaScroll != 0) {
+		_camera.clearTransitions();
 		_camera.multiplyScale(pow(1.2f, _inputManager.deltaScroll));
 		_inputManager.deltaScroll = 0;
 	}
