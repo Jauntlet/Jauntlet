@@ -124,6 +124,17 @@ void MainGame::processInput() {
 
 	_camera.translate(_deltaMouse);
 
+	glm::vec2 rStick = _inputManager.getControllerAxis(Jauntlet::Axis::RightStick);
+	if (glm::abs(rStick.x) > .2 || glm::abs(rStick.y) > .2) {
+		_camera.translate(glm::vec2(rStick.x * 5, -rStick.y * 5));
+	}
+
+	if (_inputManager.deltaScroll != 0) {
+		_camera.clearTransitions();
+		_camera.multiplyScale(pow(1.2f, _inputManager.deltaScroll));
+		_inputManager.deltaScroll = 0;
+	}
+
 	if (_inputManager.isKeyPressed(SDLK_F11) || (_inputManager.isKeyDown(SDLK_LALT) || _inputManager.isKeyDown(SDLK_RALT)) && _inputManager.isKeyPressed(SDLK_RETURN)) {
 		_window.toggleFullscreen();
 	}
@@ -134,12 +145,6 @@ void MainGame::processInput() {
 		_screenHeight = _window.getWindowHeight();
 		_camera.updateCameraSize(_screenWidth, _screenHeight);
 		_hudCamera.updateCameraSize(_screenWidth, _screenHeight);
-	}
-
-	if (_inputManager.deltaScroll != 0) {
-		_camera.clearTransitions();
-		_camera.multiplyScale(pow(1.2f, _inputManager.deltaScroll));
-		_inputManager.deltaScroll = 0;
 	}
 
 	//test for collider-position code
