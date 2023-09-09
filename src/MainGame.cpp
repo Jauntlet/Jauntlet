@@ -151,9 +151,6 @@ void MainGame::processInput() {
 	}
 
 	_oldMouse = _inputManager.getMouseCoords(); // the old mouse position is now the current mouse position
-
-	glm::vec2 axis = _inputManager.getAxis(Jauntlet::Axis::Triggers, 0);
-	std::cout << axis.x << " " << axis.y << std::endl;
 }
 
 void MainGame::drawGame() {

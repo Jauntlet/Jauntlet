@@ -38,9 +38,9 @@ public:
 	glm::vec2 getMouseCoords();
 
 	// Collect an Axis from a controller, this value is NOT normalized
-	glm::vec2 getAxis(Axis type, int controllerID);
+	glm::vec2 getControllerAxis(Axis type, int controllerID);
 	// Collect the average of all Axis's from all controllers, this value is NOT normalized
-	glm::vec2 getAxis(Axis type);
+	glm::vec2 getControllerAxis(Axis type);
 
 	Sint32 deltaScroll = 0;
 private:

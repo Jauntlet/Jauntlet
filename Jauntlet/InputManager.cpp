@@ -133,7 +133,7 @@ glm::vec2 InputManager::getMouseCoords() {
 	return _mouseCoords;
 }
 
-glm::vec2 InputManager::getAxis(Axis type, int controllerID) {
+glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 	if (controllerID >= _controllers.size()) {
 		printf("Warning: Tried to get Axis on non-existant Controller");
 		return glm::vec2(0);
@@ -148,6 +148,26 @@ glm::vec2 InputManager::getAxis(Axis type, int controllerID) {
 			return _controllers[controllerID].triggers;
 	}
 }
-glm::vec2 InputManager::getAxis(Axis type) {
-	return glm::vec2(0);
+glm::vec2 InputManager::getControllerAxis(Axis type) {
+	glm::vec2 output = glm::vec2(0);
+	
+	switch (type) {
+	case Axis::LeftStick:
+		for (int i = 0; i < _controllers.size(); i++) {
+			output += _controllers[i].leftStick;
+		}
+		break;
+	case Axis::RightStick:
+		for (int i = 0; i < _controllers.size(); i++) {
+			output += _controllers[i].rightStick;
+		}
+		break;
+	case Axis::Triggers:
+		for (int i = 0; i < _controllers.size(); i++) {
+			output += _controllers[i].triggers;
+		}
+		break;
+	}
+	
+	return output /= _controllers.size();
 }
