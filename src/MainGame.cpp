@@ -126,7 +126,7 @@ void MainGame::processInput() {
 
 	glm::vec2 rStick = _inputManager.getControllerAxis(Jauntlet::Axis::RightStick);
 	if (glm::abs(rStick.x) > .2 || glm::abs(rStick.y) > .2) {
-		_camera.translate(glm::vec2(rStick.x * 5, -rStick.y * 5));
+		_camera.translate(glm::vec2(rStick.x, -rStick.y) * (250.0f * Jauntlet::Time::getDeltaTime()));
 	}
 
 	if (_inputManager.deltaScroll != 0) {
