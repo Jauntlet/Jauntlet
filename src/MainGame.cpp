@@ -58,6 +58,9 @@ void MainGame::initSystems() {
 
 	//_level.loadTileMap("Levels/level0.txt");
 	_level.loadTileMap("Levels/testAllTiles.txt");
+
+
+	_navPoints = _navigation.genNav();
 }
 
 void MainGame::initShaders() {
@@ -194,6 +197,8 @@ void MainGame::drawHUD() {
 
 	std::string output = "Framerate: " + std::to_string((int)_fps);
 	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(1), 0, Jauntlet::Color(255, 100, 100, 255));
+
+	_navigation.drawNav(_navPoints, _spriteFont, _HUDSpriteBatch);
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();

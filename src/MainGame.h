@@ -16,8 +16,9 @@
 #include <Jauntlet/Window.h>
 #include <SDL/SDL.h>
 
-#include "Player.h"
 #include "glm/fwd.hpp"
+#include "Navigation.h"
+#include "Player.h"
 
 enum class GameState {
 	PLAY, EXIT
@@ -67,4 +68,6 @@ private:
 	Jauntlet::LineRenderer _lineRenderer;
 
 	Player _player;
+	Navigation _navigation;
+	std::vector<std::vector<int>> _navPoints;
 };
