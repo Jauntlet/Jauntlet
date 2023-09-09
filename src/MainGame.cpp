@@ -117,7 +117,7 @@ void MainGame::processInput() {
 	}
 
 	if (_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-		_camera.clearTransition(_camera.POSITION);
+		_camera.clearTransitions();
 		_deltaMouse = glm::vec2(_oldMouse.x - _inputManager.getMouseCoords().x, _inputManager.getMouseCoords().y - _oldMouse.y);
 	} else {
 		_deltaMouse -= _deltaMouse * (Jauntlet::Time::getDeltaTime() * 10);
