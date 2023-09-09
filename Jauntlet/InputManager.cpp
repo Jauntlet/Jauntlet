@@ -22,7 +22,6 @@ void InputManager::processInput() {
 	while (SDL_NumJoysticks() > _controllers.size()) {
 		_controllers.emplace_back();
 		_controllers[_controllers.size() - 1].joystick = SDL_JoystickOpen(_controllers.size() - 1);
-		printf("controller added\n");
 	}
 
 	// updates previous key map via foreach loop
@@ -82,8 +81,6 @@ void InputManager::processInput() {
 				}
 				break;
 			case SDL_JOYBUTTONDOWN:
-				printf(std::to_string(_event.cbutton.button).c_str());
-				printf("\n");
 				_keyMap[_event.cbutton.button] = true;
 				break;
 			case SDL_JOYBUTTONUP:
@@ -143,7 +140,7 @@ glm::vec2 InputManager::getMouseCoords() {
 
 glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 	if (controllerID >= _controllers.size()) {
-		printf("Warning: Tried to get Axis on non-existant Controller");
+		printf("Warning: Tried to get Axis on non-existent Controller");
 		return glm::vec2(0);
 	}
 	switch (type) {
