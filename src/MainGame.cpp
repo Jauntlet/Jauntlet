@@ -150,6 +150,11 @@ void MainGame::processInput() {
 		_hudCamera.updateCameraSize(_screenWidth, _screenHeight);
 	}
 
+	//open nav
+	if (_inputManager.isKeyPressed(SDLK_EQUALS)) {
+		_navigation.toggleNav();
+	}
+
 	//test for collider-position code
 	if (_inputManager.isKeyPressed(SDL_BUTTON_RIGHT)) {
 		Jauntlet::Collision2D data = Jauntlet::Collision2D();
