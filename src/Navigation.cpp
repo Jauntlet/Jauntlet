@@ -1,9 +1,11 @@
 #include "Navigation.h"
 
-#include <cstdlib>
+#include <chrono>
+#include <random>
 
 const int outcoveAmt = 4;
 const int layerAmt = 3;
+static int seed = std::chrono::system_clock::now().time_since_epoch().count(); //temp
 
 Navigation::Navigation() {
 	// Empty
@@ -11,13 +13,14 @@ Navigation::Navigation() {
 
 std::vector<std::vector<int>> Navigation::genNav() {
 	std::vector<std::vector<int>> map = std::vector<std::vector<int>>();
-	
+	std::mt19937 r = std::mt19937(seed);
+
 	for (int y = 0; y < layerAmt; y++) {
 		std::vector<int> layer = std::vector<int>();
 
-		int temp = outcoveAmt + (rand() % 2 - 1); //outcoveAmt - 1, outcoveAmt, outcoveAmt + 1
+		int temp = outcoveAmt + (r() % 2 - 1); //outcoveAmt - 1, outcoveAmt, outcoveAmt + 1
 		for (int x = 0; x < temp; x++) {
-			layer.push_back(rand() % 3); //0, 1, 2
+			layer.push_back(r() % 3); //0, 1, 2
 		}
 
 		map.push_back(layer);
