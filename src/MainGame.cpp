@@ -4,6 +4,8 @@
 #include <Jauntlet/Rendering/ResourceManager.h>
 #include <Jauntlet/TileSet.h>
 #include <Jauntlet/Time.h>
+#include <Jauntlet/UI/UIManager.h>
+#include <Jauntlet/UI/UITextElement.h>
 #include <iostream>
 
 #include "MainGame.h"
@@ -191,6 +193,14 @@ void MainGame::drawGame() {
 	drawHUD();
 
 	_window.swapBuffer();
+}
+
+void MainGame::initHUD() {
+	_uiManager = Jauntlet::UIManager(&_hudCamera, &_HUDSpriteBatch);
+
+	//Jauntlet::UITextElement _fpsCounter = Jauntlet::UITextElement();
+
+	///_uiManager.addElement()
 }
 
 float nut = 0;

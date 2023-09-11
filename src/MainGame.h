@@ -14,6 +14,8 @@
 #include <Jauntlet/TileSet.h>
 #include <Jauntlet/Time.h>
 #include <Jauntlet/Window.h>
+#include <Jauntlet/UI/UIManager.h>
+#include <Jauntlet/UI/UITextElement.h>
 #include <SDL/SDL.h>
 
 #include "Navigation.h"
@@ -33,6 +35,7 @@ public:
 private:
 	void initSystems();
 	void initShaders();
+	void initHUD();
 	void gameLoop();
 	void processInput();
 	void drawGame();
@@ -64,6 +67,8 @@ private:
 
 	Jauntlet::SpriteBatch _HUDSpriteBatch;
 	Jauntlet::SpriteFont _spriteFont;
+
+	Jauntlet::UIManager _uiManager;
 	
 	Jauntlet::LineRenderer _lineRenderer;
 
