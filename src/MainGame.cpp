@@ -27,17 +27,17 @@ MainGame::MainGame() :
 	_window() {
 }
 
-std::string _fpsText = "bruh";
-glm::vec2 _fpsPosition;
+std::string _fpsText = "bruh"; // #TODO: DELTEME
+glm::vec2 _fpsPosition; // #TODO: DELTEME
 
 void MainGame::run() {
-	Jauntlet::Color _fpsColor = Jauntlet::Color(0,255,0,255);
+	Jauntlet::Color _fpsColor = Jauntlet::Color(0,255,0,255); // #TODO: DELTEME
 
-	_uiManager = Jauntlet::UIManager(&_hudCamera, &_HUDSpriteBatch);
+	_uiManager = Jauntlet::UIManager(&_hudCamera, &_HUDSpriteBatch); // #TODO: DELTEME
 
-	Jauntlet::UITextElement* _fpsCounter = new Jauntlet::UITextElement(&_spriteFont, &_fpsText, &_fpsColor, &_fpsPosition);
+	Jauntlet::UITextElement* _fpsCounter = new Jauntlet::UITextElement(&_spriteFont, &_fpsText, &_fpsColor, &_fpsPosition); // #TODO: DELTEME
 
-	_uiManager.addElement(_fpsCounter);
+	_uiManager.addElement(_fpsCounter); // #TODO: DELTEME
 	
 	initSystems();
 
@@ -76,7 +76,7 @@ void MainGame::initSystems() {
 
 	_navPoints = _navigation.genNav();
 
-	_fpsPosition = glm::vec2(0, _spriteFont.getFontHeight());
+	_fpsPosition = glm::vec2(0, _spriteFont.getFontHeight()); // #TODO: DELTEME
 }
 
 void MainGame::initShaders() {
@@ -213,20 +213,15 @@ void MainGame::drawGame() {
 	_window.swapBuffer();
 }
 
-float nut = 0;
-
 void MainGame::drawHUD() {
-	nut++;
 	glUniformMatrix4fv(_colorProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_hudCamera.getCameraMatrix()[0][0]);
 
 	_HUDSpriteBatch.begin();
 
-	_fpsText = std::to_string((int)_fps);
+	_fpsText = std::to_string((int)_fps); // #TODO: DELTEME
 
 	_uiManager.draw();
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();
-
-	//_uiManager.setScale(fabs(sin(nut / 100) * 10));
 }
