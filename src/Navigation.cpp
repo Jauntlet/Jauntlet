@@ -55,5 +55,5 @@ void Navigation::drawNav(std::vector<std::vector<int>>& navPoints, Jauntlet::Spr
 }
 
 void Navigation::toggleNav() {
-
+	_navOpen = !_navOpen;
 }
