@@ -188,6 +188,9 @@ glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 			return _controllers[controllerID].triggers;
 		case Axis::dPad:
 			return _controllers[controllerID].dPad;
+		default:
+		printf("WARNING: invalid parameter passed into getControllerAxis!");
+		return glm::vec2(0);
 	}
 }
 glm::vec2 InputManager::getControllerAxis(Axis type) {
