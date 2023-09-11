@@ -8,7 +8,7 @@
 #include "../Rendering/SpriteFont.h"
 
 namespace Jauntlet {
-	class UITextElement : UIElement
+	class UITextElement : public UIElement
 	{
 	public:
 		//constructor with _position;
