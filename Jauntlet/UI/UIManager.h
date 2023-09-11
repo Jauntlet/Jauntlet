@@ -14,19 +14,21 @@ namespace Jauntlet {
 	public:
 		//constructors;
 		UIManager();
-		UIManager(Camera2D camera, SpriteBatch spriteBatch);
+		UIManager(Camera2D* camera, SpriteBatch* spriteBatch);
 		
 		// update all ui elements to fit the resolution
-		void fixResolution();
-		void addElement(UIElement uiElement);
-		void removeElement(UIElement uiElement);
-		void update();
+		void addElement(UIElement* uiElement);
+		// draw all hud elements
+		void draw();
+		// set the hud scale
 		void setScale(float scale);
+		// fix all hud elements after resize
+		void resolvePositions();
 	private:
-		Camera2D _camera;
-		SpriteBatch _spriteBatch;
-		std::vector<UIElement> _uiElements;
-		float _scale;
+		Camera2D* _camera;
+		SpriteBatch* _spriteBatch;
+		std::vector<UIElement*> _uiElements;
+		glm::vec2* _scale;
 	};
 }
 

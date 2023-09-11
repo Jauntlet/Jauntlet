@@ -9,10 +9,10 @@ UIElement::UIElement() {
 	// empty
 }
 
-void UIElement::update(Camera2D camera, SpriteBatch spriteBatch, float scale) {
+void UIElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) {
 	std::cout << "wrong method! dont use a generic update statement like this" << std::endl;
 }
 
-void UIElement::fixResolution() {
-	// cock
+void UIElement::resolvePosition(Camera2D* camera) {
+    _resolvedPostion = camera->convertScreenToWorld(*_position);
 }

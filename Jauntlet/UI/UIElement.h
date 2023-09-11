@@ -13,14 +13,12 @@ namespace Jauntlet {
 	public:
 		enum ELEMENT_TYPE {TEXT, SPRITE, BAR}; // TODO: delete this shit -jk
 		UIElement();
-		//Update UI when camera is reized
-		virtual void update(Camera2D camera, SpriteBatch spriteBatch, float scale);
-		// crazy how this is both not defined in UIElement.cpp nor does it even have different arguments than its decendants, but i have to include it because c++ has mothingfucking trust issues -jk
-		
-		virtual void fixResolution();
+		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale);
+		void resolvePosition(Camera2D* camera);
 	protected:
-		Camera2D _camera;
-		glm::vec2 _position;
+		Camera2D* _camera;
+		glm::vec2* _position;
+		glm::vec2 _resolvedPostion;
 	};
 }
 

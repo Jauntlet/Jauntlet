@@ -8,39 +8,29 @@ UIManager::UIManager() {
 	// cock
 }
 
-UIManager::UIManager(Camera2D camera, SpriteBatch spriteBatch) {
+UIManager::UIManager(Camera2D* camera, SpriteBatch* spriteBatch) {
 	_camera = camera;
 	_spriteBatch = spriteBatch;
+	_scale = new glm::vec2(1);
 }
 
-void UIManager::fixResolution() {
+void UIManager::addElement(UIElement* uiElement) {
+	_uiElements.push_back(uiElement);
+	uiElement->resolvePosition(_camera);
+}
+
+void UIManager::draw() {
 	for (int i = 0; i < _uiElements.size(); i++) {
-		_uiElements[i].fixResolution();
+		_uiElements[i]->draw(_camera, _spriteBatch, _scale);
 	}
 }
 
-void UIManager::addElement(UIElement uiElement) {
-	_uiElements.push_back(uiElement);
-}
-
-void UIManager::removeElement(UIElement uiElement) {
-	/*for (int i = 0; i < _uiElements.size(); i++) {
-		if (_uiElements[i] == uiElement) {
-			_uiElements[i] = _uiElements.back();
-			_uiElements.pop_back();
-			return;
-		}
-	}*/
-	fatalError("error: unable to remove UIElement, dont try to do this!");
-}
-
 void UIManager::setScale(float scale) {
-	_scale = scale;
+	_scale = new glm::vec2(scale);
 }
 
-void UIManager::update() {
-	std::cout << _uiElements.size() << std::endl;
+void UIManager::resolvePositions() {
 	for (int i = 0; i < _uiElements.size(); i++) {
-		_uiElements[i].update(_camera, _spriteBatch, _scale);
+		_uiElements[i]->resolvePosition(_camera);
 	}
 }

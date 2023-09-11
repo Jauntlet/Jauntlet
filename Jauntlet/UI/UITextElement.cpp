@@ -5,15 +5,17 @@
 #include "UIElement.h"
 #include "UIManager.h"
 #include "UITextElement.h"
+//#include "../Rendering/SpriteFont.h"
 
 using namespace Jauntlet;
 
-UITextElement::UITextElement(SpriteFont spriteFont,  std::string text, Color color, glm::vec2 _position) {
+UITextElement::UITextElement(SpriteFont* spriteFont, std::string* text, Color* color, glm::vec2* position) {
     _text = text;
     _spriteFont = spriteFont;
     _color = color;
+    _position = position;
 }
 
-void UITextElement::update(Camera2D camera, SpriteBatch spriteBatch, float scale) {
-    _spriteFont.draw(spriteBatch, "bruh", glm::vec2(0), glm::vec2(scale), 0, Jauntlet::Color(1,1,1,1));
+void UITextElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) {
+    _spriteFont->draw(*spriteBatch, *_text, _resolvedPostion, *scale, 0, *_color);
 }
