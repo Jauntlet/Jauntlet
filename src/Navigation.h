@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
-#include <Jauntlet/Rendering/SpriteFont.h>
 #include <Jauntlet/Rendering/SpriteBatch.h>
+#include <Jauntlet/Rendering/SpriteFont.h>
+#include <vector>
 
 class Navigation {
 public:

@@ -16,9 +16,9 @@
 #include <Jauntlet/Window.h>
 #include <SDL/SDL.h>
 
-#include "glm/fwd.hpp"
 #include "Navigation.h"
 #include "Player.h"
+#include "glm/fwd.hpp"
 
 enum class GameState {
 	PLAY, EXIT
