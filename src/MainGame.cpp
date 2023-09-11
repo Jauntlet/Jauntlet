@@ -63,8 +63,8 @@ void MainGame::initSystems() {
 	_HUDSpriteBatch.init();
 
 	// initializes spritefont
-	_spriteFont.init(&_hudCamera, "Fonts/HandelGo.ttf", 64);
-	//_spriteFont.init("Fonts/chintzy.ttf", 64);
+	//_spriteFont.init(&_hudCamera, "Fonts/HandelGo.ttf", 128);
+	_spriteFont.init(&_hudCamera, "Fonts/chintzy.ttf", 256);
 
 	// Temporary level loading
 	_bricks.addConnectionRule(Jauntlet::TileSet::ConnectionRules::TILES);
