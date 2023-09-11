@@ -166,7 +166,6 @@ void MainGame::processInput() {
 		_hudCamera.updateCameraSize(_screenWidth, _screenHeight);
 		_uiManager.resolvePositions();
 		_uiManager.setScale((_screenHeight / 1080.0f) * (_screenWidth / 1920.0f));
-		std::cout << ((_screenHeight / 1080.0f) * (_screenWidth / 1920.0f)) << std::endl;
 	}
 
 	//open nav
