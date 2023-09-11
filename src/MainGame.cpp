@@ -193,14 +193,18 @@ void MainGame::drawGame() {
 	_window.swapBuffer();
 }
 
+float nut = 0;
+
 void MainGame::drawHUD() {
+	nut++;
 	glUniformMatrix4fv(_colorProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_hudCamera.getCameraMatrix()[0][0]);
 
 	_HUDSpriteBatch.begin();
 
 	std::string output = "Framerate: " + std::to_string((int)_fps);
-	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(2,2), 0, Jauntlet::Color(255, 100, 100, 255));
+	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(fabs(cos(nut / 100) * 10),fabs(sin(nut / 100) * 10)), 0, Jauntlet::Color(255, 100, 100, 255));
 
+	std::cout << fabs(sin(nut / 100) * 10) << std::endl;
 	_navigation.drawNav(_navPoints, _spriteFont, _HUDSpriteBatch);
 
 	_HUDSpriteBatch.end();
