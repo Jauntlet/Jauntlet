@@ -34,20 +34,25 @@ void Navigation::drawNav(std::vector<std::vector<int>>& navPoints, Jauntlet::Spr
 		return;
 	}
 	
+	int layersHeight = navPoints.size();
+
 	for (int y = 0; y < navPoints.size(); y++) {
+
+		int layerSpan = navPoints[y].size();
+		
 		for (int x = 0; x < navPoints[y].size(); x++) {
 			int point = navPoints[y][x];
 
 			if (point == 0) { // white X
-				font.draw(spriteBatch, "X", glm::vec2(x * 50, y * 50), glm::vec2(1), 0, Jauntlet::Color(255, 255, 255, 255));
+				font.draw(spriteBatch, "X", glm::vec2((layerSpan * -40) + (x * 80), (layersHeight * -50) + (y * 100)), glm::vec2(1), 0, Jauntlet::Color(255, 255, 255, 255));
 				continue;
 			}
 			if (point == 1) { // blue X
-				font.draw(spriteBatch, "X", glm::vec2(x * 50, y * 50), glm::vec2(1), 0, Jauntlet::Color(0, 0, 255, 255));
+				font.draw(spriteBatch, "X", glm::vec2((layerSpan * -40) + (x * 80), (layersHeight * -50) + (y * 100)), glm::vec2(1), 0, Jauntlet::Color(0, 0, 255, 255));
 				continue;
 			}
 			if (point == 2) { // orange X
-				font.draw(spriteBatch, "X", glm::vec2(x * 50, y * 50), glm::vec2(1), 0, Jauntlet::Color(255, 165, 0, 255));
+				font.draw(spriteBatch, "X", glm::vec2((layerSpan * -40) + (x * 80), (layersHeight * -50) + (y * 100)), glm::vec2(1), 0, Jauntlet::Color(255, 165, 0, 255));
 				continue;
 			}
 		}
@@ -55,5 +60,5 @@ void Navigation::drawNav(std::vector<std::vector<int>>& navPoints, Jauntlet::Spr
 }
 
 void Navigation::toggleNav() {
-
+	_navOpen = !_navOpen;
 }
