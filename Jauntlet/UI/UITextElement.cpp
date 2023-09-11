@@ -12,6 +12,6 @@ UITextElement::UITextElement(SpriteFont* spriteFont,  std::string* text, Color* 
     _color = color;
 }
 
-void UITextElement::update(Camera2D* camera, SpriteBatch& spriteBatch, float scale) {
-    _spriteFont->draw(spriteBatch, *_text, _position, glm::vec2(scale), 0, *_color); // there is absolutely no god -jk
+void UITextElement::update(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
+    _spriteFont->draw(*spriteBatch, *_text, _position, glm::vec2(scale), 0, *_color); // there is absolutely no god -jk
 }

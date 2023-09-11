@@ -13,7 +13,8 @@ namespace Jauntlet {
 	{
 	public:
 		//constructors;
-		UIManager(Camera2D* camera, SpriteBatch& spriteBatch);
+		UIManager();
+		UIManager(Camera2D* camera, SpriteBatch* spriteBatch);
 		
 		// update all ui elements to fit the resolution
 		void fixResolution();

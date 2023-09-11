@@ -3,9 +3,13 @@
 
 using namespace Jauntlet;
 
-UIManager::UIManager(Camera2D* camera, SpriteBatch& spriteBatch) {
+UIManager::UIManager() {
+	// cock
+}
+
+UIManager::UIManager(Camera2D* camera, SpriteBatch* spriteBatch) {
 	_camera = camera;
-	_spriteBatch = &spriteBatch; // please someone tell me why i have to do this -jk
+	_spriteBatch = spriteBatch; // please someone tell me why i have to do this -jk
 }
 
 void UIManager::fixResolution() {
@@ -15,11 +19,7 @@ void UIManager::fixResolution() {
 }
 
 void UIManager::addElement(UIElement* uiElement) {
-	if (uiElement != nullptr) {
-		_uiElements.push_back(uiElement);
-	} else {
-		fatalError("error: gave UIManager nonexistant camera or nullptr");
-	}
+	_uiElements.push_back(uiElement);
 }
 
 void UIManager::removeElement(UIElement* uiElement) {
@@ -40,6 +40,6 @@ void UIManager::setScale(float scale) {
 
 void UIManager::update() {
 	for (int i = 0; i < _uiElements.size(); i++) {
-		_uiElements[i]->update(_camera, *_spriteBatch, _scale); // does this dereference a point of a pointer? fuck you. -jk
+		_uiElements[i]->update(_camera, _spriteBatch, _scale); // does this dereference a point of a pointer? fuck you. -jk
 	}
 }
