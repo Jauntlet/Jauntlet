@@ -12,12 +12,11 @@ namespace Jauntlet {
 	{
 	public:
 		//constructor with _position;
-		UITextElement(SpriteFont* spriteFont,  std::string* text, Color* color);
-        void update(Camera2D* camera, SpriteBatch* spriteBatch, float scale); // wassup youtube today in minecraft we'll be getting spread wide open by c++ -jk
-        // THE FUCKING &&&??????? AFTER THE TYPE????
+		UITextElement(SpriteFont spriteFont,  std::string text, Color color, glm::vec2 _position);
+        void update(Camera2D camera, SpriteBatch spriteBatch, float scale) override;
     private:
-		std::string* _text;
-        SpriteFont* _spriteFont;
-        Color* _color;
+		std::string _text;
+        SpriteFont _spriteFont;
+        Color _color;
 	};
 }

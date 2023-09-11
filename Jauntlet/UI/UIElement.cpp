@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 
 #include "UIElement.h"
 
@@ -8,8 +9,8 @@ UIElement::UIElement() {
 	// empty
 }
 
-void UIElement::update(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
-	// cock
+void UIElement::update(Camera2D camera, SpriteBatch spriteBatch, float scale) {
+	std::cout << "wrong method! dont use a generic update statement like this" << std::endl;
 }
 
 void UIElement::fixResolution() {

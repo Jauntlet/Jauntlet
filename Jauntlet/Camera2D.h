@@ -65,7 +65,7 @@ private:
 	bool _doTransitionPosition = false;
 	bool _doTransitionScale = false;
 
-	const float _CAMERA_MIN_ZOOM = 0.05f;
-	const float _CAMERA_MAX_ZOOM = 3.50f;
+	float _CAMERA_MIN_ZOOM = 0.05f;
+	float _CAMERA_MAX_ZOOM = 3.50f;
 };
 }

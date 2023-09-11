@@ -2,11 +2,13 @@
 #include <Jauntlet/JMath.h>
 #include <Jauntlet/Jauntlet.h>
 #include <Jauntlet/Rendering/ResourceManager.h>
+#include <Jauntlet/Rendering/Vertex.h>
 #include <Jauntlet/TileSet.h>
 #include <Jauntlet/Time.h>
 #include <Jauntlet/UI/UIManager.h>
 #include <Jauntlet/UI/UITextElement.h>
 #include <iostream>
+#include <string>
 
 #include "MainGame.h"
 #include "SDL/SDL.h"
@@ -61,6 +63,8 @@ void MainGame::initSystems() {
 
 
 	_navPoints = _navigation.genNav();
+
+	initHUD();
 }
 
 void MainGame::initShaders() {
@@ -196,11 +200,16 @@ void MainGame::drawGame() {
 }
 
 void MainGame::initHUD() {
-	_uiManager = Jauntlet::UIManager(&_hudCamera, &_HUDSpriteBatch);
+	_uiManager = Jauntlet::UIManager(_hudCamera, _HUDSpriteBatch);
 
-	//Jauntlet::UITextElement _fpsCounter = Jauntlet::UITextElement();
 
-	///_uiManager.addElement()
+	Jauntlet::Color _fpsColor = Jauntlet::Color(1,1,1,1);
+	std::string _fpsText = "bruh";
+	glm::vec2 _fpsPosition = _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight()));
+	Jauntlet::UITextElement _fpsCounter = Jauntlet::UITextElement(_spriteFont, _fpsText, _fpsColor, _fpsPosition);
+
+	std::cout << ":D" << std::endl;
+	_uiManager.addElement(_fpsCounter);
 }
 
 float nut = 0;
@@ -211,10 +220,12 @@ void MainGame::drawHUD() {
 
 	_HUDSpriteBatch.begin();
 
-	std::string output = "Framerate: " + std::to_string((int)_fps);
-	_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(fabs(cos(nut / 100) * 10),fabs(sin(nut / 100) * 10)), 0, Jauntlet::Color(255, 100, 100, 255));
+	_uiManager.update();
 
-	std::cout << fabs(sin(nut / 100) * 10) << std::endl;
+	//std::string output = "Framerate: " + std::to_string((int)_fps);
+	//_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(fabs(cos(nut / 100) * 10),fabs(sin(nut / 100) * 10)), 0, Jauntlet::Color(255, 100, 100, 255));
+
+	//std::cout << fabs(sin(nut / 100) * 10) << std::endl;
 	_navigation.drawNav(_navPoints, _spriteFont, _HUDSpriteBatch);
 
 	_HUDSpriteBatch.end();
