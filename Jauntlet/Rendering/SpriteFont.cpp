@@ -90,8 +90,11 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 			storedX = position.x;
 		}
 
-		float x = storedX;// +currentGlyph.Bearing.x * scaling.x;
-		float y = position.y - (currentGlyph.Size.y - currentGlyph.Bearing.y) * scaling.y;
+		float x = storedX;
+		float y = position.y - (_fontHeight * scaling.y / 2);
+
+
+		currentGlyph.Bearing *= scaling;
 
 		glm::vec4 destRect(x,y, currentGlyph.Bearing);
 
