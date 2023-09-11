@@ -76,7 +76,8 @@ void MainGame::initSystems() {
 
 	_navPoints = _navigation.genNav();
 
-	_fpsPosition = glm::vec2(0, _spriteFont.getFontHeight()); // #TODO: DELTEME
+	glUniformMatrix4fv(_colorProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_hudCamera.getCameraMatrix()[0][0]); // #TODO: DELETEME
+	_fpsPosition = glm::vec2(0, 0); // #TODO: DELTEME
 }
 
 void MainGame::initShaders() {
