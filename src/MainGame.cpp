@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 
+#include "Jauntlet/Rendering/Sprite.h"
 #include "MainGame.h"
 #include "SDL/SDL.h"
 #include "glm/fwd.hpp"
@@ -26,7 +27,18 @@ MainGame::MainGame() :
 	_window() {
 }
 
+std::string _fpsText = "bruh";
+glm::vec2 _fpsPosition;
+
 void MainGame::run() {
+	Jauntlet::Color _fpsColor = Jauntlet::Color(0,255,0,255);
+
+	_uiManager = Jauntlet::UIManager(&_hudCamera, &_HUDSpriteBatch);
+
+	Jauntlet::UITextElement* _fpsCounter = new Jauntlet::UITextElement(&_spriteFont, &_fpsText, &_fpsColor, &_fpsPosition);
+
+	_uiManager.addElement(_fpsCounter);
+	
 	initSystems();
 
 	gameLoop();
@@ -64,7 +76,7 @@ void MainGame::initSystems() {
 
 	_navPoints = _navigation.genNav();
 
-	initHUD();
+	_fpsPosition = glm::vec2(0, _spriteFont.getFontHeight());
 }
 
 void MainGame::initShaders() {
@@ -152,6 +164,9 @@ void MainGame::processInput() {
 		_screenHeight = _window.getWindowHeight();
 		_camera.updateCameraSize(_screenWidth, _screenHeight);
 		_hudCamera.updateCameraSize(_screenWidth, _screenHeight);
+		_uiManager.resolvePositions();
+		_uiManager.setScale((_screenHeight / 1080.0f) * (_screenWidth / 1920.0f));
+		std::cout << ((_screenHeight / 1080.0f) * (_screenWidth / 1920.0f)) << std::endl;
 	}
 
 	//open nav
@@ -199,19 +214,6 @@ void MainGame::drawGame() {
 	_window.swapBuffer();
 }
 
-void MainGame::initHUD() {
-	_uiManager = Jauntlet::UIManager(_hudCamera, _HUDSpriteBatch);
-
-
-	Jauntlet::Color _fpsColor = Jauntlet::Color(1,1,1,1);
-	std::string _fpsText = "bruh";
-	glm::vec2 _fpsPosition = _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight()));
-	Jauntlet::UITextElement _fpsCounter = Jauntlet::UITextElement(_spriteFont, _fpsText, _fpsColor, _fpsPosition);
-
-	std::cout << ":D" << std::endl;
-	_uiManager.addElement(_fpsCounter);
-}
-
 float nut = 0;
 
 void MainGame::drawHUD() {
@@ -220,14 +222,12 @@ void MainGame::drawHUD() {
 
 	_HUDSpriteBatch.begin();
 
-	_uiManager.update();
+	_fpsText = std::to_string((int)_fps);
 
-	//std::string output = "Framerate: " + std::to_string((int)_fps);
-	//_spriteFont.draw(_HUDSpriteBatch, output, _hudCamera.convertScreenToWorld(glm::vec2(20, _spriteFont.getFontHeight())), glm::vec2(fabs(cos(nut / 100) * 10),fabs(sin(nut / 100) * 10)), 0, Jauntlet::Color(255, 100, 100, 255));
-
-	//std::cout << fabs(sin(nut / 100) * 10) << std::endl;
-	_navigation.drawNav(_navPoints, _spriteFont, _HUDSpriteBatch);
+	_uiManager.draw();
 
 	_HUDSpriteBatch.end();
 	_HUDSpriteBatch.renderBatch();
+
+	//_uiManager.setScale(fabs(sin(nut / 100) * 10));
 }
