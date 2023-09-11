@@ -2,18 +2,18 @@
 #include <Jauntlet/JMath.h>
 #include <Jauntlet/Jauntlet.h>
 #include <Jauntlet/Rendering/ResourceManager.h>
+#include <Jauntlet/Rendering/Sprite.h>
 #include <Jauntlet/Rendering/Vertex.h>
 #include <Jauntlet/TileSet.h>
 #include <Jauntlet/Time.h>
 #include <Jauntlet/UI/UIManager.h>
 #include <Jauntlet/UI/UITextElement.h>
+#include <SDL/SDL.h>
+#include <glm/fwd.hpp>
 #include <iostream>
 #include <string>
 
-#include "Jauntlet/Rendering/Sprite.h"
 #include "MainGame.h"
-#include "SDL/SDL.h"
-#include "glm/fwd.hpp"
 
 // defines scale of movement for the camera. if set to 1, the camera will follow the mouse, if set to 0, the mouse has no control over the camera.
 const float _CAMERA_MOVEMENT_SCALE =  0.5f; // DO NOT DEFINE IN HEADER, BREAKS CONST -jk
