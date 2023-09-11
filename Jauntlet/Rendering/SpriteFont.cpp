@@ -93,10 +93,7 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 		float x = storedX;
 		float y = position.y - (_fontHeight * scaling.y);
 
-
-		currentGlyph.Bearing *= scaling;
-
-		glm::vec4 destRect(x,y, currentGlyph.Bearing);
+		glm::vec4 destRect(x,y, scaling * (glm::vec2)currentGlyph.Bearing);
 
 		spritebatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, color);
 
