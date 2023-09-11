@@ -91,7 +91,7 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 		}
 
 		float x = storedX;
-		float y = position.y - (_fontHeight * scaling.y / 2);
+		float y = position.y - (_fontHeight * scaling.y);
 
 
 		currentGlyph.Bearing *= scaling;
