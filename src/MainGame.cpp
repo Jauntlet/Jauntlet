@@ -78,6 +78,7 @@ void MainGame::initSystems() {
 
 	glUniformMatrix4fv(_colorProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_hudCamera.getCameraMatrix()[0][0]); // #TODO: DELETEME
 	_fpsPosition = glm::vec2(0, 0); // #TODO: DELTEME
+	_uiManager.resolvePositions(); // #TODO: DELETEME
 }
 
 void MainGame::initShaders() {
