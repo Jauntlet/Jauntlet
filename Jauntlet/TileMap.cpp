@@ -102,8 +102,6 @@ void TileMap::draw() {
 }
 
 std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
-	
-	
 	std::vector<BoxCollider2D> colliders;
 	std::vector<std::pair<float, glm::vec2>> colliderMap;
 
@@ -170,6 +168,13 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 		}
 	}
 	return colliders;
+}
+
+glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
+	return position / (glm::vec2(_tileSize) - _offset);
+}
+glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) {
+	return glm::vec2(position * _tileSize) + _offset;
 }
 
 bool TileMap::testTileSetRules(TileSet tile, int x, int y) {

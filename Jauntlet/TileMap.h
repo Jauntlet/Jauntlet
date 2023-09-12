@@ -65,6 +65,12 @@ public:
 	std::vector<BoxCollider2D> collectCollidingTiles(glm::vec2 position);
 	// returns all tiles with collision within the bounds of the box collider
 	std::vector<BoxCollider2D> collectCollidingTiles(BoxCollider2D collider);
+
+	// Converts a position to be relative to the tileset: used mostly for checking tiles.
+	glm::ivec2 WorldPosToTilePos(glm::vec2 position);
+	// Converts a position relative to the tileset to a position relative to the world.
+	glm::vec2 TilePosToWorldPos(glm::ivec2 position);
+
 private:
 	// checks whether or not a tileset would connect to the specified tile position.
 	bool testTileSetRules(TileSet tile, int x, int y);
