@@ -177,6 +177,7 @@
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
+    <ClCompile Include="UI\UITextElement.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +206,7 @@
     <ClInclude Include="Time.h" />
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\UIManager.h" />
+    <ClInclude Include="UI\UITextElement.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

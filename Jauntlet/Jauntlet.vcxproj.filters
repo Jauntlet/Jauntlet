@@ -105,6 +105,9 @@
     <ClCompile Include="UI\UIManager.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UI\UITextElement.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Errors.h">
@@ -183,6 +186,9 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIElement.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UITextElement.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
