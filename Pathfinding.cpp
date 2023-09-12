@@ -1,5 +1,9 @@
 #include "Pathfinding.h"
 #include <Jauntlet/JMath.h>
+
+std::vector<std::pair<glm::vec2, glm::vec2>> Pathfinding::_openList;
+std::vector<std::pair<glm::vec2, glm::vec2>> Pathfinding::_closedList;
+
 Pathfinding::Pathfinding() {
 	// Empty
 }
