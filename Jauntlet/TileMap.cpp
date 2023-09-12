@@ -139,7 +139,6 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 
 	return colliders;
 }
-
 std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider) {
 	glm::ivec2 lowerBound = collider.position - _offset;
 	lowerBound /= _tileSize;
@@ -168,6 +167,16 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 		}
 	}
 	return colliders;
+}
+
+bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
+	if (!isValidTilePos(tilePosition)) {
+		return false;
+	}
+
+	auto iterator = _tiles.find(_levelData[tilePosition.y][tilePosition.x]);
+
+	return !(iterator == _tiles.end() || iterator->second.tileCollision == TileCollision::NONE);
 }
 
 glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
