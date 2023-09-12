@@ -1,6 +1,8 @@
 #include "Pathfinding.h"
 #include <Jauntlet/JMath.h>
 
+#include <iostream> // remove when done debugging
+
 std::vector<std::pair<glm::vec2, glm::vec2>> Pathfinding::_openList;
 std::vector<std::pair<glm::vec2, glm::vec2>> Pathfinding::_closedList;
 
@@ -26,7 +28,8 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 	_openList.emplace_back(start, 0);
 
 	int distFromStart = 0;
-	while (!_openList.empty()) {
+	bool foundDest = false;
+	while (!_openList.empty() && !foundDest) {
 		int bestNodeID = 0;
 		// Search through the list of nodes for the lowest movement cost
 		for (int i = 1; i < _openList.size(); i++) {
@@ -55,6 +58,8 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 
 				if (currentNode.first == destination) {
 					// Goal was found, we are done.
+					foundDest = true;
+					break;
 				}
 
 				// Position has collision, and therefore is not a valid position to check for navigation.
@@ -80,28 +85,28 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 
 				// Loop through the open list for tiles at the same position, with a lower score. If found, we skip this successor.
 				for (int i = 0; i < _openList.size(); i++) {
-					if (currentNode.first == _openList[i].first && currentNode.second.x > _openList[i].second.x) {
+					if (currentNode.first == _openList[i].first && currentNode.second.x >= _openList[i].second.x) {
 						continue;
 					}
 				}
 
 				// Loop through the closed list for tiles at the same position, with a lower score. If found, we skip this successor.
 				for (int i = 0; i < _closedList.size(); i++) {
-					if (currentNode.first == _closedList[i].first && currentNode.second.x > _closedList[i].second.x) {
+					if (currentNode.first == _closedList[i].first && currentNode.second.x >= _closedList[i].second.x) {
 						continue;
 					}
 				}
 				
 				_openList.push_back(currentNode);
 			}
+			if (foundDest) break;
 		}
-
 		_closedList.push_back(bestNode);
 	}
 	std::vector<glm::vec2> output;
 
 	for (int i = 0; i < _closedList.size(); i++) {
-		output.push_back(_closedList[i].first);
+		output.push_back(map.TilePosToWorldPos(_closedList[i].first));
 	}
 
 	return output;

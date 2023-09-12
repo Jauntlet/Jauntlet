@@ -1,75 +1,55 @@
+#include <Jauntlet/JMath.h>
 #include <Jauntlet/Rendering/ResourceManager.h>
 #include <Jauntlet/Rendering/Vertex.h>
-#include <SDL/SDL.h>
 #include <Jauntlet/Time.h>
+#include <SDL/SDL.h>
 
+#include "Pathfinding.h"
 #include "Player.h"
 
-Player::Player(float x, float y, Jauntlet::InputManager* inputManager) :
-	_inputManager(inputManager),
-	_moveUp(_inputManager),
-	_moveLeft(_inputManager),
-	_moveRight(_inputManager),
-	_moveDown(_inputManager),
-	collider(Jauntlet::CircleCollider2D(16.0f, glm::vec2(x, y))) {
+#include <iostream> // remove when done debugging
+Player::Player(float x, float y) : collider(Jauntlet::CircleCollider2D(16.0f, glm::vec2(x,y))) {
 	_position = glm::vec2(x, y);
-
-	_moveUp.addKey(SDLK_w);
-	_moveUp.addKey(SDLK_UP);
-
-	_moveLeft.addKey(SDLK_a);
-	_moveLeft.addKey(SDLK_LEFT);
-
-	_moveRight.addKey(SDLK_d);
-	_moveRight.addKey(SDLK_RIGHT);
-
-	_moveDown.addKey(SDLK_s);
-	_moveDown.addKey(SDLK_DOWN);
 }
 
 void Player::update() {
+	// we have a path to follow
+	if (!_path.empty()) {
+		glm::vec2 direction = glm::vec2(_path[0].x - _position.x, _path[0].y - _position.y);
+
+		//std::cout << _path[0].x << " " << _path[0].y << std::endl;
+
+		_position += glm::min(direction * Jauntlet::Time::getDeltaTime(), direction * JMath::Distance(_position, _path[0]));
+
+		if (_position == _path[0]) {
+			_path[0] = _path.back();
+			_path.pop_back();
+		}
+	}
 	
-	glm::vec2 velocity(0, 0);
-	glm::vec2 leftStick = _inputManager->getControllerAxis(Jauntlet::Axis::LeftStick);
-
-	if (_moveUp.isDown()) {
-		velocity.y += 1;
-	}
-	if (_moveDown.isDown()) {
-		velocity.y -= 1;
-	}
-	if (leftStick.y > 0.2 || leftStick.y < -0.2) {
-		velocity.y -= leftStick.y;
-	}
-
-
-	if (_moveLeft.isDown()) {
-		velocity.x -= 1;
-	}
-	if (_moveRight.isDown()) {
-		velocity.x += 1;
-	}
-	if (leftStick.x > 0.2 || leftStick.x < -0.2) {
-		velocity.x += leftStick.x;
-	}
-
-	// for some reason position breaks if it runs while velocity is 0????
-	if (velocity != glm::vec2(0, 0)) {
-		_position += glm::normalize(velocity) * (_speed * Jauntlet::Time::getDeltaTime());
-	}
-
 	//update collider
 	collider.position = _position;
 }
 
 void Player::draw(Jauntlet::SpriteBatch& spriteBatch) {
-	const glm::vec4 uvRect(0, 0, 1, 1);
 	glm::vec4 destRect = glm::vec4(_position.x, _position.y, 32, 32);
 
 	static Jauntlet::Color color;
 	color.setColor(255, 255, 255, 255);
 
-	spriteBatch.draw(destRect, uvRect, Jauntlet::ResourceManager::getTexture("Textures/Craig.png").id, 0, color);
+	spriteBatch.draw(destRect, glm::vec4(0,0,1,1), Jauntlet::ResourceManager::getTexture("Textures/Craig.png").id, 0, color);
+}
+
+void Player::navigateTo(Jauntlet::TileMap& map, glm::vec2 position) {
+	_path.clear();
+
+	_path = Pathfinding::findPath(map, _position, position, false);
+
+	std::cout << std::endl << std::endl;
+
+	for (int i = 0; i < _path.size(); i++) {
+		std::cout << _path[i].x << " " << _path[i].y << std::endl;
+	}
 }
 
 void Player::setPosition(float x, float y) {
@@ -82,9 +62,6 @@ void Player::setPosition(glm::vec2 pos) {
 
 void Player::setSpeed(float newSpeed) {
 	_speed = newSpeed;
-}
-float Player::getSpeed() {
-	return _speed;
 }
 
 glm::vec2 Player::getPosition() {

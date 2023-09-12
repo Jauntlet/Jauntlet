@@ -23,7 +23,7 @@ MainGame::MainGame() :
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
 		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png"),
-	_player(-5 * 32, 0, &_inputManager),
+	_player(-5 * 32, 0),
 	_window() {
 }
 
@@ -178,10 +178,8 @@ void MainGame::processInput() {
 	//test for collider-position code
 	if (_inputManager.isKeyPressed(SDL_BUTTON_RIGHT)) {
 		Jauntlet::Collision2D data = Jauntlet::Collision2D();
-		//Player Collision on right click
-		if (data.getCollision(&_player.collider, _camera.convertScreenToWorld(_inputManager.getMouseCoords()))) {
-			std::cout << "Jollision @ " << _inputManager.getMouseCoords().x << ", " << _inputManager.getMouseCoords().y << std::endl;
-		} 
+		//Player moves on right click
+		_player.navigateTo(_level, _camera.convertScreenToWorld(_inputManager.getMouseCoords())); 
 
 		//Nav Collision on right click
 		if (_navigation.isNavOpen()) {
