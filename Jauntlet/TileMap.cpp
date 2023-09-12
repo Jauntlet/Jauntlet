@@ -177,6 +177,10 @@ glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) {
 	return glm::vec2(position * _tileSize) + _offset;
 }
 
+bool TileMap::isValidTilePos(glm::ivec2 position) {
+	return !(position.y < 0 || position.y >= _levelData.size() || position.x >= _levelData[position.y].size() || position.x < 0);
+}
+
 bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 	// make sure the position is within the level range
 	if (y < 0 || y >= _levelData.size() || x >= _levelData[y].size() || x < 0) {
