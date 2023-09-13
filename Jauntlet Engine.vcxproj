@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainGame.cpp" />
     <ClCompile Include="src\Navigation.cpp" />
+    <ClCompile Include="src\Pathfinding.cpp" />
     <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="src\MainGame.h" />
     <ClInclude Include="src\Navigation.h" />
+    <ClInclude Include="src\Pathfinding.h" />
     <ClInclude Include="src\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
