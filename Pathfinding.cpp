@@ -3,21 +3,13 @@
 
 #include <iostream> // remove when done debugging
 
-std::vector<std::pair<glm::vec2, glm::vec2>> Pathfinding::_openList;
-std::vector<std::pair<glm::vec2, glm::vec2>> Pathfinding::_closedList;
+std::vector<cell> Pathfinding::_openList;
+std::vector<cell> Pathfinding::_closedList;
 
 Pathfinding::Pathfinding() {
 	// Empty
 }
 std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 start, glm::vec2 destination, bool allowDiagonals /*= true*/) {	
-	/* EXPLANATION OF LOGIC:
-	* Firstly, you may notice that we are storing std::pair<glm::vec2, glm::vec2>, which is a bit weird and probably
-	* difficult to discern. The first glm::vec2 is the position of the tile, which is expect
-	* While the second glm::vec2 is stored for mathmatical operations. The first float is the total "score" of the tile,
-	* with larger numbers being worse. The second one is the distance from the start, which is used for calculations for successor tiles
-	* and is otherwise thrown away data.
-	*/
-
 	// translate world coords to tilemap coords.
 	destination = map.WorldPosToTilePos(destination);
 	start = map.WorldPosToTilePos(start);
@@ -25,20 +17,19 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 	// reset lists
 	_openList.clear();
 	_closedList.clear();
-	_openList.emplace_back(start, 0);
+	_openList.emplace_back(nullptr, start);
 
-	int distFromStart = 0;
 	bool foundDest = false;
 	while (!_openList.empty() && !foundDest) {
 		int bestNodeID = 0;
 		// Search through the list of nodes for the lowest movement cost
 		for (int i = 1; i < _openList.size(); i++) {
-			if (_openList[i].second.x < _openList[bestNodeID].second.x) {
+			if (_openList[i].estimatedDistance < _openList[bestNodeID].estimatedDistance) {
 				bestNodeID = i;
 			}
 		}
-		// add best node to output list
-		std::pair<glm::vec2, glm::vec2> bestNode = _openList[bestNodeID];
+		// cache best node
+		_closedList.push_back(_openList[bestNodeID]);
 
 		// pop best node off the list
 		_openList[bestNodeID] = _openList.back();
@@ -54,59 +45,71 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 					continue;
 				}
 
-				std::pair<glm::vec2, glm::vec2> currentNode(bestNode.first + glm::vec2(x, y), 0);
+				cell currentNode(&_closedList.back(), _closedList.back().position + glm::vec2(x, y));
 
-				if (currentNode.first == destination) {
-					// Goal was found, we are done.
+				if (currentNode.position == destination) {
 					foundDest = true;
 					break;
 				}
 
 				// Position has collision, and therefore is not a valid position to check for navigation.
-				if (map.tileHasCollision(currentNode.first)) {
+				if (map.tileHasCollision(currentNode.position)) {
 					continue;
 				}
 
-				// Distance calculation: if diagonals are allowed we run a distance calc, otherwise the distance will always be 1
-				currentNode.second.y = bestNode.second.y + (allowDiagonals ? std::abs(JMath::Distance(currentNode.first, bestNode.first)) : 1);
-
-				// Calculate the distance from the node to the goal: this is essiential for A* pathfinding.
 				if (!allowDiagonals) {
-					// We use manhattan distance when we are not allowing diagonals: it is just the difference of X + the difference of Y
-					currentNode.second.x = std::abs(currentNode.first.x - destination.x) + std::abs(currentNode.first.y - destination.y);
+					// Diagonals are not possible, so the added distance is always 1
+					currentNode.pathDistance = _closedList.back().pathDistance + 1;
+
+					// Calculate the distance from the node to the goal: this is essiential for A* pathfinding.
+					// We use manhattan distance when we are not allowing diagonals: The difference of X + the difference of Y
+					currentNode.estimatedDistance = std::abs(currentNode.position.x - destination.x) + std::abs(currentNode.position.y - destination.y);
 				}
 				else {
+					currentNode.pathDistance = _closedList.back().pathDistance + std::abs(JMath::Distance(currentNode.position, _closedList.back().position));
+
+					// Calculate the distance from the node to the goal: this is essiential for A* pathfinding.
 					// When diagonals are allowed, we simply use a distance formula.
-					currentNode.second.x = JMath::Distance(currentNode.first, destination);
+					currentNode.estimatedDistance = JMath::Distance(currentNode.position, destination);
 				}
 
 				// Final score:
-				currentNode.second.x += currentNode.second.y;
+				currentNode.estimatedDistance += currentNode.pathDistance;
 
+				bool isValidNode = true;
 				// Loop through the open list for tiles at the same position, with a lower score. If found, we skip this successor.
 				for (int i = 0; i < _openList.size(); i++) {
-					if (currentNode.first == _openList[i].first && currentNode.second.x >= _openList[i].second.x) {
-						continue;
+					if (currentNode.position == _openList[i].position && currentNode.estimatedDistance >= _openList[i].estimatedDistance) {
+						isValidNode = false;
+						break;
 					}
 				}
+
+				if (!isValidNode) continue;
 
 				// Loop through the closed list for tiles at the same position, with a lower score. If found, we skip this successor.
 				for (int i = 0; i < _closedList.size(); i++) {
-					if (currentNode.first == _closedList[i].first && currentNode.second.x >= _closedList[i].second.x) {
-						continue;
+					if (currentNode.position == _closedList[i].position && currentNode.estimatedDistance >= _closedList[i].estimatedDistance) {
+						isValidNode = false;
+						break;
 					}
 				}
+
+				if (!isValidNode) continue;
 				
 				_openList.push_back(currentNode);
 			}
 			if (foundDest) break;
 		}
-		_closedList.push_back(bestNode);
 	}
 	std::vector<glm::vec2> output;
 
-	for (int i = 0; i < _closedList.size(); i++) {
-		output.push_back(map.TilePosToWorldPos(_closedList[i].first));
+	cell Node = _closedList.back();
+
+	while (Node.parent != nullptr) {
+		output.push_back(map.TilePosToWorldPos(Node.position));
+
+		Node = *Node.parent;
 	}
 
 	return output;

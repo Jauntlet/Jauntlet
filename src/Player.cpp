@@ -3,6 +3,7 @@
 #include <Jauntlet/Rendering/Vertex.h>
 #include <Jauntlet/Time.h>
 #include <SDL/SDL.h>
+#include <algorithm>
 
 #include "Pathfinding.h"
 #include "Player.h"
@@ -15,15 +16,27 @@ Player::Player(float x, float y) : collider(Jauntlet::CircleCollider2D(16.0f, gl
 void Player::update() {
 	// we have a path to follow
 	if (!_path.empty()) {
-		glm::vec2 direction = glm::vec2(_path[0].x - _position.x, _path[0].y - _position.y);
+		glm::vec2 direction = glm::sign(glm::vec2(_path[0].x - _position.x, _path[0].y - _position.y));
 
-		//std::cout << _path[0].x << " " << _path[0].y << std::endl;
-
-		_position += glm::min(direction * Jauntlet::Time::getDeltaTime(), direction * JMath::Distance(_position, _path[0]));
+		if (direction.x > 0) {
+			_position.x += std::min(direction.x * Jauntlet::Time::getDeltaTime() * _speed, _path[0].x - _position.x);
+		}
+		else {
+			_position.x += std::max(direction.x * Jauntlet::Time::getDeltaTime() * _speed, _path[0].x - _position.x);
+		}
+		if (direction.y > 0) {
+			_position.y += std::min(direction.y * Jauntlet::Time::getDeltaTime() * _speed, _path[0].y - _position.y);
+		}
+		else {
+			_position.y += std::max(direction.y * Jauntlet::Time::getDeltaTime() * _speed, _path[0].y - _position.y);
+		}
 
 		if (_position == _path[0]) {
 			_path[0] = _path.back();
+			std::cout << _path[_path.size() - 1].x << " " << _path[_path.size() - 1].y << " Size: " << _path.size() << std::endl;
 			_path.pop_back();
+			timer = 0;
+
 		}
 	}
 	
@@ -45,11 +58,15 @@ void Player::navigateTo(Jauntlet::TileMap& map, glm::vec2 position) {
 
 	_path = Pathfinding::findPath(map, _position, position, false);
 
-	std::cout << std::endl << std::endl;
+	_path[0] = _path.back();
+	_path.pop_back();
+
+	/*std::cout << std::endl << std::endl;
 
 	for (int i = 0; i < _path.size(); i++) {
 		std::cout << _path[i].x << " " << _path[i].y << std::endl;
 	}
+	std::cout << std::endl;*/
 }
 
 void Player::setPosition(float x, float y) {
