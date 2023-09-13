@@ -24,6 +24,10 @@ include_directories(${OPENGL_INCLUDE_DIRS})
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
+# Add SDL2_mixer library
+find_package(SDL2_mixer REQUIRED)
+include_directories(${SDL_MIXER_INCLUDE_DIRS})
+
 # Find and configure GLEW
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
@@ -62,7 +66,7 @@ if(WIN32)
     target_link_libraries(game PRIVATE ${WIN_LIB_FILES})
 elseif(UNIX)
     # On Unix, use SDL2::SDL2, GLEW::GLEW, OpenGL::OpenGL, and Freetype::Freetype
-    target_link_libraries(game PRIVATE SDL2::SDL2 GLEW::GLEW OpenGL::OpenGL Freetype::Freetype)
+    target_link_libraries(game PRIVATE SDL2::SDL2 SDL2_mixer::SDL2_mixer GLEW::GLEW OpenGL::OpenGL Freetype::Freetype)
 endif()
 
 # Specify include directories for the "Jauntlet" directory (outside of it)
