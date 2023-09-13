@@ -35,7 +35,6 @@ void Player::update() {
 			_path[0] = _path.back();
 			std::cout << _path[_path.size() - 1].x << " " << _path[_path.size() - 1].y << " Size: " << _path.size() << std::endl;
 			_path.pop_back();
-			timer = 0;
 
 		}
 	}
