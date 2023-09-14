@@ -1,8 +1,6 @@
 #include "Pathfinding.h"
 #include <Jauntlet/JMath.h>
 
-#include <iostream> // remove when done debugging
-
 std::vector<cell> Pathfinding::_openList;
 std::vector<cell> Pathfinding::_closedList;
 
@@ -17,7 +15,7 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 	// reset lists
 	_openList.clear();
 	_closedList.clear();
-	_openList.emplace_back(nullptr, start);
+	_openList.emplace_back(start, glm::vec2(0, 0));
 
 	bool foundDest = false;
 	while (!_openList.empty() && !foundDest) {
@@ -45,7 +43,7 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 					continue;
 				}
 
-				cell currentNode = cell(_closedList.back().position, _closedList.back().position);
+				cell currentNode = cell(_closedList.back().position + glm::vec2(x, y), _closedList.back().position);
 
 				if (currentNode.position == destination) {
 					foundDest = true;
@@ -103,10 +101,12 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 		}
 	}
 	std::vector<glm::vec2> output;
+	output.push_back(map.TilePosToWorldPos(destination));
 
 	cell Node = _closedList.back();
-	output.push_back(Node.position);
+	output.push_back(map.TilePosToWorldPos(Node.position));
 
+	// work backwards through the vector to find the path
 	for (int i = _closedList.size() - 2; i > -1; i--) {
 		if (_closedList[i].position == Node.prevPos) {
 			Node = _closedList[i];
@@ -114,6 +114,5 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 			output.push_back(map.TilePosToWorldPos(Node.position));
 		}
 	}
-
 	return output;
 }
