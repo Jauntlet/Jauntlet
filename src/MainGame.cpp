@@ -64,7 +64,6 @@ void MainGame::initSystems() {
 
 	// initializes spritefont
 	_spriteFont.init(&_hudCamera, "Fonts/HandelGo.ttf", 256);
-	//_spriteFont.init(&_hudCamera, "Fonts/chintzy.ttf", 256);
 
 	// Temporary level loading
 	_bricks.addConnectionRule(Jauntlet::TileSet::ConnectionRules::TILES);
@@ -98,15 +97,6 @@ void MainGame::gameLoop() {
 		processInput();
 
 		_player.update();
-		
-		// collision checking between Craig and the tilemap, done after player update
-		/*std::vector<Jauntlet::BoxCollider2D> levelColliders = _level.collectCollidingTiles(_player.getPosition());
-		Jauntlet::Collision2D collision = Jauntlet::Collision2D();
-		for (int j = 0; j < levelColliders.size(); ++j) {
-			if (collision.getCollision(&_player.collider, &levelColliders[j])) {
-				_player.setPosition(_player.getPosition() + (collision.GetNormal() * collision.GetOverlap()));
-			}
-		}*/
 
 		_camera.update();
 		_hudCamera.update();
@@ -181,8 +171,7 @@ void MainGame::processInput() {
 		//Player moves on right click
 		_player.navigateTo(_level, _camera.convertScreenToWorld(_inputManager.getMouseCoords()));
 
-		//Nav Collision on right click
-		if (_navigation.isNavOpen()) {
+		if (_navigation.isNavOpen()) { //Nav Collision on right click
 			for (int j = 0; j < _navigation.getColliders().size(); j++) {
 				Jauntlet::BoxCollider2D adjustedCollider = Jauntlet::BoxCollider2D(_navigation.getColliders()[j].GetSize(), glm::vec2(_screenWidth / 2 + _navigation.getColliders()[j].position.x, _screenHeight / 2 - _navigation.getColliders()[j].position.y + 16));
 				if (data.getCollision(&adjustedCollider, _inputManager.getMouseCoords())) {
