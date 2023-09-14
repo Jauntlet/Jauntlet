@@ -224,14 +224,17 @@ void MainGame::drawGame() {
 	// Draw the player using a spriteBatch
 	_playerSpriteBatch.begin();
 	_player.draw(_playerSpriteBatch);
-	_playerSpriteBatch.end();
 
+	glm::vec2 whiteTileDest = _level.TilePosToWorldPos(_level.WorldPosToTilePos(_camera.convertScreenToWorld(_inputManager.getMouseCoords())));
+	_playerSpriteBatch.draw({whiteTileDest.x, whiteTileDest.y, 32, 32}, { 0,0,1,1 }, Jauntlet::ResourceManager::getTexture("Textures/WhiteSquare.png").id, 0, Jauntlet::Color(255, 255, 255, 255));
+
+	_playerSpriteBatch.end();
 	_playerSpriteBatch.renderBatch();
 
 	_colorProgram.unuse();
-
+	
 	drawHUD();
-
+	
 	_window.swapBuffer();
 }
 
