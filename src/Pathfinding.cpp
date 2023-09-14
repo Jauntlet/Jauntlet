@@ -45,7 +45,7 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 					continue;
 				}
 
-				cell currentNode(&_closedList.back(), _closedList.back().position + glm::vec2(x, y));
+				cell currentNode = cell(_closedList.back().position, _closedList.back().position);
 
 				if (currentNode.position == destination) {
 					foundDest = true;
@@ -105,11 +105,14 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 	std::vector<glm::vec2> output;
 
 	cell Node = _closedList.back();
+	output.push_back(Node.position);
 
-	while (Node.parent != nullptr) {
-		output.push_back(map.TilePosToWorldPos(Node.position));
-
-		Node = *Node.parent;
+	for (int i = _closedList.size() - 2; i > -1; i--) {
+		if (_closedList[i].position == Node.prevPos) {
+			Node = _closedList[i];
+		
+			output.push_back(map.TilePosToWorldPos(Node.position));
+		}
 	}
 
 	return output;

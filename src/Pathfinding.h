@@ -5,13 +5,13 @@
 
 struct cell {
 	glm::vec2 position;
+	glm::vec2 prevPos;
 	float pathDistance;
 	float estimatedDistance;
-	cell* parent;
 
-	cell(cell* cellParent, glm::vec2 pos) {
-		parent = cellParent;
+	cell(glm::vec2 pos, glm::vec2 lastPos) {
 		position = pos;
+		prevPos = lastPos;
 		pathDistance = -1;
 		estimatedDistance = -1;
 	}
