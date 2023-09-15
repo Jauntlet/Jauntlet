@@ -114,6 +114,8 @@ void MainGame::processInput() {
 		_gameState = GameState::EXIT;
 	}
 
+	_selectedTilePos = _level.RoundWorldPos(_camera.convertScreenToWorld(_inputManager.getMouseCoords()));
+
 	if (_inputManager.isKeyDown(SDLK_LSHIFT) || _inputManager.isKeyDown(SDL_CONTROLLER_BUTTON_A)) {
 		_player.setSpeed(300);
 	}
@@ -169,7 +171,7 @@ void MainGame::processInput() {
 	if (_inputManager.isKeyPressed(SDL_BUTTON_RIGHT)) {
 		Jauntlet::Collision2D data = Jauntlet::Collision2D();
 		//Player moves on right click
-		_player.navigateTo(_level, _camera.convertScreenToWorld(_inputManager.getMouseCoords()));
+		_player.navigateTo(_level, _selectedTilePos);
 
 		if (_navigation.isNavOpen()) { //Nav Collision on right click
 			for (int j = 0; j < _navigation.getColliders().size(); j++) {
@@ -214,8 +216,8 @@ void MainGame::drawGame() {
 	_playerSpriteBatch.begin();
 	_player.draw(_playerSpriteBatch);
 
-	glm::vec2 whiteTileDest = _level.TilePosToWorldPos(_level.WorldPosToTilePos(_camera.convertScreenToWorld(_inputManager.getMouseCoords())));
-	_playerSpriteBatch.draw({whiteTileDest.x, whiteTileDest.y, 32, 32}, { 0,0,1,1 }, Jauntlet::ResourceManager::getTexture("Textures/WhiteSquare.png").id, 0, Jauntlet::Color(255, 255, 255, 255));
+	// draw the selected tile sprite
+	_playerSpriteBatch.draw({_selectedTilePos.x, _selectedTilePos.y, 32, 32}, { 0,0,1,1 }, Jauntlet::ResourceManager::getTexture("Textures/WhiteSquare.png").id, 0, Jauntlet::Color(255, 255, 255, 255));
 
 	_playerSpriteBatch.end();
 	_playerSpriteBatch.renderBatch();

@@ -72,6 +72,8 @@ public:
 	glm::ivec2 WorldPosToTilePos(glm::vec2 position);
 	// Converts a position relative to the tileset to a position relative to the world.
 	glm::vec2 TilePosToWorldPos(glm::ivec2 position);
+	// Rounds the world position to the nearest tile
+	glm::vec2 RoundWorldPos(glm::vec2 position);
 	
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
 	bool isValidTilePos(glm::ivec2 position);

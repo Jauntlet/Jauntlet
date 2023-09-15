@@ -75,4 +75,5 @@ private:
 	Player _player;
 	Navigation _navigation;
 	std::vector<std::vector<int>> _navPoints;
+	glm::vec2 _selectedTilePos;
 };

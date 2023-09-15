@@ -180,12 +180,14 @@ bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
 }
 
 glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
-	return glm::vec2(position.x / _tileSize - _offset.x - (position.x < 0 ? 1 : 0), -position.y / _tileSize - _offset.y + (position.y < 0 ? 1 : 0));
+	return glm::vec2(position.x / _tileSize - _offset.x, -position.y / _tileSize - _offset.y);
 }
 glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) {
 	return glm::vec2(position.x * _tileSize + _offset.x, -position.y * _tileSize + _offset.y);
 }
-
+glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
+	return glm::vec2(((int)(position.x / _tileSize) - (position.x < 0 ? 1 : 0)) * _tileSize, ((int)(position.y / _tileSize) + (position.y < 0 ? -1 : 0)) * _tileSize);
+}
 bool TileMap::isValidTilePos(glm::ivec2 position) {
 	return !(position.y < 0 || position.y >= _levelData.size() || position.x >= _levelData[position.y].size() || position.x < 0);
 }
