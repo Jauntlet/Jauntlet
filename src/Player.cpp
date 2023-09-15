@@ -56,13 +56,6 @@ void Player::navigateTo(Jauntlet::TileMap& map, glm::vec2 position) {
 
 	_path[0] = _path.back();
 	_path.pop_back();
-
-	/*std::cout << std::endl << std::endl;
-
-	for (int i = 0; i < _path.size(); i++) {
-		std::cout << _path[i].x << " " << _path[i].y << std::endl;
-	}
-	std::cout << std::endl;*/
 }
 
 void Player::setPosition(float x, float y) {

@@ -101,12 +101,14 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 		}
 	}
 	std::vector<glm::vec2> output;
+	// add destination to final pos in output
 	output.push_back(map.TilePosToWorldPos(destination));
 
 	cell Node = _closedList.back();
+	// push the first node to the list of outputs
 	output.push_back(map.TilePosToWorldPos(Node.position));
 
-	// work backwards through the vector to find the path
+	// work backwards through the vector to find the path via previously stored position.
 	for (int i = _closedList.size() - 2; i > -1; i--) {
 		if (_closedList[i].position == Node.prevPos) {
 			Node = _closedList[i];
