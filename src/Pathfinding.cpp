@@ -104,6 +104,39 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 	}
 	std::vector<glm::vec2> output;
 
+	if (!foundDest) {
+		// Every possible tile has been checked and the destination was not found.
+		// Now we try to find the closest tile to the location and pathfind to there.
+		int bestCellIndex = 1; // 1 to avoid null value
+		for (int i = 2; i < _closedList.size(); i++) {
+			if (_closedList[i].estimatedDistance - _closedList[i].pathDistance < _closedList[bestCellIndex].estimatedDistance - _closedList[bestCellIndex].pathDistance) {
+				bestCellIndex = i;
+			}
+		}
+		
+		// we do the thing labelled by the big comment below here too.
+		output.push_back(map.TilePosToWorldPos(_closedList[bestCellIndex].position));
+		output.push_back(map.TilePosToWorldPos(_closedList[bestCellIndex].position));
+
+		for (int i = _closedList.size(); i > 0; i--) {
+			if (_closedList[i].position == _closedList[bestCellIndex].prevPos) {
+				output.push_back(map.TilePosToWorldPos(_closedList[i].position));
+				bestCellIndex = i;
+			}
+		}
+
+		// reverse the list
+		for (int i = 0; i < _closedList.size(); i++) {
+			output[0] = output.back();
+		}
+
+		// reset lists
+		_openList.clear();
+		_closedList.clear();
+
+		return output;
+	}
+
 	cell Node = _closedList.back();
 
 	// add destination to final pos in output

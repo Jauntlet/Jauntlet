@@ -33,9 +33,7 @@ void Player::update() {
 
 		if (_position == _path[0]) {
 			_path[0] = _path.back();
-			std::cout << _path[_path.size() - 1].x << " " << _path[_path.size() - 1].y << " Size: " << _path.size() << std::endl;
 			_path.pop_back();
-
 		}
 	}
 	
@@ -53,9 +51,6 @@ void Player::navigateTo(Jauntlet::TileMap& map, glm::vec2 position) {
 	_path.clear();
 
 	_path = Pathfinding::findPath(map, _position, position, false);
-
-	_path[0] = _path.back();
-	_path.pop_back();
 }
 
 void Player::setPosition(float x, float y) {
