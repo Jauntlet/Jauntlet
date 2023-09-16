@@ -1,5 +1,5 @@
-T   TTT
+T TTT
 
-TTT  T  T
-TTT TTT T
-TTT  T  T
+TTT T
+TTT T
+TTT T

@@ -23,7 +23,7 @@ MainGame::MainGame() :
 	_bricks("Textures/none.png", "Textures/all.png", "Textures/right.png", "Textures/left.png", "Textures/bottom.png", "Textures/top.png",
 		"Textures/bottomRight.png", "Textures/bottomLeft.png", "Textures/bottomTop.png", "Textures/topRight.png", "Textures/topLeft.png", "Textures/rightLeft.png",
 		"Textures/bottomTopLeft.png", "Textures/bottomTopRight.png", "Textures/bottomLeftRight.png", "Textures/topRightLeft.png"),
-	_player(-5 * 32, 0),
+	_player(32, -32),
 	_window() {
 }
 
@@ -69,8 +69,8 @@ void MainGame::initSystems() {
 	_bricks.addConnectionRule(Jauntlet::TileSet::ConnectionRules::TILES);
 	_level.registerTileSet('T', _bricks, Jauntlet::TileCollision::SQUARE);
 
-	//_level.loadTileMap("Levels/level0.txt");
-	_level.loadTileMap("Levels/testAllTiles.txt");
+	_level.loadTileMap("Levels/level0.txt");
+	//_level.loadTileMap("Levels/testAllTiles.txt");
 
 
 	_navPoints = _navigation.genNav();

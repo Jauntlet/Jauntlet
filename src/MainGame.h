@@ -73,7 +73,8 @@ private:
 	Jauntlet::LineRenderer _lineRenderer;
 
 	Player _player;
+	glm::vec2 _selectedTilePos = glm::vec2(0);
+
 	Navigation _navigation;
 	std::vector<std::vector<int>> _navPoints;
-	glm::vec2 _selectedTilePos;
 };
