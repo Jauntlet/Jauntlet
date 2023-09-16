@@ -139,15 +139,21 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 
 	cell Node = _closedList.back();
 
-	// add destination to final pos in output
-	output.push_back(map.TilePosToWorldPos(destination));
-	/* I push the final destination to the output vector twice here. Why?
-	* Well, for some reason the Player navigation just *deletes* the last element in the array when pathfinding. 
-	* There are 0 locations where elements are removed from the vector besides when I push an element to the back of the vector
-	* and delete it. Using testing I can confirm the last element remains until it is sent out of this method, and then it just *vanishes*
-	* If you could locate where that happens, that would be fantastic, but I've spent a full day on this bug and I frankly am just gonna do the easy fix.
-	* -xm */
-	output.push_back(map.TilePosToWorldPos(destination));
+	if (!map.tileHasCollision(destination)) {
+		// add destination to final pos in output
+		output.push_back(map.TilePosToWorldPos(destination));
+		/* I push the final destination to the output vector twice here. Why?
+		* Well, for some reason the Player navigation just *deletes* the last element in the array when pathfinding. 
+		* There are 0 locations where elements are removed from the vector besides when I push an element to the back of the vector
+		* and delete it. Using testing I can confirm the last element remains until it is sent out of this method, and then it just *vanishes*
+		* If you could locate where that happens, that would be fantastic, but I've spent a full day on this bug and I frankly am just gonna do the easy fix.
+		* -xm */
+		output.push_back(map.TilePosToWorldPos(destination));
+	}
+	else {
+		// same thing as big comment above
+		output.push_back(map.TilePosToWorldPos(_closedList.back().position));
+	}
 
 	// push the first node to the list of outputs
 	output.push_back(map.TilePosToWorldPos(_closedList.back().position));
