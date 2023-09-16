@@ -118,7 +118,7 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 		output.push_back(map.TilePosToWorldPos(_closedList[bestCellIndex].position));
 		output.push_back(map.TilePosToWorldPos(_closedList[bestCellIndex].position));
 
-		for (int i = _closedList.size(); i > 0; i--) {
+		for (int i = bestCellIndex - 1; i > 0; i--) {
 			if (_closedList[i].position == _closedList[bestCellIndex].prevPos) {
 				output.push_back(map.TilePosToWorldPos(_closedList[i].position));
 				bestCellIndex = i;
@@ -151,7 +151,7 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 		output.push_back(map.TilePosToWorldPos(destination));
 	}
 	else {
-		// same thing as big comment above
+		// same thing as big comment above, but with the next-best tile.
 		output.push_back(map.TilePosToWorldPos(_closedList.back().position));
 	}
 
