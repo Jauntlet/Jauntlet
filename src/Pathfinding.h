@@ -3,6 +3,8 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+// Used to find pathfind routes.
+// DO NOT USE otherwise.
 struct cell {
 	glm::vec2 position;
 	glm::vec2 prevPos;

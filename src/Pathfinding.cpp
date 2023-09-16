@@ -12,10 +12,12 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 	destination = map.WorldPosToTilePos(destination);
 	start = map.WorldPosToTilePos(start);
 
-	// reset lists
-	_openList.clear();
-	_closedList.clear();
-	_openList.emplace_back(start, glm::vec2(0, 0));
+	_openList.emplace_back(start, glm::vec2(NULL));
+
+	if (start == destination) {
+		_openList.clear();
+		return { map.TilePosToWorldPos(start) };
+	}
 
 	bool foundDest = false;
 	while (!_openList.empty() && !foundDest) {
@@ -101,12 +103,21 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 		}
 	}
 	std::vector<glm::vec2> output;
-	// add destination to final pos in output
-	output.push_back(map.TilePosToWorldPos(destination));
 
 	cell Node = _closedList.back();
+
+	// add destination to final pos in output
+	output.push_back(map.TilePosToWorldPos(destination));
+	/* I push the final destination to the output vector twice here. Why?
+	* Well, for some reason the Player navigation just *deletes* the last element in the array when pathfinding. 
+	* There are 0 locations where elements are removed from the vector besides when I push an element to the back of the vector
+	* and delete it. Using testing I can confirm the last element remains until it is sent out of this method, and then it just *vanishes*
+	* If you could locate where that happens, that would be fantastic, but I've spent a full day on this bug and I frankly am just gonna do the easy fix.
+	* -xm */
+	output.push_back(map.TilePosToWorldPos(destination));
+
 	// push the first node to the list of outputs
-	output.push_back(map.TilePosToWorldPos(Node.position));
+	output.push_back(map.TilePosToWorldPos(_closedList.back().position));
 
 	// work backwards through the vector to find the path via previously stored position.
 	for (int i = _closedList.size() - 2; i > -1; i--) {
@@ -116,5 +127,14 @@ std::vector<glm::vec2> Pathfinding::findPath(Jauntlet::TileMap& map, glm::vec2 s
 			output.push_back(map.TilePosToWorldPos(Node.position));
 		}
 	}
+	// reverse the list
+	for (int i = 0; i < _closedList.size(); i++) {
+		output[0] = output.back();
+	}
+
+	// reset lists
+	_openList.clear();
+	_closedList.clear();
+
 	return output;
 }
