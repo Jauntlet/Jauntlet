@@ -1,17 +1,5 @@
-#include <Jauntlet/Errors.h>
-#include <Jauntlet/JMath.h>
-#include <Jauntlet/Jauntlet.h>
 #include <Jauntlet/Rendering/ResourceManager.h>
-#include <Jauntlet/Rendering/Sprite.h>
-#include <Jauntlet/Rendering/Vertex.h>
-#include <Jauntlet/TileSet.h>
-#include <Jauntlet/Time.h>
-#include <Jauntlet/UI/UIManager.h>
-#include <Jauntlet/UI/UITextElement.h>
-#include <SDL/SDL.h>
-#include <glm/fwd.hpp>
 #include <iostream>
-#include <string>
 
 #include "MainGame.h"
 
@@ -50,8 +38,6 @@ void MainGame::initSystems() {
 	SDL_ShowCursor(1); // show the mouse cursor. can be set to 0 later for replacements.
 
 	initShaders();
-
-	_lineRenderer.init();
 
 	_camera.init(_screenWidth, _screenHeight);
 	_hudCamera.init(_screenWidth, _screenHeight);

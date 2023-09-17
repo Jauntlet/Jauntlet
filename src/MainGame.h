@@ -1,17 +1,6 @@
 #pragma once
 
-#include <GL/glew.h>
-#include <Jauntlet/Camera2D.h>
-#include <Jauntlet/InputManager.h>
 #include <Jauntlet/Jauntlet.h>
-#include <Jauntlet/Rendering/GLSLProgram.h>
-#include <Jauntlet/Rendering/GLTexture.h>
-#include <Jauntlet/Rendering/LineRenderer.h>
-#include <Jauntlet/Rendering/Sprite.h>
-#include <Jauntlet/Rendering/SpriteBatch.h>
-#include <Jauntlet/Rendering/SpriteFont.h>
-#include <Jauntlet/TileMap.h>
-#include <Jauntlet/TileSet.h>
 #include <Jauntlet/Time.h>
 #include <Jauntlet/Window.h>
 #include <Jauntlet/UI/UIManager.h>
@@ -35,7 +24,6 @@ public:
 private:
 	void initSystems();
 	void initShaders();
-	void initHUD();
 	void gameLoop();
 	void processInput();
 	void drawGame();
@@ -70,8 +58,6 @@ private:
 
 	Jauntlet::UIManager _uiManager;
 	
-	Jauntlet::LineRenderer _lineRenderer;
-
 	Player _player;
 	glm::vec2 _selectedTilePos = glm::vec2(0);
 
