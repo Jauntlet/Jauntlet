@@ -1,7 +1,10 @@
 #include "Navigation.h"
 
 #include <chrono>
+#include <Jauntlet/Rendering/ResourceManager.h>
 #include <random>
+
+const std::string bgTextures[] = {"Textures/NavGround1.png", "Textures/NavGround2.png", "Textures.NavGround3.png", "Textures.NavGround4.png"};
 
 const int outcoveAmt = 4;
 const int layerAmt = 3;
@@ -44,18 +47,40 @@ std::vector<std::vector<int>> Navigation::genNav() {
 }
 
 void Navigation::drawNav(std::vector<std::vector<int>>& navPoints, Jauntlet::SpriteFont& font, Jauntlet::SpriteBatch& spriteBatch) {
+	//If the navigation menu isn't meant to be open, simply don't render it.
 	if (!_navOpen) {
 		return;
 	}
-	
-	int layersHeight = navPoints.size();
+
+	//Render Background
+	/*int frame = std::mt19937(seed)() % 16;
+	switch (frame) {
+	case 0: //render one of the nonblank backgrounds
+		spriteBatch.draw(glm::vec4(-320, -320, 640, 640), glm::vec4(0, 0, 1, 1), Jauntlet::ResourceManager::getTexture(bgTextures[1]).id, 1, Jauntlet::Color(255, 255, 255, 255));
+		break;
+	case 1: //render one of the nonblank backgrounds
+		spriteBatch.draw(glm::vec4(-320, -320, 640, 640), glm::vec4(0, 0, 1, 1), Jauntlet::ResourceManager::getTexture(bgTextures[2]).id, 1, Jauntlet::Color(255, 255, 255, 255));
+		break;
+	case 2: //render one of the nonblank backgrounds
+		spriteBatch.draw(glm::vec4(-320, -320, 640, 640), glm::vec4(0, 0, 1, 1), Jauntlet::ResourceManager::getTexture(bgTextures[3]).id, 1, Jauntlet::Color(255, 255, 255, 255));
+		break;
+	default: //render "blank" background
+		spriteBatch.draw(glm::vec4(-320, -320, 640, 640), glm::vec4(0, 0, 1, 1), Jauntlet::ResourceManager::getTexture(bgTextures[0]).id, 1, Jauntlet::Color(255, 255, 255, 255));
+		break;
+	}*/
+
+	//only one background variation for testing
+	spriteBatch.draw(glm::vec4(-320, -320, 640, 640), glm::vec4(0, 0, 1, 1), Jauntlet::ResourceManager::getTexture(bgTextures[0]).id, 1, Jauntlet::Color(255, 255, 255, 255));
+
+	//Render navPoints
+	int layersHeight = navPoints.size(); //store the total height of the "layers"
 
 	for (int y = 0; y < navPoints.size(); y++) {
 
-		int layerSpan = navPoints[y].size();
+		int layerSpan = navPoints[y].size(); //store the "span" (width) of all the points on this "layer"
 		
 		for (int x = 0; x < navPoints[y].size(); x++) {
-			int point = navPoints[y][x];
+			int point = navPoints[y][x]; //
 
 			if (point == 0) { // white X
 				font.draw(spriteBatch, "X", glm::vec2((layerSpan * -40) + (x * 80), (layersHeight * -50) + (y * 100)), glm::vec2(.2), 0, Jauntlet::Color(255, 255, 255, 255));
