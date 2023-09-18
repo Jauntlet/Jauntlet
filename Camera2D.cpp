@@ -6,8 +6,6 @@
 #include "Time.h"
 #include "glm/fwd.hpp"
 
-//them changes
-
 using namespace Jauntlet;
 
 Camera2D::Camera2D() {
