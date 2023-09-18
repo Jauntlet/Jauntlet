@@ -53,14 +53,12 @@ build/compile_commands.json
 *.idb
 *.iobj
 *.ipdb
-Debug/Jauntlet.lib
-Debug/Jauntlet Engine.vcxproj.FileListAbsolute.txt
-Debug/Jauntlet.vcxproj.FileListAbsolute.txt
-Debug/Jauntlet Engine.exe.recipe
-Release/Jauntlet.lib
-Release/Jauntlet Engine.vcxproj.FileListAbsolute.txt
-Release/Jauntlet.vcxproj.FileListAbsolute.txt
-Release/Jauntlet Engine.exe.recipe
+
+# Jauntlet Build related
+build/Jauntlet.lib
+Debug/
+Release/
+Scoundrills/
 
 x64/
 Jauntlet/Debug/Jauntlet.vcxproj.FileListAbsolute.txt
