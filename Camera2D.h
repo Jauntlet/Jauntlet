@@ -9,6 +9,7 @@ class Camera2D
 {
 public:
 	enum class TRANSITION_TYPE {POSITION, SCALE};
+
 	Camera2D();
 	// initialize the screen size of the camera
 	void init(int screenWidth, int screenHeight);
@@ -42,12 +43,13 @@ public:
 	void translate(const glm::vec2& deltaPosition);
 
 	// clears a transition, takes enum TRANSITION_TYPE
-	void clearTransition(enum TRANSITION_TYPE transitionType);
+	void clearTransition(TRANSITION_TYPE transitionType);
 	// clears all transitions.
 	void clearTransitions();
 	
 	// get the cameras matrix
 	glm::mat4 getCameraMatrix() { return _cameraMatrix; }
+	
 	// multiply the position of the camera by a float
 	void multiplyPosition(float scale);
 	// multiply the scale of the camera by a float
