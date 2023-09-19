@@ -1,4 +1,5 @@
 #pragma once
+#include "Rendering/GLSLProgram.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -15,6 +16,8 @@ public:
 	void init(int screenWidth, int screenHeight);
 	// update the camera
 	void update();
+	// Makes this camera the camera objects are rendered to.
+	void setActiveCamera(GLSLProgram* activeProgram);
 	
 	// converts from a position in world space to a position on the screen
 	glm::vec2 convertWorldToScreen(glm::vec2 worldCoords);
