@@ -18,6 +18,9 @@ void SpriteBatch::begin(GlyphSortType sortType /* = GlyphSortType::TEXTURE*/) {
 	_glyphs.clear();
 }
 
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) {
+	_glyphs.emplace_back(destRect, uvRect, texture, depth, color);
+}
 void SpriteBatch::end() { 
 	// Set up pointers for fast sorting
 	_glyphPointers.resize(_glyphs.size());
@@ -29,10 +32,7 @@ void SpriteBatch::end() {
 	sortGlyphs();
 	createRenderBatches();
 }
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) { 
 
-	_glyphs.emplace_back(destRect, uvRect, texture, depth, color);
-}
 void SpriteBatch::renderBatch() { 
 
 	glBindVertexArray(_vaoID);
@@ -46,6 +46,10 @@ void SpriteBatch::renderBatch() {
 	glBindVertexArray(0);
 }
 
+void SpriteBatch::endAndRenderBatch() {
+	end();
+	renderBatch();
+}
 void SpriteBatch::createRenderBatches() {
 	std::vector <Vertex> vertices;
 	vertices.resize(_glyphPointers.size() * 6);

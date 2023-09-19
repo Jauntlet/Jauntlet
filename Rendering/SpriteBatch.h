@@ -60,12 +60,14 @@ public:
 	void init();
 	// Opens the spritebatch to be able to add textures to it
 	void begin(GlyphSortType sortType = GlyphSortType::NONE);
-	// closes and sorts the spritebatch
-	void end();
 	// adds a texture and its information to the spritebatch
 	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color);
+	// closes and sorts the spritebatch
+	void end();
 	// renders the contents of the spritebatch to screen
 	void renderBatch();
+	// closes and renders the contents of the spritebatch to screen
+	void endAndRenderBatch();
 private: 
 	void createRenderBatches();
 	void createVertexArray();
