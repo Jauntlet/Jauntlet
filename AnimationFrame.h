@@ -26,8 +26,9 @@ public:
 	AnimationFrame(std::string FilePath);
 
 	void play(int start, int end, float frameTime);
-	glm::vec4 update();
+	void update(float deltaTime);
 	void stop();
+	glm::vec4 getUV();
 private:
 
 	float _elapsedTime = 0;

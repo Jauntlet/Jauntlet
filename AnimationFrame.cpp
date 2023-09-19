@@ -24,12 +24,12 @@ void AnimationFrame::stop() {
 	_playing = false;
 }
 
-glm::vec4 AnimationFrame::update() {
+void AnimationFrame::update(float deltaTime) {
 	if (!_playing) {
-		return _uv;
+		return;
 	}
 
-	_elapsedTime += Time::getDeltaTime();
+	_elapsedTime += deltaTime;
 	
 	while (_elapsedTime > _frameTime) {
 		// increment by one unless above end, if so set to start.
@@ -38,6 +38,8 @@ glm::vec4 AnimationFrame::update() {
 	}
 
 	_uv = glm::vec4(_spriteSize.x * _frame,0,_spriteSize.x * (_frame - 1),_spriteSize.y);
+}
 
+glm::vec4 AnimationFrame::getUV() {
 	return _uv;
 }
