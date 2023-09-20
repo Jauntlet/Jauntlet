@@ -28,6 +28,7 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 	_mainTiles[14] = TileSet::Tileinfo(Right);
 	_mainTiles[15] = TileSet::Tileinfo(AllSidesCovered);
 }
+
 TileSet::TileSet(std::string FilePath) {
 	for (int i = 0; i < 16; i++) {
 		_mainTiles[i].texture = FilePath;
@@ -36,22 +37,22 @@ TileSet::TileSet(std::string FilePath) {
 	// Do not that the Y axis goes from the bottom to top, not top to bottom.
 	const float UVsize = 0.2f;
 
-	_mainTiles[0].UV = glm::vec4(0, UVsize * 4, UVsize, UVsize);
-	_mainTiles[1].UV = glm::vec4(UVsize * 2, UVsize * 4, UVsize, UVsize);
-	_mainTiles[2].UV = glm::vec4(UVsize * 4, UVsize * 2, UVsize, UVsize);
-	_mainTiles[3].UV = glm::vec4(0, UVsize * 2, UVsize, UVsize);
-	_mainTiles[4].UV = glm::vec4(UVsize * 4, 0, UVsize, UVsize);
-	_mainTiles[5].UV = glm::vec4(0, 0, UVsize, UVsize);
-	_mainTiles[6].UV = glm::vec4(UVsize * 4, UVsize, UVsize, UVsize);
-	_mainTiles[7].UV = glm::vec4(0, UVsize, UVsize, UVsize);
-	_mainTiles[8].UV = glm::vec4(UVsize * 4, UVsize * 4, UVsize, UVsize);
-	_mainTiles[9].UV = glm::vec4(UVsize * 3, UVsize * 4, UVsize, UVsize);
-	_mainTiles[10].UV = glm::vec4(UVsize * 2, UVsize * 2, UVsize, UVsize);
-	_mainTiles[11].UV = glm::vec4(UVsize, UVsize * 2, UVsize, UVsize);
-	_mainTiles[12].UV = glm::vec4(UVsize * 2, 0, UVsize, UVsize);
-	_mainTiles[13].UV = glm::vec4(UVsize, 0, UVsize, UVsize);
-	_mainTiles[14].UV = glm::vec4(UVsize * 2, UVsize, UVsize, UVsize);
-	_mainTiles[15].UV = glm::vec4(UVsize, UVsize, UVsize, UVsize);
+	_mainTiles[0 ].UV = glm::vec4(UVsize * 0, UVsize * 4, UVsize * 1, UVsize * 1);
+	_mainTiles[1 ].UV = glm::vec4(UVsize * 2, UVsize * 4, UVsize * 1, UVsize * 1);
+	_mainTiles[2 ].UV = glm::vec4(UVsize * 4, UVsize * 2, UVsize * 1, UVsize * 1);
+	_mainTiles[3 ].UV = glm::vec4(UVsize * 0, UVsize * 2, UVsize * 1, UVsize * 1);
+	_mainTiles[4 ].UV = glm::vec4(UVsize * 4, UVsize * 0, UVsize * 1, UVsize * 1);
+	_mainTiles[5 ].UV = glm::vec4(UVsize * 0, UVsize * 0, UVsize * 1, UVsize * 1);
+	_mainTiles[6 ].UV = glm::vec4(UVsize * 4, UVsize * 1, UVsize * 1, UVsize * 1);
+	_mainTiles[7 ].UV = glm::vec4(UVsize * 0, UVsize * 1, UVsize * 1, UVsize * 1);
+	_mainTiles[8 ].UV = glm::vec4(UVsize * 4, UVsize * 4, UVsize * 1, UVsize * 1);
+	_mainTiles[9 ].UV = glm::vec4(UVsize * 3, UVsize * 4, UVsize * 1, UVsize * 1);
+	_mainTiles[10].UV = glm::vec4(UVsize * 2, UVsize * 2, UVsize * 1, UVsize * 1);
+	_mainTiles[11].UV = glm::vec4(UVsize * 1, UVsize * 2, UVsize * 1, UVsize * 1);
+	_mainTiles[12].UV = glm::vec4(UVsize * 2, UVsize * 0, UVsize * 1, UVsize * 1);
+	_mainTiles[13].UV = glm::vec4(UVsize * 1, UVsize * 0, UVsize * 1, UVsize * 1);
+	_mainTiles[14].UV = glm::vec4(UVsize * 2, UVsize * 1, UVsize * 1, UVsize * 1);
+	_mainTiles[15].UV = glm::vec4(UVsize * 1, UVsize * 1, UVsize * 1, UVsize * 1);
 }
 // Adds to what the Tileset can connect to. Use TileSet::ConnectionRules.
 void TileSet::addConnectionRule(unsigned int rule) {
