@@ -68,9 +68,9 @@ public:
 	// closes and sorts the spritebatch
 	void end();
 	// renders the contents of the spritebatch to screen
-	void renderBatch();
+	void render();
 	// closes and renders the contents of the spritebatch to screen
-	void endAndRenderBatch();
+	void endAndRender();
 private: 
 	void createRenderBatches();
 	void createVertexArray();

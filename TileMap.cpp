@@ -97,7 +97,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 }
 
 void TileMap::draw() {
-	_spriteBatch.renderBatch();
+	_spriteBatch.render();
 }
 
 std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {

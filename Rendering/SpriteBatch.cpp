@@ -37,7 +37,7 @@ void SpriteBatch::end() {
 	createRenderBatches();
 }
 
-void SpriteBatch::renderBatch() { 
+void SpriteBatch::render() { 
 
 	glBindVertexArray(_vaoID);
 
@@ -50,9 +50,9 @@ void SpriteBatch::renderBatch() {
 	glBindVertexArray(0);
 }
 
-void SpriteBatch::endAndRenderBatch() {
+void SpriteBatch::endAndRender() {
 	end();
-	renderBatch();
+	render();
 }
 void SpriteBatch::createRenderBatches() {
 	std::vector <Vertex> vertices;
