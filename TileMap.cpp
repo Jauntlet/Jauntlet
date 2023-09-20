@@ -51,10 +51,6 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 
 	_spriteBatch.begin();
 
-	glm::vec4 uvRect(0, 0, 1, 1);
-	Jauntlet::Color whiteColor;
-	whiteColor.setColor(255, 255, 255, 255);
-
 	// Rendering all tiles into the sprite batch
 	for (int y = 0; y < _levelData.size(); y++) {
 		for (int x = 0; x < _levelData[y].size(); x++) {
@@ -87,13 +83,13 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
 
 
-				_spriteBatch.draw(destRect, {currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z}, _textureCache.getTexture(currentTile.texture).id, 0, whiteColor);
+				_spriteBatch.draw(destRect, {currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z}, _textureCache.getTexture(currentTile.texture).id, 0);
 			}
 			else if (mapIterator->second.tileFunc != nullptr) {
 				mapIterator->second.tileFunc(x * _tileSize + offsetX, -y * _tileSize + offsetY);
 			}
 			else {
-				_spriteBatch.draw(destRect, uvRect, _textureCache.getTexture(mapIterator->second.texture).id, 0, whiteColor);
+				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0);
 			}
 		}
 	}
