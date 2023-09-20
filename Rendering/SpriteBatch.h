@@ -62,6 +62,9 @@ public:
 	void begin(GlyphSortType sortType = GlyphSortType::NONE);
 	// adds a texture and its information to the spritebatch
 	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color = Color(255, 255, 255));
+	// adds a texture and its information to the spritebatch;
+	// this overload assumes your UVs are using the full image
+	void draw(const glm::vec4& destRect, GLuint texture, float depth, const Color& color = Color(255, 255, 255));
 	// closes and sorts the spritebatch
 	void end();
 	// renders the contents of the spritebatch to screen

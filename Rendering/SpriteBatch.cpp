@@ -18,9 +18,13 @@ void SpriteBatch::begin(GlyphSortType sortType /* = GlyphSortType::TEXTURE*/) {
 	_glyphs.clear();
 }
 
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color/* = Color(255, 255, 255)*/) {
 	_glyphs.emplace_back(destRect, uvRect, texture, depth, color);
 }
+void SpriteBatch::draw(const glm::vec4& destRect, GLuint texture, float depth, const Color& color/*= Color(255, 255, 255)*/) {
+	_glyphs.emplace_back(destRect, glm::vec4(0,0,1,1), texture, depth, color);
+}
+
 void SpriteBatch::end() { 
 	// Set up pointers for fast sorting
 	_glyphPointers.resize(_glyphs.size());
