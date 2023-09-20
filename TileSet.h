@@ -7,7 +7,7 @@ namespace Jauntlet {
 class TileSet
 {
 public:
-	enum TileSides { RIGHT = 0x1, BOTTOM = 0x2, TOP = 0x4, LEFT = 0x8 };
+	enum TileSides { RIGHT = 1, BOTTOM = 2, TOP = 4, LEFT = 8, BOTTOM_RIGHT = 16, BOTTOM_LEFT = 32, TOP_RIGHT = 64, TOP_LEFT = 128};
 	// The rules for Tilesets connecting to other tile types. NONE means it will only connect to itself.
 	enum ConnectionRules { NONE = 0x0, TILESETS = 0x1, TILES = 0x2, EMPTY = 0x4 };
 
@@ -45,6 +45,6 @@ private:
 
 	int _id;
 	
-	TileSet::Tileinfo _mainTiles[16];
+	TileSet::Tileinfo _mainTiles[20];
 };
 }

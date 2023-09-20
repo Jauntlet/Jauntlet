@@ -30,7 +30,7 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 }
 
 TileSet::TileSet(std::string FilePath) {
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 20; i++) {
 		_mainTiles[i].texture = FilePath;
 	}
 	// UVs for a full image go from 0 -> 1. This is the size the UV needs to be for a single tile on the template image.
@@ -53,6 +53,12 @@ TileSet::TileSet(std::string FilePath) {
 	_mainTiles[13].UV = glm::vec4(UVsize * 1, UVsize * 0, UVsize, UVsize);
 	_mainTiles[14].UV = glm::vec4(UVsize * 2, UVsize * 1, UVsize, UVsize);
 	_mainTiles[15].UV = glm::vec4(UVsize * 1, UVsize * 1, UVsize, UVsize);
+
+	// TODO: MAKE THIS BETTER
+	_mainTiles[16].UV = glm::vec4(UVsize * 3, UVsize * 4, UVsize, UVsize); // bottom right
+	_mainTiles[17].UV = glm::vec4(UVsize * 4, UVsize * 4, UVsize, UVsize); // bottom left
+	_mainTiles[18].UV = glm::vec4(UVsize * 3, UVsize * 3, UVsize, UVsize); // top right
+	_mainTiles[19].UV = glm::vec4(UVsize * 4, UVsize * 3, UVsize, UVsize); // top left
 }
 // Adds to what the Tileset can connect to. Use TileSet::ConnectionRules.
 void TileSet::addConnectionRule(unsigned int rule) {
@@ -60,7 +66,7 @@ void TileSet::addConnectionRule(unsigned int rule) {
 }
 
 // used by tilemaps to find and display the correct tile based on surrounding tiles
-TileSet::Tileinfo TileSet::tileSetToTile(unsigned int layout) {	
+TileSet::Tileinfo TileSet::tileSetToTile(unsigned int layout) {
 	// 1 = right side
 	// 2 = bottom
 	// 4 = top
@@ -70,5 +76,22 @@ TileSet::Tileinfo TileSet::tileSetToTile(unsigned int layout) {
 		return _mainTiles[layout];
 	}
 	
+	// NOTE: unlike with the regular sides, where the value is true if the tile connects, meaning we check for if it doesn't,
+	// the corners are true if they actually appear, meaning we have to do a bit of weird logic here. -xm
+
+	if (!(layout & TileSides::LEFT) && !(layout & TileSides::TOP) && layout & TileSides::BOTTOM_RIGHT) {
+		return _mainTiles[16];
+	}
+	if (!(layout & TileSides::RIGHT) && !(layout & TileSides::TOP) && layout & TileSides::BOTTOM_LEFT) {
+		return _mainTiles[17];
+	}
+	if (!(layout & TileSides::LEFT) && !(layout & TileSides::BOTTOM) && layout & TileSides::TOP_RIGHT) {
+		return _mainTiles[18];
+	}
+	if (!(layout & TileSides::RIGHT) && !(layout & TileSides::BOTTOM) && layout & TileSides::TOP_LEFT) {
+		return _mainTiles[19];
+	}
+
+	// none of the programmed values are true, return no-sides-connected tile
 	return _mainTiles[0];
 }

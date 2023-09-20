@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <fstream>
-#include <iostream>
+#include <iostream> // remove when done debugging
 
 #include "Errors.h"
 #include "JMath.h"
@@ -70,15 +70,34 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 				if (testTileSetRules(*mapIterator->second.tileSet, x + 1, y)) {
 					tileData |= TileSet::TileSides::RIGHT;
 				}
+
 				if (testTileSetRules(*mapIterator->second.tileSet, x - 1, y)) {
 					tileData |= TileSet::TileSides::LEFT;
 				}
+				
 				if (testTileSetRules(*mapIterator->second.tileSet, x, y + 1)) {
 					tileData |= TileSet::TileSides::BOTTOM;
+					// check for corners
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, x + 1, y + 1)) {
+						tileData |= TileSet::TileSides::BOTTOM_RIGHT;
+					}
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, x - 1, y + 1)) {
+						tileData |= TileSet::TileSides::BOTTOM_LEFT;
+					}
 				}
+				
 				if (testTileSetRules(*mapIterator->second.tileSet, x, y - 1)) {
 					tileData |= TileSet::TileSides::TOP;
+					// check for corners
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, x + 1, y - 1)) {
+						tileData |= TileSet::TileSides::TOP_RIGHT;
+					}
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, x - 1, y - 1)) {
+						tileData |= TileSet::TileSides::TOP_LEFT;
+					}
 				}
+
+				// !left !bottom top right
 
 				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
 
@@ -199,7 +218,7 @@ bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 	
 	auto iterator = _tiles.find(_levelData[y][x]);
 	
-	if (iterator == _tiles.end()) { // must always check if the result is empty first
+	if (iterator == _tiles.end() || iterator->second.tileFunc != nullptr) { // must always check if the result is empty first
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
 	if (iterator->second.tileSet != nullptr && iterator->second.tileSet->getID() == tile.getID()) { // check if the tile is the same tileset
@@ -207,9 +226,6 @@ bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 	}
 	if (tile.connectionRules & TileSet::ConnectionRules::NONE) { // test if the tileset wants to connect to nothing
 		return false;
-	}
-	if (iterator->second.tileFunc != nullptr) { // check if the tile is a function. For now we treat it as if the space is empty.
-		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
 	if (iterator->second.tileSet != nullptr) { // check if the tile is a tileset
 		return (tile.connectionRules & TileSet::ConnectionRules::TILESETS) ? true : false;
