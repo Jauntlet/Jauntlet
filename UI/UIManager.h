@@ -22,6 +22,8 @@ namespace Jauntlet {
 		void draw();
 		// set the hud scale
 		void setScale(float scale);
+		// set the hud scale with x and y scaling seperately
+		void setScale(glm::vec2 scale);
 		// fix all hud elements after resize
 		void resolvePositions();
 	private:

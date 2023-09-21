@@ -29,6 +29,10 @@ void UIManager::setScale(float scale) {
 	_scale = new glm::vec2(scale);
 }
 
+void UIManager::setScale(glm::vec2 scale) {
+	_scale = &scale;
+}
+
 void UIManager::resolvePositions() {
 	for (int i = 0; i < _uiElements.size(); i++) {
 		_uiElements[i]->resolvePosition(_camera);
