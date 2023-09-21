@@ -31,8 +31,15 @@ void TileMap::registerFunction(char identifier, std::function<void(int, int)> cu
 	_tiles.insert(std::make_pair(identifier, tmp));
 }
 
-void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
-	_offset = glm::vec2(offsetX, offsetY);
+int TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
+	if (_levels.empty()) {
+		_spriteBatch.init();
+
+		_spriteBatch.begin();
+	}
+	int currentlevel = _levels.size();
+	_offsets.push_back(glm::vec2(offsetX, offsetY));
+	_levels.emplace_back();
 	
 	std::ifstream file;
 	file.open(filePath);
@@ -44,17 +51,13 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 	std::string tmp;
 
 	while (std::getline(file, tmp)) {
-		_levelData.push_back(tmp);
+		_levels[currentlevel].push_back(tmp);
 	}
 
-	_spriteBatch.init();
-
-	_spriteBatch.begin();
-
 	// Rendering all tiles into the sprite batch
-	for (int y = 0; y < _levelData.size(); y++) {
-		for (int x = 0; x < _levelData[y].size(); x++) {
-			char tile = _levelData[y][x];
+	for (int y = 0; y < _levels[currentlevel].size(); y++) {
+		for (int x = 0; x < _levels[currentlevel][y].size(); x++) {
+			char tile = _levels[currentlevel][y][x];
 			// Create the location and size of the tile
 			glm::vec4 destRect(x * _tileSize + offsetX, -y * _tileSize + offsetY, _tileSize, _tileSize);
 			// Find and Process the tile
@@ -67,37 +70,35 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			if (mapIterator->second.tileSet != nullptr) {
 				unsigned int tileData = 0;
 
-				if (testTileSetRules(*mapIterator->second.tileSet, x + 1, y)) {
+				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel, x + 1, y)) {
 					tileData |= TileSet::TileSides::RIGHT;
 				}
 
-				if (testTileSetRules(*mapIterator->second.tileSet, x - 1, y)) {
+				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel, x - 1, y)) {
 					tileData |= TileSet::TileSides::LEFT;
 				}
 				
-				if (testTileSetRules(*mapIterator->second.tileSet, x, y + 1)) {
+				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel,  x, y + 1)) {
 					tileData |= TileSet::TileSides::BOTTOM;
 					// check for corners
-					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, x + 1, y + 1)) {
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x + 1, y + 1)) {
 						tileData |= TileSet::TileSides::BOTTOM_RIGHT;
 					}
-					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, x - 1, y + 1)) {
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x - 1, y + 1)) {
 						tileData |= TileSet::TileSides::BOTTOM_LEFT;
 					}
 				}
 				
-				if (testTileSetRules(*mapIterator->second.tileSet, x, y - 1)) {
+				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel, x, y - 1)) {
 					tileData |= TileSet::TileSides::TOP;
 					// check for corners
-					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, x + 1, y - 1)) {
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x + 1, y - 1)) {
 						tileData |= TileSet::TileSides::TOP_RIGHT;
 					}
-					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, x - 1, y - 1)) {
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x - 1, y - 1)) {
 						tileData |= TileSet::TileSides::TOP_LEFT;
 					}
 				}
-
-				// !left !bottom top right
 
 				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
 
@@ -112,19 +113,23 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			}
 		}
 	}
-	_spriteBatch.end();
+	return _levels.size() - 1;
 }
 
 void TileMap::draw() {
+	if (!_batchClosed) {
+		_spriteBatch.end();
+		_batchClosed = true;
+	}
 	_spriteBatch.render();
 }
 
-std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
+std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position, int levelIndex) {
 	std::vector<BoxCollider2D> colliders;
 	std::vector<std::pair<float, glm::vec2>> colliderMap;
 
 	// convert position to be a similar index to the levelData
-	glm::ivec2 newPos = position - _offset;
+	glm::ivec2 newPos = position - _offsets[levelIndex];
 	newPos /= _tileSize;
 
 	for (int x = -1; x < 2; x++) {
@@ -134,34 +139,75 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 			int yPos = -newPos.y + y;
 			
 			// if true, the tile position doesn't exist
-			if (yPos < 0 || yPos >= _levelData.size() || xPos >= _levelData[yPos].size() || xPos < 0) {
+			if (yPos < 0 || yPos >= _levels[levelIndex].size() || xPos >= _levels[levelIndex][yPos].size() || xPos < 0) {
 				continue;
 			}
 
-			auto iterator = _tiles.find(_levelData[yPos][xPos]);
+			auto iterator = _tiles.find(_levels[levelIndex][yPos][xPos]);
 
 			if (iterator == _tiles.end()) {
 					continue;
 			}
 
 			if (iterator->second.tileCollision == TileCollision::SQUARE) {
-				colliderMap.emplace_back(JMath::Distance(glm::vec2(xPos * _tileSize + _offset.x, -yPos * _tileSize + _offset.y), position), glm::vec2(xPos, yPos));
+				colliderMap.emplace_back(JMath::Distance(glm::vec2(xPos * _tileSize + _offsets[levelIndex].x, -yPos * _tileSize + _offsets[levelIndex].y), position), glm::vec2(xPos, yPos));
 			}
 		}
 	}
 	std::sort(colliderMap.begin(), colliderMap.end(), &TileMap::shortestDist);
 
 	for (auto& it : colliderMap) {
-		colliders.emplace_back(_tileSize, _tileSize, it.second.x * _tileSize + _offset.x, -it.second.y * _tileSize + _offset.y);
+		colliders.emplace_back(_tileSize, _tileSize, it.second.x * _tileSize + _offsets[levelIndex].x, -it.second.y * _tileSize + _offsets[levelIndex].y);
 	}
 
 	return colliders;
 }
-std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider) {
-	glm::ivec2 lowerBound = collider.position - _offset;
+std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
+	std::vector<BoxCollider2D> colliders;
+	std::vector<std::pair<float, glm::vec2>> colliderMap;
+	for (int i = 0; i < _levels.size(); i++) {
+		// convert position to be a similar index to the levelData
+		glm::ivec2 newPos = position - _offsets[i];
+		newPos /= _tileSize;
+
+		for (int x = -1; x < 2; x++) {
+			for (int y = -1; y < 2; y++) {
+
+				int xPos = newPos.x + x;
+				int yPos = -newPos.y + y;
+
+				// if true, the tile position doesn't exist
+				if (yPos < 0 || yPos >= _levels[i].size() || xPos >= _levels[i][yPos].size() || xPos < 0) {
+					continue;
+				}
+
+				auto iterator = _tiles.find(_levels[i][yPos][xPos]);
+
+				if (iterator == _tiles.end()) {
+					continue;
+				}
+
+				if (iterator->second.tileCollision == TileCollision::SQUARE) {
+					colliderMap.emplace_back(JMath::Distance(glm::vec2(xPos * _tileSize + _offsets[i].x, -yPos * _tileSize + _offsets[i].y), position), glm::vec2(xPos, yPos));
+				}
+			}
+		}
+	}
+	std::sort(colliderMap.begin(), colliderMap.end(), &TileMap::shortestDist);
+
+	for (auto& it : colliderMap) {
+		// I noticed that we add offset twice once I noticed this line of code won't work. I wonder if this is a bug with the original function
+		// -xm
+		colliders.emplace_back(_tileSize, _tileSize, it.second.x * _tileSize /*+ _offsets[levelIndex].x*/, -it.second.y * _tileSize /*+ _offsets[levelIndex].y*/);
+	}
+
+	return colliders;
+}
+std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider, int levelIndex) {
+	glm::ivec2 lowerBound = collider.position - _offsets[levelIndex];
 	lowerBound /= _tileSize;
 
-	glm::ivec2 upperBound = collider.position + collider.GetSize() - _offset;
+	glm::ivec2 upperBound = collider.position + collider.GetSize() - _offsets[levelIndex];
 	upperBound /= _tileSize;
 
 	std::vector<BoxCollider2D> colliders;
@@ -169,54 +215,54 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 	for (int x = lowerBound.x; x < upperBound.x + 1; x++) {
 		for (int y = lowerBound.y; y < upperBound.y + 1; y++) {
 			// if true, the tile position doesn't exist
-			if (y < 0 || y >= _levelData.size() || x >= _levelData[y].size() || x < 0) {
+			if (y < 0 || y >= _levels[levelIndex].size() || x >= _levels[levelIndex][y].size() || x < 0) {
 				continue;
 			}
 
-			auto iterator = _tiles.find(_levelData[y][x]);
+			auto iterator = _tiles.find(_levels[levelIndex][y][x]);
 
 			if (iterator == _tiles.end()) {
 				continue;
 			}
 
 			if (iterator->second.tileCollision == TileCollision::SQUARE) {
-				colliders.emplace_back(_tileSize, _tileSize, x * _tileSize + _offset.x, -y * _tileSize + _offset.y);
+				colliders.emplace_back(_tileSize, _tileSize, x * _tileSize + _offsets[levelIndex].x, -y * _tileSize + _offsets[levelIndex].y);
 			}
 		}
 	}
 	return colliders;
 }
 
-bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
-	if (!isValidTilePos(tilePosition)) {
+bool TileMap::tileHasCollision(glm::ivec2 tilePosition, int levelIndex) {
+	if (!isValidTilePos(levelIndex, tilePosition)) {
 		return false;
 	}
 
-	auto iterator = _tiles.find(_levelData[tilePosition.y][tilePosition.x]);
+	auto iterator = _tiles.find(_levels[levelIndex][tilePosition.y][tilePosition.x]);
 
 	return !(iterator == _tiles.end() || iterator->second.tileCollision == TileCollision::NONE);
 }
 
-glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
-	return glm::vec2(position.x / _tileSize - _offset.x, -position.y / _tileSize - _offset.y);
+glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position, int levelIndex) {
+	return glm::vec2(position.x / _tileSize - _offsets[levelIndex].x, -position.y / _tileSize - _offsets[levelIndex].y);
 }
-glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) {
-	return glm::vec2(position.x * _tileSize + _offset.x, -position.y * _tileSize + _offset.y);
+glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position, int levelIndex) {
+	return glm::vec2(position.x * _tileSize + _offsets[levelIndex].x, -position.y * _tileSize + _offsets[levelIndex].y);
 }
 glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 	return glm::vec2(((int)(position.x / _tileSize) - (position.x < 0 ? 1 : 0)) * _tileSize, ((int)(position.y / _tileSize) + (position.y < 0 ? -1 : 0)) * _tileSize);
 }
-bool TileMap::isValidTilePos(glm::ivec2 position) {
-	return !(position.y < 0 || position.y >= _levelData.size() || position.x >= _levelData[position.y].size() || position.x < 0);
+bool TileMap::isValidTilePos(int levelIndex, glm::ivec2 position) {
+	return !(position.y < 0 || position.y >= _levels[levelIndex].size() || position.x >= _levels[levelIndex][position.y].size() || position.x < 0);
 }
 
-bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
+bool TileMap::testTileSetRules(TileSet tile, int levelIndex, int x, int y) {
 	// make sure the position is within the level range
-	if (y < 0 || y >= _levelData.size() || x >= _levelData[y].size() || x < 0) {
+	if (y < 0 || y >= _levels[levelIndex].size() || x >= _levels[levelIndex][y].size() || x < 0) {
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
 	
-	auto iterator = _tiles.find(_levelData[y][x]);
+	auto iterator = _tiles.find(_levels[levelIndex][y][x]);
 	
 	if (iterator == _tiles.end() || iterator->second.tileFunc != nullptr) { // must always check if the result is empty first
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
