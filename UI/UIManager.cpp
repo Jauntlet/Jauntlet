@@ -20,9 +20,11 @@ void UIManager::addElement(UIElement* uiElement) {
 }
 
 void UIManager::draw() {
+	_spriteBatch->begin();
 	for (int i = 0; i < _uiElements.size(); i++) {
 		_uiElements[i]->draw(_camera, _spriteBatch, _scale);
 	}
+	_spriteBatch->endAndRender();
 }
 
 void UIManager::setScale(float scale) {
