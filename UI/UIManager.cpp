@@ -8,9 +8,10 @@ UIManager::UIManager() {
 	// cock
 }
 
-UIManager::UIManager(Camera2D* camera, SpriteBatch* spriteBatch) {
+UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
-	_spriteBatch = spriteBatch;
+	_spriteBatch = new Jauntlet::SpriteBatch;
+	_spriteBatch->init();
 	_scale = new glm::vec2(1);
 }
 
