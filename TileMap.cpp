@@ -12,23 +12,17 @@
 using namespace Jauntlet;
 
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
+	// Empty
 }
 
 void TileMap::registerTile(char identifier, std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
-	tile tmp = tile(filePath, collisionType);
-	
-	_tiles.insert(std::make_pair(identifier, tmp));
+	_tiles.insert(std::make_pair(identifier, tile(filePath, collisionType)));
 }
-
 void TileMap::registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
-	tile tmp = tile(&tileSet, collisionType);
-
-	_tiles.insert(std::make_pair(identifier, tmp));
+	_tiles.insert(std::make_pair(identifier, tile(&tileSet, collisionType)));
 }
 void TileMap::registerFunction(char identifier, std::function<void(int, int)> customFunction) {
-	tile tmp = tile(customFunction);
-
-	_tiles.insert(std::make_pair(identifier, tmp));
+	_tiles.insert(std::make_pair(identifier, tile(customFunction)));
 }
 
 int TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
