@@ -51,11 +51,11 @@ public:
 	// loads in the tilemap
 	TileMap(TextureCache& textureCache, int tileSize);
 	// register a key to identify a tile
-	void registerTile(char identifier, std::string filePath, TileCollision collisionType = TileCollision::NONE);
+	void registerTile(unsigned int identifier, std::string filePath, TileCollision collisionType = TileCollision::NONE);
 	// register a key to identify a tileSet. TileSetConnections should be from the "TileSetConnections" ENUM.
-	void registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
+	void registerTileSet(unsigned int identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
 	// register a key to execute a function at its location
-	void registerFunction(char identifier, std::function<void(int, int)> customFunction);
+	void registerFunction(unsigned int identifier, std::function<void(int, int)> customFunction);
 	// loads tile map from a file of chars to place all the tiles in the world.
 	// returns ID of tilemap, although the IDs are in load order so its unlikely to be needed.
 	int loadTileMap(std::string filePath, float offsetX = 0, float offsetY = 0);
@@ -95,7 +95,7 @@ private:
 
 	int _tileSize;
 	std::vector<glm::vec2> _offsets;
-	std::map<char, tile> _tiles;
+	std::map<unsigned int, tile> _tiles;
 
 	TextureCache& _textureCache;
 };

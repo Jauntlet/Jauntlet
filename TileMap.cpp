@@ -14,13 +14,13 @@ TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize)
 	// Empty
 }
 
-void TileMap::registerTile(char identifier, std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
+void TileMap::registerTile(unsigned int identifier, std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
 	_tiles.insert(std::make_pair(identifier, tile(filePath, collisionType)));
 }
-void TileMap::registerTileSet(char identifier, TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
+void TileMap::registerTileSet(unsigned int identifier, TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
 	_tiles.insert(std::make_pair(identifier, tile(&tileSet, collisionType)));
 }
-void TileMap::registerFunction(char identifier, std::function<void(int, int)> customFunction) {
+void TileMap::registerFunction(unsigned int identifier, std::function<void(int, int)> customFunction) {
 	_tiles.insert(std::make_pair(identifier, tile(customFunction)));
 }
 
