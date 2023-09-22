@@ -50,15 +50,18 @@ class TileMap
 public:
 	// loads in the tilemap
 	TileMap(TextureCache& textureCache, int tileSize);
+	
 	// register a key to identify a tile
-	void registerTile(unsigned int identifier, std::string filePath, TileCollision collisionType = TileCollision::NONE);
+	void Register(unsigned int identifier, std::string filePath, TileCollision collisionType = TileCollision::NONE);
 	// register a key to identify a tileSet.
-	void registerTileSet(unsigned int identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
+	void Register(unsigned int identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
 	// register a key to execute a function at its location
-	void registerFunction(unsigned int identifier, std::function<void(int, int)> customFunction);
+	void Register(unsigned int identifier, std::function<void(int, int)> customFunction);
+	
 	// loads tile map from a file of chars to place all the tiles in the world.
 	// returns ID of tilemap, although the IDs are in load order so its unlikely to be needed.
 	int loadTileMap(std::string filePath, float offsetX = 0, float offsetY = 0);
+	
 	// draw the tilemap on screen
 	void draw();
 
@@ -68,6 +71,7 @@ public:
 	std::vector<BoxCollider2D> collectCollidingTiles(glm::vec2 position);
 	// returns all tiles with collision within the bounds of the box collider
 	std::vector<BoxCollider2D> collectCollidingTiles(BoxCollider2D collider, int levelIndex);
+	
 	// returns true if the tile position has a collision.
 	bool tileHasCollision(glm::ivec2 tilePosition, int levelIndex);
 
