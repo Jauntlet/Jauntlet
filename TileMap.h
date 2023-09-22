@@ -52,7 +52,7 @@ public:
 	TileMap(TextureCache& textureCache, int tileSize);
 	// register a key to identify a tile
 	void registerTile(unsigned int identifier, std::string filePath, TileCollision collisionType = TileCollision::NONE);
-	// register a key to identify a tileSet. TileSetConnections should be from the "TileSetConnections" ENUM.
+	// register a key to identify a tileSet.
 	void registerTileSet(unsigned int identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
 	// register a key to execute a function at its location
 	void registerFunction(unsigned int identifier, std::function<void(int, int)> customFunction);
@@ -77,6 +77,10 @@ public:
 	glm::vec2 TilePosToWorldPos(glm::ivec2 position, int levelIndex);
 	// Rounds the world position to the nearest tile
 	glm::vec2 RoundWorldPos(glm::vec2 position);
+
+	// Updates what a tile is based on ID. 
+	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations.
+	void UpdateTile(glm::ivec2 position, int levelIndex, unsigned int newID);
 	
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
 	bool isValidTilePos(int levelIndex, glm::ivec2 position);

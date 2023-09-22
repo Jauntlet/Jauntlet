@@ -183,6 +183,14 @@ glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position, int levelIndex) {
 glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 	return glm::vec2(((int)(position.x / _tileSize) - (position.x < 0 ? 1 : 0)) * _tileSize, ((int)(position.y / _tileSize) + (position.y < 0 ? -1 : 0)) * _tileSize);
 }
+
+void TileMap::UpdateTile(glm::ivec2 position, int levelIndex, unsigned int newID) {
+	_levels[levelIndex][position.y][position.x] = newID;
+	// Eventually, it may be smarter to move this into the draw function so that we only update the tile map
+	// once per frame at max, but for now this functionality is not needed, and I have a lot more work to do elsewhere. -xm
+	updateTileMap(levelIndex);
+}
+
 bool TileMap::isValidTilePos(int levelIndex, glm::ivec2 position) {
 	return !(position.y < 0 || position.y >= _levels[levelIndex].size() || position.x >= _levels[levelIndex][position.y].size() || position.x < 0);
 }
