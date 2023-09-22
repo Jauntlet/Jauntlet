@@ -3,6 +3,10 @@
 
 using namespace Jauntlet;
 
+Window::Window() {
+	// Empty
+}
+
 int Window::create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags /*= 0*/)
 {
 
