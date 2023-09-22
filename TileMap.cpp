@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <fstream>
-#include <iostream> // remove when done debugging
 
 #include "Errors.h"
 #include "JMath.h"
@@ -26,14 +25,11 @@ void TileMap::registerFunction(char identifier, std::function<void(int, int)> cu
 }
 
 int TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
-	if (_levels.empty()) {
-		_spriteBatch.init();
-
-		_spriteBatch.begin();
-	}
 	int currentlevel = _levels.size();
 	_offsets.push_back(glm::vec2(offsetX, offsetY));
 	_levels.emplace_back();
+	_spriteBatches.emplace_back();
+	_spriteBatches[_spriteBatches.size() - 1].init();
 	
 	std::ifstream file;
 	file.open(filePath);
@@ -47,75 +43,16 @@ int TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offs
 	while (std::getline(file, tmp)) {
 		_levels[currentlevel].push_back(tmp);
 	}
-
-	// Rendering all tiles into the sprite batch
-	for (int y = 0; y < _levels[currentlevel].size(); y++) {
-		for (int x = 0; x < _levels[currentlevel][y].size(); x++) {
-			char tile = _levels[currentlevel][y][x];
-			// Create the location and size of the tile
-			glm::vec4 destRect(x * _tileSize + offsetX, -y * _tileSize + offsetY, _tileSize, _tileSize);
-			// Find and Process the tile
-			auto mapIterator = _tiles.find(tile);
-
-			if (mapIterator == _tiles.end()) {
-				continue;
-			}
-			
-			if (mapIterator->second.tileSet != nullptr) {
-				unsigned int tileData = 0;
-
-				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel, x + 1, y)) {
-					tileData |= TileSet::TileSides::RIGHT;
-				}
-
-				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel, x - 1, y)) {
-					tileData |= TileSet::TileSides::LEFT;
-				}
-				
-				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel,  x, y + 1)) {
-					tileData |= TileSet::TileSides::BOTTOM;
-					// check for corners
-					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x + 1, y + 1)) {
-						tileData |= TileSet::TileSides::BOTTOM_RIGHT;
-					}
-					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x - 1, y + 1)) {
-						tileData |= TileSet::TileSides::BOTTOM_LEFT;
-					}
-				}
-				
-				if (testTileSetRules(*mapIterator->second.tileSet, currentlevel, x, y - 1)) {
-					tileData |= TileSet::TileSides::TOP;
-					// check for corners
-					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x + 1, y - 1)) {
-						tileData |= TileSet::TileSides::TOP_RIGHT;
-					}
-					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, currentlevel, x - 1, y - 1)) {
-						tileData |= TileSet::TileSides::TOP_LEFT;
-					}
-				}
-
-				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
-
-
-				_spriteBatch.draw(destRect, {currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z}, _textureCache.getTexture(currentTile.texture).id, 0);
-			}
-			else if (mapIterator->second.tileFunc != nullptr) {
-				mapIterator->second.tileFunc(x * _tileSize + offsetX, -y * _tileSize + offsetY);
-			}
-			else {
-				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0);
-			}
-		}
-	}
+	
+	updateTileMap(currentlevel);
+	
 	return _levels.size() - 1;
 }
 
 void TileMap::draw() {
-	if (!_batchClosed) {
-		_spriteBatch.end();
-		_batchClosed = true;
+	for (int i = 0; i < _spriteBatches.size(); i++) {
+		_spriteBatches[i].render();
 	}
-	_spriteBatch.render();
 }
 
 std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position, int levelIndex) {
@@ -248,6 +185,71 @@ glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 }
 bool TileMap::isValidTilePos(int levelIndex, glm::ivec2 position) {
 	return !(position.y < 0 || position.y >= _levels[levelIndex].size() || position.x >= _levels[levelIndex][position.y].size() || position.x < 0);
+}
+
+void TileMap::updateTileMap(int levelIndex) {
+	_spriteBatches[levelIndex].begin();
+
+	// Rendering all tiles into the sprite batch
+	for (int y = 0; y < _levels[levelIndex].size(); y++) {
+		for (int x = 0; x < _levels[levelIndex][y].size(); x++) {
+			char tile = _levels[levelIndex][y][x];
+			// Create the location and size of the tile
+			glm::vec4 destRect(x * _tileSize + _offsets[levelIndex].x, -y * _tileSize + _offsets[levelIndex].y, _tileSize, _tileSize);
+			// Find and Process the tile
+			auto mapIterator = _tiles.find(tile);
+
+			if (mapIterator == _tiles.end()) {
+				continue;
+			}
+
+			if (mapIterator->second.tileSet != nullptr) {
+				unsigned int tileData = 0;
+
+				if (testTileSetRules(*mapIterator->second.tileSet, levelIndex, x + 1, y)) {
+					tileData |= TileSet::TileSides::RIGHT;
+				}
+
+				if (testTileSetRules(*mapIterator->second.tileSet, levelIndex, x - 1, y)) {
+					tileData |= TileSet::TileSides::LEFT;
+				}
+
+				if (testTileSetRules(*mapIterator->second.tileSet, levelIndex, x, y + 1)) {
+					tileData |= TileSet::TileSides::BOTTOM;
+					// check for corners
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, levelIndex, x + 1, y + 1)) {
+						tileData |= TileSet::TileSides::BOTTOM_RIGHT;
+					}
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, levelIndex, x - 1, y + 1)) {
+						tileData |= TileSet::TileSides::BOTTOM_LEFT;
+					}
+				}
+
+				if (testTileSetRules(*mapIterator->second.tileSet, levelIndex, x, y - 1)) {
+					tileData |= TileSet::TileSides::TOP;
+					// check for corners
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, levelIndex, x + 1, y - 1)) {
+						tileData |= TileSet::TileSides::TOP_RIGHT;
+					}
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, levelIndex, x - 1, y - 1)) {
+						tileData |= TileSet::TileSides::TOP_LEFT;
+					}
+				}
+
+				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
+
+
+				_spriteBatches[levelIndex].draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0);
+			}
+			else if (mapIterator->second.tileFunc != nullptr) {
+				mapIterator->second.tileFunc(x * _tileSize + _offsets[levelIndex].x, -y * _tileSize + _offsets[levelIndex].y);
+			}
+			else {
+				_spriteBatches[levelIndex].draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0);
+			}
+		}
+	}
+	_spriteBatches[levelIndex].end();
 }
 
 bool TileMap::testTileSetRules(TileSet tile, int levelIndex, int x, int y) {

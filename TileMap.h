@@ -81,6 +81,9 @@ public:
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
 	bool isValidTilePos(int levelIndex, glm::ivec2 position);
 private:
+	// Updates what tiles are drawn to screen. Run this as little as possible.
+	void updateTileMap(int levelIndex);
+	
 	// checks whether or not a tileset would connect to the specified tile position.
 	bool testTileSetRules(TileSet tile, int x, int y, int levelIndex);
 
@@ -88,8 +91,7 @@ private:
 	static bool shortestDist(std::pair<float, glm::vec2>& a, std::pair<float, glm::vec2>& b);
 
 	std::vector<std::vector<std::string>> _levels;
-	SpriteBatch _spriteBatch;
-	bool _batchClosed = false;
+	std::vector<SpriteBatch> _spriteBatches;
 
 	int _tileSize;
 	std::vector<glm::vec2> _offsets;
