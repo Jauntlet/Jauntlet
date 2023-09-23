@@ -55,8 +55,6 @@ public:
 	void Register(std::string filePath, TileCollision collisionType = TileCollision::NONE);
 	// register a key to identify a tileSet.
 	void Register(TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
-	// register a key to execute a function at its location
-	void Register(std::function<void(int, int)> customFunction);
 	
 	// loads tile map from a file of chars to place all the tiles in the world.
 	void loadTileMap(std::string filePath, float offsetX = 0, float offsetY = 0);

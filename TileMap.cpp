@@ -23,9 +23,6 @@ void TileMap::Register(std::string filePath, TileCollision collisionType/*= Tile
 void TileMap::Register(TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
 	_tiles.insert(std::make_pair(nextID++, tile(&tileSet, collisionType)));
 }
-void TileMap::Register(std::function<void(int, int)> customFunction) {
-	_tiles.insert(std::make_pair(nextID++, tile(customFunction)));
-}
 
 void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
 	_offset = glm::vec2(offsetX, offsetY);
