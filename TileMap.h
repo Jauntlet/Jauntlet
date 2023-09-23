@@ -52,11 +52,11 @@ public:
 	TileMap(TextureCache& textureCache, int tileSize);
 	
 	// register a key to identify a tile
-	void Register(unsigned int identifier, std::string filePath, TileCollision collisionType = TileCollision::NONE);
+	void Register(std::string filePath, TileCollision collisionType = TileCollision::NONE);
 	// register a key to identify a tileSet.
-	void Register(unsigned int identifier, TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
+	void Register(TileSet& tileSet, TileCollision collisionType = TileCollision::NONE);
 	// register a key to execute a function at its location
-	void Register(unsigned int identifier, std::function<void(int, int)> customFunction);
+	void Register(std::function<void(int, int)> customFunction);
 	
 	// loads tile map from a file of chars to place all the tiles in the world.
 	void loadTileMap(std::string filePath, float offsetX = 0, float offsetY = 0);
@@ -99,8 +99,10 @@ private:
 	SpriteBatch _spriteBatch;
 
 	int _tileSize;
-	glm::vec2 _offset;
+	glm::vec2 _offset = glm::vec2();
+	
 	std::map<unsigned int, tile> _tiles;
+	int nextID = 1;
 
 	TextureCache& _textureCache;
 };

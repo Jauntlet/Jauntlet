@@ -1,5 +1,8 @@
 #include <algorithm>
 #include <fstream>
+#include <sstream>
+
+#include <iostream> // remove when done debugging
 
 #include "Errors.h"
 #include "JMath.h"
@@ -14,14 +17,14 @@ TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize)
 	// Empty
 }
 
-void TileMap::Register(unsigned int identifier, std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
-	_tiles.insert(std::make_pair(identifier, tile(filePath, collisionType)));
+void TileMap::Register(std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
+	_tiles.insert(std::make_pair(nextID++, tile(filePath, collisionType)));
 }
-void TileMap::Register(unsigned int identifier, TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
-	_tiles.insert(std::make_pair(identifier, tile(&tileSet, collisionType)));
+void TileMap::Register(TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
+	_tiles.insert(std::make_pair(nextID++, tile(&tileSet, collisionType)));
 }
-void TileMap::Register(unsigned int identifier, std::function<void(int, int)> customFunction) {
-	_tiles.insert(std::make_pair(identifier, tile(customFunction)));
+void TileMap::Register(std::function<void(int, int)> customFunction) {
+	_tiles.insert(std::make_pair(nextID++, tile(customFunction)));
 }
 
 void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
@@ -39,12 +42,44 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 	std::string tmp;
 
 	// Reading tile information into the tilemap
-	while (std::getline(file, tmp)) {
+	while (std::getline(file, tmp, ' ')) {
+		// further delimiting
+		std::stringstream ss(tmp);
+		while (std::getline(ss, tmp, '\n')) {
+			
+			// break out of this loop to start reading in the tilemap itself
+			if (tmp == "ENDDEC") {
+				break;
+			}
 
+			if (tmp == "tile") {
+				std::getline(file, tmp, '\n');
+
+				if (JMath::Split(tmp, ' ')[1] == "collision") {
+					Register(JMath::Split(tmp,' ')[0], TileCollision::SQUARE);
+					continue;
+				}
+				Register(JMath::Split(tmp, ' ')[0]);
+				continue;
+			}
+			
+			if (tmp == "tileSet") {
+				std::getline(file, tmp, '\n');
+
+				TileSet newTile(JMath::Split(tmp, ' ')[0]);
+
+				if (JMath::Split(tmp, ' ')[1] == "collision") {
+					Register(newTile, TileCollision::SQUARE);
+					continue;
+				}
+				Register(newTile);
+				continue;
+			}
+		}
 	}
 
-	while (std::getline(file, tmp)) {
-		//_level.push_back(tmp);
+	while (std::getline(file, tmp, ',')) {
+		_level.push_back(tmp);
 	}
 	
 	updateTileMap();
