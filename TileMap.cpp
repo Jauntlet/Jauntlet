@@ -242,9 +242,6 @@ void TileMap::updateTileMap() {
 
 				_spriteBatch.draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0);
 			}
-			else if (mapIterator->second.tileFunc != nullptr) {
-				mapIterator->second.tileFunc(x * _tileSize + _offset.x, -y * _tileSize + _offset.y);
-			}
 			else {
 				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0);
 			}
@@ -261,7 +258,7 @@ bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 	
 	auto iterator = _tiles.find(_level[y][x]);
 	
-	if (iterator == _tiles.end() || iterator->second.tileFunc != nullptr) { // must always check if the result is empty first
+	if (iterator == _tiles.end()) { // must always check if the result is empty first
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
 	if (iterator->second.tileSet != nullptr && iterator->second.tileSet->getID() == tile.getID()) { // check if the tile is the same tileset

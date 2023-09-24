@@ -20,28 +20,19 @@ enum TileCollision { NONE = 0, SQUARE = 1};
 struct tile {
 	std::string texture;
 	TileSet* tileSet;
-	std::function<void(int, int)> tileFunc;
 
 	TileCollision tileCollision;
 
 	tile(std::string Texture, TileCollision collisionType) {
 		texture = Texture;
 		tileSet = nullptr;
-		tileFunc = nullptr;
 
 		tileCollision = collisionType;
 	}
 	tile(TileSet* tileset, TileCollision collisionType) {
 		tileSet = tileset;
-		tileFunc = nullptr;
 
 		tileCollision = collisionType;
-	}
-	tile(std::function<void(int, int)> func) {
-		tileSet = nullptr;
-		tileFunc = func;
-
-		tileCollision = TileCollision::NONE;
 	}
 };
 
