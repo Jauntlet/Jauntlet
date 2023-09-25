@@ -95,6 +95,7 @@ private:
 	std::map<unsigned int, tile> _tiles;
 	std::vector<TileSet*> _storedTileSets;
 	int nextID = 1;
+	bool _needsTileUpdate = false;
 
 	TextureCache& _textureCache;
 };

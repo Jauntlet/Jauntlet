@@ -43,7 +43,6 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 	}
 
 	std::string line;
-	bool readingLevel = false;
 	// Reading tile information into the tilemap
 	while (std::getline(file, line, '\n')) {
 		// further delimiting
@@ -103,6 +102,9 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 }
 
 void TileMap::draw() {
+	if (_needsTileUpdate) {
+		updateTileMap();
+	}
 	_spriteBatch.render();
 }
 
@@ -199,9 +201,7 @@ glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 
 void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 	_level[position.y][position.x] = newID;
-	// Eventually, it may be smarter to move this into the draw function so that we only update the tile map
-	// once per frame at max, but for now this functionality is not needed, and I have a lot more work to do elsewhere. -xm
-	updateTileMap();
+	_needsTileUpdate = true;
 }
 
 bool TileMap::isValidTilePos(glm::ivec2 position) {
