@@ -16,6 +16,7 @@ using namespace Jauntlet;
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 	// Empty
 }
+
 TileMap::~TileMap() {
 	for (int i = 0; i < _storedTileSets.size(); i++) {
 		delete _storedTileSets[i];
@@ -69,8 +70,6 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			if (line == "tileSet") {
 				std::getline(ss, line);
 
-				std::cout << "Line is: " << JMath::Split(line, ' ')[0] << std::endl;
-
 				_storedTileSets.emplace_back(new TileSet(JMath::Split(line, ' ')[0]));
 
 				if (JMath::Split(line, ' ')[1] == "collision") {
@@ -87,15 +86,15 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 	}
 
 	int y = 0;
-	_level.push_back(std::vector<std::string>());
+	_level.push_back(std::vector<unsigned int>());
 	while (std::getline(file, line, '\n')) {
 		std::stringstream ss(line);
 		while (std::getline(ss, line, ',')) {
 			std::cout << "Reading: " << line << std::endl;
-			_level[y].push_back(line);
+			_level[y].push_back(stoi(line));
 		}
 		y++;
-		_level.push_back(std::vector<std::string>());
+		_level.push_back(std::vector<unsigned int>());
 	}
 
 	updateTileMap();
@@ -127,7 +126,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 				continue;
 			}
 
-			auto iterator = _tiles.find(stoi(_level[yPos][xPos]));
+			auto iterator = _tiles.find(_level[yPos][xPos]);
 
 			if (iterator == _tiles.end()) {
 				continue;
@@ -165,7 +164,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 				continue;
 			}
 
-			auto iterator = _tiles.find(stoi(_level[y][x]));
+			auto iterator = _tiles.find(_level[y][x]);
 
 			if (iterator == _tiles.end()) {
 				continue;
@@ -184,7 +183,7 @@ bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
 		return false;
 	}
 
-	auto iterator = _tiles.find(stoi(_level[tilePosition.y][tilePosition.x]));
+	auto iterator = _tiles.find(_level[tilePosition.y][tilePosition.x]);
 
 	return !(iterator == _tiles.end() || iterator->second.tileCollision == TileCollision::NONE);
 }
@@ -201,10 +200,10 @@ glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 
 void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 	while (position.y > _level.size() - 1) {
-		_level.push_back(std::vector<std::string>());
+		_level.push_back(std::vector<unsigned int>());
 	}
 	while (position.x > _level[position.y].size() - 1) {
-		_level[position.y].emplace_back(0);
+		_level[position.y].push_back(0);
 	}
 	
 	_level[position.y][position.x] = newID;
@@ -221,11 +220,11 @@ void TileMap::updateTileMap() {
 	// Rendering all tiles into the sprite batch
 	for (int y = 0; y < _level.size(); y++) {
 		for (int x = 0; x < _level[y].size(); x++) {
-			std::string tile = _level[y][x];
+			unsigned int tile = _level[y][x];
 			// Create the location and size of the tile
 			glm::vec4 destRect(x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize);
 			// Find and Process the tile
-			auto mapIterator = _tiles.find(stoi(tile));
+			auto mapIterator = _tiles.find(tile);
 
 			if (mapIterator == _tiles.end()) {
 				continue;
@@ -283,7 +282,7 @@ bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
 	
-	auto iterator = _tiles.find(stoi(_level[y][x]));
+	auto iterator = _tiles.find(_level[y][x]);
 	
 	if (iterator == _tiles.end()) { // must always check if the result is empty first
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;

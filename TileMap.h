@@ -86,7 +86,7 @@ private:
 	// for sorting tiles via distance
 	static bool shortestDist(std::pair<float, glm::vec2>& a, std::pair<float, glm::vec2>& b);
 
-	std::vector<std::vector<std::string>> _level;
+	std::vector<std::vector<unsigned int>> _level;
 	SpriteBatch _spriteBatch;
 
 	int _tileSize;
