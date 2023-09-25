@@ -25,6 +25,7 @@ void TileMap::Register(TileSet& tileSet, TileCollision collisionType/*= TileColl
 }
 
 void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
+	
 	_offset = glm::vec2(offsetX, offsetY);
 	
 	_spriteBatch.init();
@@ -37,20 +38,25 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 	}
 
 	std::string tmp;
-
+	bool readingLevel = false;
 	// Reading tile information into the tilemap
-	while (std::getline(file, tmp, ' ')) {
+	while (std::getline(file, tmp, '\n')) {
 		// further delimiting
 		std::stringstream ss(tmp);
-		while (std::getline(ss, tmp, '\n')) {
-			
+		while (std::getline(ss, tmp, ' ')) {
+			// We are reading in tile and tileset information
+
 			// break out of this loop to start reading in the tilemap itself
-			if (tmp == "ENDDEC") {
-				break;
+			if (readingLevel || tmp == "ENDDEC") {
+				readingLevel = true;
+				std::stringstream ss2(tmp);
+				while (std::getline(ss2, tmp, ',')) {
+					_level.push_back(tmp);
+				}
 			}
 
 			if (tmp == "tile") {
-				std::getline(file, tmp, '\n');
+				std::getline(ss, tmp);
 
 				if (JMath::Split(tmp, ' ')[1] == "collision") {
 					Register(JMath::Split(tmp,' ')[0], TileCollision::SQUARE);
@@ -61,7 +67,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			}
 			
 			if (tmp == "tileSet") {
-				std::getline(file, tmp, '\n');
+				std::getline(ss, tmp);
 
 				TileSet newTile(JMath::Split(tmp, ' ')[0]);
 
@@ -74,11 +80,6 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			}
 		}
 	}
-
-	while (std::getline(file, tmp, ',')) {
-		_level.push_back(tmp);
-	}
-	
 	updateTileMap();
 }
 
