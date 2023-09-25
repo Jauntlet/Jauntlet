@@ -200,6 +200,13 @@ glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 }
 
 void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
+	while (position.y > _level.size() - 1) {
+		_level.push_back(std::vector<std::string>());
+	}
+	while (position.x > _level[position.y].size() - 1) {
+		_level[position.y].emplace_back(0);
+	}
+	
 	_level[position.y][position.x] = newID;
 	_needsTileUpdate = true;
 }
