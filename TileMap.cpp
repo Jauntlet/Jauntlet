@@ -16,6 +16,11 @@ using namespace Jauntlet;
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 	// Empty
 }
+TileMap::~TileMap() {
+	for (int i = 0; i < _storedTileSets.size(); i++) {
+		delete _storedTileSets[i];
+	}
+}
 
 void TileMap::Register(std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
 	_tiles.insert(std::make_pair(nextID++, tile(filePath, collisionType)));
@@ -37,49 +42,63 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 		fatalError("Failed to open TileMap " + filePath);
 	}
 
-	std::string tmp;
+	std::string line;
 	bool readingLevel = false;
 	// Reading tile information into the tilemap
-	while (std::getline(file, tmp, '\n')) {
+	while (std::getline(file, line, '\n')) {
 		// further delimiting
-		std::stringstream ss(tmp);
-		while (std::getline(ss, tmp, ' ')) {
+		std::stringstream ss(line);
+		while (std::getline(ss, line, ' ')) {
 			// We are reading in tile and tileset information
 
 			// break out of this loop to start reading in the tilemap itself
-			if (readingLevel || tmp == "ENDDEC") {
-				readingLevel = true;
-				std::stringstream ss2(tmp);
-				while (std::getline(ss2, tmp, ',')) {
-					_level.push_back(tmp);
-				}
+			if (line == "ENDDEC") {
+				break;
 			}
 
-			if (tmp == "tile") {
-				std::getline(ss, tmp);
+			if (line == "tile") {
+				std::getline(ss, line);
 
-				if (JMath::Split(tmp, ' ')[1] == "collision") {
-					Register(JMath::Split(tmp,' ')[0], TileCollision::SQUARE);
+				if (JMath::Split(line, ' ')[1] == "collision") {
+					Register(JMath::Split(line,' ')[0], TileCollision::SQUARE);
 					continue;
 				}
-				Register(JMath::Split(tmp, ' ')[0]);
+				Register(JMath::Split(line, ' ')[0]);
 				continue;
 			}
 			
-			if (tmp == "tileSet") {
-				std::getline(ss, tmp);
+			if (line == "tileSet") {
+				std::getline(ss, line);
 
-				TileSet newTile(JMath::Split(tmp, ' ')[0]);
+				std::cout << "Line is: " << JMath::Split(line, ' ')[0] << std::endl;
 
-				if (JMath::Split(tmp, ' ')[1] == "collision") {
-					Register(newTile, TileCollision::SQUARE);
+				_storedTileSets.emplace_back(new TileSet(JMath::Split(line, ' ')[0]));
+
+				if (JMath::Split(line, ' ')[1] == "collision") {
+					Register(*_storedTileSets.back(), TileCollision::SQUARE);
 					continue;
 				}
-				Register(newTile);
+				Register(*_storedTileSets.back());
 				continue;
 			}
 		}
+		if (line == "ENDDEC") {
+			break;
+		}
 	}
+
+	int y = 0;
+	_level.push_back(std::vector<std::string>());
+	while (std::getline(file, line, '\n')) {
+		std::stringstream ss(line);
+		while (std::getline(ss, line, ',')) {
+			std::cout << "Reading: " << line << std::endl;
+			_level[y].push_back(line);
+		}
+		y++;
+		_level.push_back(std::vector<std::string>());
+	}
+
 	updateTileMap();
 }
 
@@ -106,7 +125,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 				continue;
 			}
 
-			auto iterator = _tiles.find(_level[yPos][xPos]);
+			auto iterator = _tiles.find(stoi(_level[yPos][xPos]));
 
 			if (iterator == _tiles.end()) {
 				continue;
@@ -144,7 +163,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 				continue;
 			}
 
-			auto iterator = _tiles.find(_level[y][x]);
+			auto iterator = _tiles.find(stoi(_level[y][x]));
 
 			if (iterator == _tiles.end()) {
 				continue;
@@ -163,7 +182,7 @@ bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
 		return false;
 	}
 
-	auto iterator = _tiles.find(_level[tilePosition.y][tilePosition.x]);
+	auto iterator = _tiles.find(stoi(_level[tilePosition.y][tilePosition.x]));
 
 	return !(iterator == _tiles.end() || iterator->second.tileCollision == TileCollision::NONE);
 }
@@ -195,11 +214,11 @@ void TileMap::updateTileMap() {
 	// Rendering all tiles into the sprite batch
 	for (int y = 0; y < _level.size(); y++) {
 		for (int x = 0; x < _level[y].size(); x++) {
-			char tile = _level[y][x];
+			std::string tile = _level[y][x];
 			// Create the location and size of the tile
 			glm::vec4 destRect(x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize);
 			// Find and Process the tile
-			auto mapIterator = _tiles.find(tile);
+			auto mapIterator = _tiles.find(stoi(tile));
 
 			if (mapIterator == _tiles.end()) {
 				continue;
@@ -257,7 +276,7 @@ bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
 	
-	auto iterator = _tiles.find(_level[y][x]);
+	auto iterator = _tiles.find(stoi(_level[y][x]));
 	
 	if (iterator == _tiles.end()) { // must always check if the result is empty first
 		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;

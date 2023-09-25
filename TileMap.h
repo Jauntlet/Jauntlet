@@ -41,7 +41,9 @@ class TileMap
 public:
 	// loads in the tilemap
 	TileMap(TextureCache& textureCache, int tileSize);
-	
+	// Destructor
+	~TileMap();
+
 	// register a key to identify a tile
 	void Register(std::string filePath, TileCollision collisionType = TileCollision::NONE);
 	// register a key to identify a tileSet.
@@ -84,13 +86,14 @@ private:
 	// for sorting tiles via distance
 	static bool shortestDist(std::pair<float, glm::vec2>& a, std::pair<float, glm::vec2>& b);
 
-	std::vector<std::string> _level;
+	std::vector<std::vector<std::string>> _level;
 	SpriteBatch _spriteBatch;
 
 	int _tileSize;
 	glm::vec2 _offset = glm::vec2();
 	
 	std::map<unsigned int, tile> _tiles;
+	std::vector<TileSet*> _storedTileSets;
 	int nextID = 1;
 
 	TextureCache& _textureCache;
