@@ -41,8 +41,6 @@ class TileMap
 public:
 	// loads in the tilemap
 	TileMap(TextureCache& textureCache, int tileSize);
-	// Destructor
-	~TileMap();
 
 	// register a key to identify a tile
 	void Register(std::string filePath, TileCollision collisionType = TileCollision::NONE);
@@ -73,11 +71,14 @@ public:
 	glm::vec2 RoundWorldPos(glm::vec2 position);
 
 	// Updates what a tile is based on ID. 
-	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations.
+	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
 	void UpdateTile(glm::ivec2 position, unsigned int newID);
 	
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
 	bool isValidTilePos(glm::ivec2 position);
+protected:
+	// Destructor
+	~TileMap();
 private:
 	// Updates what tiles are drawn to screen. Run this as little as possible.
 	void updateTileMap();
