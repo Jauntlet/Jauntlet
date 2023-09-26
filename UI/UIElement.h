@@ -11,7 +11,13 @@ namespace Jauntlet {
 	class UIElement
 	{
 	public:
-		enum ELEMENT_TYPE {TEXT, SPRITE, BAR}; // TODO: delete this shit -jk
+		enum class PIN_POSITION {
+			TOP_LEFT,
+			TOP_RIGHT,
+			BOTTOM_LEFT,
+			BOTTOM_RIGHT,
+			CENTER
+		};
 		UIElement();
 		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale);
 		virtual void resolvePosition(Camera2D* camera);
