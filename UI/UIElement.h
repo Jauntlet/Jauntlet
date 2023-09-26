@@ -14,7 +14,7 @@ namespace Jauntlet {
 		enum ELEMENT_TYPE {TEXT, SPRITE, BAR}; // TODO: delete this shit -jk
 		UIElement();
 		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale);
-		void resolvePosition(Camera2D* camera);
+		virtual void resolvePosition(Camera2D* camera);
 	protected:
 		Camera2D* _camera;
 		glm::vec2* _position;
