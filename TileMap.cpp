@@ -19,7 +19,7 @@ TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize)
 
 TileMap::~TileMap() {
 	for (int i = 0; i < _storedTileSets.size(); i++) {
-		delete _storedTileSets[i];
+		delete &_storedTileSets[i];
 	}
 }
 
