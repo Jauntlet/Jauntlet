@@ -186,6 +186,12 @@ bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
 
 	return !(iterator == _tiles.end() || iterator->second.tileCollision == TileCollision::NONE);
 }
+unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
+	if (!isValidTilePos(tilePosition)) {
+		return 0;
+	}
+	return _level[tilePosition.y][tilePosition.x];
+}
 
 glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
 	return glm::vec2(position.x / _tileSize - _offset.x, -position.y / _tileSize - _offset.y);
@@ -202,8 +208,6 @@ void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 		std::cout << "WARNING: Tried to overwrite a negative tileposition: " << position.x << ", " << position.y << std::endl;
 		return;
 	}
-	
-	std::cout << position.x << ", " << position.y << std::endl;
 
 	while (position.y >= _level.size() - 1) {
 		_level.push_back(std::vector<unsigned int>());

@@ -62,6 +62,8 @@ public:
 	
 	// returns true if the tile position has a collision.
 	bool tileHasCollision(glm::ivec2 tilePosition);
+	// returns ID of tile position.
+	unsigned int getTileID(glm::ivec2 tilePosition);
 
 	// Converts a position to be relative to the tileset: used mostly for checking tiles.
 	glm::ivec2 WorldPosToTilePos(glm::vec2 position);
