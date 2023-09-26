@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 
-#include <iostream> // remove when done debugging
 
 #include "Errors.h"
 #include "JMath.h"
@@ -90,7 +90,6 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 	while (std::getline(file, line, '\n')) {
 		std::stringstream ss(line);
 		while (std::getline(ss, line, ',')) {
-			std::cout << "Reading: " << line << std::endl;
 			_level[y].push_back(stoi(line));
 		}
 		y++;
@@ -199,10 +198,19 @@ glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 }
 
 void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
-	while (position.y > _level.size() - 1) {
-		_level.push_back(std::vector<unsigned int>());
+	if (position.y < 0 || position.x < 0) {
+		std::cout << "WARNING: Tried to overwrite a negative tileposition: " << position.x << ", " << position.y << std::endl;
+		return;
 	}
-	while (position.x > _level[position.y].size() - 1) {
+	
+	std::cout << position.x << ", " << position.y << std::endl;
+
+	while (position.y >= _level.size() - 1) {
+		_level.push_back(std::vector<unsigned int>());
+		_level[_level.size() - 1].push_back(0);
+	}
+	
+	while (position.x >= _level[position.y].size()) {
 		_level[position.y].push_back(0);
 	}
 	
