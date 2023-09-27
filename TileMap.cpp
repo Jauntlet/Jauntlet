@@ -194,13 +194,14 @@ unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
 }
 
 glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
-	return glm::vec2(position.x / _tileSize - _offset.x, -position.y / _tileSize - _offset.y);
+	// remember that offset is in worldspace aswell.
+	return glm::vec2((position.x - _offset.x) / _tileSize, (-position.y - _offset.y) / _tileSize);
 }
 glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) {
 	return glm::vec2(position.x * _tileSize + _offset.x, -position.y * _tileSize + _offset.y);
 }
 glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
-	return glm::vec2(((int)(position.x / _tileSize) - (position.x < 0 ? 1 : 0)) * _tileSize, ((int)(position.y / _tileSize) + (position.y < 0 ? -1 : 0)) * _tileSize);
+	return glm::vec2(((int)(position.x / _tileSize) - (position.x < 0 ? 1 : 0)) * _tileSize + (int)_offset.x % _tileSize, ((int)(position.y / _tileSize) + (position.y < 0 ? -1 : 0)) * _tileSize - (int)_offset.y % _tileSize);
 }
 
 void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
@@ -218,7 +219,11 @@ void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 		_level[position.y].push_back(0);
 	}
 	
-	_level[position.y][position.x] = newID;
+	if (_level[position.y][position.x] != newID) {
+		_level[position.y][position.x] = newID;
+		_needsTileUpdate = true;
+	}
+}
 	_needsTileUpdate = true;
 }
 
