@@ -47,8 +47,8 @@ void Camera2D::update() {
 	//xander wants to remove unrounded positions from the camera, as they cause shimmering. to prevent this, we round position before updating the matrix. -jk
     _cameraMatrix = glm::translate(
         _orthoMatrix,
-        glm::vec3(_screenWidth / 2.0f - _doRounding ? round(_position.x) : _position.x,
-                  _screenHeight / 2.0f - _doRounding ? round(_position.y) : _position.y, 0.0f));
+        glm::vec3(_screenWidth / 2.0f - (_doRounding ? round(_position.x) : _position.x),
+                  _screenHeight / 2.0f - (_doRounding ? round(_position.y) : _position.y), 0.0f));
     
 	_cameraMatrix = glm::scale(_cameraMatrix, glm::vec3(_scale, _scale, 0));
 
