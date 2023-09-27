@@ -75,6 +75,10 @@ public:
 	// Updates what a tile is based on ID. 
 	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
 	void UpdateTile(glm::ivec2 position, unsigned int newID);
+	// Adds to the offset amount.
+	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
+	void AddOffset(glm::vec2 offset);
+
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
 	bool isValidTilePos(glm::ivec2 position);
 private:

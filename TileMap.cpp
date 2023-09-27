@@ -224,6 +224,8 @@ void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 		_needsTileUpdate = true;
 	}
 }
+void TileMap::AddOffset(glm::vec2 offset) {
+	_offset += offset;
 	_needsTileUpdate = true;
 }
 
