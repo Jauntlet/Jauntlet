@@ -195,10 +195,6 @@ unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
 
 glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
 	// remember that offset is in worldspace aswell.
-	std::cout << "World Pos: " << position.x << ", " << position.y << std::endl;
-	std::cout << "Tile Pos w/o offset: " << position.x / _tileSize << ", " << position.y / _tileSize << std::endl;
-	std::cout << "Offset: " << _offset.x << ", " << _offset.y << std::endl;
-	std::cout << "Tile Pos: " << (position.x - _offset.x) / _tileSize << ", " << (-position.y + _offset.y) / _tileSize << std::endl;
 	return glm::vec2((position.x - _offset.x) / _tileSize, (-position.y + _offset.y) / _tileSize);
 }
 glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) {

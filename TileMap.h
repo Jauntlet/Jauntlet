@@ -95,7 +95,7 @@ private:
 	SpriteBatch _spriteBatch;
 
 	int _tileSize;
-	glm::vec2 _offset = glm::vec2();
+	glm::vec2 _offset = glm::vec2(0);
 	
 	std::map<unsigned int, tile> _tiles;
 	std::vector<TileSet*> _storedTileSets;
