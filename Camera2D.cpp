@@ -12,10 +12,11 @@ Camera2D::Camera2D() {
 	// Empty
 }
 
-void Camera2D::init(int screenWidth, int screenHeight) {
+void Camera2D::init(int screenWidth, int screenHeight, bool doRounding) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
 	_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
+	_doRounding = doRounding;
 }
 
 void Camera2D::update() {
@@ -46,8 +47,8 @@ void Camera2D::update() {
 	//xander wants to remove unrounded positions from the camera, as they cause shimmering. to prevent this, we round position before updating the matrix. -jk
     _cameraMatrix = glm::translate(
         _orthoMatrix,
-        glm::vec3(_screenWidth / 2.0f - round(_position.x),
-                  _screenHeight / 2.0f - round(_position.y), 0.0f));
+        glm::vec3(_screenWidth / 2.0f - (_doRounding ? round(_position.x) : _position.x),
+                  _screenHeight / 2.0f - (_doRounding ? round(_position.y) : _position.y), 0.0f));
     
 	_cameraMatrix = glm::scale(_cameraMatrix, glm::vec3(_scale, _scale, 0));
 

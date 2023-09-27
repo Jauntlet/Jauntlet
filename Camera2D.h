@@ -13,7 +13,7 @@ public:
 
 	Camera2D();
 	// initialize the screen size of the camera
-	void init(int screenWidth, int screenHeight);
+	void init(int screenWidth, int screenHeight, bool doRounding = true);
 	// update the camera
 	void update();
 	// Makes this camera the camera objects are rendered to.
@@ -78,5 +78,7 @@ private:
 
 	float _CAMERA_MIN_ZOOM = 0.05f;
 	float _CAMERA_MAX_ZOOM = 3.50f;
+
+	bool _doRounding = true;
 };
 }
