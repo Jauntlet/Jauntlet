@@ -46,12 +46,15 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2
     
     glm::vec2 mousecoords = _inputManager->getMouseCoords();
 
-    if (mousecoords.x >= _position->x && mousecoords.y >= _position->y && mousecoords.x <= _position->x + _size->x && mousecoords.y <= _position->y + _size->y && _inputManager->isKeyPressed(SDL_BUTTON_LEFT)) {
-        _clicked = true;
-        _onClick();
+    _clicked = false;
+    if (mousecoords.x >= _position->x && mousecoords.y >= _position->y && mousecoords.x <= _position->x + _size->x && mousecoords.y <= _position->y + _size->y) {
+        if (_inputManager->isKeyPressed(SDL_BUTTON_LEFT)) {
+            _onClick();
+            _clicked = true;
+        } else if (_inputManager->isKeyDown(SDL_BUTTON_LEFT)) {
+            _clicked = true;
+        }
     }
-
-    std::cout << _resolvedPostion.x << ", " << _resolvedPostion.y << " - " << _resolvedSize.x << ", " << _resolvedSize.y << std::endl;
-
-    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, _resolvedSize.y}, {_clicked ? 0.5 : 0,0, _clicked ? 1 : 0.5, 1}, _textureId);
+    
+    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, -_resolvedSize.y}, {_clicked ? 0.5 : 0,0, _clicked ? 1 : 0.5, 1}, _textureId);
 }
