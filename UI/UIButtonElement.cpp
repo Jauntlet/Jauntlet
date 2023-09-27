@@ -56,5 +56,5 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2
         }
     }
     
-    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, -_resolvedSize.y}, {_clicked ? 0.5 : 0,0, _clicked ? 1 : 0.5, 1}, _textureId);
+    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, -_resolvedSize.y}, {_clicked ? 0.5 : 0, 0, 0.5, 1}, _textureId);
 }
