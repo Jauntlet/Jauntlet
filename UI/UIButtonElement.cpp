@@ -17,20 +17,20 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
 
     switch (positionPinType) {
         case UIElement::PIN_POSITION::TOP_RIGHT:
-            _position = new glm::vec2(position->x - size->x, position->y);
+            _position = new glm::vec2(position->x - size->x, position->y  + size->y);
             break;
         case UIElement::PIN_POSITION::BOTTOM_RIGHT:
-            _position = new glm::vec2(position->x - size->x, position->y - size->y);
+            _position = new glm::vec2(position->x - size->x, position->y);
             break;
         case UIElement::PIN_POSITION::BOTTOM_LEFT:
-            _position = new glm::vec2(position->x, position->y - size->y);
+            _position = new glm::vec2(position->x, position->y);
             break;
         case UIElement::PIN_POSITION::CENTER:
-            _position = new glm::vec2(position->x - (size->x / 2), position->y - (size->y / 2));
+            _position = new glm::vec2(position->x - (size->x / 2), position->y + (size->y / 2));
             break;
         case UIElement::PIN_POSITION::TOP_LEFT:
         default: // TOP_LEFT or anything else
-            _position = position;
+            _position = new glm::vec2(position->x, position->y + size->y);
             break;
     }
 
@@ -47,7 +47,7 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2
     glm::vec2 mousecoords = _inputManager->getMouseCoords();
 
     _clicked = false;
-    if (mousecoords.x >= _position->x && mousecoords.y >= _position->y && mousecoords.x <= _position->x + _size->x && mousecoords.y <= _position->y + _size->y) {
+    if (mousecoords.x >= _position->x && mousecoords.y >= _position->y - _size->y && mousecoords.x <= _position->x + _size->x && mousecoords.y <= _position->y) {
         if (_inputManager->isKeyPressed(SDL_BUTTON_LEFT)) {
             _onClick();
             _clicked = true;
@@ -56,5 +56,5 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2
         }
     }
     
-    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, -_resolvedSize.y}, {_clicked ? 0.5 : 0, 0, 0.5, 1}, _textureId);
+    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, _resolvedSize.y}, {_clicked ? 0.5 : 0, 0, 0.5, 1}, _textureId);
 }
