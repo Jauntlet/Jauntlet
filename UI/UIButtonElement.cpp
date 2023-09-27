@@ -39,7 +39,7 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
 
 void UIButtonElement::resolvePosition(Camera2D* camera) {
     _resolvedPostion = camera->convertScreenToWorld(*_position);
-    _resolvedSize = camera->convertScreenToWorldDisreguardPosition(*_size);
+    _resolvedSize = *_size;
 }
 
 void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) {
@@ -50,6 +50,8 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2
         _clicked = true;
         _onClick();
     }
+
+    std::cout << _resolvedPostion.x << ", " << _resolvedPostion.y << " - " << _resolvedSize.x << ", " << _resolvedSize.y << std::endl;
 
     spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, _resolvedSize.y}, {_clicked ? 0.5 : 0,0, _clicked ? 1 : 0.5, 1}, _textureId);
 }
