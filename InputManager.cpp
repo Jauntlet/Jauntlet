@@ -35,6 +35,8 @@ void InputManager::processInput() {
 	// I disagree fully with this. This is stupid and dumb. -xm
 	float controllerAxis = 0;
 
+	deltaScroll = 0;
+	
 	SDL_Event _event;
 	while (SDL_PollEvent(&_event))
 	{
