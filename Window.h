@@ -21,6 +21,8 @@ public:
 	
 	// sets the default color of the window.
 	void setBackgroundColor(Color color);
+	// set the icon of the window
+	void setWindowIcon(std::string filepath);
 
 	// Clears what is rendered on screen.
 	// WARNING: resets ALL window screens
