@@ -177,6 +177,7 @@
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="UI\UIButtonElement.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
     <ClCompile Include="UI\UITextElement.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="UI\UIButtonElement.h" />
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="UI\UITextElement.h" />
