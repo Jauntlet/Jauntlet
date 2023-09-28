@@ -34,6 +34,7 @@ void InputManager::processInput() {
 	// but doing so creates a "compiler error" where the variable is non-accessible to other case statements.
 	// I disagree fully with this. This is stupid and dumb. -xm
 	float controllerAxis = 0;
+	deltaScroll = 0;
 
 	SDL_Event _event;
 	while (SDL_PollEvent(&_event))
