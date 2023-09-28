@@ -1,6 +1,9 @@
 #include "Window.h"
 #include "Errors.h"
 
+#include "Rendering/picoPNG.h"
+#include "IOManager.h"
+
 using namespace Jauntlet;
 
 Window::Window() {
@@ -45,9 +48,6 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 	// tells you your version of OpenGL
 	std::printf("*** OpenGL Version: %s ***\n", glGetString(GL_VERSION));
 
-	// sets the background color of window
-	glClearColor(0.298f, 0.094f, 0.125f, 1);
-
 	// this turns on VSync (0 = off, 1 = on)
 	SDL_GL_SetSwapInterval(0);
 
@@ -56,6 +56,15 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	return 0;
+}
+
+void Window::setBackgroundColor(Color color) {
+	glClearColor(color.r / static_cast<GLclampf>(255), color.g / static_cast<GLclampf>(255), color.b / static_cast<GLclampf>(255), 1);
+}
+
+void Window::clearScreen() {
+	glClearDepth(1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Window::swapBuffer() {
@@ -83,6 +92,11 @@ void Window::toggleFullscreen(bool fullscreen) {
 	SDL_SetWindowFullscreen(_sdlWindow, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 }
 
+void Window::resolveWindowSize() {
+	SDL_GetWindowSize(_sdlWindow, &_screenWidth, &_screenHeight);
+	glViewport(0, 0, _screenWidth, _screenHeight);
+}
+
 // get the width of the screen
 int Window::getWindowWidth() {
 	return _screenWidth; 
@@ -93,8 +107,5 @@ int Window::getWindowHeight() {
 }
 
 glm::ivec2 Window::getWindowSize() {
-	SDL_GetWindowSize(_sdlWindow, &_screenWidth, &_screenHeight);
-	glViewport(0, 0, _screenWidth, _screenHeight);
-
 	return glm::ivec2(_screenWidth, _screenHeight); 
 }
