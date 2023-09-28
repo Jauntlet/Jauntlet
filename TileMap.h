@@ -86,7 +86,7 @@ private:
 	void updateTileMap();
 	
 	// checks whether or not a tileset would connect to the specified tile position.
-	bool testTileSetRules(TileSet tile, int x, int y);
+	bool testTileSetRules(TileSet* tile, int x, int y);
 
 	// for sorting tiles via distance
 	static bool shortestDist(std::pair<float, glm::vec2>& a, std::pair<float, glm::vec2>& b);

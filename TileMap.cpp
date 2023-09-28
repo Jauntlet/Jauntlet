@@ -252,32 +252,32 @@ void TileMap::updateTileMap() {
 			if (mapIterator->second.tileSet != nullptr) {
 				unsigned int tileData = 0;
 
-				if (testTileSetRules(*mapIterator->second.tileSet, x + 1, y)) {
+				if (testTileSetRules(mapIterator->second.tileSet, x + 1, y)) {
 					tileData |= TileSet::TileSides::RIGHT;
 				}
 
-				if (testTileSetRules(*mapIterator->second.tileSet, x - 1, y)) {
+				if (testTileSetRules(mapIterator->second.tileSet, x - 1, y)) {
 					tileData |= TileSet::TileSides::LEFT;
 				}
 
-				if (testTileSetRules(*mapIterator->second.tileSet, x, y + 1)) {
+				if (testTileSetRules(mapIterator->second.tileSet, x, y + 1)) {
 					tileData |= TileSet::TileSides::BOTTOM;
 					// check for corners
-					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, x + 1, y + 1)) {
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(mapIterator->second.tileSet, x + 1, y + 1)) {
 						tileData |= TileSet::TileSides::BOTTOM_RIGHT;
 					}
-					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, x - 1, y + 1)) {
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(mapIterator->second.tileSet, x - 1, y + 1)) {
 						tileData |= TileSet::TileSides::BOTTOM_LEFT;
 					}
 				}
 
-				if (testTileSetRules(*mapIterator->second.tileSet, x, y - 1)) {
+				if (testTileSetRules(mapIterator->second.tileSet, x, y - 1)) {
 					tileData |= TileSet::TileSides::TOP;
 					// check for corners
-					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(*mapIterator->second.tileSet, x + 1, y - 1)) {
+					if (tileData & TileSet::TileSides::RIGHT && !testTileSetRules(mapIterator->second.tileSet, x + 1, y - 1)) {
 						tileData |= TileSet::TileSides::TOP_RIGHT;
 					}
-					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(*mapIterator->second.tileSet, x - 1, y - 1)) {
+					if (tileData & TileSet::TileSides::LEFT && !testTileSetRules(mapIterator->second.tileSet, x - 1, y - 1)) {
 						tileData |= TileSet::TileSides::TOP_LEFT;
 					}
 				}
@@ -295,28 +295,26 @@ void TileMap::updateTileMap() {
 	_spriteBatch.end();
 }
 
-bool TileMap::testTileSetRules(TileSet tile, int x, int y) {
+bool TileMap::testTileSetRules(TileSet* tile, int x, int y) {
 	// make sure the position is within the level range
 	if (y < 0 || y >= _level.size() || x >= _level[y].size() || x < 0) {
-		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
+		return (tile->connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
 	}
-	
-	auto iterator = _tiles.find(_level[y][x]);
-	
-	if (iterator == _tiles.end()) { // must always check if the result is empty first
-		return (tile.connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
+	else {
+		auto iterator = _tiles.find(_level[y][x]);
+		
+		if (iterator == _tiles.end()) { // must always check if the result is empty first
+			return (tile->connectionRules & TileSet::ConnectionRules::EMPTY) ? true : false;
+		}
+		else if (iterator->second.tileSet != nullptr && iterator->second.tileSet->getID() == tile->getID()) { // check if the tile is the same tileset
+			return true;
+		}
+		else if (iterator->second.tileSet != nullptr) { // check if the tile is a tileset
+			return (tile->connectionRules & TileSet::ConnectionRules::TILESETS) ? true : false;
+		}
+		// The only remaining condition is if the tile is a regular tile.
+		return (tile->connectionRules & TileSet::ConnectionRules::TILES) ? true : false;
 	}
-	if (iterator->second.tileSet != nullptr && iterator->second.tileSet->getID() == tile.getID()) { // check if the tile is the same tileset
-		return true;
-	}
-	if (tile.connectionRules & TileSet::ConnectionRules::NONE) { // test if the tileset wants to connect to nothing
-		return false;
-	}
-	if (iterator->second.tileSet != nullptr) { // check if the tile is a tileset
-		return (tile.connectionRules & TileSet::ConnectionRules::TILESETS) ? true : false;
-	}
-	// The only remaining condition is if the tile is a regular tile.
-	return (tile.connectionRules & TileSet::ConnectionRules::TILES) ? true : false;
 }
 
 bool TileMap::shortestDist(std::pair<float, glm::vec2>& a, std::pair<float, glm::vec2>& b) {
