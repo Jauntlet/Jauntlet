@@ -157,6 +157,10 @@ bool InputManager::onKeyUp(unsigned int keyID) {
 	return !_keyMap[keyID] ? _previousKeyMap[keyID] : false;
 }
 
+bool InputManager::isKeyUp(unsigned int keyID) {
+	return !_keyMap[keyID];
+}
+
 
 SDL_KeyCode InputManager::lastButtonPressed() {
 	return _lastInput;
