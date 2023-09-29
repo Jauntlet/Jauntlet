@@ -102,6 +102,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 void TileMap::draw() {
 	if (_needsTileUpdate) {
 		updateTileMap();
+		_needsTileUpdate = false;
 	}
 	_spriteBatch.render();
 }
