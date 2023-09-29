@@ -10,27 +10,38 @@
 
 using namespace Jauntlet;
 
-UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2 position, glm::vec2 size, PIN_POSITION positionPinType) {
+UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2 position, glm::vec2 size, ORIGIN_PIN_POSITION positionPinType) {
     _inputManager = inputManager;
     _onClick = onClick;
     _textureId = textureId;
 
     switch (positionPinType) {
-        case UIElement::PIN_POSITION::TOP_RIGHT:
+        case UIElement::ORIGIN_PIN_POSITION::TOP_LEFT:
+            _position = new glm::vec2(position.x, position.y + size.y);
+            break;
+        case UIElement::ORIGIN_PIN_POSITION::TOP:
+            _position = new glm::vec2(position.x - (size.x / 2), position.y + size.y);
+            break;
+        case UIElement::ORIGIN_PIN_POSITION::TOP_RIGHT:
             _position = new glm::vec2(position.x - size.x, position.y  + size.y);
             break;
-        case UIElement::PIN_POSITION::BOTTOM_RIGHT:
+        case UIElement::ORIGIN_PIN_POSITION::RIGHT:
+            _position = new glm::vec2(position.x - size.x, position.y + (size.y / 2));
+            break;
+        case UIElement::ORIGIN_PIN_POSITION::BOTTOM_RIGHT:
             _position = new glm::vec2(position.x - size.x, position.y);
             break;
-        case UIElement::PIN_POSITION::BOTTOM_LEFT:
+        case UIElement::ORIGIN_PIN_POSITION::BOTTOM:
+            _position = new glm::vec2(position.x - (size.x / 2), position.y);
+            break;
+        case UIElement::ORIGIN_PIN_POSITION::BOTTOM_LEFT:
             _position = new glm::vec2(position.x, position.y);
             break;
-        case UIElement::PIN_POSITION::CENTER:
-            _position = new glm::vec2(position.x - (size.x / 2), position.y + (size.y / 2));
+        case UIElement::ORIGIN_PIN_POSITION::LEFT:
+            _position = new glm::vec2(position.x, position.y + (size.y / 2));
             break;
-        case UIElement::PIN_POSITION::TOP_LEFT:
-        default: // TOP_LEFT or anything else
-            _position = new glm::vec2(position.x, position.y + size.y);
+        case UIElement::ORIGIN_PIN_POSITION::CENTER:
+            _position = new glm::vec2(position.x - (size.x / 2), position.y + (size.y / 2));
             break;
     }
 

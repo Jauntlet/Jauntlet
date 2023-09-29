@@ -15,7 +15,7 @@ namespace Jauntlet {
 	{
 	public:
 		//constructor with _position;
-		UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2 position, glm::vec2 size, PIN_POSITION positionPinType);
+		UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2 position, glm::vec2 size, ORIGIN_PIN_POSITION positionPinType);
         void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) override;
 		void resolvePosition(Camera2D* camera) override;
 		void click() { _onClick(); };

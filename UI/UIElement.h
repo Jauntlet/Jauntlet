@@ -11,11 +11,15 @@ namespace Jauntlet {
 	class UIElement
 	{
 	public:
-		enum class PIN_POSITION {
+		enum class ORIGIN_PIN_POSITION {
 			TOP_LEFT,
+			TOP,
 			TOP_RIGHT,
-			BOTTOM_LEFT,
+			RIGHT,
 			BOTTOM_RIGHT,
+			BOTTOM,
+			BOTTOM_LEFT,
+			LEFT,
 			CENTER
 		};
 		UIElement();
@@ -25,6 +29,8 @@ namespace Jauntlet {
 		Camera2D* _camera;
 		glm::vec2* _position;
 		glm::vec2 _resolvedPostion;
+		ORIGIN_PIN_POSITION _originPin;
+		glm::vec2 _resolvedOrigin;
 	};
 }
 

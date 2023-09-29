@@ -1,4 +1,5 @@
 #include "UIManager.h"
+#include "SDL/SDL_video.h"
 #include "UIElement.h"
 #include <iostream>
 
