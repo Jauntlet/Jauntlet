@@ -99,6 +99,7 @@ void Window::setWindowSize(glm::ivec2 size) {
 	_screenWidth = size.x;
 	_screenWidth = size.y;
 	SDL_SetWindowSize(_sdlWindow, size.x, size.y);
+	glViewport(0, 0, _screenWidth, _screenHeight);
 }
 void Window::setWindowSize(int width, int height) {
 	_screenWidth = width;
