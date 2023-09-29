@@ -65,10 +65,10 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2
             _wasPressed = true;
         } else if (_inputManager->isKeyDown(SDL_BUTTON_LEFT) && _wasPressed) {
             _clicked = true;
-        } else if (_inputManager->isKeyUp(SDL_BUTTON_LEFT)) {
-            _wasPressed = false;
         }
+    } else {
+        _wasPressed = false;
     }
     
-    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, _resolvedSize.y}, {_clicked ? 0.5 : 0, 0, 0.5, 1}, _textureId);
+    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, _resolvedSize.y}, {_clicked * 0.5, 0, 0.5, 1}, _textureId);
 }
