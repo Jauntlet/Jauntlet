@@ -23,6 +23,8 @@ public:
 	bool isKeyDown(unsigned int keyID);
 	// checks if a specific key was just pressed
 	bool isKeyPressed(unsigned int keyID);
+	// checks if a specific key was just unpressed
+	bool onKeyUp(unsigned int keyID);
 
 	// Returns the last button pressed by the user.
 	SDL_KeyCode lastButtonPressed();

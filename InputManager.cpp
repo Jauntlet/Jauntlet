@@ -153,6 +153,10 @@ bool InputManager::isKeyDown(unsigned int keyID) {
 bool InputManager::isKeyPressed(unsigned int keyID) {
 	return _keyMap[keyID] ? !_previousKeyMap[keyID] : false;
 }
+bool InputManager::onKeyUp(unsigned int keyID) {
+	return !_keyMap[keyID] ? _previousKeyMap[keyID] : false;
+}
+
 
 SDL_KeyCode InputManager::lastButtonPressed() {
 	return _lastInput;
