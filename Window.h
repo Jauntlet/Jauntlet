@@ -21,7 +21,8 @@ public:
 	
 	// sets the default color of the window.
 	void setBackgroundColor(Color color);
-	// set the icon of the window
+	// set the icon of the window.
+	// if your icon does not appear, it could be because it is too large.
 	void setWindowIcon(std::string filepath);
 
 	// Clears what is rendered on screen.
