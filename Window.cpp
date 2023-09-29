@@ -72,7 +72,7 @@ void Window::setWindowIcon(std::string filepath) {
 	int errorCode = decodePNG(out, width, height, &(in[0]), in.size());
 
 	if (errorCode != 0) {
-		fatalError("decodePNG failed with error: " + errorCode);
+		fatalError("decodePNG failed with error: " + std::to_string(errorCode));
 	}
 
 	SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)out.data(), width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
