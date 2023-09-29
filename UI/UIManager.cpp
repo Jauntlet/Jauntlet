@@ -6,7 +6,7 @@
 using namespace Jauntlet;
 
 UIManager::UIManager() {
-	// cock
+	// empty
 }
 
 UIManager::UIManager(Camera2D* camera) {

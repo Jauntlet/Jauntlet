@@ -6,7 +6,7 @@ using namespace Jauntlet;
 TextureCache::TextureCache() {
 }
 
-GLTexture TextureCache::getTexture(std::string filePath) {
+GLTexture TextureCache::getTexture(std::string& filePath) {
 
 	auto mapIterator = _textureMap.find(filePath);
 

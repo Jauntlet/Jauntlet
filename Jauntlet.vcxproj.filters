@@ -65,6 +65,9 @@
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="UI\UIButtonElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -126,5 +129,8 @@
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="UI\UIButtonElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
