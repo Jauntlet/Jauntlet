@@ -28,6 +28,7 @@ namespace Jauntlet {
 		glm::vec2 _resolvedSize;
 		GLuint _textureId;
 		bool _clicked;
+		bool _wasPressed = false;
 		InputManager* _inputManager;
 	};
 }
