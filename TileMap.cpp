@@ -60,17 +60,17 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 				std::getline(ss, line);
 
 				if (JMath::Split(line, ' ')[1] == "collision") {
-					Register(JMath::Split(line,' ')[0], TileCollision::SQUARE);
+					Register(JMath::Split(line,'"')[1], TileCollision::SQUARE);
 					continue;
 				}
-				Register(JMath::Split(line, ' ')[0]);
+				Register(JMath::Split(line, '"')[1]);
 				continue;
 			}
 			
 			if (line == "tileSet") {
 				std::getline(ss, line);
-
-				_storedTileSets.emplace_back(new TileSet(JMath::Split(line, ' ')[0]));
+				std::cout << line << std::endl;
+				_storedTileSets.emplace_back(new TileSet(JMath::Split(line, '"')[1]));
 
 				if (JMath::Split(line, ' ')[1] == "collision") {
 					Register(*_storedTileSets.back(), TileCollision::SQUARE);
@@ -96,6 +96,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 		_level.push_back(std::vector<unsigned int>());
 	}
 
+	file.close();
 	updateTileMap();
 }
 
