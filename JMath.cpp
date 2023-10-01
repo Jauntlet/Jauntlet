@@ -34,10 +34,11 @@ std::vector<std::string> JMath::Split(std::string string, char delimiter) {
 
 	int delim = string.find(delimiter);
 	do {
+		std::cout << string[delim] << std::endl;
 		output.push_back(string.substr(0, delim));
 		string.erase(0, delim + 1);
-	} while (delim = string.find(delimiter) != std::string::npos);
-
+	} while ((delim = string.find(delimiter)) != std::string::npos);
+	
 	output.push_back(string);
 	
 	if (output.size() == 1) {
