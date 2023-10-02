@@ -230,6 +230,10 @@ void TileMap::AddOffset(glm::vec2 offset) {
 	_offset += offset;
 	_needsTileUpdate = true;
 }
+void TileMap::changeDrawColor(Jauntlet::Color color) {
+	_drawColor = color;
+	_needsTileUpdate = true;
+}
 
 bool TileMap::isValidTilePos(glm::ivec2 position) {
 	return !(position.y < 0 || position.y >= _level.size() || position.x >= _level[position.y].size() || position.x < 0);
@@ -285,10 +289,10 @@ void TileMap::updateTileMap() {
 				}
 
 				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
-				_spriteBatch.draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0);
+				_spriteBatch.draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0, _drawColor);
 			}
 			else {
-				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0);
+				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0, _drawColor);
 			}
 		}
 	}
