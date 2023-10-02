@@ -59,7 +59,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			if (line == "tile") {
 				std::getline(ss, line);
 
-				if (JMath::Split(line, ' ')[1] == "collision") {
+				if (JMath::Split(line, ' ').back() == "collision") {
 					Register(JMath::Split(line,'"')[1], TileCollision::SQUARE);
 					continue;
 				}
@@ -69,10 +69,10 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			
 			if (line == "tileSet") {
 				std::getline(ss, line);
-				std::cout << line << std::endl;
+
 				_storedTileSets.emplace_back(new TileSet(JMath::Split(line, '"')[1]));
 
-				if (JMath::Split(line, ' ')[1] == "collision") {
+				if (JMath::Split(line, ' ').back() == "collision") {
 					Register(*_storedTileSets.back(), TileCollision::SQUARE);
 					continue;
 				}
@@ -285,8 +285,6 @@ void TileMap::updateTileMap() {
 				}
 
 				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
-
-
 				_spriteBatch.draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0);
 			}
 			else {
