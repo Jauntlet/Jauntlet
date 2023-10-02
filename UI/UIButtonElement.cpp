@@ -46,11 +46,14 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
     }
 
     _size = size;
+
+    _originPin = positionPinType;
 }
 
 void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]) {
     _resolvedPostion = camera->convertScreenToWorld(*_position);
-    _resolvedPostion += resolvedPins[(int)_originPin];
+    std::cout << (int)_originPin << " (: " << (resolvedPins[(int)_originPin].y) << std::endl;
+    _resolvedPostion -= resolvedPins[(int)(_originPin)];
     _resolvedSize = _size; // we will handle scaling later.
 }
 

@@ -12,15 +12,15 @@ namespace Jauntlet {
 	{
 	public:
 		enum class ORIGIN_PIN {
-			TOP_LEFT,
-			TOP,
-			TOP_RIGHT,
-			RIGHT,
-			BOTTOM_RIGHT,
-			BOTTOM,
-			BOTTOM_LEFT,
-			LEFT,
-			CENTER
+			TOP_LEFT = 0,
+			TOP = 1,
+			TOP_RIGHT = 2,
+			RIGHT = 3,
+			BOTTOM_RIGHT = 4,
+			BOTTOM = 5,
+			BOTTOM_LEFT = 6,
+			LEFT = 7,
+			CENTER = 8
 		};
 
 		UIElement();

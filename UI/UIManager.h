@@ -33,7 +33,7 @@ namespace Jauntlet {
 		glm::vec2* _scale;
 
 		// holy fucking shit i wish i could make this a const -jk
-		glm::vec2 ORIGIN_PIN_POSITIONS[9] = {glm::vec2(0,0),glm::vec2(0.5,0),glm::vec2(1,0),glm::vec2(1,0.5),glm::vec2(1,1),glm::vec2(0.5,1),glm::vec2(0,1),glm::vec2(0,0.5),glm::vec2(0.5,0.5)};
+		glm::vec2 ORIGIN_PIN_POSITIONS[9] = {glm::vec2(0.0f,0.0f),glm::vec2(0.5f,0.0f),glm::vec2(1.0f,0.0f),glm::vec2(1.0f,0.5f),glm::vec2(1.0f,1.0f),glm::vec2(0.5f,1.0f),glm::vec2(0.0f,1.0f),glm::vec2(0.0f,0.5f),glm::vec2(0.5f,0.5f)};
 
 		// im going to name my baby this -jk
 		glm::vec2 _calculatedOriginPinPositionsInScreenspace[9];
