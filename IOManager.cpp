@@ -21,7 +21,7 @@ bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char
 	file.seekg(0, std::ios::beg);
 
 	// this is supposed to remove "header bytes" from the file, however this probably does nothing since we are at the beginning of the file. Leaving this here anyways 
-	// incase something breaks way down the line. Never know when it could save someone a few hours -Xander Mooney
+	// incase something breaks way down the line. Never know when it could save someone a few hours -xm
 	// fileSize -= file.tellg();
 
 	buffer.resize(fileSize);

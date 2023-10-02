@@ -17,7 +17,7 @@ std::vector<std::string> JMath::Split(std::string string, std::string delimiter)
 
 	do {
 		output.push_back(string.substr(0, delim));
-		string.erase(0, delim + delimiter.length() + 1);
+		string.erase(0, delim + delimiter.length());
 	} while ((delim = string.find(delimiter)) != std::string::npos);
 	
 	output.push_back(string);
