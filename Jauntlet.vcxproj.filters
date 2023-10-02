@@ -68,6 +68,7 @@
     <ClCompile Include="UI\UIButtonElement.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="tinyfiledialogs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -132,5 +133,6 @@
     <ClInclude Include="UI\UIButtonElement.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="tinyfiledialogs.h" />
   </ItemGroup>
 </Project>
