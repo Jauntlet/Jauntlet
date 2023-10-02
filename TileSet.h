@@ -45,6 +45,6 @@ private:
 
 	int _id;
 	
-	TileSet::Tileinfo _mainTiles[20];
+	TileSet::Tileinfo _mainTiles[25];
 };
 }

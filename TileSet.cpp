@@ -1,10 +1,12 @@
 #include "TileSet.h"
 
+#include <iostream> // REMOVE
+
 using namespace Jauntlet;
 
 static int _lastestID = 0;
 
-TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
+TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,//psychos only
 	std::string Right, std::string Left, std::string Bottom, std::string Top,
 	std::string BottomRight, std::string BottomLeft, std::string BottomTop,
 	std::string TopRight, std::string TopLeft, std::string RightLeft,
@@ -30,7 +32,7 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,
 }
 
 TileSet::TileSet(std::string FilePath) {
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 25; i++) {
 		_mainTiles[i].texture = FilePath;
 	}
 	// UVs for a full image go from 0 -> 1. This is the size the UV needs to be for a single tile on the template image.
@@ -59,7 +61,17 @@ TileSet::TileSet(std::string FilePath) {
 	_mainTiles[17].UV = glm::vec4(UVsize * 4, UVsize * 4, UVsize, UVsize); // bottom left
 	_mainTiles[18].UV = glm::vec4(UVsize * 3, UVsize * 3, UVsize, UVsize); // top right
 	_mainTiles[19].UV = glm::vec4(UVsize * 4, UVsize * 3, UVsize, UVsize); // top left
+	
+	_mainTiles[20].UV = glm::vec4(UVsize * 4 ,UVsize * 2 ,UVsize, UVsize); //three side top    left  empty
+	_mainTiles[21].UV = glm::vec4(UVsize * 4 ,UVsize * 0 ,UVsize, UVsize); //three side top    right empty
+	_mainTiles[22].UV = glm::vec4(UVsize * 2 ,UVsize * 4 ,UVsize, UVsize); //three side bottom left  empty
+	_mainTiles[23].UV = glm::vec4(UVsize * 4 ,UVsize * 1 ,UVsize, UVsize); //three side bottom right empty
+	_mainTiles[24].UV = glm::vec4(UVsize * 1 ,UVsize * 4 ,UVsize, UVsize); //four sides
 }
+
+
+
+
 // Adds to what the Tileset can connect to. Use TileSet::ConnectionRules.
 void TileSet::addConnectionRule(unsigned int rule) {
 	connectionRules |= rule;
@@ -91,7 +103,21 @@ TileSet::Tileinfo TileSet::tileSetToTile(unsigned int layout) {
 	if (!(layout & TileSides::RIGHT) && !(layout & TileSides::BOTTOM) && layout & TileSides::TOP_LEFT) {
 		return _mainTiles[19];
 	}
-
+	if ((layout & TileSides::BOTTOM_LEFT)&&(layout & TileSides::BOTTOM_RIGHT)&&(layout & TileSides::TOP_LEFT)&&(layout & TileSides::TOP_RIGHT)) {
+		return _mainTiles[24];
+	}
+	if ((layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&&!(layout & TileSides::TOP)) {
+		return _mainTiles[23];
+	}
+	if (!(layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
+		return _mainTiles[22];
+	}
+	if ((layout & TileSides::BOTTOM)&&!(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
+		return _mainTiles[21];
+	}
+	if ((layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&!(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
+		return _mainTiles[20];
+	}
 	// none of the programmed values are true, return no-sides-connected tile
-	return _mainTiles[0];
+	return _mainTiles[15];
 }
