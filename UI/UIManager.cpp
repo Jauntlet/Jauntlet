@@ -83,6 +83,5 @@ simply just multiply these values by the cameras width and height.
 void UIManager::_recalculateOriginPinPositions() {
 	for (int i = 0; i < 9; ++i) {
 		_calculatedOriginPinPositionsInScreenspace[i] = _camera->getCameraSize() * ORIGIN_PIN_POSITIONS[i];
-		std::cout << _calculatedOriginPinPositionsInScreenspace[i].x << std::endl;
 	}
 }
