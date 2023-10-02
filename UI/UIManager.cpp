@@ -18,13 +18,15 @@ UIManager::UIManager(Camera2D* camera) {
 
 void UIManager::addElement(UIElement* uiElement) {
 	_uiElements.push_back(uiElement);
-	uiElement->resolvePosition(_camera);
+	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace);
 }
 
 void UIManager::draw() {
 	_spriteBatch->begin();
-	for (int i = 0; i < _uiElements.size(); i++) {
-		_uiElements[i]->draw(_camera, _spriteBatch, _scale);
+	for (int i = 0; i < _uiElements.size(); ++i) {
+		if (_uiElements[i]->visible) {
+			_uiElements[i]->draw(_camera, _spriteBatch, _scale);
+		}
 	}
 	_spriteBatch->endAndRender();
 }
@@ -38,7 +40,48 @@ void UIManager::setScale(glm::vec2 scale) {
 }
 
 void UIManager::resolvePositions() {
-	for (int i = 0; i < _uiElements.size(); i++) {
-		_uiElements[i]->resolvePosition(_camera);
+	// we've changed our resolution, recalculate
+	_recalculateOriginPinPositions();
+	for (int i = 0; i < _uiElements.size(); ++i) {
+		if (_uiElements[i]->visible) {
+			_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace);
+		}
+	}
+}
+/*
+
+breif reminder for those watching at home how screen space works.
+0.0 on both axis is the top left, 1.0 on both axis is the top right.
+obviously this only applies to a resolution of 1x1 but can be expaned on,
+simply just multiply these values by the cameras width and height.
+
+(0.0 , 0.0)       (0.5 , 0.0)       (1.0 , 0.0)
+
+
+
+
+
+
+
+
+
+(0.0 , 0.5)       (0.5 , 0.5)       (1.0 , 0.5)
+
+
+
+
+
+
+
+
+
+(0.0 , 1.0)       (0.5 , 1.0)       (1.0 , 1.0)
+
+*/
+
+
+void UIManager::_recalculateOriginPinPositions() {
+	for (int i = 0; i < 9; ++i) {
+		_calculatedOriginPinPositionsInScreenspace[i] = _camera->getCameraSize() * ORIGIN_PIN_POSITIONS[i];
 	}
 }

@@ -11,7 +11,7 @@ namespace Jauntlet {
 	class UIElement
 	{
 	public:
-		enum class ORIGIN_PIN_POSITION {
+		enum class ORIGIN_PIN {
 			TOP_LEFT,
 			TOP,
 			TOP_RIGHT,
@@ -22,15 +22,19 @@ namespace Jauntlet {
 			LEFT,
 			CENTER
 		};
+
 		UIElement();
+
 		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale);
-		virtual void resolvePosition(Camera2D* camera);
+		virtual void resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]);
+		
+		bool visible = true;
 	protected:
 		Camera2D* _camera;
 		glm::vec2* _position;
 		glm::vec2 _resolvedPostion;
-		ORIGIN_PIN_POSITION _originPin;
 		glm::vec2 _resolvedOrigin;
+		ORIGIN_PIN _originPin = ORIGIN_PIN::TOP_LEFT;
 	};
 }
 

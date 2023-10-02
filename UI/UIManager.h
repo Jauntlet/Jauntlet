@@ -31,6 +31,15 @@ namespace Jauntlet {
 		SpriteBatch* _spriteBatch;
 		std::vector<UIElement*> _uiElements;
 		glm::vec2* _scale;
+
+		// holy fucking shit i wish i could make this a const -jk
+		glm::vec2 ORIGIN_PIN_POSITIONS[9] = {glm::vec2(0,0),glm::vec2(0.5,0),glm::vec2(1,0),glm::vec2(1,0.5),glm::vec2(1,1),glm::vec2(0.5,1),glm::vec2(0,1),glm::vec2(0,0.5),glm::vec2(0.5,0.5)};
+
+		// im going to name my baby this -jk
+		glm::vec2 _calculatedOriginPinPositionsInScreenspace[9];
+
+		// recalculate the origin pin positions.
+		void _recalculateOriginPinPositions();
 	};
 }
 

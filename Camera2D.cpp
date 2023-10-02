@@ -96,6 +96,8 @@ glm::vec2 Camera2D::convertScreenToWorldDisreguardPosition(glm::vec2 screenCoord
 void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
+	
+	_screenVector = glm::vec2(screenWidth, screenHeight);
 
 	_needsMatrixUpdate = true;
 }
@@ -176,4 +178,8 @@ void Camera2D::multiplyScale(float scale) {
 void Camera2D::multiply(float scale) {
 	_scale *= scale;
 	_position *= scale;
+}
+
+glm::vec2 Camera2D::getCameraSize() {
+	return _screenVector;
 }

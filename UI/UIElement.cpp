@@ -13,6 +13,6 @@ void UIElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scal
 	std::cout << "wrong method! dont use a generic update statement like this" << std::endl;
 }
 
-void UIElement::resolvePosition(Camera2D* camera) {
-    _resolvedPostion = camera->convertScreenToWorld(*_position);
+void UIElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]) {
+    _resolvedPostion = camera->convertScreenToWorld(*_position) * resolvedPins[(int)_originPin];
 }

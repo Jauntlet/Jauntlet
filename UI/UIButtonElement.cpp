@@ -10,37 +10,37 @@
 
 using namespace Jauntlet;
 
-UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2 position, glm::vec2 size, ORIGIN_PIN_POSITION positionPinType) {
+UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2 position, glm::vec2 size, ORIGIN_PIN positionPinType) {
     _inputManager = inputManager;
     _onClick = onClick;
     _textureId = textureId;
 
     switch (positionPinType) {
-        case UIElement::ORIGIN_PIN_POSITION::TOP_LEFT:
+        case UIElement::ORIGIN_PIN::TOP_LEFT:
             _position = new glm::vec2(position.x, position.y + size.y);
             break;
-        case UIElement::ORIGIN_PIN_POSITION::TOP:
+        case UIElement::ORIGIN_PIN::TOP:
             _position = new glm::vec2(position.x - (size.x / 2), position.y + size.y);
             break;
-        case UIElement::ORIGIN_PIN_POSITION::TOP_RIGHT:
+        case UIElement::ORIGIN_PIN::TOP_RIGHT:
             _position = new glm::vec2(position.x - size.x, position.y  + size.y);
             break;
-        case UIElement::ORIGIN_PIN_POSITION::RIGHT:
+        case UIElement::ORIGIN_PIN::RIGHT:
             _position = new glm::vec2(position.x - size.x, position.y + (size.y / 2));
             break;
-        case UIElement::ORIGIN_PIN_POSITION::BOTTOM_RIGHT:
+        case UIElement::ORIGIN_PIN::BOTTOM_RIGHT:
             _position = new glm::vec2(position.x - size.x, position.y);
             break;
-        case UIElement::ORIGIN_PIN_POSITION::BOTTOM:
+        case UIElement::ORIGIN_PIN::BOTTOM:
             _position = new glm::vec2(position.x - (size.x / 2), position.y);
             break;
-        case UIElement::ORIGIN_PIN_POSITION::BOTTOM_LEFT:
+        case UIElement::ORIGIN_PIN::BOTTOM_LEFT:
             _position = new glm::vec2(position.x, position.y);
             break;
-        case UIElement::ORIGIN_PIN_POSITION::LEFT:
+        case UIElement::ORIGIN_PIN::LEFT:
             _position = new glm::vec2(position.x, position.y + (size.y / 2));
             break;
-        case UIElement::ORIGIN_PIN_POSITION::CENTER:
+        case UIElement::ORIGIN_PIN::CENTER:
             _position = new glm::vec2(position.x - (size.x / 2), position.y + (size.y / 2));
             break;
     }
@@ -48,13 +48,13 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
     _size = size;
 }
 
-void UIButtonElement::resolvePosition(Camera2D* camera) {
+void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]) {
     _resolvedPostion = camera->convertScreenToWorld(*_position);
+    _resolvedPostion += resolvedPins[(int)_originPin];
     _resolvedSize = _size; // we will handle scaling later.
 }
 
 void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) {
-    
     glm::vec2 mousecoords = _inputManager->getMouseCoords();
 
     _clicked = false;
