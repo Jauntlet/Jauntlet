@@ -13,11 +13,8 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
     _inputManager = inputManager;
     _onClick = onClick;
     _textureId = textureId;
-
     _originPin = positionPinType;
-
     _position = position;
-
     _size = size;
 }
 
