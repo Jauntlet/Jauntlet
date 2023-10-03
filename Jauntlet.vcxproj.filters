@@ -36,9 +36,6 @@
     <ClCompile Include="Rendering\ResourceManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Sprite.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\SpriteBatch.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
@@ -96,9 +93,6 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\ResourceManager.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Sprite.h">
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\SpriteBatch.h">

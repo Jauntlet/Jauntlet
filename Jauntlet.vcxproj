@@ -170,7 +170,6 @@
     <ClCompile Include="Rendering\LineRenderer.cpp" />
     <ClCompile Include="Rendering\picoPNG.cpp" />
     <ClCompile Include="Rendering\ResourceManager.cpp" />
-    <ClCompile Include="Rendering\Sprite.cpp" />
     <ClCompile Include="Rendering\SpriteBatch.cpp" />
     <ClCompile Include="Rendering\SpriteFont.cpp" />
     <ClCompile Include="Rendering\TextureCache.cpp" />
@@ -200,7 +199,6 @@
     <ClInclude Include="Rendering\LineRenderer.h" />
     <ClInclude Include="Rendering\picoPNG.h" />
     <ClInclude Include="Rendering\ResourceManager.h" />
-    <ClInclude Include="Rendering\Sprite.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
     <ClInclude Include="Rendering\SpriteFont.h" />
     <ClInclude Include="Rendering\TextureCache.h" />
