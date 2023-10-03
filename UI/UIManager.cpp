@@ -1,6 +1,7 @@
 #include "UIManager.h"
 #include "SDL/SDL_video.h"
 #include "UIElement.h"
+#include "glm/fwd.hpp"
 #include <iostream>
 
 using namespace Jauntlet;
@@ -81,7 +82,9 @@ simply just multiply these values by the cameras width and height.
 
 
 void UIManager::_recalculateOriginPinPositions() {
+	glm::vec2 _cameraSize = _camera->getCameraSize();
+	_cameraSize.y *= -1; // corrects button positions
 	for (int i = 0; i < 9; ++i) {
-		_calculatedOriginPinPositionsInScreenspace[i] = _camera->getCameraSize() * ORIGIN_PIN_POSITIONS[i];
+		_calculatedOriginPinPositionsInScreenspace[i] = _cameraSize * ORIGIN_PIN_POSITIONS[i];
 	}
 }
