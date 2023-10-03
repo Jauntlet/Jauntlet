@@ -15,9 +15,9 @@ namespace Jauntlet {
 	{
 	public:
 		//constructor with _position;
-		UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2 position, glm::vec2 size, ORIGIN_PIN_POSITION positionPinType);
+		UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType);
         void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) override;
-		void resolvePosition(Camera2D* camera) override;
+		void resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]) override;
 		void click() { _onClick(); };
     private:
 		std::string* _text;
@@ -30,5 +30,6 @@ namespace Jauntlet {
 		bool _clicked;
 		bool _wasPressed = false;
 		InputManager* _inputManager;
+		glm::vec4 _onScreenButtonVec4;
 	};
 }

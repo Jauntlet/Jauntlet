@@ -11,26 +11,30 @@ namespace Jauntlet {
 	class UIElement
 	{
 	public:
-		enum class ORIGIN_PIN_POSITION {
-			TOP_LEFT,
-			TOP,
-			TOP_RIGHT,
-			RIGHT,
-			BOTTOM_RIGHT,
-			BOTTOM,
-			BOTTOM_LEFT,
-			LEFT,
-			CENTER
+		enum class ORIGIN_PIN {
+			TOP_LEFT = 0,
+			TOP = 1,
+			TOP_RIGHT = 2,
+			RIGHT = 3,
+			BOTTOM_RIGHT = 4,
+			BOTTOM = 5,
+			BOTTOM_LEFT = 6,
+			LEFT = 7,
+			CENTER = 8
 		};
+
 		UIElement();
+
 		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale);
-		virtual void resolvePosition(Camera2D* camera);
+		virtual void resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]);
+		
+		bool visible = true;
 	protected:
 		Camera2D* _camera;
 		glm::vec2* _position;
 		glm::vec2 _resolvedPostion;
-		ORIGIN_PIN_POSITION _originPin;
 		glm::vec2 _resolvedOrigin;
+		ORIGIN_PIN _originPin = ORIGIN_PIN::TOP_LEFT;
 	};
 }
 

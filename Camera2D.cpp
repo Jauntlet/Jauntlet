@@ -15,6 +15,10 @@ Camera2D::Camera2D() {
 void Camera2D::init(int screenWidth, int screenHeight, bool doRounding) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
+
+	_screenVector.x = (float)screenWidth;
+	_screenVector.y = (float)screenHeight;
+
 	_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
 	_doRounding = doRounding;
 }
@@ -97,6 +101,9 @@ void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
 
+	_screenVector.x = (float)screenWidth;
+	_screenVector.y = (float)screenHeight;
+
 	_needsMatrixUpdate = true;
 }
 
@@ -176,4 +183,8 @@ void Camera2D::multiplyScale(float scale) {
 void Camera2D::multiply(float scale) {
 	_scale *= scale;
 	_position *= scale;
+}
+
+glm::vec2 Camera2D::getCameraSize() {
+	return _screenVector;
 }

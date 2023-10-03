@@ -59,6 +59,10 @@ public:
 	void multiplyScale(float scale);
 	// multiply both the position and scale of the camera by a float
 	void multiply(float scale);
+
+	// get the cameras width and height as a vec2 for maths
+	glm::vec2 getCameraSize(); // UNDOCUMENTED
+
 private:
 	float _scale = 1;
 	float _transitionScale = 1;
@@ -70,6 +74,8 @@ private:
 	glm::mat4 _orthoMatrix = glm::mat4(1);
 
 	int _screenWidth = 500, _screenHeight = 500;
+
+	glm::vec2 _screenVector = glm::vec2(1,1);
 	
 	bool _needsMatrixUpdate = true;
 
