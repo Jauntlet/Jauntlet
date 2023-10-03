@@ -14,12 +14,12 @@ UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
 	_spriteBatch = new Jauntlet::SpriteBatch;
 	_spriteBatch->init();
-	_scale = new glm::vec2(1);
+	_scale = 1.0f;
 }
 
 void UIManager::addElement(UIElement* uiElement) {
 	_uiElements.push_back(uiElement);
-	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace);
+	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, _scale);
 }
 
 void UIManager::draw() {
@@ -33,11 +33,7 @@ void UIManager::draw() {
 }
 
 void UIManager::setScale(float scale) {
-	_scale = new glm::vec2(scale);
-}
-
-void UIManager::setScale(glm::vec2 scale) {
-	_scale = &scale;
+	_scale = scale;
 }
 
 void UIManager::resolvePositions() {
@@ -45,7 +41,7 @@ void UIManager::resolvePositions() {
 	_recalculateOriginPinPositions();
 	for (int i = 0; i < _uiElements.size(); ++i) {
 		if (_uiElements[i]->visible) {
-			_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace);
+			_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, _scale);
 		}
 	}
 }

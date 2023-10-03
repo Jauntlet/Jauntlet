@@ -25,14 +25,14 @@ namespace Jauntlet {
 
 		UIElement();
 
-		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale);
-		virtual void resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]);
+		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale);
+		virtual void resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[], float scale);
 		
 		bool visible = true;
 	protected:
 		Camera2D* _camera;
 		glm::vec2* _position;
-		glm::vec2 _resolvedPostion;
+		glm::vec2 _resolvedPosition;
 		glm::vec2 _resolvedOrigin;
 		ORIGIN_PIN _originPin = ORIGIN_PIN::TOP_LEFT;
 	};
