@@ -70,7 +70,7 @@ void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]
     };
 }
 
-void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) {
+void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
     glm::vec2 mousecoords = _inputManager->getMouseCoords();
 
     _clicked = false;

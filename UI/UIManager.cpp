@@ -14,7 +14,7 @@ UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
 	_spriteBatch = new Jauntlet::SpriteBatch;
 	_spriteBatch->init();
-	_scale = new glm::vec2(1);
+	_scale = 1.0f;
 }
 
 void UIManager::addElement(UIElement* uiElement) {
