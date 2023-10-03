@@ -18,55 +18,45 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
     _size = size;
 }
 
-void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]) {
-    
+void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[], float scale) {
     switch (_originPin) {
         case UIElement::ORIGIN_PIN::TOP_LEFT:
-            _resolvedPosition = glm::vec2(_position->x, _position->y + _size.y);
+            _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale + _size.y * scale);
             break;
         case UIElement::ORIGIN_PIN::TOP:
-            _resolvedPosition = glm::vec2(_position->x - (_size.x / 2), _position->y + _size.y);
+            _unresolvedPosition = glm::vec2(_position->x * scale - ((_size.x * scale) / 2), _position->y * scale + _size.y * scale);
             break;
         case UIElement::ORIGIN_PIN::TOP_RIGHT:
-            _resolvedPosition = glm::vec2(_position->x - _size.x, _position->y  + _size.y);
+            _unresolvedPosition = glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale  + _size.y * scale);
             break;
         case UIElement::ORIGIN_PIN::RIGHT:
-            _resolvedPosition = glm::vec2(_position->x - _size.x, _position->y + (_size.y / 2));
+            _unresolvedPosition = glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale + ((_size.y * scale) / 2));
             break;
         case UIElement::ORIGIN_PIN::BOTTOM_RIGHT:
-            _resolvedPosition = glm::vec2(_position->x - _size.x, _position->y);
+            _unresolvedPosition = glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale);
             break;
         case UIElement::ORIGIN_PIN::BOTTOM:
-            _resolvedPosition = glm::vec2(_position->x - (_size.x / 2), _position->y);
+            _unresolvedPosition = glm::vec2(_position->x * scale - ((_size.x * scale ) / 2), _position->y * scale);
             break;
         case UIElement::ORIGIN_PIN::BOTTOM_LEFT:
-            _resolvedPosition = glm::vec2(_position->x, _position->y);
+            _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale);
             break;
         case UIElement::ORIGIN_PIN::LEFT:
-            _resolvedPosition = glm::vec2(_position->x, _position->y + (_size.y / 2));
+            _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale + ((_size.y * scale) / 2));
             break;
         case UIElement::ORIGIN_PIN::CENTER:
-            _resolvedPosition = glm::vec2(_position->x - (_size.x / 2), _position->y + (_size.y / 2));
+            _unresolvedPosition = glm::vec2(_position->x * scale - ((_size.x * scale) / 2), _position->y * scale + ((_size.y * scale) / 2));
             break;
     }
 
-    std::cout << "pos:  " << _position->x << ", " << _position->y << std::endl;
-    std::cout << "size: " << _size.x << ", " << _size.y << std::endl;
-
-    std::cout << "BEFORE SCALING: " << _resolvedPosition.x << ", " << _resolvedPosition.y << std::endl;
-
-    _resolvedPosition *= 2.0f;
-
-    std::cout << "AFTER SCALING:  " << _resolvedPosition.x << ", " << _resolvedPosition.y << std::endl;
-    
-    _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(_resolvedPosition);
-    _resolvedSize = _size; // we will handle scaling later.
+    _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(_unresolvedPosition);
+    _resolvedSize = _size * scale; // we will handle scaling later.
     
     _onScreenButtonVec4 = {
-        _position->x + resolvedPins[(int)(_originPin)].x,
-        _position->x + _size.x + resolvedPins[(int)(_originPin)].x,
-        _position->y - resolvedPins[(int)(_originPin)].y,
-        _position->y - _size.y - resolvedPins[(int)(_originPin)].y,
+        _unresolvedPosition.x + resolvedPins[(int)(_originPin)].x,
+        _unresolvedPosition.x + _size.x * scale + resolvedPins[(int)(_originPin)].x,
+        _unresolvedPosition.y - resolvedPins[(int)(_originPin)].y,
+        _unresolvedPosition.y - _size.y * scale - resolvedPins[(int)(_originPin)].y,
     };
 }
 

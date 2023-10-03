@@ -31,5 +31,6 @@ namespace Jauntlet {
 		bool _wasPressed = false;
 		InputManager* _inputManager;
 		glm::vec4 _onScreenButtonVec4;
+		glm::vec2 _unresolvedPosition;
 	};
 }
