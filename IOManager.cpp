@@ -1,4 +1,3 @@
-#include <filesystem>
 #include <fstream>
 #include <vector>
 
@@ -7,7 +6,7 @@
 using namespace Jauntlet;
 
 bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer) {
-	std::ifstream file(std::filesystem::canonical(std::filesystem::current_path()).u8string() + "/" + filePath, std::ios::binary);
+	std::ifstream file(filePath, std::ios::binary);
 	if (file.fail()) {
 		perror(filePath.c_str());
 		return false;
