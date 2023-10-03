@@ -17,5 +17,5 @@ UITextElement::UITextElement(SpriteFont* spriteFont, std::string* text, Color* c
 }
 
 void UITextElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scale) {
-    _spriteFont->draw(*spriteBatch, *_text, _resolvedPostion, *scale, 0, *_color);
+    _spriteFont->draw(*spriteBatch, *_text, _resolvedPosition, *scale, 0, *_color);
 }

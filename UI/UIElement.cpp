@@ -14,5 +14,5 @@ void UIElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2* scal
 }
 
 void UIElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]) {
-	_resolvedPostion = camera->convertScreenToWorld(*_position);
+	_resolvedPosition = camera->convertScreenToWorld(*_position);
 }

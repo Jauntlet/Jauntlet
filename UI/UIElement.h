@@ -32,7 +32,7 @@ namespace Jauntlet {
 	protected:
 		Camera2D* _camera;
 		glm::vec2* _position;
-		glm::vec2 _resolvedPostion;
+		glm::vec2 _resolvedPosition;
 		glm::vec2 _resolvedOrigin;
 		ORIGIN_PIN _originPin = ORIGIN_PIN::TOP_LEFT;
 	};

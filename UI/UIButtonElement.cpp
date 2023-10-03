@@ -6,7 +6,6 @@
 #include "UIElement.h"
 #include "UIManager.h"
 #include "UIButtonElement.h"
-//#include "../Rendering/SpriteFont.h"
 
 using namespace Jauntlet;
 
@@ -17,42 +16,53 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
 
     _originPin = positionPinType;
 
-    switch (positionPinType) {
-        case UIElement::ORIGIN_PIN::TOP_LEFT:
-            _position = new glm::vec2(position->x, position->y + size.y);
-            break;
-        case UIElement::ORIGIN_PIN::TOP:
-            _position = new glm::vec2(position->x - (size.x / 2), position->y + size.y);
-            break;
-        case UIElement::ORIGIN_PIN::TOP_RIGHT:
-            _position = new glm::vec2(position->x - size.x, position->y  + size.y);
-            break;
-        case UIElement::ORIGIN_PIN::RIGHT:
-            _position = new glm::vec2(position->x - size.x, position->y + (size.y / 2));
-            break;
-        case UIElement::ORIGIN_PIN::BOTTOM_RIGHT:
-            _position = new glm::vec2(position->x - size.x, position->y);
-            break;
-        case UIElement::ORIGIN_PIN::BOTTOM:
-            _position = new glm::vec2(position->x - (size.x / 2), position->y);
-            break;
-        case UIElement::ORIGIN_PIN::BOTTOM_LEFT:
-            _position = new glm::vec2(position->x, position->y);
-            break;
-        case UIElement::ORIGIN_PIN::LEFT:
-            _position = new glm::vec2(position->x, position->y + (size.y / 2));
-            break;
-        case UIElement::ORIGIN_PIN::CENTER:
-            _position = new glm::vec2(position->x - (size.x / 2), position->y + (size.y / 2));
-            break;
-    }
+    _position = position;
 
     _size = size;
 }
 
 void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[]) {
-    _resolvedPostion = camera->convertScreenToWorld(*_position);
-    _resolvedPostion += resolvedPins[(int)(_originPin)];
+    
+    switch (_originPin) {
+        case UIElement::ORIGIN_PIN::TOP_LEFT:
+            _resolvedPosition = glm::vec2(_position->x, _position->y + _size.y);
+            break;
+        case UIElement::ORIGIN_PIN::TOP:
+            _resolvedPosition = glm::vec2(_position->x - (_size.x / 2), _position->y + _size.y);
+            break;
+        case UIElement::ORIGIN_PIN::TOP_RIGHT:
+            _resolvedPosition = glm::vec2(_position->x - _size.x, _position->y  + _size.y);
+            break;
+        case UIElement::ORIGIN_PIN::RIGHT:
+            _resolvedPosition = glm::vec2(_position->x - _size.x, _position->y + (_size.y / 2));
+            break;
+        case UIElement::ORIGIN_PIN::BOTTOM_RIGHT:
+            _resolvedPosition = glm::vec2(_position->x - _size.x, _position->y);
+            break;
+        case UIElement::ORIGIN_PIN::BOTTOM:
+            _resolvedPosition = glm::vec2(_position->x - (_size.x / 2), _position->y);
+            break;
+        case UIElement::ORIGIN_PIN::BOTTOM_LEFT:
+            _resolvedPosition = glm::vec2(_position->x, _position->y);
+            break;
+        case UIElement::ORIGIN_PIN::LEFT:
+            _resolvedPosition = glm::vec2(_position->x, _position->y + (_size.y / 2));
+            break;
+        case UIElement::ORIGIN_PIN::CENTER:
+            _resolvedPosition = glm::vec2(_position->x - (_size.x / 2), _position->y + (_size.y / 2));
+            break;
+    }
+
+    std::cout << "pos:  " << _position->x << ", " << _position->y << std::endl;
+    std::cout << "size: " << _size.x << ", " << _size.y << std::endl;
+
+    std::cout << "BEFORE SCALING: " << _resolvedPosition.x << ", " << _resolvedPosition.y << std::endl;
+
+    _resolvedPosition *= 2.0f;
+
+    std::cout << "AFTER SCALING:  " << _resolvedPosition.x << ", " << _resolvedPosition.y << std::endl;
+    
+    _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(_resolvedPosition);
     _resolvedSize = _size; // we will handle scaling later.
     
     _onScreenButtonVec4 = {
@@ -79,5 +89,5 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, glm::vec2
         _wasPressed = false;
     }
     
-    spriteBatch->draw({_resolvedPostion.x, _resolvedPostion.y, _resolvedSize.x, _resolvedSize.y}, {_clicked * 0.5, 0, 0.5, 1}, _textureId);
+    spriteBatch->draw({_resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y}, {_clicked * 0.5, 0, 0.5, 1}, _textureId);
 }
