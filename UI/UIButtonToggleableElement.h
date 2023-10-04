@@ -8,14 +8,14 @@
 #include "../Camera2D.h"
 #include "../InputManager.h"
 #include "../Rendering/SpriteFont.h"
-#include "UIElement.h"
+#include "UIButtonElement.h"
 
 namespace Jauntlet {
-	class UIButtonElement : public UIElement
+	class UIButtonToggleableElement : public UIButtonElement
 	{
 	public:
-		UIButtonElement();
-		UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType);
+		//constructor with _position;
+		UIButtonToggleableElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType);
         void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
 		void resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[], float scale) override;
 		void click() { _onClick(); };
