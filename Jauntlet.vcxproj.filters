@@ -66,6 +66,12 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="tinyfiledialogs.cpp" />
+    <ClCompile Include="Rendering\Animation.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\AnimationManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -128,5 +134,11 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="tinyfiledialogs.h" />
+    <ClInclude Include="Rendering\Animation.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\AnimationManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
