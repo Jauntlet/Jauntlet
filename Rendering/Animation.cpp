@@ -1,9 +1,18 @@
 #include "Animation.h"
+#include "AnimationManager.h"
 
 using namespace Jauntlet;
 
+Animation::Animation() {
+	_spriteSize = 0.0f;
+}
+
 Animation::Animation(glm::vec2 spriteSize, glm::vec2 animationSize) {
-	_spriteSize = spriteSize / animationSize;
+	_spriteSize = spriteSize.x / animationSize.x;
+}
+
+Animation::Animation(int frames) {
+	_spriteSize = 1.0f / frames;
 }
 
 void Animation::play(int start, int end, float frameTime) {
@@ -33,7 +42,7 @@ void Animation::update() {
 		_elapsedTime -= _frameTime;
 	}
 
-	_uv = glm::vec4(_spriteSize.x * _frame,0,_spriteSize.x * (_frame - 1),1);
+	_uv = glm::vec4(_spriteSize * _frame,0,_spriteSize,1);
 }
 
 glm::vec4 Animation::getUV() {

@@ -10,7 +10,9 @@ namespace Jauntlet {
 class Animation
 {
 public:
+	Animation();
 	Animation(glm::vec2 spriteSize, glm::vec2 animationSize);
+	Animation(int frames);
 	void play(int start, int end, float frameTime);
 	void update();
 	void stop();
@@ -19,7 +21,7 @@ private:
 
 	float _elapsedTime = 0;
 	
-	glm::vec2 _spriteSize;
+	float _spriteSize;
 
 	int _start;
 	int _end;
