@@ -15,6 +15,8 @@ public:
     static float getTimeScale();
     //get game speed
 	static void setTimeScale(float newScale);
+	//get time elapsed since game start
+	static long getTime();
 
 private:
 	static void calculateFPS();
@@ -23,6 +25,7 @@ private:
 	static float _maxFPS;
 	static float _deltaTime;
 	static float _timeScale;
+	static long _time;
 	static unsigned int _startTicks;
 };
 }

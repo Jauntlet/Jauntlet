@@ -8,6 +8,7 @@ float Time::_fps = 0;
 float Time::_maxFPS = -1;
 float Time::_deltaTime = 0;
 float Time::_timeScale = 1;
+long Time::_time = 0;
 unsigned int Time::_startTicks;
 
 void Time::setMaxFPS(int maxFPS) {
@@ -36,6 +37,11 @@ float Time::endFrame() {
 float Time::getTimeScale() {
 	return _timeScale;
 }
+
+long Time::getTime() {
+	return _time;
+}
+
 void Time::setTimeScale(float newScale) {
 	_timeScale = newScale;
 }
@@ -68,4 +74,5 @@ void Time::calculateFPS() {
 	else {
 		_fps = 0;
 	}
+	_time += _deltaTime;
 }
