@@ -17,10 +17,6 @@ UIManager::UIManager(Camera2D* camera) {
 	//_scale = 1.0f;
 }
 
-UIManager::~UIManager() {
-	delete _spriteBatch;
-}
-
 void UIManager::addElement(UIElement* uiElement) {
 	_uiElements.push_back(uiElement);
 	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, _scale);

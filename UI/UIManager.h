@@ -15,8 +15,6 @@ namespace Jauntlet {
 		//constructors;
 		UIManager();
 		UIManager(Camera2D* camera);
-		
-		~UIManager();
 
 		// update all ui elements to fit the resolution
 		void addElement(UIElement* uiElement);
