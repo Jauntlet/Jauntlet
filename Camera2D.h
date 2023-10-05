@@ -17,7 +17,7 @@ public:
 	// update the camera
 	void update();
 	// Makes this camera the camera objects are rendered to.
-	void setActiveCamera(GLSLProgram* activeProgram);
+	void setActiveCamera();
 	
 	// converts from a position in world space to a position on the screen
 	glm::vec2 convertWorldToScreen(glm::vec2 worldCoords);

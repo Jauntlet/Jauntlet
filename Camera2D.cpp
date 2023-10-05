@@ -59,8 +59,10 @@ void Camera2D::update() {
 	_needsMatrixUpdate = false;
 }
 
-void Camera2D::setActiveCamera(GLSLProgram* activeProgram) {
-	glUniformMatrix4fv(activeProgram->getUniformLocation("Projection"), 1, GL_FALSE, &getCameraMatrix()[0][0]);
+void Camera2D::setActiveCamera() {
+	if (GLSLProgram::currentProgram != nullptr) {
+		glUniformMatrix4fv(GLSLProgram::currentProgram->getUniformLocation("Projection"), 1, GL_FALSE, &getCameraMatrix()[0][0]);
+	}
 }
 
 glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
