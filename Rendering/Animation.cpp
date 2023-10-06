@@ -31,6 +31,10 @@ void Animation::pause() {
 	_playing = false;
 }
 
+void Animation::resume() {
+	_playing = true;
+}
+
 void Animation::stop() {
 	_playing = false;
 	_frame = _start;

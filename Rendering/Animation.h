@@ -15,8 +15,12 @@ public:
 	Animation(int frames);
 	void play(int start, int end, float frameTime);
 	void update();
+	// stop the animation.
 	void stop();
+	// stops the animation.
 	void pause();
+	// resumes the animation and continues playing.
+	void resume();
 	glm::vec4 getUV();
 private:
 
