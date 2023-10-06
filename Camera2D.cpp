@@ -176,15 +176,18 @@ void Camera2D::clearTransitions() {
 
 void Camera2D::multiplyPosition(float scale) {
 	_position *= scale;
+	_needsMatrixUpdate = true;
 }
 
 void Camera2D::multiplyScale(float scale) {
 	_scale *= scale;
+	_needsMatrixUpdate = true;
 }
 
 void Camera2D::multiply(float scale) {
 	_scale *= scale;
 	_position *= scale;
+	_needsMatrixUpdate = true;
 }
 
 glm::vec2 Camera2D::getCameraSize() {
