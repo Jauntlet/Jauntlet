@@ -188,6 +188,15 @@ bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
 
 	return !(iterator == _tiles.end() || iterator->second.tileCollision == TileCollision::NONE);
 }
+bool TileMap::isTileEmpty(glm::ivec2 tilePosition) {
+	if (!isValidTilePos(tilePosition)) {
+		return true;
+	}
+
+	auto iterator = _tiles.find(_level[tilePosition.y][tilePosition.x]);
+
+	return iterator == _tiles.end();
+}
 unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
 	if (!isValidTilePos(tilePosition)) {
 		return 0;

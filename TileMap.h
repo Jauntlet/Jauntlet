@@ -62,6 +62,8 @@ public:
 	
 	// returns true if the tile position has a collision.
 	bool tileHasCollision(glm::ivec2 tilePosition);
+	// returns true if the tile is empty
+	bool isTileEmpty(glm::ivec2 tilePosition);
 	// returns ID of tile position.
 	unsigned int getTileID(glm::ivec2 tilePosition);
 
