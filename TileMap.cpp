@@ -79,6 +79,16 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 				Register(*_storedTileSets.back());
 				continue;
 			}
+
+			if (line == "offset") {
+				std::getline(ss, line, ' ');
+
+				AddOffset(glm::vec2(std::stoi(line), 0));
+
+				std::getline(ss, line, ' ');
+				AddOffset(glm::vec2(0, std::stoi(line)));
+				continue;
+			}
 		}
 		if (line == "ENDDEC") {
 			break;
@@ -238,6 +248,9 @@ void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 void TileMap::AddOffset(glm::vec2 offset) {
 	_offset += offset;
 	_needsTileUpdate = true;
+}
+void TileMap::resetOffset() {
+	_offset = glm::vec2(0);
 }
 void TileMap::changeDrawColor(Jauntlet::Color color) {
 	_drawColor = color;

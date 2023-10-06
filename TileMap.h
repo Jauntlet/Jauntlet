@@ -80,6 +80,9 @@ public:
 	// Adds to the offset amount.
 	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
 	void AddOffset(glm::vec2 offset);
+	// Resets Offset to 0.
+	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
+	void resetOffset();
 	// Updates the color of the tilemap
 	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
 	void changeDrawColor(Jauntlet::Color color);
