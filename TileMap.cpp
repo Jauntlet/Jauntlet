@@ -21,6 +21,7 @@ TileMap::~TileMap() {
 	for (int i = 0; i < _storedTileSets.size(); i++) {
 		delete _storedTileSets[i];
 	}
+	_storedTileSets.clear();
 }
 
 void TileMap::Register(std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
@@ -31,7 +32,6 @@ void TileMap::Register(TileSet& tileSet, TileCollision collisionType/*= TileColl
 }
 
 void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
-	
 	_offset = glm::vec2(offsetX, offsetY);
 	
 	_spriteBatch.init();
@@ -40,7 +40,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 	file.open(filePath);
 
 	if (file.fail()) {
-		fatalError("Failed to open TileMap " + filePath);
+		fatalError("Failed to open TileMap \"" + filePath + "\"");
 	}
 
 	std::string line;
