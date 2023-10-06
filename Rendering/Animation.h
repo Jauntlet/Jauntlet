@@ -16,6 +16,7 @@ public:
 	void play(int start, int end, float frameTime);
 	void update();
 	void stop();
+	void pause();
 	glm::vec4 getUV();
 private:
 
@@ -26,7 +27,7 @@ private:
 	int _start;
 	int _end;
 
-	int _frame;
+	int _frame = -1;
 
 	float _frameTime;
 

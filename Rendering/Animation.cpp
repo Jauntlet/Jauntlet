@@ -21,11 +21,19 @@ void Animation::play(int start, int end, float frameTime) {
 	_end = end;
 	_frameTime = frameTime;
 	_playing = true;
-	_frame = start;
+
+	if (_frame == -1) {
+		_frame = start;
+	}
+}
+
+void Animation::pause() {
+	_playing = false;
 }
 
 void Animation::stop() {
 	_playing = false;
+	_frame = _start;
 }
 
 void Animation::update() {
