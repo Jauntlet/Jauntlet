@@ -86,36 +86,42 @@ TileSet::Tileinfo TileSet::tileSetToTile(unsigned int layout) {
 		return _mainTiles[layout];
 	}
 	
-	// NOTE: unlike with the regular sides, where the value is true if the tile connects, meaning we check for if it doesn't,
+	// NOTE: unlike with the regular sides, where the value is true if the tile connects,
 	// the corners are true if they actually appear, meaning we have to do a bit of weird logic here. -xm
 
-	if (!(layout & TileSides::LEFT) && !(layout & TileSides::TOP) && layout & TileSides::BOTTOM_RIGHT) {
+
+	// All of this code is jank and will be removed eventually.
+	else if (!(layout & TileSides::LEFT) && !(layout & TileSides::TOP) && layout & TileSides::BOTTOM_RIGHT) {
 		return _mainTiles[16];
 	}
-	if (!(layout & TileSides::RIGHT) && !(layout & TileSides::TOP) && layout & TileSides::BOTTOM_LEFT) {
+	else if (!(layout & TileSides::RIGHT) && !(layout & TileSides::TOP) && layout & TileSides::BOTTOM_LEFT) {
 		return _mainTiles[17];
 	}
-	if (!(layout & TileSides::LEFT) && !(layout & TileSides::BOTTOM) && layout & TileSides::TOP_RIGHT) {
+	else if (!(layout & TileSides::LEFT) && !(layout & TileSides::BOTTOM) && layout & TileSides::TOP_RIGHT) {
 		return _mainTiles[18];
 	}
-	if (!(layout & TileSides::RIGHT) && !(layout & TileSides::BOTTOM) && layout & TileSides::TOP_LEFT) {
+	else if (!(layout & TileSides::RIGHT) && !(layout & TileSides::BOTTOM) && layout & TileSides::TOP_LEFT) {
 		return _mainTiles[19];
 	}
-	if ((layout & TileSides::BOTTOM_LEFT)&&(layout & TileSides::BOTTOM_RIGHT)&&(layout & TileSides::TOP_LEFT)&&(layout & TileSides::TOP_RIGHT)) {
+	else if ((layout & TileSides::BOTTOM_LEFT)&&(layout & TileSides::BOTTOM_RIGHT)&&(layout & TileSides::TOP_LEFT)&&(layout & TileSides::TOP_RIGHT)) {
 		return _mainTiles[24];
 	}
-	if ((layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&&!(layout & TileSides::TOP)) {
+	else if ((layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&&!(layout & TileSides::TOP)) {
 		return _mainTiles[23];
 	}
-	if (!(layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
+	else if (!(layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
 		return _mainTiles[22];
 	}
-	if ((layout & TileSides::BOTTOM)&&!(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
+	else if ((layout & TileSides::BOTTOM)&&!(layout & TileSides::RIGHT)&&(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
 		return _mainTiles[21];
 	}
-	if ((layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&!(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
+	else if ((layout & TileSides::BOTTOM)&&(layout & TileSides::RIGHT)&&!(layout & TileSides::LEFT)&& (layout & TileSides::TOP)) {
 		return _mainTiles[20];
 	}
-	// none of the programmed values are true, return no-sides-connected tile
-	return _mainTiles[15];
+	else {
+		// none of the programmed values are true, return no-sides-connected tile
+		return _mainTiles[15];
+	}
+	
+	
 }
