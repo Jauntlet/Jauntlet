@@ -1,11 +1,9 @@
 #include <string>
-#include <iostream>
 #include <glm/fwd.hpp>
 
 #include "UIElement.h"
 #include "UIManager.h"
 #include "UITextElement.h"
-//#include "../Rendering/SpriteFont.h"
 
 using namespace Jauntlet;
 

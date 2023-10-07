@@ -1,7 +1,5 @@
 #include "TileSet.h"
 
-#include <iostream> // REMOVE
-
 using namespace Jauntlet;
 
 static int _lastestID = 0;

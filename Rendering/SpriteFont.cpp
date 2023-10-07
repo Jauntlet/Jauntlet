@@ -1,7 +1,5 @@
 #include <SDL/SDL.h>
 #include <cstdio>
-#include <iostream>
-
 #include "../Errors.h"
 #include "SpriteBatch.h"
 #include "SpriteFont.h"
@@ -33,7 +31,7 @@ void SpriteFont::init(Camera2D* camera, const char* font, int size) {
 
 	for (unsigned char c = FIRST_PRINTABLE_CHAR; c < LAST_PRINTABLE_CHAR; c++) {
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-			std::cout << "Failed to load Font Glyph: " << font << " of char " << c << std::endl;
+			error("Failed to load Font Glyph: " + std::to_string(*font) + " of char " + std::to_string(c));
 			continue;
 		}
 		unsigned int texture;

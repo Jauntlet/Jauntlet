@@ -1,7 +1,5 @@
 #include "JMath.h"
 
-#include <iostream> // REMOVE 
-
 float JMath::Distance(glm::vec2 a, glm::vec2 b) {
 	return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
 }

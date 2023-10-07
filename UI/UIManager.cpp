@@ -2,7 +2,6 @@
 #include "SDL/SDL_video.h"
 #include "UIElement.h"
 #include "glm/fwd.hpp"
-#include <iostream>
 
 using namespace Jauntlet;
 

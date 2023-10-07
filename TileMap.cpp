@@ -1,8 +1,6 @@
 #include <algorithm>
 #include <fstream>
-#include <iostream>
 #include <sstream>
-
 
 #include "Errors.h"
 #include "JMath.h"
@@ -227,7 +225,7 @@ glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
 
 void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 	if (position.y < 0 || position.x < 0) {
-		std::cout << "WARNING: Tried to overwrite a negative tileposition: " << position.x << ", " << position.y << std::endl;
+		error("WARNING: Tried to overwrite a negative tileposition: " + std::to_string(position.x) + ", " + std::to_string(position.y));
 		return;
 	}
 

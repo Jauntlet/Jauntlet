@@ -1,9 +1,8 @@
 #include <SDL/SDL.h>
 #include <cstdio>
-
+#include "Errors.h"
 #include "InputManager.h"
 #include <string>
-#include <iostream>
 
 using namespace Jauntlet;
 
@@ -80,7 +79,7 @@ void InputManager::processInput() {
 						_controllers[_event.jaxis.which].triggers.y = controllerAxis;
 						break;
 					default:
-						printf("WARNING: undefined stick axis detected %i\n", _event.jaxis.axis);
+						error("WARNING: undefined stick axis detected " + _event.jaxis.axis);
 						continue;
 				}
 				break;
@@ -187,7 +186,7 @@ glm::vec2 InputManager::getMouseCoords() {
 
 glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 	if (controllerID >= _controllers.size()) {
-		printf("Warning: Tried to get Axis on non-existent Controller");
+		error("Warning: Tried to get Axis on non-existent Controller");
 		return glm::vec2(0);
 	}
 	switch (type) {
@@ -200,7 +199,7 @@ glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 		case Axis::dPad:
 			return _controllers[controllerID].dPad;
 		default:
-		printf("WARNING: invalid parameter passed into getControllerAxis!");
+		error("WARNING: invalid parameter passed into getControllerAxis!");
 		return glm::vec2(0);
 	}
 }
@@ -229,7 +228,7 @@ glm::vec2 InputManager::getControllerAxis(Axis type) {
 		}
 		break;
 	default:
-		printf("WARNING: invalid parameter passed into getControllerAxis!");
+		error("WARNING: invalid parameter passed into getControllerAxis!");
 		return glm::vec2(0);
 	}
 	

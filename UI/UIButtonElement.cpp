@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 #include <glm/fwd.hpp>
 
 #include "SDL/SDL_mouse.h"

@@ -1,7 +1,5 @@
 #include <fstream>
 #include <vector>
-#include <iostream> // remove when done debugging
-
 #include "../Errors.h"
 #include "GLSLProgram.h"
 

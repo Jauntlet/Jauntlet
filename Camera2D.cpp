@@ -1,6 +1,4 @@
 #include <algorithm>
-#include <iostream>
-
 #include "Camera2D.h"
 #include "Errors.h"
 #include "Time.h"
