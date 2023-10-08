@@ -11,7 +11,16 @@ float JMath::Distance(glm::vec3 a, glm::vec3 b) {
 
 std::vector<std::string> JMath::Split(std::string string, std::string delimiter) {
 	std::vector<std::string> output;
+	
 	int delim = string.find(delimiter);
+
+	// if no delimiter was found
+	if (delim == -1) {
+		output.push_back(string);
+		// most Split functions in other languages returns an empty string at the 1st index if there is no delimiter in the string. This is for consistency. -xm
+		output.push_back("");
+		return output;
+	}
 
 	do {
 		output.push_back(string.substr(0, delim));
@@ -19,11 +28,6 @@ std::vector<std::string> JMath::Split(std::string string, std::string delimiter)
 	} while ((delim = string.find(delimiter)) != std::string::npos);
 	
 	output.push_back(string);
-	
-	if (output.size() == 1) {
-		// most Split functions in other languages returns an empty string at the 1st index if there is no delimiter in the string. This is for consistency. -xm
-		output.push_back("");
-	}
 
 	return output;
 }
