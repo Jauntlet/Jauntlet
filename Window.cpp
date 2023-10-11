@@ -58,6 +58,15 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 	return 0;
 }
 
+void Window::clearScreen() {
+	glClearDepth(1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Window::swapBuffer() {
+	SDL_GL_SwapWindow(_sdlWindow);
+}
+
 void Window::setBackgroundColor(Color color) {
 	glClearColor(color.r / static_cast<GLclampf>(255), color.g / static_cast<GLclampf>(255), color.b / static_cast<GLclampf>(255), 1);
 }
@@ -85,16 +94,6 @@ void Window::setWindowIcon(std::string filepath) {
 
 	SDL_FreeSurface(icon);
 }
-
-void Window::clearScreen() {
-	glClearDepth(1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void Window::swapBuffer() {
-	SDL_GL_SwapWindow(_sdlWindow);
-}
-
 void Window::setWindowSize(glm::ivec2 size) {
 	_screenWidth = size.x;
 	_screenWidth = size.y;

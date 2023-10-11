@@ -18,12 +18,6 @@ public:
 	Window();
 	// Creates a window using SDL and openGL
 	int create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags = 0);
-	
-	// sets the default color of the window.
-	void setBackgroundColor(Color color);
-	// set the icon of the window.
-	// if your icon does not appear, it could be because it is too large.
-	void setWindowIcon(std::string filepath);
 
 	// Clears what is rendered on screen.
 	// WARNING: resets ALL window screens
@@ -31,6 +25,11 @@ public:
 	// Swaps the windows buffer, should be done every draw frame
 	void swapBuffer();
 	
+	// sets the default color of the window.
+	void setBackgroundColor(Color color);
+	// set the icon of the window.
+	// if your icon does not appear, it could be because it is too large.
+	void setWindowIcon(std::string filepath);
 	// Sets the size of the window
 	void setWindowSize(glm::ivec2 size);
 	// Sets the size of the window
