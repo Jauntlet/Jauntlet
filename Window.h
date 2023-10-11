@@ -44,11 +44,13 @@ public:
 	
 	// Collects the correct window size
 	// Needed when the window is resized.
-	void resolveWindowSize();
+	glm::vec2 resolveWindowSize();
 
 	// get the width of the window
+	// make sure to run resolveWindowSize() on changes of window size (read docs)
 	int getWindowWidth();
 	// get the height of the window
+	// make sure to run resolveWindowSize() on changes of window size (read docs)
 	int getWindowHeight();
 	// get the width and height of the window.
 	// make sure to run resolveWindowSize() on changes of window size (read docs)

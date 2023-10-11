@@ -100,14 +100,12 @@ void Window::setWindowTitle(std::string newTitle) {
 void Window::setWindowSize(glm::ivec2 size) {
 	_screenWidth = size.x;
 	_screenWidth = size.y;
-	SDL_SetWindowSize(_sdlWindow, size.x, size.y);
-	glViewport(0, 0, _screenWidth, _screenHeight);
+	resolveWindowSize();
 }
 void Window::setWindowSize(int width, int height) {
 	_screenWidth = width;
 	_screenHeight = height;
-	SDL_SetWindowSize(_sdlWindow, width, height);
-	glViewport(0, 0, _screenWidth, _screenHeight);
+	resolveWindowSize();
 }
 
 void Window::toggleFullscreen() {
@@ -119,20 +117,19 @@ void Window::toggleFullscreen(bool fullscreen) {
 	SDL_SetWindowFullscreen(_sdlWindow, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 }
 
-void Window::resolveWindowSize() {
+glm::vec2 Window::resolveWindowSize() {
 	SDL_GetWindowSize(_sdlWindow, &_screenWidth, &_screenHeight);
 	glViewport(0, 0, _screenWidth, _screenHeight);
+
+	return glm::vec2(_screenHeight, _screenWidth);
 }
 
-// get the width of the screen
 int Window::getWindowWidth() {
 	return _screenWidth; 
 }
-
 int Window::getWindowHeight() {
 	return _screenHeight; 
 }
-
 glm::ivec2 Window::getWindowSize() {
 	return glm::ivec2(_screenWidth, _screenHeight); 
 }
