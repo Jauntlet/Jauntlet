@@ -1,3 +1,6 @@
+/* Purpose: Proper error handling across all supported platforms/OS's
+ * Main Contributer(s): Xander Mooney / Jack Kennedy
+ */
 #pragma once
 
 #include <string>

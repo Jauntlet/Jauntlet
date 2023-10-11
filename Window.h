@@ -1,3 +1,6 @@
+/* Purpose: Handles the state of windows
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 #include "Rendering/Vertex.h"
 

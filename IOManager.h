@@ -1,3 +1,6 @@
+/* Purpose: Reads binary files into memory
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <string>

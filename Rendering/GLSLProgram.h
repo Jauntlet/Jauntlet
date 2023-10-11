@@ -1,3 +1,7 @@
+/* Purpose: Links and manages a vertex and fragment shader which is integral to rendering anything. 
+ * also tracks the currently active GLSLProgram and makes sure only one is active at once.
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <GL/glew.h>

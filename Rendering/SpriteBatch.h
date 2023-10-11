@@ -1,3 +1,6 @@
+/* Purpose: Used to batch data for rendering on the GPU into one draw call instead of what would otherwise be many.
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <GL/glew.h>

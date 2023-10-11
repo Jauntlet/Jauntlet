@@ -1,3 +1,6 @@
+/* Purpose: Stores data effectively to visually connect tiles that are meant to be connected
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <string>

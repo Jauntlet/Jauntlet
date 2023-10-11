@@ -1,3 +1,6 @@
+/* Purpose: Used in parallel with InputManager to be able to combine different key inputs into the same event
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <SDL/SDL.h>

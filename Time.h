@@ -1,3 +1,6 @@
+/* Purpose: Handles time globally within Jauntlet
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 namespace Jauntlet{

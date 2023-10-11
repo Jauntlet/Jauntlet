@@ -1,3 +1,6 @@
+/* Purpose: used for obtaining texture information as quickly as possible.
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <string>

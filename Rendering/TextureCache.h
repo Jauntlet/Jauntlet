@@ -1,3 +1,6 @@
+/* Purpose: Stores texture data efficently
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <map>

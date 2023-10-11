@@ -1,3 +1,6 @@
+/* Purpose: Data structures frequently used within the engine.
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <GL/glew.h>

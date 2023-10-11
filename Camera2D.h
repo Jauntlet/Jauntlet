@@ -1,3 +1,6 @@
+/* Purpose: Optimal camera for 2D games, which handles the state of said perspective and all data related to it.
+ * Main Contributer(s): Xander Mooney / Jack Kennedy
+ */
 #pragma once
 #include "Rendering/GLSLProgram.h"
 

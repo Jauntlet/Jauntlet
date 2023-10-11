@@ -1,3 +1,6 @@
+/* Purpose: Uses .ttf files to be able to load fonts and render them on screen as requested.
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <ft2build.h>

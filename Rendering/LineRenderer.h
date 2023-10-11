@@ -1,3 +1,8 @@
+/* Purpose: Renders lines on screen.
+ * Main Contributer(s): Xander Mooney
+ */
+
+// THIS CLASS IS CURRENTLY IN-DEVELOPMENT AND DOES NOT ACTUALLY WORK
 #pragma once
 
 #include <glm/glm.hpp>
@@ -6,8 +11,10 @@
 namespace Jauntlet {
 class LineRenderer {
 public:
+	// THIS CLASS IS CURRENTLY IN-DEVELOPMENT AND DOES NOT ACTUALLY WORK
 	LineRenderer();
 	// initialize line renderer
+	// THIS CLASS IS CURRENTLY IN-DEVELOPMENT AND DOES NOT ACTUALLY WORK
 	void init();
 	// destructor
 	~LineRenderer();

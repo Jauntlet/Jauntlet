@@ -1,3 +1,6 @@
+/* Purpose: Loads data necessary for rendering an image to memory
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <string>

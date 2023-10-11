@@ -1,3 +1,6 @@
+/* Purpose: Holds information for a texture to be rendered onscreen
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <GL/glew.h>

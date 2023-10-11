@@ -1,3 +1,6 @@
+/* Purpose: Handles all possible user inputs for later reading during runtime.
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <SDL/SDL.h>

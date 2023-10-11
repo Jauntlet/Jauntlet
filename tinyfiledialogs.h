@@ -1,3 +1,7 @@
+// this code is a prebuilt prompter for selecting files/etc.
+// we may want to look into our own in the future.
+// THIS CODE IS NOT OURS
+
 /* If you are using a C++ compiler to compile tinyfiledialogs.c (maybe renamed with an extension ".cpp")
 then comment out << extern "C" >> bellow in this header file) */
 

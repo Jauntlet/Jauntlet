@@ -1,3 +1,6 @@
+/* Purpose: Holds and manages collections of tiles and renders them onto the screen
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 
 #include <functional>
