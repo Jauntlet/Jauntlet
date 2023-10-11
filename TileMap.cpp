@@ -265,17 +265,19 @@ void TileMap::updateTileMap() {
 	// Rendering all tiles into the sprite batch
 	for (int y = 0; y < _level.size(); y++) {
 		for (int x = 0; x < _level[y].size(); x++) {
-			unsigned int tile = _level[y][x];
-			// Create the location and size of the tile
-			glm::vec4 destRect(x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize);
 			// Find and Process the tile
+			unsigned int tile = _level[y][x];
 			auto mapIterator = _tiles.find(tile);
 
 			if (mapIterator == _tiles.end()) {
 				continue;
 			}
+			
+			// Create the location and size of the tile
+			glm::vec4 destRect(x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize);
 
 			if (mapIterator->second.tileSet != nullptr) {
+				// tile is a tileset, process which tile should be drawn
 				unsigned int tileData = 0;
 
 				if (testTileSetRules(mapIterator->second.tileSet, x + 1, y)) {
@@ -312,6 +314,7 @@ void TileMap::updateTileMap() {
 				_spriteBatch.draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0, _drawColor);
 			}
 			else {
+				// normal tile, render it as usual.
 				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0, _drawColor);
 			}
 		}
