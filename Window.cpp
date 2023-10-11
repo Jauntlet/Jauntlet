@@ -94,6 +94,9 @@ void Window::setWindowIcon(std::string filepath) {
 
 	SDL_FreeSurface(icon);
 }
+void Window::setWindowTitle(std::string newTitle) {
+	SDL_SetWindowTitle(_sdlWindow, newTitle.c_str());
+}
 void Window::setWindowSize(glm::ivec2 size) {
 	_screenWidth = size.x;
 	_screenWidth = size.y;

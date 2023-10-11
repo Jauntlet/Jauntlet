@@ -30,6 +30,8 @@ public:
 	// set the icon of the window.
 	// if your icon does not appear, it could be because it is too large.
 	void setWindowIcon(std::string filepath);
+	// changes the window's title.
+	void setWindowTitle(std::string newTitle);
 	// Sets the size of the window
 	void setWindowSize(glm::ivec2 size);
 	// Sets the size of the window
