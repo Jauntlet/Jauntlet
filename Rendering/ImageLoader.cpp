@@ -1,8 +1,10 @@
 #include "ImageLoader.h"
 #include "../Errors.h"
 #include "../IOManager.h"
+#include "../Jauntlet.h"
 #include "picoPNG.h"
 #include "ResourceManager.h"
+#include <SDL/SDL.h>
 
 using namespace Jauntlet;
 
@@ -34,6 +36,11 @@ GLTexture ImageLoader::loadPNG(std::string filePath) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
+	// Check for an error with openGL. An error occurs here if OpenGL isn't initialized.
+	if (glGetError() != GL_NO_ERROR) {
+		fatalError("Attempted to create a texture before a window is created! Please try to grab the texture later in program execution!");
+	}
+	
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
