@@ -3,6 +3,7 @@
 
 #include "Rendering/picoPNG.h"
 #include "IOManager.h"
+#include "Rendering/ImageLoader.h"
 
 using namespace Jauntlet;
 
@@ -71,28 +72,11 @@ void Window::setBackgroundColor(Color color) {
 	glClearColor(color.r / static_cast<GLclampf>(255), color.g / static_cast<GLclampf>(255), color.b / static_cast<GLclampf>(255), 1);
 }
 void Window::setWindowIcon(std::string filepath) {
-	std::vector<unsigned char> out, in;
-	unsigned long width, height;
-
-	if (!IOManager::readFileToBuffer(filepath, in)) {
-		fatalError("Failed to load PNG " + filepath + " file to buffer!");
-	}
-
-	int errorCode = decodePNG(out, width, height, &(in[0]), in.size());
-
-	if (errorCode != 0) {
-		fatalError("decodePNG failed with error: " + std::to_string(errorCode));
-	}
-
-	SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)out.data(), width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
-
-	if (icon == nullptr) {
-		SDL_Log("Failed to create icon surface: %s", SDL_GetError());
-	}
+	SDL_Surface* icon = ImageLoader::loadPNGtoSurface(filepath);
 
 	SDL_SetWindowIcon(_sdlWindow, icon);
 
-	SDL_FreeSurface(icon);
+	ImageLoader::freeSurface(icon);
 }
 void Window::setWindowTitle(std::string newTitle) {
 	SDL_SetWindowTitle(_sdlWindow, newTitle.c_str());
