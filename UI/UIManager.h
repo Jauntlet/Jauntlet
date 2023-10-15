@@ -3,10 +3,8 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "../Camera2D.h"
 #include "../Errors.h"
 #include "UIElement.h"
-#include "../Rendering/SpriteBatch.h"
 
 namespace Jauntlet {
 	class UIManager

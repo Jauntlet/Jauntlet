@@ -5,7 +5,6 @@
 
 #include <string>
 
-#include "GLTexture.h"
 #include "TextureCache.h"
 
 namespace Jauntlet {

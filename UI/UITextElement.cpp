@@ -1,8 +1,3 @@
-#include <string>
-#include <glm/fwd.hpp>
-
-#include "UIElement.h"
-#include "UIManager.h"
 #include "UITextElement.h"
 
 using namespace Jauntlet;

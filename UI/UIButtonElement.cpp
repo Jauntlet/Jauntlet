@@ -2,8 +2,6 @@
 #include <glm/fwd.hpp>
 
 #include "SDL/SDL_mouse.h"
-#include "UIElement.h"
-#include "UIManager.h"
 #include "UIButtonElement.h"
 
 using namespace Jauntlet;

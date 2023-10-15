@@ -5,9 +5,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-#include "../Camera2D.h"
 #include "../InputManager.h"
-#include "../Rendering/SpriteFont.h"
 #include "UIElement.h"
 
 namespace Jauntlet {
@@ -21,7 +19,6 @@ namespace Jauntlet {
 		void click() { _onClick(); };
     private:
 		std::string* _text;
-        SpriteFont* _spriteFont;
         Color* _color;
 		std::function<void()> _onClick;
 		glm::vec2 _size;

@@ -162,7 +162,7 @@ void Camera2D::clearTransition(TRANSITION_TYPE transitionType) {
 			_doTransitionScale = false;
 			break;
 		default:
-			Jauntlet::fatalError("invalid TRANSITION_TYPE in clearTransition");
+			Jauntlet::error("invalid TRANSITION_TYPE in clearTransition");
 			break;
 	}
 }

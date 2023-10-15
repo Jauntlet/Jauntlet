@@ -3,7 +3,6 @@
 #include <glm/glm.hpp>
 #include <string>
 
-#include "../Camera2D.h"
 #include "UIElement.h"
 #include "../Rendering/SpriteFont.h"
 

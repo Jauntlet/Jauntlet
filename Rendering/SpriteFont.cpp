@@ -1,7 +1,6 @@
 #include <SDL/SDL.h>
 #include <cstdio>
 #include "../Errors.h"
-#include "SpriteBatch.h"
 #include "SpriteFont.h"
 
 using namespace Jauntlet;

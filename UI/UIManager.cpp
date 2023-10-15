@@ -1,6 +1,5 @@
 #include "UIManager.h"
 #include "SDL/SDL_video.h"
-#include "UIElement.h"
 #include "glm/fwd.hpp"
 
 using namespace Jauntlet;

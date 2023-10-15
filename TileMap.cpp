@@ -4,10 +4,7 @@
 
 #include "Errors.h"
 #include "JMath.h"
-#include "Rendering/ImageLoader.h"
-#include "Rendering/ResourceManager.h"
 #include "TileMap.h"
-#include "TileSet.h"
 
 using namespace Jauntlet;
 
