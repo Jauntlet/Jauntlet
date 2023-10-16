@@ -76,13 +76,18 @@ void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float off
 			}
 
 			if (line == "offset") {
-				std::getline(ss, line, ' ');
+				try {
+					std::getline(ss, line, ' ');
 
-				AddOffset(glm::vec2(std::stoi(line), 0));
+					AddOffset(glm::vec2(std::stoi(line), 0));
 
-				std::getline(ss, line, ' ');
-				AddOffset(glm::vec2(0, std::stoi(line)));
-				continue;
+					std::getline(ss, line, ' ');
+					AddOffset(glm::vec2(0, std::stoi(line)));
+					continue;
+				}
+				catch (...) {
+					fatalError("offset of: " + line + " is invalid!");
+				}
 			}
 		}
 		if (line == "ENDDEC") {
