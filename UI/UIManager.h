@@ -13,7 +13,6 @@ namespace Jauntlet {
 		//constructors;
 		UIManager();
 		UIManager(Camera2D* camera);
-
 		// update all ui elements to fit the resolution
 		void addElement(UIElement* uiElement);
 		// draw all hud elements
@@ -26,7 +25,7 @@ namespace Jauntlet {
 		void resolvePositions();
 	private:
 		Camera2D* _camera;
-		SpriteBatch* _spriteBatch;
+		SpriteBatch _spriteBatch;
 		std::vector<UIElement*> _uiElements;
 		float _scale;
 

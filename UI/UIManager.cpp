@@ -10,9 +10,7 @@ UIManager::UIManager() {
 
 UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
-	_spriteBatch = new Jauntlet::SpriteBatch;
-	_spriteBatch->init();
-	//_scale = 1.0f;
+	_spriteBatch.init();
 }
 
 void UIManager::addElement(UIElement* uiElement) {
@@ -21,13 +19,13 @@ void UIManager::addElement(UIElement* uiElement) {
 }
 
 void UIManager::draw() {
-	_spriteBatch->begin();
+	_spriteBatch.begin();
 	for (int i = 0; i < _uiElements.size(); ++i) {
 		if (_uiElements[i]->visible) {
-			_uiElements[i]->draw(_camera, _spriteBatch, _scale);
+			_uiElements[i]->draw(_camera, &_spriteBatch, _scale);
 		}
 	}
-	_spriteBatch->endAndRender();
+	_spriteBatch.endAndRender();
 }
 
 void UIManager::setScale(float scale) {
