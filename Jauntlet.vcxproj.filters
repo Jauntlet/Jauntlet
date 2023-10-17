@@ -72,6 +72,9 @@
     <ClCompile Include="Rendering\AnimationManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="UI\UISpriteElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="Rendering\AnimationManager.h">
       <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UISpriteElement.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
