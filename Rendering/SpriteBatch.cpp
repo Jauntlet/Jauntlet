@@ -12,7 +12,7 @@ void SpriteBatch::init() {
 	createVertexArray();
 }
 
-void SpriteBatch::begin(GlyphSortType sortType /* = GlyphSortType::TEXTURE*/) {
+void SpriteBatch::begin(GlyphSortType sortType) {
 	_sortType = sortType;
 	_renderBatches.clear();
 	_glyphs.clear();
