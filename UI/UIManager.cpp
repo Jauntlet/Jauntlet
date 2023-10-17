@@ -39,7 +39,7 @@ void UIManager::resolvePositions() {
 	_recalculateOriginPinPositions();
 	for (int i = 0; i < _uiElements.size(); ++i) {
 		if (_uiElements[i]->visible) {
-			_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, _scale);
+			_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspacePtr, _scale);
 		}
 	}
 }

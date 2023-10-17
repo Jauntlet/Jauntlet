@@ -36,6 +36,8 @@ namespace Jauntlet {
 		// im going to name my baby this -jk
 		glm::vec2 _calculatedOriginPinPositionsInScreenspace[9];
 
+		glm::vec2* _calculatedOriginPinPositionsInScreenspacePtr = _calculatedOriginPinPositionsInScreenspace;
+
 		// recalculate the origin pin positions.
 		void _recalculateOriginPinPositions();
 	};

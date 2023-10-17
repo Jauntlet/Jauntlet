@@ -26,7 +26,7 @@ namespace Jauntlet {
 		UIElement();
 
 		virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale);
-		virtual void resolvePosition(Camera2D* camera, glm::vec2 resolvedPins[], float scale);
+		virtual void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale);
 		
 		bool visible = true;
 	protected:
