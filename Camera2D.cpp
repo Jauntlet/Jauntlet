@@ -32,7 +32,7 @@ void Camera2D::update() {
 	}
 
 	if (_doTransitionPosition && _transitionPosition != _position) {
-		_position = _position + (_transitionPosition - _position) * (Jauntlet::Time::getDeltaTime() * 4);
+		_position += (_transitionPosition - _position) * (Jauntlet::Time::getDeltaTime() * 4);
 		_needsMatrixUpdate = true;
 
 		if (std::fabs(_position.x - _transitionPosition.x) < 0.005f && std::fabs(_position.y - _transitionPosition.y) < 0.005f) {
