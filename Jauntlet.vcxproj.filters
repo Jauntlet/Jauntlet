@@ -75,6 +75,7 @@
     <ClCompile Include="UI\UISpriteElement.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="UI\UIButtonToggleableElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -144,6 +145,9 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="UI\UISpriteElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIButtonToggleableElement.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

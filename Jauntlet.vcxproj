@@ -214,6 +214,7 @@
     <ClInclude Include="Time.h" />
     <ClInclude Include="tinyfiledialogs.h" />
     <ClInclude Include="UI\UIButtonElement.h" />
+    <ClInclude Include="UI\UIButtonToggleableElement.h" />
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="UI\UISpriteElement.h" />
