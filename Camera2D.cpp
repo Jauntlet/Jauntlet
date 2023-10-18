@@ -148,6 +148,7 @@ void Camera2D::setScale(float newScale) {
 
 void Camera2D::transitionToScale(float newScale) { 
 	_transitionScale = std::min(std::max(newScale,_CAMERA_MIN_ZOOM),_CAMERA_MAX_ZOOM);
+	_transitionPosition *= _transitionScale;
 	_needsMatrixUpdate = true;
 	_doTransitionScale = true;
 }
