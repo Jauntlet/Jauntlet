@@ -182,6 +182,7 @@
     <ClCompile Include="UI\UIButtonElement.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
+    <ClCompile Include="UI\UISpriteElement.cpp" />
     <ClCompile Include="UI\UITextElement.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -214,6 +215,7 @@
     <ClInclude Include="UI\UIButtonElement.h" />
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\UIManager.h" />
+    <ClInclude Include="UI\UISpriteElement.h" />
     <ClInclude Include="UI\UITextElement.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

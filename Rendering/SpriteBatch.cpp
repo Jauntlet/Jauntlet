@@ -12,7 +12,7 @@ void SpriteBatch::init() {
 	createVertexArray();
 }
 
-void SpriteBatch::begin(GlyphSortType sortType /* = GlyphSortType::TEXTURE*/) {
+void SpriteBatch::begin(GlyphSortType sortType) {
 	_sortType = sortType;
 	_renderBatches.clear();
 	_glyphs.clear();
@@ -135,9 +135,6 @@ void SpriteBatch::sortGlyphs() {
 		case GlyphSortType::FRONT_TO_BACK:
 			std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareFrontToBack);
 			break;
-		case GlyphSortType::TEXTURE:
-			std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareTexture);
-			break;
 		case GlyphSortType::NONE:
 			break;
 		default:
@@ -151,7 +148,4 @@ bool SpriteBatch::compareFrontToBack(Glyph* a, Glyph* b) {
 }
 bool SpriteBatch::compareBackToFront(Glyph* a, Glyph* b) {
 	return (a->depth > b->depth);
-}
-bool SpriteBatch::compareTexture(Glyph* a, Glyph* b) {
-	return (a->texture < b->texture);
 }
