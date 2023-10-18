@@ -131,7 +131,11 @@ void Camera2D::setPosition(const glm::vec2& newPosition) {
 }
 
 void Camera2D::transitionToPosition(const glm::vec2& newPosition) { 
-	_transitionPosition = newPosition;
+	if (_doTransitionScale) {
+		_transitionPosition = newPosition;
+	} else {
+		_transitionPosition = newPosition * _transitionScale;
+	}
 	_needsMatrixUpdate = true;
 	_doTransitionPosition = true;
 }
