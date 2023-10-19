@@ -18,13 +18,16 @@ public:
 	static float Distance(glm::vec2 a, glm::vec2 b);
 	// find the distance between two vectors
 	static float Distance(glm::vec3 a, glm::vec3 b);
-	// splits a string in two, returns as an array of two elements [0] being before the delimiter, [1] being after.
+
+	// splits a string based on the provided delimiter, splitting as many times as needed.
+	// if no delimiter is found, the 0th element will be the full string and the 1th element will be an empty string.
 	static std::vector<std::string> Split(std::string string, std::string delimiter);
+	// splits a string based on the provided delimiter, splitting as many times as needed.
+	// if no delimiter is found, the 0th element will be the full string and the 1th element will be an empty string.
 	static std::vector<std::string> Split(std::string string, char delimiter);
 
+	// Converts Radians to Degrees
 	static float Rad2Deg();
+	// Converts Degree to Radians
 	static float Deg2Rad();
-private:
-	// used for splitting strings
-	static std::string arr[2];
 };
