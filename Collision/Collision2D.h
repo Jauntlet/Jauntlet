@@ -1,5 +1,5 @@
-/* Purpose:
- * Main Contributer(s):
+/* Purpose: Use Collider2Ds to detect and signal when collision happens
+ * Main Contributor(s): Christopher Kowalewski
  */
 #pragma once
 

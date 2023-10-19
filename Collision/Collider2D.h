@@ -1,5 +1,5 @@
-/* Purpose:
- * Main Contributer(s):
+/* Purpose: Creates bounds in which collision may be detected
+ * Main Contributor(s): Christopher Kowalewski
  */
 #pragma once
 
