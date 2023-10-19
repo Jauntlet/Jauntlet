@@ -15,16 +15,16 @@ class JMath
 {
 public:
 	// find the distance between two vectors
-	static float Distance(glm::vec2 a, glm::vec2 b);
+	static float Distance(const glm::vec2& a, const glm::vec2& b);
 	// find the distance between two vectors
-	static float Distance(glm::vec3 a, glm::vec3 b);
+	static float Distance(const glm::vec3& a, const glm::vec3& b);
 
 	// splits a string based on the provided delimiter, splitting as many times as needed.
 	// if no delimiter is found, the 0th element will be the full string and the 1th element will be an empty string.
-	static std::vector<std::string> Split(std::string string, std::string delimiter);
+	static std::vector<std::string> Split(std::string string, const std::string& delimiter);
 	// splits a string based on the provided delimiter, splitting as many times as needed.
 	// if no delimiter is found, the 0th element will be the full string and the 1th element will be an empty string.
-	static std::vector<std::string> Split(std::string string, char delimiter);
+	static std::vector<std::string> Split(std::string string, const char& delimiter);
 
 	// Converts Radians to Degrees
 	static float Rad2Deg();

@@ -1,14 +1,14 @@
 #include "JMath.h"
 
-float JMath::Distance(glm::vec2 a, glm::vec2 b) {
+float JMath::Distance(const glm::vec2& a,const glm::vec2& b) {
 	return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
 }
-float JMath::Distance(glm::vec3 a, glm::vec3 b) {
+float JMath::Distance(const glm::vec3& a,const glm::vec3& b) {
 	                           // a^2 + b^2 = c^2                                 // c^2 + z^2 = s^2
 	return std::sqrt(std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2)) + std::pow(a.z + b.z, 2));
 }
 
-std::vector<std::string> JMath::Split(std::string string, std::string delimiter) {
+std::vector<std::string> JMath::Split(std::string string,const std::string& delimiter) {
 	std::vector<std::string> output;
 	
 	int delim = string.find(delimiter);
@@ -30,7 +30,7 @@ std::vector<std::string> JMath::Split(std::string string, std::string delimiter)
 
 	return output;
 }
-std::vector<std::string> JMath::Split(std::string string, char delimiter) {
+std::vector<std::string> JMath::Split(std::string string,const char& delimiter) {
 	std::vector<std::string> output;
 
 	int delim = string.find(delimiter);
