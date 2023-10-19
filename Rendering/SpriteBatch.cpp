@@ -1,8 +1,58 @@
 #include <algorithm>
-
+#include "../JMath.h"
 #include "SpriteBatch.h"
 
 using namespace Jauntlet;
+
+Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, GLuint Texture, float Depth, const Color& Color) :
+	texture(Texture), depth(Depth) {
+	topLeft.color = Color;
+	topLeft.setPosition(DestRect.x, DestRect.y + DestRect.w);
+	topLeft.setUV(UvRect.x, UvRect.y + UvRect.w);
+
+	bottomLeft.color = Color;
+	bottomLeft.setPosition(DestRect.x, DestRect.y);
+	bottomLeft.setUV(UvRect.x, UvRect.y);
+
+	bottomRight.color = Color;
+	bottomRight.setPosition(DestRect.x + DestRect.z, DestRect.y);
+	bottomRight.setUV(UvRect.x + UvRect.z, UvRect.y);
+
+	topRight.color = Color;
+	topRight.setPosition(DestRect.x + DestRect.z, DestRect.y + DestRect.w);
+	topRight.setUV(UvRect.x + UvRect.z, UvRect.y + UvRect.w);
+}
+Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float degrees, GLuint Texture, float Depth, const Color& Color) :
+	texture(Texture), depth(Depth) {
+	degrees *= JMath::Deg2Rad();
+
+	glm::vec2 halfDims(DestRect.z / 2.0f, DestRect.w / 2.0f);
+
+	glm::vec2 tl(rotatePoint(-halfDims.x, halfDims.y, degrees) + halfDims);
+	glm::vec2 bl(rotatePoint(-halfDims.x, -halfDims.y, degrees) + halfDims);
+	glm::vec2 br(rotatePoint(halfDims.x, -halfDims.y, degrees) + halfDims);
+	glm::vec2 tr(rotatePoint(halfDims.x, halfDims.y, degrees) + halfDims);
+
+	topLeft.color = Color;
+	topLeft.setPosition(DestRect.x + tl.x, DestRect.y + tl.y);
+	topLeft.setUV(UvRect.x, UvRect.y + UvRect.w);
+
+	bottomLeft.color = Color;
+	bottomLeft.setPosition(DestRect.x + bl.x, DestRect.y + bl.y);
+	bottomLeft.setUV(UvRect.x, UvRect.y);
+
+	bottomRight.color = Color;
+	bottomRight.setPosition(DestRect.x + br.x, DestRect.y + br.y);
+	bottomRight.setUV(UvRect.x + UvRect.z, UvRect.y);
+
+	topRight.color = Color;
+	topRight.setPosition(DestRect.x + tr.x, DestRect.y + tr.y);
+	topRight.setUV(UvRect.x + UvRect.z, UvRect.y + UvRect.w);
+}
+
+glm::vec2 Glyph::rotatePoint(const float& x, const float& y, const float& angle) {
+	return glm::vec2(x * cos(angle) - y * sin(angle), x * sin(angle) + y * cos(angle));
+}
 
 SpriteBatch::SpriteBatch() {
 	// Empty
@@ -18,11 +68,23 @@ void SpriteBatch::begin(GlyphSortType sortType) {
 	_glyphs.clear();
 }
 
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color/* = Color(255, 255, 255)*/) {
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, uvRect, texture, depth, color);
 }
-void SpriteBatch::draw(const glm::vec4& destRect, GLuint texture, float depth, const Color& color/*= Color(255, 255, 255)*/) {
+void SpriteBatch::draw(const glm::vec4& destRect, GLuint texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, glm::vec4(0,0,1,1), texture, depth, color);
+}
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color) {
+	_glyphs.emplace_back(destRect, uvRect, angle, texture, depth, color);
+}
+void SpriteBatch::draw(const glm::vec4& destRect, float angle, GLuint texture, float depth, const Color& color) {
+	_glyphs.emplace_back(destRect, glm::vec4(0, 0, 1, 1), angle, texture, depth, color);
+}
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, const glm::vec2& angle, GLuint texture, float depth, const Color& color) {
+	_glyphs.emplace_back(destRect, uvRect, atan2(angle.y, angle.x), texture, depth, color);
+}
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec2& angle, GLuint texture, float depth, const Color& color) {
+	_glyphs.emplace_back(destRect, glm::vec4(0, 0, 1, 1), atan2(angle.y, angle.x), texture, depth, color);
 }
 
 void SpriteBatch::end() { 
