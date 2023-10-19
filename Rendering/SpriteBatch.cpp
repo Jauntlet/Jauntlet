@@ -53,12 +53,9 @@ glm::vec2 Glyph::rotatePoint(const float& x, const float& y, const float& angle)
 }
 
 SpriteBatch::SpriteBatch() {
-	// Empty
-}
-
-void SpriteBatch::init() { 
 	createVertexArray();
 }
+
 
 void SpriteBatch::begin(GlyphSortType sortType) {
 	_sortType = sortType;

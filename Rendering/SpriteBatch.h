@@ -45,8 +45,6 @@ class SpriteBatch
 {
 public:
 	SpriteBatch();
-	// initializes the spritebatch
-	void init();
 	// Opens the spritebatch to be able to add textures to it
 	void begin(GlyphSortType sortType = GlyphSortType::NONE);
 	// adds a texture and its information to the spritebatch

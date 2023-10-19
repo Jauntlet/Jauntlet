@@ -7,13 +7,13 @@ using namespace Jauntlet;
 
 GLSLProgram SpriteFont::_textProgram;
 
-void SpriteFont::init(Camera2D* camera, const char* font, int size) {
-	_fontHeight = size;
-	_camera = camera;
-	
+SpriteFont::SpriteFont(Camera2D* camera, const char* font, int size) :
+	_fontHeight(size),
+	_camera(camera)
+{
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
+
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft)) {
 		fatalError("FREETYPE library failed to initialize!");
@@ -43,12 +43,12 @@ void SpriteFont::init(Camera2D* camera, const char* font, int size) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		CharGlyph character = { texture, glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows), 
+		CharGlyph character = { texture, glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
 								glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap_top), static_cast<unsigned int>(face->glyph->advance.x)
 		};
 		Characters.insert(std::pair<char, CharGlyph>(c, character));
 	}
-	
+
 	// Clear memory for face and ft
 	FT_Done_Face(face);
 	FT_Done_FreeType(ft);

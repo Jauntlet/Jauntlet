@@ -13,11 +13,8 @@ namespace Jauntlet {
 class InputKey
 {
 public:
-	InputKey();
 	InputKey(InputManager* inputManager);
 	InputKey(InputManager* inputManager, SDL_KeyCode key);
-	// initialize InputKey; for use when using empty constructor.
-	void init(InputManager* inputManager);
 	// add a key that will trigger the input
 	void addKey(SDL_KeyCode key);
 	// add a key that will trigger the input

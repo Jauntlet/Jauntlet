@@ -29,8 +29,6 @@ void TileMap::Register(TileSet& tileSet, TileCollision collisionType/*= TileColl
 void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
 	_offset = glm::vec2(offsetX, offsetY);
 	
-	_spriteBatch.init();
-	
 	std::ifstream file;
 	file.open(filePath);
 

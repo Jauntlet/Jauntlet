@@ -2,10 +2,6 @@
 
 using namespace Jauntlet;
 
-InputKey::InputKey() {
-	// Empty
-}
-
 InputKey::InputKey(InputManager* inputManager) : _inputManager(inputManager) {
 	
 }
@@ -13,14 +9,9 @@ InputKey::InputKey(InputManager* inputManager, SDL_KeyCode key) : _inputManager(
 	_keys.push_back(key);
 }
 
-void InputKey::init(InputManager* inputManager) {
-	_inputManager = inputManager;
-}
-
 void InputKey::addKey(SDL_KeyCode key) {
 	_keys.push_back(key);
 }
-
 void InputKey::addKey(SDL_KeyCode key, SDL_KeyCode keytwo) {
 	_keys.push_back(key);
 	_keys.push_back(keytwo);

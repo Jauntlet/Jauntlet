@@ -27,10 +27,7 @@ class SpriteFont
 {
 public:
 	// Empty constructor. Use init();
-	SpriteFont() {};
-
-	// initialize a SpriteFont that uses all ascii characters
-	void init(Camera2D* camera, const char* font, int size);
+	SpriteFont(Camera2D* camera, const char* font, int size);
 	
 	// Draws the spritefont using a spritebatch
 	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,

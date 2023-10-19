@@ -10,7 +10,6 @@ UIManager::UIManager() {
 
 UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
-	_spriteBatch.init();
 }
 
 void UIManager::addElement(UIElement* uiElement) {
