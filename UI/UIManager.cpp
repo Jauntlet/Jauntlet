@@ -79,4 +79,6 @@ void UIManager::_recalculateOriginPinPositions() {
 	for (int i = 0; i < 9; ++i) {
 		_calculatedOriginPinPositionsInScreenspace[i] = _cameraSize * ORIGIN_PIN_POSITIONS[i];
 	}
+	// this pointer only works once, so every time we recalculate we pointerize it again
+	_calculatedOriginPinPositionsInScreenspacePtr = _calculatedOriginPinPositionsInScreenspace;
 }
