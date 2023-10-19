@@ -14,9 +14,7 @@ class Camera2D
 public:
 	enum class TRANSITION_TYPE {POSITION, SCALE};
 
-	Camera2D();
-	// initialize the screen size of the camera
-	void init(int screenWidth, int screenHeight, bool doRounding = true);
+	Camera2D(int screenWidth, int screenHeight, bool doRounding = true);
 	// update the camera
 	void update();
 	// Makes this camera the camera objects are rendered to.

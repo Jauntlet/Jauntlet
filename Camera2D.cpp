@@ -6,11 +6,7 @@
 
 using namespace Jauntlet;
 
-Camera2D::Camera2D() {
-	// Empty
-}
-
-void Camera2D::init(int screenWidth, int screenHeight, bool doRounding) {
+Camera2D::Camera2D(int screenWidth, int screenHeight, bool doRounding) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
 
