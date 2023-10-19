@@ -7,13 +7,7 @@
 
 using namespace Jauntlet;
 
-Window::Window() {
-	// Empty
-}
-
-int Window::create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags /*= 0*/)
-{
-
+Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) {
 	Uint32 flags = SDL_WINDOW_OPENGL;
 
 	if (currentFlags & INVISIBLE) {
@@ -55,8 +49,6 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 	// Enables Alpha Blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	return 0;
 }
 
 void Window::clearScreen() {

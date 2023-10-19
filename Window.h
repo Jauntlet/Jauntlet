@@ -18,9 +18,7 @@ enum WindowFlags { INVISIBLE = 0x1, FULLSCREEN = 0x2, BORDERLESS = 0x4, RESIZEAB
 class Window
 {
 public:
-	Window();
-	// Creates a window using SDL and openGL
-	int create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags = 0);
+	Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
 
 	// Clears what is rendered on screen.
 	// WARNING: resets ALL window screens
