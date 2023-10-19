@@ -9,6 +9,9 @@
 #include <SDL/SDL_stdinc.h>
 #include <vector>
 
+#define Rad2Deg (180.0f / M_PI)
+#define Deg2Rad (M_PI / 180.0f)
+
 // JMath is purposefully left out of the Jauntlet Namespace to shorten the syntax to call it.
 // we want: JMath::Function(), not Jauntlet::JMath::Function(). -xm
 class JMath
@@ -25,9 +28,4 @@ public:
 	// splits a string based on the provided delimiter, splitting as many times as needed.
 	// if no delimiter is found, the 0th element will be the full string and the 1th element will be an empty string.
 	static std::vector<std::string> Split(std::string string, const char& delimiter);
-
-	// Converts Radians to Degrees
-	static float Rad2Deg();
-	// Converts Degree to Radians
-	static float Deg2Rad();
 };

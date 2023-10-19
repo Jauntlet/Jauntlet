@@ -53,10 +53,3 @@ std::vector<std::string> JMath::Split(std::string string,const char& delimiter) 
 	
 	return output;
 }
-
-float JMath::Rad2Deg() {
-	return 180.0f / M_PI;
-}
-float JMath::Deg2Rad() {
-	return M_PI / 180.0f;
-}
