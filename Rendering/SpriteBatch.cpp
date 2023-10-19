@@ -22,16 +22,14 @@ Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, GLuint Texture,
 	topRight.setPosition(DestRect.x + DestRect.z, DestRect.y + DestRect.w);
 	topRight.setUV(UvRect.x + UvRect.z, UvRect.y + UvRect.w);
 }
-Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float degrees, GLuint Texture, float Depth, const Color& Color) :
+Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float radians, GLuint Texture, float Depth, const Color& Color) :
 	texture(Texture), depth(Depth) {
-	degrees *= JMath::Deg2Rad();
-
 	glm::vec2 halfDims(DestRect.z / 2.0f, DestRect.w / 2.0f);
 
-	glm::vec2 tl(rotatePoint(-halfDims.x, halfDims.y, degrees) + halfDims);
-	glm::vec2 bl(rotatePoint(-halfDims.x, -halfDims.y, degrees) + halfDims);
-	glm::vec2 br(rotatePoint(halfDims.x, -halfDims.y, degrees) + halfDims);
-	glm::vec2 tr(rotatePoint(halfDims.x, halfDims.y, degrees) + halfDims);
+	glm::vec2 tl(rotatePoint(-halfDims.x, halfDims.y, radians) + halfDims);
+	glm::vec2 bl(rotatePoint(-halfDims.x, -halfDims.y, radians) + halfDims);
+	glm::vec2 br(rotatePoint(halfDims.x, -halfDims.y, radians) + halfDims);
+	glm::vec2 tr(rotatePoint(halfDims.x, halfDims.y, radians) + halfDims);
 
 	topLeft.color = Color;
 	topLeft.setPosition(DestRect.x + tl.x, DestRect.y + tl.y);
