@@ -42,7 +42,7 @@ void UIManager::resolvePositions() {
 }
 /*
 
-breif reminder for those watching at home how screen space works.
+brief reminder for those watching at home how screen space works.
 0.0 on both axis is the top left, 1.0 on both axis is the top right.
 obviously this only applies to a resolution of 1x1 but can be expaned on,
 simply just multiply these values by the cameras width and height.
@@ -54,13 +54,7 @@ simply just multiply these values by the cameras width and height.
 
 
 
-
-
-
 (0.0 , 0.5)       (0.5 , 0.5)       (1.0 , 0.5)
-
-
-
 
 
 

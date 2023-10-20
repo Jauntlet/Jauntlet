@@ -1,13 +1,4 @@
 #pragma once
-
-#include <functional>
-#include <glm/fwd.hpp>
-#include <glm/glm.hpp>
-#include <string>
-
-#include "../Camera2D.h"
-#include "../InputManager.h"
-#include "../Rendering/SpriteFont.h"
 #include "UIButtonElement.h"
 
 namespace Jauntlet {

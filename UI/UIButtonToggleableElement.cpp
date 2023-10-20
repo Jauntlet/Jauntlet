@@ -1,9 +1,3 @@
-#include <string>
-#include <iostream>
-#include <glm/fwd.hpp>
-
-#include "SDL/SDL_mouse.h"
-#include "UIButtonElement.h"
 #include "UIButtonToggleableElement.h"
 
 using namespace Jauntlet;

@@ -1,11 +1,4 @@
 #pragma once
-
-#include <functional>
-#include <glm/fwd.hpp>
-#include <glm/glm.hpp>
-#include <string>
-
-#include "../InputManager.h"
 #include "UIElement.h"
 
 namespace Jauntlet {
