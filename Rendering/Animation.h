@@ -8,8 +8,6 @@
 #include <glm/glm.hpp>
 #include <string>
 
-#include "../Time.h"
-
 namespace Jauntlet {
 class Animation
 {

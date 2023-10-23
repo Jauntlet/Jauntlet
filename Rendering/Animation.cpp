@@ -1,5 +1,6 @@
 #include "Animation.h"
-#include "AnimationManager.h"
+
+#include "../Time.h"
 
 using namespace Jauntlet;
 
