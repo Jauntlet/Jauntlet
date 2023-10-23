@@ -4,6 +4,10 @@
 #include <iostream>
 #include "Jauntlet.h"
 
+#if _WIN32
+#include <Windows.h>
+#endif
+
 namespace Jauntlet {
 	int init() {
 		std::set_terminate(terminate);
@@ -22,6 +26,19 @@ namespace Jauntlet {
 			"yesno", "error", 1);
 		if (userOutput == 1) {
 			tinyfd_messageBox("yes", "user pressed yes probably", "ok", "info", 1);
+			try {
+				std::rethrow_exception(std::current_exception());
+			}
+			catch (const std::exception& ex) {
+			#if _WIN32
+				std::string output = " mailto:ps24xmooney@efcts.us?subject=Jauntlet_Crash&body=";
+				output += ex.what();
+				ShellExecuteA(NULL, "open", output.c_str(), NULL, NULL, SW_SHOWNORMAL);
+			#endif
+			}
+#if __linux__
+			system("xdg-open mailto:ps24xmooney@efcts.us?subject=Jauntlet_Crash&body=" + std::current_exception());
+#endif
 		}
 		else {
 			tinyfd_messageBox("no", "user pressed no probably", "ok", "info", 1);
