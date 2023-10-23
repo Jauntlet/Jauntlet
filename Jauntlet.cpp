@@ -25,7 +25,6 @@ namespace Jauntlet {
 			"Jauntlet has reached an unhandled exception!\nWould you like to send an error report to the Jauntlet Dev team?",
 			"yesno", "error", 1);
 		if (userOutput == 1) {
-			tinyfd_messageBox("yes", "user pressed yes probably", "ok", "info", 1);
 			try {
 				std::rethrow_exception(std::current_exception());
 			}
@@ -41,9 +40,6 @@ namespace Jauntlet {
 				system(output.c_str());
 			#endif
 			}
-		}
-		else {
-			tinyfd_messageBox("no", "user pressed no probably", "ok", "info", 1);
 		}
 
 		SDL_Quit();
