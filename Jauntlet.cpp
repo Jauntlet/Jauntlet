@@ -30,15 +30,17 @@ namespace Jauntlet {
 				std::rethrow_exception(std::current_exception());
 			}
 			catch (const std::exception& ex) {
-			#if _WIN32
-				std::string output = " mailto:ps24xmooney@efcts.us?subject=Jauntlet_Crash&body=";
+				std::string output = "mailto:ps24xmooney@efcts.us?subject=Jauntlet%20Crash&body=";
+				output += typeid(ex).name();
+				output += "%0A";
 				output += ex.what();
+			#if _WIN32
 				ShellExecuteA(NULL, "open", output.c_str(), NULL, NULL, SW_SHOWNORMAL);
+			#elif __linux__
+				output = "xdg-open " + output;
+				system(output.c_str());
 			#endif
 			}
-#if __linux__
-			system("xdg-open mailto:ps24xmooney@efcts.us?subject=Jauntlet_Crash&body=" + std::current_exception());
-#endif
 		}
 		else {
 			tinyfd_messageBox("no", "user pressed no probably", "ok", "info", 1);
