@@ -1,9 +1,12 @@
+/* Purpose: Manages UIElements. Can draw, move, scale, and update given elements.
+ * Main Contributer(s): Jack Kennedy
+ */
+
 #pragma once
 
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "../Errors.h"
 #include "UIElement.h"
 
 namespace Jauntlet {

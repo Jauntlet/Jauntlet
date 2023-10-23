@@ -1,3 +1,7 @@
+/* Purpose: Creates a clickable button on screen that runs a methon on click
+ * Main Contributer(s): Jack Kennedy
+ */
+
 #pragma once
 
 #include <functional>

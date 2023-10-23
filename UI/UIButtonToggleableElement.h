@@ -1,4 +1,10 @@
+/* Purpose: Creates a button that flicks "on" and "off", like a switch.
+ * identical to UIButtonElement in functionality.
+ * Main Contributer(s): Jack Kennedy
+ */
+
 #pragma once
+
 #include "UIButtonElement.h"
 
 namespace Jauntlet {

@@ -1,3 +1,7 @@
+/* Purpose: Creates a UI element on screen that takes a font and text and outputs real rendered text on screen.
+ * Main Contributer(s): Jack Kennedy
+ */
+
 #pragma once
 
 #include <glm/glm.hpp>

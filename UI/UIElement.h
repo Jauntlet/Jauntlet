@@ -1,3 +1,8 @@
+/* Purpose: Creates a basic, blank, and barely functional UI element.
+ * better used as a base for other elements.
+ * Main Contributer(s): Jack Kennedy
+ */
+
 #pragma once
 
 #include <glm/glm.hpp>

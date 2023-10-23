@@ -1,5 +1,5 @@
-/* Purpose:
- * Main Contributer(s):
+/* Purpose: unused, deleteme
+ * Main Contributer(s): Jack Kennedy
  */
 #pragma once
 

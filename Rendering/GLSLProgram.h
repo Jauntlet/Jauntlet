@@ -1,6 +1,6 @@
 /* Purpose: Links and manages a vertex and fragment shader which is integral to rendering anything. 
  * also tracks the currently active GLSLProgram and makes sure only one is active at once.
- * Main Contributer(s): Xander Mooney
+ * Main Contributer(s): Xander Mooney / Jack Kennedy
  */
 #pragma once
 
@@ -27,6 +27,9 @@ public:
 
 	// returns the GLint of the location of a uniform
 	GLint getUniformLocation(const std::string& uniformName);
+
+	// returns the id of the program
+	GLuint getId() { return _programID; };
 
 	// enable the use of the program
 	void use();

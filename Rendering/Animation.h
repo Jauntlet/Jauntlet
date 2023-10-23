@@ -1,6 +1,7 @@
-/* Purpose:
- * Main Contributer(s):
+/* Purpose: Sets up, stores, and plays back animations through textures and their UVS.
+ * Main Contributer(s): Jack Kennedy
  */
+
 #pragma once
 
 #include <glm/fwd.hpp>

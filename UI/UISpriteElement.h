@@ -1,4 +1,9 @@
+/* Purpose: Creates a static sprite on screen, managable through the ui manager.
+ * Main Contributer(s): Jack Kennedy
+ */
+
 #pragma once
+
 #include "UIElement.h"
 
 namespace Jauntlet {
