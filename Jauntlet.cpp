@@ -6,6 +6,8 @@
 
 #if _WIN32
 #include <Windows.h>
+#elif __linux__
+#include <unistd.h>
 #endif
 
 namespace Jauntlet {
@@ -37,8 +39,7 @@ namespace Jauntlet {
 			#if _WIN32
 				ShellExecuteA(NULL, "open", output.c_str(), NULL, NULL, SW_SHOWNORMAL);
 			#elif __linux__
-				output = "xdg-open " + output;
-				system(output.c_str());
+				execl("/usr/bin/xdg-open", "xdg-open", output.c_str(), nullptr);
 			#endif
 			}
 		}
