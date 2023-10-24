@@ -6,5 +6,4 @@ namespace Jauntlet {
 // initializes the game engine
 extern int init();
 
-void terminate();
 }
