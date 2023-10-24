@@ -21,6 +21,7 @@ namespace Jauntlet {
 	}
 
 	void terminate() {
+		SDL_Quit();
 		int userOutput = tinyfd_messageBox("Jauntlet has Crashed!",
 			"Jauntlet has reached an unhandled exception!\nWould you like to send an error report to the Jauntlet Dev team?",
 			"yesno", "error", 1);
@@ -29,9 +30,9 @@ namespace Jauntlet {
 				std::rethrow_exception(std::current_exception());
 			}
 			catch (const std::exception& ex) {
-				std::string output = "mailto:ps24xmooney@efcts.us?subject=Jauntlet%20Crash&body=";
+				std::string output = "mailto:ps24xmooney@efcts.us?subject=Jauntlet%20Crash%20Report&body=Hello,%20I%20have%20experienced%20a%20crash%20within%20the%20Jauntlet%20Engine.%20Here%20is%20my%20crash%20report:%0A";
 				output += typeid(ex).name();
-				output += "%0A";
+				output += "%0A"; // newline in URLs
 				output += ex.what();
 			#if _WIN32
 				ShellExecuteA(NULL, "open", output.c_str(), NULL, NULL, SW_SHOWNORMAL);
@@ -41,7 +42,6 @@ namespace Jauntlet {
 			#endif
 			}
 		}
-
-		SDL_Quit();
+		exit(-1);
 	}
 }
