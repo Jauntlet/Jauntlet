@@ -5,12 +5,6 @@
 #include "IOManager.h"
 #include "Jauntlet.h"
 
-#if _WIN32
-#include <Windows.h>
-#elif __linux__
-#include <unistd.h>
-#endif
-
 namespace Jauntlet {
 	int init() {
 		std::set_terminate(terminate);

@@ -38,8 +38,6 @@ bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char
 	return true;
 }
 
-namespace fs = std::experimental::filesystem;
-
 bool IOManager::createFolder(std::string folderPath) {
 #if _WIN32
 	// turns any local paths into an absolute path
