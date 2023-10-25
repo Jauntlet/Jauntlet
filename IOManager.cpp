@@ -1,7 +1,13 @@
 #include <fstream>
 #include <vector>
-
 #include "IOManager.h"
+
+#if _WIN32
+#include <Windows.h>
+#endif
+
+//REMOVE
+#include <iostream>
 
 using namespace Jauntlet;
 
@@ -30,4 +36,34 @@ bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char
 	file.close();
 
 	return true;
+}
+
+namespace fs = std::experimental::filesystem;
+
+bool IOManager::createFolder(std::string folderPath) {
+#if _WIN32
+	// turns any local paths into an absolute path
+	// on Linux this may look like:
+	// realPath(folderPath.c_str(), NULL);
+	// - xm
+	std::string truePath = _fullpath(NULL, folderPath.c_str(), NULL);
+
+	if (CreateDirectory(std::wstring(truePath.begin(), truePath.end()).c_str(), NULL)) {
+		// folder is made.
+		return true;
+	}
+	else {
+		// folder failed to be made
+		return false;
+	}
+#elif (__unix__)
+	// I am not a linux developer and I have no clue if mkdir works locally like they do in Windows.
+	// I pray every day that Jack Kennedy will see this code shortly after I make it and fix my errors. -xm
+	if (mkdir(folderPath, 0700) == -1) {
+		return false;
+	}
+	else {
+		return true;
+	}
+#endif
 }

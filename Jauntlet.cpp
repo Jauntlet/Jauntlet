@@ -2,19 +2,25 @@
 #include <SDL/SDL.h>
 #include <exception>
 #include <fstream>
+#include "IOManager.h"
 #include "Jauntlet.h"
 
 #if _WIN32
 #include <Windows.h>
 #elif __linux__
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #endif
 
 namespace Jauntlet {
 	int init() {
 		std::set_terminate(terminate);
+
+		if (IOManager::createFolder("Logs")) {
+			tinyfd_messageBox("Report", "Created folder!", "ok", "error", 1);
+		}
+		else {
+			tinyfd_messageBox("Report", "Failed to create folder!", "ok", "error", 1);
+		}
 
 		// Initialize SDL
 		SDL_Init(SDL_INIT_EVERYTHING);
@@ -34,8 +40,9 @@ namespace Jauntlet {
 				std::rethrow_exception(std::current_exception());
 			}
 			catch (const std::exception& ex) {
-				//makeLog();
-
+				
+				IOManager::createFolder("Logs");
+				 
 				std::ofstream errorFile;
 				errorFile.open("Logs/Latest.log");
 				errorFile << typeid(ex).name() << std::endl << ex.what();
@@ -53,22 +60,5 @@ namespace Jauntlet {
 			}
 		}
 		exit(-1);
-	}
-
-	void makeLog() {
-	#if _WIN32
-		std::string folder = "Logs";
-		if (CreateDirectoryA(folder.c_str(), NULL) || ERROR_ALREADY_EXISTS == GetLastError()) {
-			// folder is made. Empty for now :)
-		}
-	#elif (__unix__)
-		// I am not a linux developer and I have no clue if mkdir works locally like they do in Windows.
-		// I pray every day that Jack Kennedy will see this code shortly after I make it and fix my errors. -xm
-		struct stat st = { 0 };
-		if (stat("Logs", &st) == -1) {
-			mkdir("Logs", 0700);
-		}
-	#endif
-
 	}
 }
