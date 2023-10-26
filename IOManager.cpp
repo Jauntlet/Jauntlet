@@ -38,25 +38,23 @@ bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char
 	return true;
 }
 
-bool IOManager::createFolder(std::string folderPath) {
-#if _WIN32
-	// turns any local paths into an absolute path
-	// on Linux this may look like:
-	// realPath(folderPath.c_str(), NULL);
-	// - xm
-	std::string truePath = _fullpath(NULL, folderPath.c_str(), NULL);
-
-	if (CreateDirectory(std::wstring(truePath.begin(), truePath.end()).c_str(), NULL)) {
-		// folder is made.
+bool IOManager::findFolder(const std::string& folderPath) {
+	struct stat sb;
+	if (stat(toAbsoluteFilePath(folderPath).c_str(), &sb) == 0) {
 		return true;
 	}
-	else {
-		// folder failed to be made
-		return false;
+	return false;
+}
+
+bool IOManager::createFolder(const std::string& folderPath) {
+	std::string truePath = toAbsoluteFilePath(folderPath);
+#if _WIN32
+	if (CreateDirectory(std::wstring(truePath.begin(), truePath.end()).c_str(), NULL)) {
+		return true;
 	}
+	return false;
 #elif (__unix__)
-	
-	if (mkdir(folderPath.c_str(), 0700) == -1) {
+	if (mkdir(truePath.c_str(), 0700) == -1) {
 		return false;
 	}
 	return true;
