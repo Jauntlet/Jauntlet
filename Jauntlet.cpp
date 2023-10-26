@@ -39,8 +39,9 @@ namespace Jauntlet {
 	}
 	
 	int init() {
+		#ifdef NDEBUG
 		std::set_terminate(terminate);
-
+		#endif
 		// Initialize SDL
 		SDL_Init(SDL_INIT_EVERYTHING);
 		// allows for buffer swapping

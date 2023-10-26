@@ -1,5 +1,6 @@
 #include <fstream>
 #include <vector>
+#include "Errors.h"
 #include "IOManager.h"
 
 #if _WIN32
@@ -40,21 +41,21 @@ bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char
 
 bool IOManager::findFolder(const std::string& folderPath) {
 	struct stat sb;
-	if (stat(toAbsoluteFilePath(folderPath).c_str(), &sb) == 0) {
+	if (stat(folderPath.c_str(), &sb) == 0) {
 		return true;
 	}
 	return false;
 }
 
 bool IOManager::createFolder(const std::string& folderPath) {
-	std::string truePath = toAbsoluteFilePath(folderPath);
 #if _WIN32
+	std::string truePath = toAbsoluteFilePath(folderPath);
 	if (CreateDirectory(std::wstring(truePath.begin(), truePath.end()).c_str(), NULL)) {
 		return true;
 	}
 	return false;
 #elif (__unix__)
-	if (mkdir(truepath.c_str(), 0700) == -1) {
+	if (mkdir(folderPath.c_str(), 0700) == -1) {
 		return false;
 	}
 	return true;
@@ -65,6 +66,10 @@ std::string IOManager::toAbsoluteFilePath(const std::string& filePath) {
 #if _WIN32
 	return _fullpath(NULL, filePath.c_str(), NULL);
 #elif (__unix__)
-	return realPath(filePath.c_str(), NULL);
+try {
+	return realpath(filePath.c_str(), NULL);
+} catch (...) {
+	fatalError("Tried to find the filepath of a directory that doesn't exist: " + filePath);
+}
 #endif
 }
