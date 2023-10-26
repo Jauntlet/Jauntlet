@@ -60,6 +60,7 @@ bool IOManager::createFolder(const std::string& folderPath) {
 }
 
 std::string IOManager::toAbsoluteFilePath(const std::string& filePath) {
+// while Windows doesn't care if a file directory exists or not to turn it into a true filepath, Linux very much does.
 #if _WIN32
 	return _fullpath(NULL, filePath.c_str(), NULL);
 #elif (__unix__)

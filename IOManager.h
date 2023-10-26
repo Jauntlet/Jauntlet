@@ -26,8 +26,9 @@ public:
 	static bool findFolder(const std::string& folderPath);
 	// Create a folder at designated file path
 	static bool createFolder(const std::string& folderPath);
-	// Takes a file path that is localized and makes an absolute path.
-	// EX: "Build" -> "C:\Users\[Username]\Build"
+	// Takes a file/folder path that is localized to the project and makes an absolute path.
+	// EX: "Build" -> "C:\Users\[Username]\Project\Build"
+	// !!! Causes a crash on Linux if the filepath does not exist !!!
 	static std::string toAbsoluteFilePath(const std::string& filePath);
 };
 }
