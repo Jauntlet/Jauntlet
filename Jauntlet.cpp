@@ -6,17 +6,6 @@
 #include "Jauntlet.h"
 
 namespace Jauntlet {
-	int init() {
-		std::set_terminate(terminate);
-
-		// Initialize SDL
-		SDL_Init(SDL_INIT_EVERYTHING);
-		// allows for buffer swapping
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-		return 0;
-	}
-
 	void terminate() {
 		SDL_Quit();
 		int userOutput = tinyfd_messageBox("Jauntlet has Crashed!",
