@@ -41,13 +41,6 @@ namespace Jauntlet {
 	int init() {
 		std::set_terminate(terminate);
 
-		if (IOManager::createFolder("Logs")) {
-			tinyfd_messageBox("Report", "Created folder!", "ok", "error", 1);
-		}
-		else {
-			tinyfd_messageBox("Report", "Failed to create folder!", "ok", "error", 1);
-		}
-
 		// Initialize SDL
 		SDL_Init(SDL_INIT_EVERYTHING);
 		// allows for buffer swapping
