@@ -7,9 +7,6 @@
 #include <Windows.h>
 #endif
 
-//REMOVE
-#include <iostream>
-
 using namespace Jauntlet;
 
 bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer) {
