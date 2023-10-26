@@ -24,5 +24,8 @@ public:
 	static bool readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer);
 	// Create a folder at designated file path
 	static bool createFolder(std::string folderPath);
+	// Takes a file path that is localized and makes an absolute path.
+	// EX: "Build" -> "C:\Users\[Username]\Build"
+	static std::string toAbsoluteFilePath(const std::string& filePath);
 };
 }

@@ -62,3 +62,11 @@ bool IOManager::createFolder(std::string folderPath) {
 	return true;
 #endif
 }
+
+std::string IOManager::toAbsoluteFilePath(const std::string& filePath) {
+#if _WIN32
+	return _fullpath(NULL, filePath.c_str(), NULL);
+#elif (__unix__)
+	return realPath(filePath.c_str(), NULL);
+#endif
+}
