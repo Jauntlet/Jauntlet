@@ -46,8 +46,7 @@ bool IOManager::findFolder(const std::string& folderPath) {
 
 bool IOManager::createFolder(const std::string& folderPath) {
 #if _WIN32
-	std::string truePath = toAbsoluteFilePath(folderPath);
-	if (CreateDirectory(std::wstring(truePath.begin(), truePath.end()).c_str(), NULL)) {
+	if (CreateDirectory(std::wstring(folderPath.begin(), folderPath.end()).c_str(), NULL)) {
 		return true;
 	}
 	return false;
