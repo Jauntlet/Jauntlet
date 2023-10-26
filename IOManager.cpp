@@ -55,13 +55,10 @@ bool IOManager::createFolder(std::string folderPath) {
 		return false;
 	}
 #elif (__unix__)
-	// I am not a linux developer and I have no clue if mkdir works locally like they do in Windows.
-	// I pray every day that Jack Kennedy will see this code shortly after I make it and fix my errors. -xm
-	if (mkdir(folderPath, 0700) == -1) {
+	
+	if (mkdir(folderPath.c_str(), 0700) == -1) {
 		return false;
 	}
-	else {
-		return true;
-	}
+	return true;
 #endif
 }

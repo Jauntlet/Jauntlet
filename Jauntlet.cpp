@@ -6,24 +6,6 @@
 #include "Jauntlet.h"
 
 namespace Jauntlet {
-	int init() {
-		std::set_terminate(terminate);
-
-		if (IOManager::createFolder("Logs")) {
-			tinyfd_messageBox("Report", "Created folder!", "ok", "error", 1);
-		}
-		else {
-			tinyfd_messageBox("Report", "Failed to create folder!", "ok", "error", 1);
-		}
-
-		// Initialize SDL
-		SDL_Init(SDL_INIT_EVERYTHING);
-		// allows for buffer swapping
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-		return 0;
-	}
-
 	void terminate() {
 		SDL_Quit();
 		int userOutput = tinyfd_messageBox("Jauntlet has Crashed!",
@@ -54,5 +36,23 @@ namespace Jauntlet {
 			}
 		}
 		exit(-1);
+	}
+	
+	int init() {
+		std::set_terminate(terminate);
+
+		if (IOManager::createFolder("Logs")) {
+			tinyfd_messageBox("Report", "Created folder!", "ok", "error", 1);
+		}
+		else {
+			tinyfd_messageBox("Report", "Failed to create folder!", "ok", "error", 1);
+		}
+
+		// Initialize SDL
+		SDL_Init(SDL_INIT_EVERYTHING);
+		// allows for buffer swapping
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+		return 0;
 	}
 }
