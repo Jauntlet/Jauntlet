@@ -54,7 +54,7 @@ bool IOManager::createFolder(const std::string& folderPath) {
 	}
 	return false;
 #elif (__unix__)
-	if (mkdir(truePath.c_str(), 0700) == -1) {
+	if (mkdir(truepath.c_str(), 0700) == -1) {
 		return false;
 	}
 	return true;
