@@ -11,10 +11,10 @@ UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
 }
 
-void UIManager::addElement(UIElement* uiElement, GLuint* programID) {
+void UIManager::addElement(UIElement* uiElement, GLSLProgram* program) {
 	_optimized = false;
 	_uiElements.push_back(uiElement);
-	_programIDs.push_back(programID);
+	_programs.push_back(program);
 	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, *_scale);
 }
 
@@ -22,15 +22,15 @@ void UIManager::optimize() {
 	// order in the court!
 
 	for(int i = 0; i < _uiElements.size(); ++i) {
-		GLuint* programID = _programIDs[i];
-		UIBatch temporaryBatch = UIBatch(*_programIDs[i]);
+		GLSLProgram* program = _programs[i];
+		UIBatch temporaryBatch = UIBatch(_programs[i]);
 
 		temporaryBatch.addElement(_uiElements[i]);
 
 		int addedElements = 0;
 
 		for (int i2 = i + 1; i2 < _uiElements.size(); ++i2) {
-			if (_programIDs[i2] == programID) {
+			if (_programs[i2] == program) {
 				temporaryBatch.addElement(_uiElements[i2]);
 				++addedElements;
 			}

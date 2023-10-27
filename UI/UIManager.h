@@ -9,6 +9,7 @@
 
 #include "UIElement.h"
 #include "UIBatch.h"
+#include "../Rendering/GLSLProgram.h"
 
 namespace Jauntlet {
 	class UIManager
@@ -18,7 +19,7 @@ namespace Jauntlet {
 		UIManager();
 		UIManager(Camera2D* camera);
 		// update all ui elements to fit the resolution
-		void addElement(UIElement* uiElement, GLuint* programID);
+		void addElement(UIElement* uiElement, GLSLProgram* program);
 		// draw all hud elements
 		void draw();
 		// set the hud scale
@@ -33,7 +34,7 @@ namespace Jauntlet {
 		Camera2D* _camera;
 		SpriteBatch _spriteBatch;
 		std::vector<UIElement*> _uiElements;
-		std::vector<GLuint*> _programIDs;
+		std::vector<GLSLProgram*> _programs;
 		std::vector<UIBatch> _uiBatches;
 		float* _scale;
 
