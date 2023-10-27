@@ -34,7 +34,7 @@ public:
 	// enable the use of the program
 	void use();
 	// enable the use of the program
-	static void use();
+	static void use(GLuint programID);
 	// disable the use of the program
 	void unuse();
 	
