@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "UIElement.h"
+#include "UIBatch.h"
 
 namespace Jauntlet {
 	class UIManager
@@ -17,7 +18,7 @@ namespace Jauntlet {
 		UIManager();
 		UIManager(Camera2D* camera);
 		// update all ui elements to fit the resolution
-		void addElement(UIElement* uiElement);
+		void addElement(UIElement* uiElement, GLuint* programID);
 		// draw all hud elements
 		void draw();
 		// set the hud scale
@@ -26,11 +27,17 @@ namespace Jauntlet {
 		void setScale(glm::vec2 scale);
 		// fix all hud elements after resize
 		void resolvePositions();
+		// orders all hud elements into batches before drawing
+		void optimize();
 	private:
 		Camera2D* _camera;
 		SpriteBatch _spriteBatch;
 		std::vector<UIElement*> _uiElements;
-		float _scale;
+		std::vector<GLuint*> _programIDs;
+		std::vector<UIBatch> _uiBatches;
+		float* _scale;
+
+		bool _optimized = false;
 
 		// holy fucking shit i wish i could make this a const -jk
 		glm::vec2 ORIGIN_PIN_POSITIONS[9] = {glm::vec2(0.0f,0.0f),glm::vec2(0.5f,0.0f),glm::vec2(1.0f,0.0f),glm::vec2(1.0f,0.5f),glm::vec2(1.0f,1.0f),glm::vec2(0.5f,1.0f),glm::vec2(0.0f,1.0f),glm::vec2(0.0f,0.5f),glm::vec2(0.5f,0.5f)};

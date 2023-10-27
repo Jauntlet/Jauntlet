@@ -18,13 +18,15 @@ namespace Jauntlet {
         // create a ui batch without an element
 		UIBatch(GLuint programID);
         // create a ui batch with an element
-		UIBatch(GLuint programID, UIElement UIElement);
+		UIBatch(GLuint programID, UIElement* UIElement);
         // add an element to the ui batch
-		void addElement(UIElement UIElement);
+		void addElement(UIElement* UIElement);
 		// draw
-		void draw(Camera2D* _camera, SpriteBatch* _spriteBatch, float* _scale);
+		void draw(Camera2D* _camera, float* _scale);
 	private:
 		GLuint _programID;
-		std::vector<UIElement> _UIElements;
+		std::vector<UIElement*> _UIElements;
+
+		SpriteBatch* _spriteBatch;
 	};
 }

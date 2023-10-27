@@ -11,23 +11,51 @@ UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
 }
 
-void UIManager::addElement(UIElement* uiElement) {
+void UIManager::addElement(UIElement* uiElement, GLuint* programID) {
+	_optimized = false;
 	_uiElements.push_back(uiElement);
-	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, _scale);
+	_programIDs.push_back(programID);
+	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, *_scale);
+}
+
+void UIManager::optimize() {
+	// order in the court!
+
+	for(int i = 0; i < _uiElements.size(); ++i) {
+		GLuint* programID = _programIDs[i];
+		UIBatch temporaryBatch = UIBatch(*_programIDs[i]);
+
+		temporaryBatch.addElement(_uiElements[i]);
+
+		int addedElements = 0;
+
+		for (int i2 = i + 1; i2 < _uiElements.size(); ++i2) {
+			if (_programIDs[i2] == programID) {
+				temporaryBatch.addElement(_uiElements[i2]);
+				++addedElements;
+			}
+		}
+
+		_uiBatches.push_back(temporaryBatch);
+
+		i += addedElements;
+	}
+
+	_optimized = true;
 }
 
 void UIManager::draw() {
-	_spriteBatch.begin();
-	for (int i = 0; i < _uiElements.size(); ++i) {
-		if (_uiElements[i]->visible) {
-			_uiElements[i]->draw(_camera, &_spriteBatch, _scale);
-		}
+	if (!_optimized) {
+		optimize();
 	}
-	_spriteBatch.endAndRender();
+
+	for (int i = 0; i < _uiBatches.size(); ++i) {
+		_uiBatches[i].draw(_camera, _scale);
+	}
 }
 
 void UIManager::setScale(float scale) {
-	_scale = scale;
+	_scale = &scale;
 }
 
 void UIManager::resolvePositions() {
@@ -35,7 +63,7 @@ void UIManager::resolvePositions() {
 	_recalculateOriginPinPositions();
 	for (int i = 0; i < _uiElements.size(); ++i) {
 		if (_uiElements[i]->visible) {
-			_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspacePtr, _scale);
+			_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspacePtr, *_scale);
 		}
 	}
 }
