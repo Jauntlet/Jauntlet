@@ -94,6 +94,23 @@ void GLSLProgram::use() {
 
 	currentProgram = this;
 }
+void GLSLProgram::use(GLuint programID) {
+	if (currentProgram != nullptr) { // makes sure only one program is in use
+		if (currentProgram->_programID == programID) {
+			return;
+		}
+		currentProgram->unuse();
+	}
+
+	glUseProgram(programID);
+	for (int i = 0; i < _numAttributes; ++i)
+	{
+		glEnableVertexAttribArray(i);
+	}
+	// doing it through this method does not return the GLSLprogram we are using.
+	// I will probably fix this shortly. -xm
+	currentProgram = nullptr;
+}
 void GLSLProgram::unuse() {
 	glUseProgram(0);
 	
