@@ -10,9 +10,10 @@
 #include "UIElement.h"
 #include "../Camera2D.h"
 
-class GLSLProgram;
 
 namespace Jauntlet {
+	class GLSLProgram;
+
 	class UIBatch
 	{
 	public:
@@ -28,6 +29,6 @@ namespace Jauntlet {
 		GLSLProgram* _program = nullptr;
 		std::vector<UIElement*> _UIElements;
 
-		SpriteBatch* _spriteBatch = nullptr;
+		SpriteBatch _spriteBatch;
 	};
 }

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "../Rendering/GLSLProgram.h"
 #include "UIBatch.h"
 
@@ -17,24 +19,28 @@ void UIBatch::addElement(UIElement* UIElement) {
 }
 
 void UIBatch::draw(Camera2D* _camera, float* _scale) {
-	_spriteBatch->begin();
 
-	// Dear Jack Kennedy,
-	// Consider storing the active program used before draw is called, because if you persay, called this while in the
-	// middle of the standard draw function with the default program used, by enabling a different program you disable that
-	// program, which would lead to the user dealing with what they would consider "undefined" behavior. You can do this by
-	// calling GLSLProgam::activeProgram, which returns a pointer to the currently active program, which you can then renable at
-	// the end.
-	// Best Regards,
-	// Xander Mooney
+	GLSLProgram* storedProgram = GLSLProgram::currentProgram;
 
 	_program->use();
+	
+	_camera->setActiveCamera();
+
+	_spriteBatch.begin();
 
 	for (int i = 0; i < _UIElements.size(); ++i) {
-		_UIElements[i]->draw(_camera, _spriteBatch, *_scale);
+		_UIElements[i]->draw(_camera, &_spriteBatch, *_scale);
+		std::cout << "bruhhh" << std::endl;
 	}
 
-	_spriteBatch->endAndRender();
+	_spriteBatch.endAndRender();
 
 	_program->unuse();
+
+	// We store and then use the previously used program as to make sure that if the user decides to draw the UI while
+	// another program is active, it doesn't deactivate their program and cause what the user may decide is "undefined"
+	// behavior -xm
+	if (storedProgram != nullptr) {
+		storedProgram->use();
+	}
 }
