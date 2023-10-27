@@ -78,6 +78,9 @@
     <ClCompile Include="UI\UIButtonToggleableElement.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="UI\UIBatch.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -150,6 +153,9 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIButtonToggleableElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIBatch.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

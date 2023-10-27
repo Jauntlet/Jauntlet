@@ -9,7 +9,8 @@
 
 #include "UIElement.h"
 #include "UIBatch.h"
-#include "../Rendering/GLSLProgram.h"
+
+class GLSLProgram;
 
 namespace Jauntlet {
 	class UIManager

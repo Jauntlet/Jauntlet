@@ -23,9 +23,7 @@ void UIManager::optimize() {
 
 	for(int i = 0; i < _uiElements.size(); ++i) {
 		GLSLProgram* program = _programs[i];
-		UIBatch temporaryBatch = UIBatch(_programs[i]);
-
-		temporaryBatch.addElement(_uiElements[i]);
+		UIBatch temporaryBatch(program, _uiElements[i]);
 
 		int addedElements = 0;
 

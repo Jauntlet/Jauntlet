@@ -179,6 +179,7 @@
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="tinyfiledialogs.cpp" />
+    <ClCompile Include="UI\UIBatch.cpp" />
     <ClCompile Include="UI\UIButtonElement.cpp" />
     <ClCompile Include="UI\UIButtonToggleableElement.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="tinyfiledialogs.h" />
+    <ClInclude Include="UI\UIBatch.h" />
     <ClInclude Include="UI\UIButtonElement.h" />
     <ClInclude Include="UI\UIButtonToggleableElement.h" />
     <ClInclude Include="UI\UIElement.h" />
