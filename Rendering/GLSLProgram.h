@@ -33,6 +33,8 @@ public:
 
 	// enable the use of the program
 	void use();
+	// enable the use of the program
+	static void use();
 	// disable the use of the program
 	void unuse();
 	
