@@ -30,7 +30,6 @@ void UIBatch::draw(Camera2D* _camera, float* _scale) {
 
 	for (int i = 0; i < _UIElements.size(); ++i) {
 		_UIElements[i]->draw(_camera, &_spriteBatch, *_scale);
-		std::cout << "bruhhh" << std::endl;
 	}
 
 	_spriteBatch.endAndRender();
