@@ -17,7 +17,7 @@ enum class GlyphSortType {
 // stores the information needed to render a texture
 class Glyph {
 public:
-	Glyph() {};
+	Glyph() : depth(0), texture(0) {};
 	Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, GLuint Texture, float Depth, const Color& Color);
 	Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float angle, GLuint Texture, float Depth, const Color& Color);
 

@@ -37,6 +37,12 @@ struct Vertex {
 	Color color;
 	UV uv;
 
+	Vertex() {
+		position.x = 0;
+		position.y = 0;
+		uv.u = 0;
+		uv.v = 0;
+	}
 	// setters
 	void setColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a) {
 		color.r = r;
