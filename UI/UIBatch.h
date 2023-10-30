@@ -25,6 +25,8 @@ namespace Jauntlet {
 		void addElement(UIElement* UIElement);
 		// draw
 		void draw(Camera2D* _camera, float* _scale);
+		// resolve positions
+		void resolvePositions(Camera2D* camera, glm::vec2* resolvedPins, float scale);
 	private:
 		GLSLProgram* _program = nullptr;
 		std::vector<UIElement*> _UIElements;

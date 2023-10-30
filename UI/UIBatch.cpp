@@ -43,3 +43,9 @@ void UIBatch::draw(Camera2D* _camera, float* _scale) {
 		storedProgram->use();
 	}
 }
+
+void UIBatch::resolvePositions(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
+	for (int i = 0; i < _UIElements.size(); ++i) {
+		_UIElements[i]->resolvePosition(camera, resolvedPins, scale);
+	}
+}
