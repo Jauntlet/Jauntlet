@@ -14,7 +14,6 @@ UIManager::UIManager(Camera2D* camera) {
 void UIManager::addElement(UIElement* uiElement, GLSLProgram* program) {
 	_uiElements.push_back(uiElement);
 	_programs.push_back(program);
-	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, *_scale);
 }
 
 void UIManager::optimize() {
