@@ -10,6 +10,9 @@
     <Filter Include="Collision">
       <UniqueIdentifier>{2704dada-92f2-4fb4-8131-499807e1c17c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tiles">
+      <UniqueIdentifier>{2943617f-b4a6-4212-b906-91bf8729547c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UITextElement.cpp">
@@ -58,8 +61,6 @@
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
-    <ClCompile Include="TileMap.cpp" />
-    <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="UI\UIButtonElement.cpp">
@@ -80,6 +81,12 @@
     </ClCompile>
     <ClCompile Include="UI\UIBatch.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tiles\TileMap.cpp">
+      <Filter>Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Tiles\TileSet.cpp">
+      <Filter>Tiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,8 +143,6 @@
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
-    <ClInclude Include="TileMap.h" />
-    <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UI\UIButtonElement.h">
       <Filter>UI</Filter>
@@ -157,6 +162,12 @@
     </ClInclude>
     <ClInclude Include="UI\UIBatch.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\TileMap.h">
+      <Filter>Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiles\TileSet.h">
+      <Filter>Tiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,14 +9,14 @@
 #include <utility>
 #include <vector>
 
-#include "Collision/Collider2D.h"
-#include "Rendering/SpriteBatch.h"
-#include "Rendering/TextureCache.h"
+#include "../Collision/Collider2D.h"
+#include "../Rendering/SpriteBatch.h"
+#include "../Rendering/TextureCache.h"
 #include "TileSet.h"
 
 namespace Jauntlet {
 
-enum TileCollision { NONE = 0, SQUARE = 1};
+enum class TileCollision { NONE = 0, SQUARE = 1};
 
 // This is probably an unintuitive way to handle this, however we need to be able to efficentely link the chars from the level file to the texture or tileset based on what it is.
 struct tile {

@@ -2,8 +2,8 @@
 #include <fstream>
 #include <sstream>
 
-#include "Errors.h"
-#include "JMath.h"
+#include "../Errors.h"
+#include "../JMath.h"
 #include "TileMap.h"
 
 using namespace Jauntlet;
