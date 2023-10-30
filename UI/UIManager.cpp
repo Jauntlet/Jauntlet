@@ -12,7 +12,6 @@ UIManager::UIManager(Camera2D* camera) {
 }
 
 void UIManager::addElement(UIElement* uiElement, GLSLProgram* program) {
-	_optimized = false;
 	_uiElements.push_back(uiElement);
 	_programs.push_back(program);
 	uiElement->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspace, *_scale);
@@ -39,13 +38,9 @@ void UIManager::optimize() {
 		i += addedElements;
 	}
 
-	_optimized = true;
 }
 
 void UIManager::draw() {
-	if (!_optimized) {
-		optimize();
-	}
 
 	for (int i = 0; i < _uiBatches.size(); ++i) {
 		_uiBatches[i].draw(_camera, _scale);
