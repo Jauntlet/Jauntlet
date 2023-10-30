@@ -42,9 +42,7 @@ void UIManager::optimize() {
 
 void UIManager::draw() {
 	for (int i = 0; i < _uiBatches.size(); ++i) {
-		if (_uiElements[i]->visible) {
-			_uiBatches[i].draw(_camera, _scale);
-		}
+		_uiBatches[i].draw(_camera, _scale);
 	}
 }
 
