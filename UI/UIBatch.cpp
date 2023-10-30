@@ -29,7 +29,9 @@ void UIBatch::draw(Camera2D* _camera, float* _scale) {
 	_spriteBatch.begin();
 
 	for (int i = 0; i < _UIElements.size(); ++i) {
-		_UIElements[i]->draw(_camera, &_spriteBatch, *_scale);
+		if (_UIElements[i]->visible) {
+			_UIElements[i]->draw(_camera, &_spriteBatch, *_scale);
+		}
 	}
 
 	_spriteBatch.endAndRender();
