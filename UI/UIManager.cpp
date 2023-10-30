@@ -17,7 +17,6 @@ void UIManager::addElement(UIElement* uiElement, GLSLProgram* program) {
 }
 
 void UIManager::optimize() {
-	// order in the court!
 
 	for(int i = 0; i < _uiElements.size(); ++i) {
 		GLSLProgram* program = _programs[i];
