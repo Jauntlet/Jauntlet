@@ -63,7 +63,7 @@ void Time::calculateFPS() {
 	currentFrame++;
 
 	float frameTimeAverage = 0;
-	for (int i = 0; i < NUM_SAMPLES; i++) {
+	for (int i = 0; i < NUM_SAMPLES; ++i) {
 		frameTimeAverage += frameTimes[i];
 	}
 	frameTimeAverage /= NUM_SAMPLES;

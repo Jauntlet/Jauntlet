@@ -30,7 +30,7 @@ TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,//psych
 }
 
 TileSet::TileSet(std::string FilePath) {
-	for (int i = 0; i < 25; i++) {
+	for (int i = 0; i < 25; ++i) {
 		_mainTiles[i].texture = FilePath;
 	}
 	// UVs for a full image go from 0 -> 1. This is the size the UV needs to be for a single tile on the template image.

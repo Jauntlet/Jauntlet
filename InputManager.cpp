@@ -11,7 +11,7 @@ InputManager::InputManager() {
 }
 
 InputManager::~InputManager() {
-	for (int i = 0; i < _controllers.size(); i++) {
+	for (int i = 0; i < _controllers.size(); ++i) {
 		SDL_JoystickClose(_controllers[i].joystick);
 		_controllers[i].joystick = nullptr;
 	}
@@ -208,22 +208,22 @@ glm::vec2 InputManager::getControllerAxis(Axis type) {
 	
 	switch (type) {
 	case Axis::LeftStick:
-		for (int i = 0; i < _controllers.size(); i++) {
+		for (int i = 0; i < _controllers.size(); ++i) {
 			output += _controllers[i].leftStick;
 		}
 		break;
 	case Axis::RightStick:
-		for (int i = 0; i < _controllers.size(); i++) {
+		for (int i = 0; i < _controllers.size(); ++i) {
 			output += _controllers[i].rightStick;
 		}
 		break;
 	case Axis::Triggers:
-		for (int i = 0; i < _controllers.size(); i++) {
+		for (int i = 0; i < _controllers.size(); ++i) {
 			output += _controllers[i].triggers;
 		}
 		break;
 	case Axis::dPad:
-		for (int i = 0; i < _controllers.size(); i++) {
+		for (int i = 0; i < _controllers.size(); ++i) {
 			output += _controllers[i].dPad;
 		}
 		break;

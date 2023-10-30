@@ -86,7 +86,7 @@ void SpriteBatch::end() {
 	// Set up pointers for fast sorting
 	_glyphPointers.resize(_glyphs.size());
 
-	for (int i = 0; i < _glyphs.size(); i++) {
+	for (int i = 0; i < _glyphs.size(); ++i) {
 		_glyphPointers[i] = &_glyphs[i];
 	}
 
@@ -98,7 +98,7 @@ void SpriteBatch::render() {
 
 	glBindVertexArray(_vaoID);
 
-	for (int i = 0; i < _renderBatches.size(); i++) {
+	for (int i = 0; i < _renderBatches.size(); ++i) {
 		glBindTexture(GL_TEXTURE_2D, _renderBatches[i].texture);
 
 		glDrawArrays(GL_TRIANGLES, _renderBatches[i].offset, _renderBatches[i].numVertices);
