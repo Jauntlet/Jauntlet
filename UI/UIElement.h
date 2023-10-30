@@ -35,7 +35,7 @@ namespace Jauntlet {
 		
 		bool visible = true;
 	protected:
-		Camera2D* _camera;
+		//Camera2D* _camera;
 		glm::vec2* _position;
 		glm::vec2 _resolvedPosition;
 		glm::vec2 _resolvedOrigin;
