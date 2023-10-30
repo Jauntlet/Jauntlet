@@ -17,6 +17,8 @@ void UIManager::addElement(UIElement* uiElement, GLSLProgram* program) {
 }
 
 void UIManager::optimize() {
+	// we dont want duplicate batches
+	_uiBatches.clear();
 
 	for(int i = 0; i < _uiElements.size(); ++i) {
 		GLSLProgram* program = _programs[i];
