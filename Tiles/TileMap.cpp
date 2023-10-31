@@ -6,6 +6,8 @@
 #include "../JMath.h"
 #include "TileMap.h"
 
+#include "../Collision/Collision2D.h"
+
 using namespace Jauntlet;
 
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
@@ -188,15 +190,12 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 }
 
 bool TileMap::doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox) {
-	glm::vec2 newTilePos(tilePos.x * _tileSize + _offset.x, tilePos.y * _tileSize + _offset.y);
+	glm::vec2 newTilePos = TilePosToWorldPos(tilePos);
 
-	if (boundingBox.x < newTilePos.x + _tileSize &&
+	return (boundingBox.x < newTilePos.x + _tileSize &&
 		boundingBox.x + boundingBox.z > newTilePos.x &&
 		boundingBox.y < newTilePos.y + _tileSize &&
-		boundingBox.y + boundingBox.w > newTilePos.y) {
-		return true;
-	}
-	return false;
+		boundingBox.y + boundingBox.w > newTilePos.y);
 }
 
 bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
