@@ -54,7 +54,7 @@ void Time::calculateFPS() {
 
 	float currentTicks = SDL_GetTicks();
 
-	_deltaTime = currentTicks - prevTicks;
+	_deltaTime = (currentTicks - prevTicks) * _timeScale;
 	frameTimes[currentFrame % NUM_SAMPLES] = _deltaTime;
 	
 	prevTicks = currentTicks;
