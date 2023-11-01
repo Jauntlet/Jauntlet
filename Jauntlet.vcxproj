@@ -175,8 +175,8 @@
     <ClCompile Include="Rendering\SpriteBatch.cpp" />
     <ClCompile Include="Rendering\SpriteFont.cpp" />
     <ClCompile Include="Rendering\TextureCache.cpp" />
-    <ClCompile Include="TileMap.cpp" />
-    <ClCompile Include="TileSet.cpp" />
+    <ClCompile Include="Tiles\TileMap.cpp" />
+    <ClCompile Include="Tiles\TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="tinyfiledialogs.cpp" />
     <ClCompile Include="UI\UIBatch.cpp" />
@@ -210,8 +210,8 @@
     <ClInclude Include="Rendering\SpriteFont.h" />
     <ClInclude Include="Rendering\TextureCache.h" />
     <ClInclude Include="Rendering\Vertex.h" />
-    <ClInclude Include="TileMap.h" />
-    <ClInclude Include="TileSet.h" />
+    <ClInclude Include="Tiles\TileMap.h" />
+    <ClInclude Include="Tiles\TileSet.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="tinyfiledialogs.h" />
     <ClInclude Include="UI\UIBatch.h" />

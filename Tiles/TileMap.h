@@ -9,14 +9,14 @@
 #include <utility>
 #include <vector>
 
-#include "Collision/Collider2D.h"
-#include "Rendering/SpriteBatch.h"
-#include "Rendering/TextureCache.h"
+#include "../Collision/Collider2D.h"
+#include "../Rendering/SpriteBatch.h"
+#include "../Rendering/TextureCache.h"
 #include "TileSet.h"
 
 namespace Jauntlet {
 
-enum TileCollision { NONE = 0, SQUARE = 1};
+enum class TileCollision { NONE = 0, SQUARE = 1};
 
 // This is probably an unintuitive way to handle this, however we need to be able to efficentely link the chars from the level file to the texture or tileset based on what it is.
 struct tile {
@@ -60,8 +60,13 @@ public:
 	// returns adjacent tiles to position with collision. This is assuming the position is the top-left position on a square.
 	std::vector<BoxCollider2D> collectCollidingTiles(glm::vec2 position);
 	// returns all tiles with collision within the bounds of the box collider
+	// This method has not been fully tested and therefore may have errors -xm
 	std::vector<BoxCollider2D> collectCollidingTiles(BoxCollider2D collider);
+	// TODO: std::vector<BoxCollider2D> collectCollidingTiles(glm::vec4 boundingBox);
 	
+	// returns true if designated tile position overlaps with provided bounding box.
+	bool doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox);
+
 	// returns true if the tile position has a collision.
 	bool tileHasCollision(glm::ivec2 tilePosition);
 	// returns true if the tile is empty

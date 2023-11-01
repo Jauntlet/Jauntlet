@@ -2,9 +2,11 @@
 #include <fstream>
 #include <sstream>
 
-#include "Errors.h"
-#include "JMath.h"
+#include "../Errors.h"
+#include "../JMath.h"
 #include "TileMap.h"
+
+#include "../Collision/Collision2D.h"
 
 using namespace Jauntlet;
 
@@ -185,6 +187,15 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 		}
 	}
 	return colliders;
+}
+
+bool TileMap::doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox) {
+	glm::vec2 newTilePos = TilePosToWorldPos(tilePos);
+
+	return (boundingBox.x < newTilePos.x + _tileSize &&
+		boundingBox.x + boundingBox.z > newTilePos.x &&
+		boundingBox.y < newTilePos.y + _tileSize &&
+		boundingBox.y + boundingBox.w > newTilePos.y);
 }
 
 bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
