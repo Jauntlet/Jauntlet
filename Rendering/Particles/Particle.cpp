@@ -2,6 +2,14 @@
 
 using namespace Jauntlet;
 
-Particle::Particle() {
-	
+Particle::Particle(ParticleProperty properties[], Camera2D camera) {
+    _camera = camera;
+}
+
+void Particle::draw(Camera2D* camera2D) {
+    _spriteBatch.begin();
+
+    for (int i = 0; i < emissions.size(); ++i) {
+        emissions[i].draw(&_spriteBatch,&_camera);
+    }
 }
