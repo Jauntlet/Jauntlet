@@ -17,7 +17,11 @@ class Emission
 public:
     Emission();
 
-    void draw(SpriteBatch* spriteBatch, Camera2D* camera); // DONTDOCUMENT
+    // draw the emission
+    void draw(SpriteBatch* spriteBatch, Camera2D* camera, GLuint texture); // DONTDOCUMENT
+
+    // update the emission
+    void update();
 
     // our current position
     glm::vec2 position;

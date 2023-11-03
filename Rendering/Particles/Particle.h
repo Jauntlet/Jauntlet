@@ -8,6 +8,7 @@
 
 #include "Emission.h"
 
+#include <string>
 #include <vector>
 
 #pragma once
@@ -16,18 +17,36 @@ namespace Jauntlet {
 class Particle
 {
 public:
-    Particle(ParticleProperty properties[], Camera2D* camera, glm::vec2* position); // UNDOCUMENTED
+    Particle(
+        const ParticleProperty properties[],
+        Camera2D* camera,
+        glm::vec2* position,
+        // the properties
+        std::string texture,
+        // pre determined
+        uint8_t maxAliveMembers = 10,
+        bool emitContinuously = true,
+        float emissionSpeed = 10,
+        Color startingColor = Color()
+        
+        ); // UNDOCUMENTED
 
-    void draw(Camera2D* camera); // UNDOCUMENTED
+    // draw the emissions
+    void draw(); // UNDOCUMENTED
+
+    // update emissions (positions, size, etc)
+    void update();
 
     std::vector<Emission> emissions; // DONTDOCUMENT
 private:
     SpriteBatch _spriteBatch;
     std::vector<ParticleProperty> _properties;
-
-    SpriteBatch* _spriteBatchPtr;
+    
     Camera2D* _camera;
-
     glm::vec2* _position;
+
+    GLuint _texture;
+
+    uint8_t _maxEmissions = 0;
 };
 }
