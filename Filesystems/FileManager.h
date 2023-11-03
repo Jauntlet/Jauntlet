@@ -17,7 +17,7 @@
 
 
 namespace Jauntlet {
-class IOManager
+class FileManager
 {
 public:
 	// reads files to a data buffer. Returns true if it found the file, false otherwise. The data is returned into the second field.

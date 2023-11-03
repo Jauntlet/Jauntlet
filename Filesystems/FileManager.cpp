@@ -1,7 +1,7 @@
 #include <fstream>
 #include <vector>
-#include "Errors.h"
-#include "IOManager.h"
+#include "../Errors.h"
+#include "FileManager.h"
 
 #if _WIN32
 #include <Windows.h>
@@ -9,7 +9,7 @@
 
 using namespace Jauntlet;
 
-bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer) {
+bool FileManager::readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer) {
 	std::ifstream file(filePath, std::ios::binary);
 	if (file.fail()) {
 		perror(filePath.c_str());
@@ -36,7 +36,7 @@ bool IOManager::readFileToBuffer(std::string filePath, std::vector<unsigned char
 	return true;
 }
 
-bool IOManager::findFolder(const std::string& folderPath) {
+bool FileManager::findFolder(const std::string& folderPath) {
 	struct stat sb;
 	if (stat(folderPath.c_str(), &sb) == 0) {
 		return true;
@@ -44,7 +44,7 @@ bool IOManager::findFolder(const std::string& folderPath) {
 	return false;
 }
 
-bool IOManager::createFolder(const std::string& folderPath) {
+bool FileManager::createFolder(const std::string& folderPath) {
 #if _WIN32
 	if (CreateDirectory(std::wstring(folderPath.begin(), folderPath.end()).c_str(), NULL)) {
 		return true;
@@ -58,7 +58,7 @@ bool IOManager::createFolder(const std::string& folderPath) {
 #endif
 }
 
-std::string IOManager::toAbsoluteFilePath(const std::string& filePath) {
+std::string FileManager::toAbsoluteFilePath(const std::string& filePath) {
 // while Windows doesn't care if a file directory exists or not to turn it into a true filepath, Linux very much does.
 #if _WIN32
 	return _fullpath(NULL, filePath.c_str(), NULL);

@@ -1,6 +1,6 @@
 #include "ImageLoader.h"
 #include "../Errors.h"
-#include "../IOManager.h"
+#include "../Filesystems/FileManager.h"
 #include "../Externals/picoPNG.h"
 #include "ResourceManager.h"
 #include <SDL/SDL.h>
@@ -15,7 +15,7 @@ GLTexture ImageLoader::loadPNG(std::string filePath) {
 	std::vector<unsigned char> in, out;
 	unsigned long width, height;
 
-	if (!IOManager::readFileToBuffer(filePath, in)) {
+	if (!FileManager::readFileToBuffer(filePath, in)) {
 		return loadMissingTexture();
 	}
 
@@ -54,7 +54,7 @@ SDL_Surface* ImageLoader::loadPNGtoSurface(std::string filePath) {
 	std::vector<unsigned char> in;
 	unsigned long width, height;
 
-	if (!IOManager::readFileToBuffer(filePath, in)) {
+	if (!FileManager::readFileToBuffer(filePath, in)) {
 		fatalError("Failed to load PNG " + filePath + " file to buffer!");
 	}
 
@@ -85,7 +85,7 @@ GLTexture ImageLoader::loadMissingTexture() {
 	std::vector<unsigned char> out;
 	unsigned long width, height;
 
-	if (!IOManager::readFileToBuffer(ResourceManager::getMissingTexture(), in)) {
+	if (!FileManager::readFileToBuffer(ResourceManager::getMissingTexture(), in)) {
 		fatalError("Failed to load PNG \"" + ResourceManager::getMissingTexture() + "\" file to buffer!");
 	}
 
