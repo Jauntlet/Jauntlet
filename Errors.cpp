@@ -11,6 +11,8 @@
 #include <unistd.h>
 #endif
 
+std::vector<std::string> errors;
+
 namespace Jauntlet {
 	void fatalError(std::string errorString) {
 #ifdef _WIN32
