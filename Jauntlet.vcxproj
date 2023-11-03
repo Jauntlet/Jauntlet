@@ -172,7 +172,10 @@
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
     <ClCompile Include="Rendering\ImageLoader.cpp" />
     <ClCompile Include="Rendering\LineRenderer.cpp" />
+    <ClCompile Include="Rendering\Particles\Emission.cpp" />
     <ClCompile Include="Rendering\Particles\Particle.cpp" />
+    <ClCompile Include="Rendering\Particles\Properties\ParticleGrow.cpp" />
+    <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp" />
     <ClCompile Include="Rendering\ResourceManager.cpp" />
     <ClCompile Include="Rendering\SpriteBatch.cpp" />
     <ClCompile Include="Rendering\SpriteFont.cpp" />
@@ -207,7 +210,9 @@
     <ClInclude Include="Rendering\GLTexture.h" />
     <ClInclude Include="Rendering\ImageLoader.h" />
     <ClInclude Include="Rendering\LineRenderer.h" />
+    <ClInclude Include="Rendering\Particles\Emission.h" />
     <ClInclude Include="Rendering\Particles\Particle.h" />
+    <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h" />
     <ClInclude Include="Rendering\ResourceManager.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
     <ClInclude Include="Rendering\SpriteFont.h" />
