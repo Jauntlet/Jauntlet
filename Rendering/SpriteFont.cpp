@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <cstdio>
+#include <freetype2/freetype/freetype.h>
 #include "../Errors.h"
 #include "SpriteFont.h"
 

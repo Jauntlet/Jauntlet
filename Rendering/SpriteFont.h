@@ -3,8 +3,12 @@
  */
 #pragma once
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include </usr/include/freetype2/ft2build.h>
+#include FT_FREETYPE_H // This include is for the main FreeType header
+
+#include FT_TRIGONOMETRY_H // Include additional FreeType headers as needed
+#include FT_GLYPH_H
+
 #include <glm/glm.hpp>
 #include <map>
 #include <cstring>
