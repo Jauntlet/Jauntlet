@@ -31,6 +31,9 @@
     <Filter Include="Rendering\Particles\Properties">
       <UniqueIdentifier>{3addc3fe-683a-4705-9e68-f62f7cbf44dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Filesystems">
+      <UniqueIdentifier>{27f1be88-8946-4dd0-8e0f-d515a2f57a09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UITextElement.cpp">
@@ -70,7 +73,6 @@
       <Filter>Collision</Filter>
     </ClCompile>
     <ClCompile Include="Errors.cpp" />
-    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -128,6 +130,9 @@
     <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp">
       <Filter>Rendering\Particles\Properties</Filter>
     </ClCompile>
+    <ClCompile Include="Filesystems\FileManager.cpp">
+      <Filter>Filesystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -173,7 +178,6 @@
       <Filter>Collision</Filter>
     </ClInclude>
     <ClInclude Include="Errors.h" />
-    <ClInclude Include="IOManager.h" />
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
     <ClInclude Include="Time.h" />
@@ -227,6 +231,9 @@
     </ClInclude>
     <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h">
       <Filter>Rendering\Particles\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Filesystems\FileManager.h">
+      <Filter>Filesystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

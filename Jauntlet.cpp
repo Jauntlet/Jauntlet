@@ -2,7 +2,7 @@
 #include <SDL/SDL.h>
 #include <exception>
 #include <fstream>
-#include "IOManager.h"
+#include "Filesystems/FileManager.h"
 #include "Jauntlet.h"
 
 namespace Jauntlet {
@@ -17,7 +17,7 @@ namespace Jauntlet {
 			}
 			catch (const std::exception& ex) {
 				
-				IOManager::createFolder("Logs");
+				FileManager::createFolder("Logs");
 				 
 				std::ofstream errorFile;
 				errorFile.open("Logs/Latest.log");
