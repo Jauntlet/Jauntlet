@@ -2,7 +2,7 @@
 
 using namespace Jauntlet;
 
-Particle::Particle(ParticleProperty properties[], Camera2D camera) {
+Particle::Particle(ParticleProperty properties[], Camera2D* camera) {
     _camera = camera;
 }
 
