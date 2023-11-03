@@ -1,6 +1,7 @@
 #include <algorithm>
 #include "../JMath.h"
 #include "SpriteBatch.h"
+#include "../Errors.h"
 
 using namespace Jauntlet;
 
@@ -55,7 +56,6 @@ glm::vec2 Glyph::rotatePoint(const float& x, const float& y, const float& angle)
 SpriteBatch::SpriteBatch() {
 	createVertexArray();
 }
-
 
 void SpriteBatch::begin(GlyphSortType sortType) {
 	_sortType = sortType;
@@ -156,6 +156,10 @@ void SpriteBatch::createRenderBatches() {
 }
 
 void SpriteBatch::createVertexArray() {
+	
+	if (glGetError != GL_NO_ERROR) {
+		fatalError("Tried to initialize a SpriteBatch before a window is created! Please reorder your initialization order!");
+	}
 
 	if (_vaoID == 0) {
 		glGenVertexArrays(1, &_vaoID);
