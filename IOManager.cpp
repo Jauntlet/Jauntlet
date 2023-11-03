@@ -67,6 +67,7 @@ try {
 	return realpath(filePath.c_str(), NULL);
 } catch (...) {
 	fatalError("Tried to find the filepath of a directory that doesn't exist: " + filePath);
+	return NULL;
 }
 #endif
 }
