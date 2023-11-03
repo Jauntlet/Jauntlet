@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL/SDL.h>
-#include <tinyfiledialogs.h>
+#include "tinyfiledialogs.h"
 
 namespace Jauntlet {
 // initializes the game engine
