@@ -2,7 +2,6 @@
  * Main Contributer(s): Jack Kennedy
  */
 
-#include "../../Camera2D.h"
 #include "../../Time.h"
 #include "../SpriteBatch.h"
 #include "Properties/ParticleProperty.h"
@@ -17,9 +16,9 @@ namespace Jauntlet {
 class Particle
 {
 public:
-    Particle(ParticleProperty properties[]); // UNDOCUMENTED
+    Particle(ParticleProperty properties[], Camera2D* camera); // UNDOCUMENTED
 
-    void draw(Camera2D* camera2D); // UNDOCUMENTED
+    void draw(Camera2D* camera); // UNDOCUMENTED
 
     std::vector<Emission> emissions; // DONTDOCUMENT
 private:
