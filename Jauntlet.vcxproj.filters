@@ -28,6 +28,9 @@
     <Filter Include="Inputs">
       <UniqueIdentifier>{927d93be-6a14-4b7d-96bb-6bb51f57d014}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Particles\Properties">
+      <UniqueIdentifier>{3addc3fe-683a-4705-9e68-f62f7cbf44dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UITextElement.cpp">
@@ -115,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="Inputs\InputManager.cpp">
       <Filter>Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Particles\Emission.cpp">
+      <Filter>Rendering\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Particles\Properties\ParticleGrow.cpp">
+      <Filter>Rendering\Particles\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp">
+      <Filter>Rendering\Particles\Properties</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +221,12 @@
     </ClInclude>
     <ClInclude Include="Inputs\InputManager.h">
       <Filter>Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Particles\Emission.h">
+      <Filter>Rendering\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h">
+      <Filter>Rendering\Particles\Properties</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
