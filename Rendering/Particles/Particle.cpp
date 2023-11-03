@@ -10,6 +10,8 @@ void Particle::draw(Camera2D* camera) {
     _spriteBatch.begin();
 
     for (int i = 0; i < emissions.size(); ++i) {
-        emissions[i].draw(&_spriteBatch,&_camera);
+        emissions[i].draw(&_spriteBatch,_camera);
     }
+
+    _spriteBatch.endAndRender();
 }

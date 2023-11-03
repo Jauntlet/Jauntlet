@@ -26,6 +26,6 @@ private:
     std::vector<ParticleProperty> _properties;
 
     SpriteBatch* _spriteBatchPtr;
-    Camera2D _camera;
+    Camera2D* _camera;
 };
 }
