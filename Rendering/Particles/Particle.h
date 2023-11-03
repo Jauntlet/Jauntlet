@@ -16,7 +16,7 @@ namespace Jauntlet {
 class Particle
 {
 public:
-    Particle(ParticleProperty properties[], Camera2D* camera); // UNDOCUMENTED
+    Particle(ParticleProperty properties[], Camera2D* camera, glm::vec2* position); // UNDOCUMENTED
 
     void draw(Camera2D* camera); // UNDOCUMENTED
 
@@ -27,5 +27,7 @@ private:
 
     SpriteBatch* _spriteBatchPtr;
     Camera2D* _camera;
+
+    glm::vec2* _position;
 };
 }

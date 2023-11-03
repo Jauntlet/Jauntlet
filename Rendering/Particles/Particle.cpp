@@ -2,8 +2,9 @@
 
 using namespace Jauntlet;
 
-Particle::Particle(ParticleProperty properties[], Camera2D* camera) {
+Particle::Particle(ParticleProperty properties[], Camera2D* camera, glm::vec2* position) {
     _camera = camera;
+    _position = position;
 }
 
 void Particle::draw(Camera2D* camera) {
