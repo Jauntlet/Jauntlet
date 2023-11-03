@@ -1,8 +1,7 @@
 #include "Window.h"
 #include "Errors.h"
 
-#include "Rendering/picoPNG.h"
-#include "IOManager.h"
+#include <picoPNG.h>
 #include "Rendering/ImageLoader.h"
 
 using namespace Jauntlet;
