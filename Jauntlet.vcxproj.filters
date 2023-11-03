@@ -13,6 +13,12 @@
     <Filter Include="Tiles">
       <UniqueIdentifier>{2943617f-b4a6-4212-b906-91bf8729547c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Animation">
+      <UniqueIdentifier>{e6be3762-c114-4e0f-9047-1c88095edebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Particles">
+      <UniqueIdentifier>{c163e0dd-e619-4e3b-ae20-ac9dbdb184c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UITextElement.cpp">
@@ -67,12 +73,6 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="tinyfiledialogs.cpp" />
-    <ClCompile Include="Rendering\Animation.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\AnimationManager.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="UI\UISpriteElement.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -87,6 +87,15 @@
     </ClCompile>
     <ClCompile Include="Tiles\TileSet.cpp">
       <Filter>Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Animation\Animation.cpp">
+      <Filter>Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Animation\AnimationManager.cpp">
+      <Filter>Rendering\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Particles\Particle.cpp">
+      <Filter>Rendering\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,12 +157,6 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="tinyfiledialogs.h" />
-    <ClInclude Include="Rendering\Animation.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\AnimationManager.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="UI\UISpriteElement.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -168,6 +171,15 @@
     </ClInclude>
     <ClInclude Include="Tiles\TileSet.h">
       <Filter>Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Animation\Animation.h">
+      <Filter>Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Animation\AnimationManager.h">
+      <Filter>Rendering\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Particles\Particle.h">
+      <Filter>Rendering\Particles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
