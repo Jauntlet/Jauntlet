@@ -3,7 +3,7 @@
 #include "../Filesystems/FileManager.h"
 #include "../Externals/picoPNG.h"
 #include "ResourceManager.h"
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 using namespace Jauntlet;
 

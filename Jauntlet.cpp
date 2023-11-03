@@ -1,5 +1,5 @@
 #include <GL/glew.h>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include <exception>
 #include <fstream>
 #include "Filesystems/FileManager.h"

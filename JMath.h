@@ -6,7 +6,7 @@
 #include <cstddef>
 #include <glm/glm.hpp>
 #include <string>
-#include <SDL/SDL_stdinc.h>
+#include <SDL2/SDL_stdinc.h>
 #include <vector>
 
 #define Rad2Deg (180.0f / M_PI)

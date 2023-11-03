@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "Externals/tinyfiledialogs.h"
 
 namespace Jauntlet {
