@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "../SpriteBatch.h" // Jauntlet::SpriteBatch
-#include "../../Camera2D.h" // Jauntlet::Camera2D
+#include "../Cameras/Camera2D.h" // Jauntlet::Camera2D
 #include "../Vertex.h" // Jauntlet::Color
 
 #pragma once
