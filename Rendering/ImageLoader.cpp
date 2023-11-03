@@ -1,7 +1,7 @@
 #include "ImageLoader.h"
 #include "../Errors.h"
 #include "../IOManager.h"
-#include "picoPNG.h"
+#include "../Externals/picoPNG.h"
 #include "ResourceManager.h"
 #include <SDL/SDL.h>
 

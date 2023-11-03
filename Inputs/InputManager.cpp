@@ -1,6 +1,6 @@
 #include <SDL/SDL.h>
 #include <cstdio>
-#include "Errors.h"
+#include "../Errors.h"
 #include "InputManager.h"
 #include <string>
 

@@ -1,9 +1,9 @@
 #include "Window.h"
-#include "Errors.h"
+#include "../Errors.h"
 
-#include "Rendering/picoPNG.h"
-#include "IOManager.h"
-#include "Rendering/ImageLoader.h"
+#include "../Externals/picoPNG.h"
+#include "../IOManager.h"
+#include "ImageLoader.h"
 
 using namespace Jauntlet;
 

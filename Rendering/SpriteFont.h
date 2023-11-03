@@ -9,7 +9,7 @@
 #include <map>
 #include <cstring>
 
-#include "../Camera2D.h"
+#include "../Rendering/Cameras/Camera2D.h"
 #include "SpriteBatch.h"
 #include "GLSLProgram.h"
 

@@ -156,30 +156,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Collision\Collider2D.cpp" />
     <ClCompile Include="Collision\Collision2D.cpp" />
     <ClCompile Include="Errors.cpp" />
-    <ClCompile Include="InputKey.cpp" />
-    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Externals\picoPNG.cpp" />
+    <ClCompile Include="Externals\tinyfiledialogs.cpp" />
+    <ClCompile Include="Inputs\InputKey.cpp" />
+    <ClCompile Include="Inputs\InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
     <ClCompile Include="Rendering\Animation\Animation.cpp" />
     <ClCompile Include="Rendering\Animation\AnimationManager.cpp" />
+    <ClCompile Include="Rendering\Cameras\Camera2D.cpp" />
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
     <ClCompile Include="Rendering\ImageLoader.cpp" />
     <ClCompile Include="Rendering\LineRenderer.cpp" />
     <ClCompile Include="Rendering\Particles\Particle.cpp" />
-    <ClCompile Include="Rendering\picoPNG.cpp" />
     <ClCompile Include="Rendering\ResourceManager.cpp" />
     <ClCompile Include="Rendering\SpriteBatch.cpp" />
     <ClCompile Include="Rendering\SpriteFont.cpp" />
     <ClCompile Include="Rendering\TextureCache.cpp" />
+    <ClCompile Include="Rendering\Window.cpp" />
     <ClCompile Include="Tiles\TileMap.cpp" />
     <ClCompile Include="Tiles\TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
-    <ClCompile Include="tinyfiledialogs.cpp" />
     <ClCompile Include="UI\UIBatch.cpp" />
     <ClCompile Include="UI\UIButtonElement.cpp" />
     <ClCompile Include="UI\UIButtonToggleableElement.cpp" />
@@ -187,35 +188,35 @@
     <ClCompile Include="UI\UIManager.cpp" />
     <ClCompile Include="UI\UISpriteElement.cpp" />
     <ClCompile Include="UI\UITextElement.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Collision\Collider2D.h" />
     <ClInclude Include="Collision\Collision2D.h" />
     <ClInclude Include="Errors.h" />
-    <ClInclude Include="InputKey.h" />
-    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Externals\picoPNG.h" />
+    <ClInclude Include="Externals\tinyfiledialogs.h" />
+    <ClInclude Include="Inputs\InputKey.h" />
+    <ClInclude Include="Inputs\InputManager.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
     <ClInclude Include="Rendering\Animation\Animation.h" />
     <ClInclude Include="Rendering\Animation\AnimationManager.h" />
+    <ClInclude Include="Rendering\Cameras\Camera2D.h" />
     <ClInclude Include="Rendering\GLSLProgram.h" />
     <ClInclude Include="Rendering\GLTexture.h" />
     <ClInclude Include="Rendering\ImageLoader.h" />
     <ClInclude Include="Rendering\LineRenderer.h" />
     <ClInclude Include="Rendering\Particles\Particle.h" />
-    <ClInclude Include="Rendering\picoPNG.h" />
     <ClInclude Include="Rendering\ResourceManager.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
     <ClInclude Include="Rendering\SpriteFont.h" />
     <ClInclude Include="Rendering\TextureCache.h" />
     <ClInclude Include="Rendering\Vertex.h" />
+    <ClInclude Include="Rendering\Window.h" />
     <ClInclude Include="Tiles\TileMap.h" />
     <ClInclude Include="Tiles\TileSet.h" />
     <ClInclude Include="Time.h" />
-    <ClInclude Include="tinyfiledialogs.h" />
     <ClInclude Include="UI\UIBatch.h" />
     <ClInclude Include="UI\UIButtonElement.h" />
     <ClInclude Include="UI\UIButtonToggleableElement.h" />
@@ -223,7 +224,6 @@
     <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="UI\UISpriteElement.h" />
     <ClInclude Include="UI\UITextElement.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

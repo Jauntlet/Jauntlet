@@ -19,6 +19,15 @@
     <Filter Include="Rendering\Particles">
       <UniqueIdentifier>{c163e0dd-e619-4e3b-ae20-ac9dbdb184c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Externals">
+      <UniqueIdentifier>{ee27908f-34c0-4329-aa94-c9fc703fd04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Cameras">
+      <UniqueIdentifier>{085f436a-cc76-43d1-99f9-f1fdc2cf372c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inputs">
+      <UniqueIdentifier>{927d93be-6a14-4b7d-96bb-6bb51f57d014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UITextElement.cpp">
@@ -39,9 +48,6 @@
     <ClCompile Include="Rendering\LineRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\picoPNG.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\ResourceManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
@@ -60,19 +66,14 @@
     <ClCompile Include="Collision\Collision2D.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Errors.cpp" />
-    <ClCompile Include="InputKey.cpp" />
-    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
     <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Window.cpp" />
     <ClCompile Include="UI\UIButtonElement.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="tinyfiledialogs.cpp" />
     <ClCompile Include="UI\UISpriteElement.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -97,6 +98,24 @@
     <ClCompile Include="Rendering\Particles\Particle.cpp">
       <Filter>Rendering\Particles</Filter>
     </ClCompile>
+    <ClCompile Include="Externals\picoPNG.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="Externals\tinyfiledialogs.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Window.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Cameras\Camera2D.cpp">
+      <Filter>Rendering\Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="Inputs\InputKey.cpp">
+      <Filter>Inputs</Filter>
+    </ClCompile>
+    <ClCompile Include="Inputs\InputManager.cpp">
+      <Filter>Inputs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -120,9 +139,6 @@
     <ClInclude Include="Rendering\LineRenderer.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\picoPNG.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Rendering\ResourceManager.h">
       <Filter>Rendering</Filter>
     </ClInclude>
@@ -144,11 +160,7 @@
     <ClInclude Include="Collision\Collision2D.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h" />
-    <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Errors.h" />
-    <ClInclude Include="InputKey.h" />
-    <ClInclude Include="InputManager.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
@@ -156,7 +168,6 @@
     <ClInclude Include="UI\UIButtonElement.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="tinyfiledialogs.h" />
     <ClInclude Include="UI\UISpriteElement.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -180,6 +191,24 @@
     </ClInclude>
     <ClInclude Include="Rendering\Particles\Particle.h">
       <Filter>Rendering\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals\picoPNG.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Externals\tinyfiledialogs.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Window.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Cameras\Camera2D.h">
+      <Filter>Rendering\Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="Inputs\InputKey.h">
+      <Filter>Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Inputs\InputManager.h">
+      <Filter>Inputs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

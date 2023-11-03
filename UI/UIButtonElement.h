@@ -9,7 +9,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-#include "../InputManager.h"
+#include "../Inputs/InputManager.h"
 #include "UIElement.h"
 
 namespace Jauntlet {

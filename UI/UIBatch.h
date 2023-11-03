@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "UIElement.h"
-#include "../Camera2D.h"
+#include "../Rendering/Cameras/Camera2D.h"
 
 
 namespace Jauntlet {

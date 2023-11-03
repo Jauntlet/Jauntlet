@@ -2,7 +2,7 @@
  * Main Contributer(s): Xander Mooney
  */
 #pragma once
-#include "Rendering/Vertex.h"
+#include "Vertex.h"
 
 #include <GL/glew.h>
 #include <SDL/SDL.h>

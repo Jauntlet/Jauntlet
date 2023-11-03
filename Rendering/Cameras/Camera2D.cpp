@@ -1,10 +1,10 @@
 #include <algorithm>
 
 #include "Camera2D.h"
-#include "Errors.h"
-#include "Time.h"
+#include "../../Errors.h"
+#include "../../Time.h"
 #include "glm/fwd.hpp"
-#include "Rendering/GLSLProgram.h"
+#include "../GLSLProgram.h"
 
 using namespace Jauntlet;
 
