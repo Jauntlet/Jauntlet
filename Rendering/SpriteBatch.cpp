@@ -156,8 +156,8 @@ void SpriteBatch::createRenderBatches() {
 }
 
 void SpriteBatch::createVertexArray() {
-	
-	if (glGetError != GL_NO_ERROR) {
+
+	if (glGetError() != GL_NO_ERROR) {
 		fatalError("Tried to initialize a SpriteBatch before a window is created! Please reorder your initialization order!");
 	}
 

@@ -4,7 +4,7 @@
 
 using namespace Jauntlet;
 
-Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) {
+Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) : _screenHeight(screenHeight), _screenWidth(screenWidth) {
 	Uint32 flags = SDL_WINDOW_OPENGL;
 
 	if (currentFlags & INVISIBLE) {
