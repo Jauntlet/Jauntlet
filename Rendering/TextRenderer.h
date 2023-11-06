@@ -36,6 +36,7 @@ public:
 	
 	// Begin rendering to the TextRenderer
 	void begin();
+	// add text to be rendered
 	void addText(std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color());
 	// renders the text drawn to screen
 	void Render();
