@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ParticleProperty.h"
+#include "../Emission.h"
 
 namespace Jauntlet {
 class ParticleGrow : public ParticleProperty
