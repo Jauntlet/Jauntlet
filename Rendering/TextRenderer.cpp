@@ -2,13 +2,13 @@
 #include <cstdio>
 #include <freetype/freetype.h>
 #include "../Errors.h"
-#include "SpriteFont.h"
+#include "TextRenderer.h"
 
 using namespace Jauntlet;
 
-GLSLProgram SpriteFont::_textProgram;
+GLSLProgram TextRenderer::_textProgram;
 
-SpriteFont::SpriteFont(Camera2D* camera, const char* font, int size) :
+TextRenderer::TextRenderer(Camera2D* camera, const char* font, int size) :
 	_fontHeight(size),
 	_camera(camera)
 {
@@ -66,7 +66,7 @@ SpriteFont::SpriteFont(Camera2D* camera, const char* font, int size) :
 	_textProgram.linkShaders();
 }
 
-void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
+void TextRenderer::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
 	float depth, Color color) {
 	// Store last used program, and then use our program.
 	GLSLProgram* storedProg = GLSLProgram::currentProgram;
@@ -99,6 +99,6 @@ void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 po
 	}
 }
 
-int SpriteFont::getFontHeight() {
+int TextRenderer::getFontHeight() {
 	return _fontHeight;
 }

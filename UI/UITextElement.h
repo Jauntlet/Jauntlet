@@ -8,18 +8,18 @@
 #include <string>
 
 #include "UIElement.h"
-#include "../Rendering/SpriteFont.h"
+#include "../Rendering/TextRenderer.h"
 
 namespace Jauntlet {
 	class UITextElement : public UIElement
 	{
 	public:
 		//constructor with _position;
-		UITextElement(SpriteFont* spriteFont, std::string* text, Color* color, glm::vec2* _position);
-        void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
+		UITextElement(TextRenderer* spriteFont, std::string* text, Color* color, glm::vec2* _position);
+        void draw(Camera2D* camera, float scale);
     private:
 		std::string* _text;
-        SpriteFont* _spriteFont;
+        TextRenderer* _textRenderer;
         Color* _color;
 	};
 }

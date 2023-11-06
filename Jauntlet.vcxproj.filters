@@ -60,7 +60,7 @@
     <ClCompile Include="Rendering\SpriteBatch.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\SpriteFont.cpp">
+    <ClCompile Include="Rendering\TextRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\TextureCache.cpp">
@@ -162,7 +162,7 @@
     <ClInclude Include="Rendering\SpriteBatch.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\SpriteFont.h">
+    <ClInclude Include="Rendering\TextRenderer.h">
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\TextureCache.h">

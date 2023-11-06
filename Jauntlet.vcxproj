@@ -178,7 +178,7 @@
     <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp" />
     <ClCompile Include="Rendering\ResourceManager.cpp" />
     <ClCompile Include="Rendering\SpriteBatch.cpp" />
-    <ClCompile Include="Rendering\SpriteFont.cpp" />
+    <ClCompile Include="Rendering\TextRenderer.cpp" />
     <ClCompile Include="Rendering\TextureCache.cpp" />
     <ClCompile Include="Rendering\Window.cpp" />
     <ClCompile Include="Tiles\TileMap.cpp" />
@@ -216,7 +216,7 @@
     <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h" />
     <ClInclude Include="Rendering\ResourceManager.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
-    <ClInclude Include="Rendering\SpriteFont.h" />
+    <ClInclude Include="Rendering\TextRenderer.h" />
     <ClInclude Include="Rendering\TextureCache.h" />
     <ClInclude Include="Rendering\Vertex.h" />
     <ClInclude Include="Rendering\Window.h" />

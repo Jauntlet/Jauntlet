@@ -28,11 +28,11 @@ struct CharGlyph {
 	unsigned int Advance;
 };
 
-class SpriteFont
+class TextRenderer
 {
 public:
 	// Empty constructor. Use init();
-	SpriteFont(Camera2D* camera, const char* font, int size);
+	TextRenderer(Camera2D* camera, const char* font, int size);
 	
 	// Draws the spritefont using a spritebatch
 	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
