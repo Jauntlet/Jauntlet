@@ -12,5 +12,10 @@ namespace Jauntlet {
 	// Gives a warning to the console / logging system
 	extern void error(std::string errorString);
 
+	void terminate();
+	void terminate(const std::string& error);
+
+	void dumpLog();
+
 	static std::vector<std::string> errors;
 }

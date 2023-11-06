@@ -4,44 +4,24 @@
 #include <fstream>
 #include "Filesystems/FileManager.h"
 #include "Jauntlet.h"
+#include "Errors.h"
 
 namespace Jauntlet {
-	void terminate() {
-		SDL_Quit();
-		int userOutput = tinyfd_messageBox("Jauntlet has Crashed!",
-			"Jauntlet has reached an unhandled exception!\n\nWould you like to send an error report to the Jauntlet Dev team?",
-			"yesno", "error", 1);
-		if (userOutput == 1) {
-			try {
-				std::rethrow_exception(std::current_exception());
-			}
-			catch (const std::exception& ex) {
-				
-				FileManager::createFolder("Logs");
-				 
-				std::ofstream errorFile;
-				errorFile.open("Logs/Latest.log");
-				errorFile << typeid(ex).name() << std::endl << ex.what();
-				errorFile.close();
-
-				std::string output = "mailto:ps24xmooney@efcts.us?subject=Jauntlet%20Crash%20Report&body=Hello,%20I%20have%20experienced%20a%20crash%20within%20the%20Jauntlet%20Engine.%20Here%20is%20my%20crash%20report:%0A";
-				output += typeid(ex).name();
-				output += "%0A"; // newline in URLs
-				output += ex.what();
-			#if _WIN32
-				ShellExecuteA(NULL, "open", output.c_str(), NULL, NULL, SW_SHOWNORMAL);
-			#elif __linux__
-				execl("/usr/bin/xdg-open", "xdg-open", output.c_str(), nullptr);
-			#endif
-			}
-		}
-		exit(-1);
-	}
 	
 	int init() {
-		#ifdef NDEBUG
-		std::set_terminate(terminate);
+		// We only want to use our termination script on release builds so that we don't intercept crash logging for IDEs,
+		// this is actually only useful for Linux developers, where all builds will run the termination script whilst developing,
+		// Windows users will find that when running through VS that VS overrides std::set_terminate anyways. -xm
+		#ifdef NDEBUG 
+		FileManager::createFolder("Logs");
+		// open the file, therefore clearing it.
+		std::ofstream errorFile;
+		errorFile.open("Logs/Latest.log");
+		errorFile.close();
+
+		std::set_terminate(Jauntlet::terminate);
 		#endif
+		
 		// Initialize SDL
 		SDL_Init(SDL_INIT_EVERYTHING);
 		// allows for buffer swapping
