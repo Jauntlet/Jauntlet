@@ -66,17 +66,18 @@ TextRenderer::TextRenderer(Camera2D* camera, const char* font, int size) :
 	_textProgram.linkShaders();
 }
 
-void TextRenderer::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
-	float depth, Color color) {
+void TextRenderer::begin() {
 	// Store last used program, and then use our program.
-	GLSLProgram* storedProg = GLSLProgram::currentProgram;
+	_storedProgram = GLSLProgram::currentProgram;
 	_textProgram.use();
-
-	//glUniform1i(_textProgram.getUniformLocation("imageTexture"), 0);
 	_camera->setActiveCamera();
 
+	_spriteBatch.begin();
+}
+
+void TextRenderer::addText(std::string text, glm::vec2 position, glm::vec2 scaling, float depth, Color color) {
 	float storedX = position.x;
-	for (auto c = string.begin(); c != string.end(); c++) {
+	for (auto c = text.begin(); c != text.end(); c++) {
 		CharGlyph currentGlyph = Characters[*c];
 
 		if (*c == '\n') {
@@ -87,18 +88,18 @@ void TextRenderer::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 
 		float x = storedX;
 		float y = position.y - (_fontHeight * scaling.y);
 
-		glm::vec4 destRect(x,y, scaling * (glm::vec2)currentGlyph.Bearing);
+		glm::vec4 destRect(x, y, scaling * (glm::vec2)currentGlyph.Bearing);
 
-		spritebatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, color);
+		_spriteBatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, color);
 
 		storedX += (currentGlyph.Advance >> 6) * scaling.x;
 	}
-
-    if (storedProg != nullptr) {
-    	storedProg->use();
-	}
 }
 
-int TextRenderer::getFontHeight() {
-	return _fontHeight;
+void TextRenderer::Render() {
+	_spriteBatch.endAndRender();
+
+	if (_storedProgram != nullptr) {
+		_storedProgram->use();
+	}
 }

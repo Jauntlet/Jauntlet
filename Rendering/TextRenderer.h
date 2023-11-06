@@ -34,22 +34,20 @@ public:
 	// Empty constructor. Use init();
 	TextRenderer(Camera2D* camera, const char* font, int size);
 	
-	// Draws the spritefont using a spritebatch
-	void draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
-			  float depth, Color color);
-
-	// We only make a getter because we should not be able to set the fontHeight at any time. This would cause multiple issues when rendering
-	// due to how it is setup. -xm
-
-	// Get the height of the font
-	int getFontHeight(); 
+	// Begin rendering to the TextRenderer
+	void begin();
+	void addText(std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color());
+	// renders the text drawn to screen
+	void Render();
 private:
 	int _fontHeight;
 	std::map<char, CharGlyph> Characters;
 
 	Camera2D* _camera = nullptr;
+	SpriteBatch _spriteBatch;
 
-	static GLSLProgram _textProgram; 
+	static GLSLProgram _textProgram;
+	GLSLProgram* _storedProgram;
 };
 }
 
