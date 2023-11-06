@@ -32,12 +32,15 @@ public:
 
     // draw the emissions
     void draw(); // UNDOCUMENTED
+<<<<<<< HEAD
 
     // update emissions (positions, size, etc)
     void update();
 
     void addProperty(ParticleProperty* property);
 
+=======
+>>>>>>> bfc069aad21c1199c7d8e3a2a686fe33a1c4b413
     std::vector<Emission> emissions; // DONTDOCUMENT
 private:
     SpriteBatch _spriteBatch;
