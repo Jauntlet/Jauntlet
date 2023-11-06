@@ -9,7 +9,7 @@
 
 using namespace Jauntlet;
 
-const bool FileManager::readFileToBuffer(std::string filePath, std::vector<unsigned char>& buffer) {
+const bool FileManager::readFileToBuffer(const std::string& filePath, std::vector<unsigned char>& buffer) {
 	std::ifstream file(filePath, std::ios::binary);
 	if (file.fail()) {
 		perror(filePath.c_str());
@@ -43,7 +43,6 @@ const bool FileManager::findFolder(const std::string& folderPath) {
 	}
 	return false;
 }
-
 const bool FileManager::createFolder(const std::string& folderPath) {
 #if _WIN32
 	if (CreateDirectory(std::wstring(folderPath.begin(), folderPath.end()).c_str(), NULL)) {
@@ -69,5 +68,13 @@ try {
 	fatalError("Tried to find the filepath of a directory that doesn't exist: " + filePath);
 	return NULL;
 }
+#endif
+}
+
+const void FileManager::openLink(const std::string& link) {
+#if _WIN32
+	ShellExecuteA(NULL, "open", link.c_str(), NULL, NULL, SW_SHOWNORMAL);
+#elif __linux__
+	execl("/usr/bin/xdg-open", "xdg-open", link.c_str(), nullptr);
 #endif
 }
