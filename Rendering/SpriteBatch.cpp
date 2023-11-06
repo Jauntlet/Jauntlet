@@ -81,6 +81,10 @@ void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec2& angle, GLuint
 	_glyphs.emplace_back(destRect, glm::vec4(0, 0, 1, 1), atan2(angle.y, angle.x), texture, depth, color);
 }
 
+void SpriteBatch::draw(Glyph glyph) {
+	_glyphs.emplace_back(glyph);
+}
+
 void SpriteBatch::end() { 
 	// Set up pointers for fast sorting
 	_glyphPointers.resize(_glyphs.size());
@@ -198,7 +202,7 @@ void SpriteBatch::sortGlyphs() {
 		case GlyphSortType::NONE:
 			break;
 		default:
-			throw("sort type not found");
+			error("invalid sort type found in spritebatch!");
 			break;
 	}
 }

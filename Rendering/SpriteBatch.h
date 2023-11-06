@@ -53,13 +53,13 @@ public:
 	// texture: The texture ID to draw
 	// depth: the ordering in which to draw everything in the spriteBatch; only used if sorting was initialized in begin
 	// color: color to draw the sprite in
-	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth = 0, const Color& color = Color(255, 255, 255));
+	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth = 0, const Color& color = Color());
 	// adds a texture and its information to the spritebatch;
 	// destRect: where to draw the sprite X/Y = position, Z/W = width/height
 	// texture: The texture ID to draw
 	// depth: the ordering in which to draw everything in the spriteBatch; only used if sorting was initialized in begin
 	// color: color to draw the sprite in
-	void draw(const glm::vec4& destRect, GLuint texture, float depth = 0, const Color& color = Color(255, 255, 255));
+	void draw(const glm::vec4& destRect, GLuint texture, float depth = 0, const Color& color = Color());
 	// adds a texture and its information to the spritebatch
 	// destRect: where to draw the sprite X/Y = position, Z/W = width/height
 	// uvRect: The UVs of the texture to be drawn
@@ -67,14 +67,14 @@ public:
 	// texture: The texture ID to draw
 	// depth: the ordering in which to draw everything in the spriteBatch; only used if sorting was initialized in begin
 	// color: color to draw the sprite in
-	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, float degrees, GLuint texture, float depth = 0, const Color& color = Color(255, 255, 255));
+	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, float degrees, GLuint texture, float depth = 0, const Color& color = Color());
 	// adds a texture and its information to the spritebatch;
 	// destRect: where to draw the sprite X/Y = position, Z/W = width/height
 	// degrees: direction to rotate the sprite
 	// texture: The texture ID to draw
 	// depth: the ordering in which to draw everything in the spriteBatch; only used if sorting was initialized in begin
 	// color: color to draw the sprite in
-	void draw(const glm::vec4& destRect, float degrees, GLuint texture, float depth = 0, const Color& color = Color(255, 255, 255));
+	void draw(const glm::vec4& destRect, float degrees, GLuint texture, float depth = 0, const Color& color = Color());
 	// adds a texture and its information to the spritebatch
 	// destRect: where to draw the sprite X/Y = position, Z/W = width/height
 	// uvRect: The UVs of the texture to be drawn
@@ -82,14 +82,16 @@ public:
 	// texture: The texture ID to draw
 	// depth: the ordering in which to draw everything in the spriteBatch; only used if sorting was initialized in begin
 	// color: color to draw the sprite in
-	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, const glm::vec2& angle, GLuint texture, float depth = 0, const Color& color = Color(255, 255, 255));
+	void draw(const glm::vec4& destRect, const glm::vec4& uvRect, const glm::vec2& angle, GLuint texture, float depth = 0, const Color& color = Color());
 	// adds a texture and its information to the spritebatch;
 	// destRect: where to draw the sprite X/Y = position, W/Z = width/height
 	// degrees: direction to rotate the sprite
 	// texture: The texture ID to draw
 	// depth: the ordering in which to draw everything in the spriteBatch; only used if sorting was initialized in begin
 	// color: color to draw the sprite in
-	void draw(const glm::vec4& destRect, const glm::vec2& angle, GLuint texture, float depth = 0, const Color& color = Color(255, 255, 255));
+	void draw(const glm::vec4& destRect, const glm::vec2& angle, GLuint texture, float depth = 0, const Color& color = Color());
+
+	void draw(Glyph glyph); // UNDOCUMENTED
 
 	// closes and sorts the spritebatch
 	void end();
@@ -104,7 +106,6 @@ private:
 
 	static bool compareFrontToBack(Glyph* a, Glyph* b);
 	static bool compareBackToFront(Glyph* a, Glyph* b);
-	static bool compareTexture(Glyph* a, Glyph* b);
 
 	GLuint _vboID = 0;
 	GLuint _vaoID = 0;
