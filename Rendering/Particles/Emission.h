@@ -2,6 +2,7 @@
  * Main Contributer(s): Jack Kennedy
  */
 
+#include <glm/fwd.hpp>
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -24,15 +25,17 @@ public:
     void update();
 
     // our current position
-    glm::vec2 position;
+    glm::vec2 position = glm::vec2(0);
     // our current size
-    glm::vec2 size;
+    glm::vec2 size = glm::vec2(10);
     // the movement we make in one second
-    glm::vec2 movement;
+    glm::vec2 movement = glm::vec2(0,10);
     // the current color of our emission
     Color color;
-    // the life of our emission
-    float time;
+    // the age of our emission
+    float age;
+    // the life expectancy of our emission
+    float lifetime = 10.0f;
 private:
 };
 }

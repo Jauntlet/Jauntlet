@@ -1,12 +1,14 @@
-#include "ParticleProperty.h"
-#include "../../../Errors.h"
+#include "ParticleGrow.h"
 
 using namespace Jauntlet;
 
-ParticleProperty::ParticleProperty(float values[]) {
-	// empty
+ParticleGrow::ParticleGrow(float startSize, float endSize) {
+	_startSize = startSize;
+    _sizeDiff = startSize - endSize;
 }
 
-void ParticleProperty::apply() {
-    error("ParticleProperty.apply() was called! this is a generic particle property, not to be called! its apply statement will forever do nothing!");
+void ParticleGrow::apply(std::vector<Emission>& emissions) {
+    for (int i = 0; i < emissions.size(); ++i) {
+        emissions[i].size = glm::vec2(_startSize + _sizeDiff * (emissions[i].age / emissions[i].lifetime));
+    }
 }

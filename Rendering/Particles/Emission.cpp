@@ -9,9 +9,10 @@ Emission::Emission() {
 }
 
 void Emission::draw(SpriteBatch* spriteBatch, Camera2D* camera, GLuint texture) {
-    spriteBatch->draw(glm::vec4(0,0,10,10), glm::vec4(0,0,1,1), texture, 0, Jauntlet::Color());//, //);
+    spriteBatch->draw(glm::vec4(position.x,position.y,size.x,size.y), texture, 0, Jauntlet::Color(255,255,255,255));
 }
 
 void Emission::update() {
     position += movement * Time::getDeltaTime();
+    age += Time::getDeltaTime();
 }

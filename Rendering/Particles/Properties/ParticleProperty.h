@@ -1,14 +1,20 @@
 #pragma once
 
+#include "../Emission.h"
+
+#include <vector>
+
 namespace Jauntlet {
 class ParticleProperty
 {
 public:
     // constructor example of a particle property.
-	ParticleProperty(float values[]); // UNDOCUMENTED
+	ParticleProperty(); // UNDOCUMENTED
 
     // method to only be used by a particle to apply the property onto said particle
-    void apply(); // DONTDOCUMENT
+    virtual void apply(std::vector<Emission>& emissions); // DONTDOCUMENT
+
+    void bruh();
 private:
     
 };

@@ -1,14 +1,18 @@
 #include "Particle.h"
 #include "Emission.h"
+#include "../../Time.h"
 
 #include "../ResourceManager.h"
+#include "Properties/ParticleGrow.h"
+#include "Properties/ParticleProperty.h"
+
+#include <iostream>
 
 using namespace Jauntlet;
 
 Particle::Particle(
-        const ParticleProperty properties[],
         Camera2D* camera,
-        glm::vec2* position,
+        glm::vec2 position,
         // the properties
         std::string texture,
         // pre determined
@@ -21,10 +25,8 @@ Particle::Particle(
     _camera = camera;
     _position = position;
     _texture = Jauntlet::ResourceManager::getTexture(texture).id;
-
-    for (int i = 0; i < maxAliveMembers; ++i) {
-        emissions.push_back(Emission());
-    }
+    _emissionSpeed = emissionSpeed;
+    _maxEmissions = maxAliveMembers;
 }
 
 void Particle::draw() {
@@ -35,4 +37,38 @@ void Particle::draw() {
     }
 
     _spriteBatch.endAndRender();
+}
+
+void Particle::update() {
+    _timer += Time::getDeltaTime();
+    
+    while (_emissionsCount < _maxEmissions && _timer > _emissionSpeed) {
+        emit();
+        _timer -= _emissionSpeed;
+    }
+
+    for (int i = 0; i < emissions.size(); ++i) {
+        emissions[i].update();
+
+        if (emissions[i].age > emissions[i].lifetime) {
+            emissions.erase(emissions.begin() + i);
+            --i;
+            --_emissionsCount;
+        }
+    }
+
+    if (_emissionsCount > 0) {
+        for (int i = 0; i < _properties.size(); ++i) {
+            _properties[i]->bruh();
+        }
+    }
+}
+
+void Particle::emit() {
+    ++_emissionsCount;
+    emissions.push_back(Emission());
+}
+
+void Particle::addProperty(ParticleProperty* property) {
+    _properties.push_back(property);
 }

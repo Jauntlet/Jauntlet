@@ -1,5 +1,4 @@
 #include <algorithm>
-#include "../JMath.h"
 #include "SpriteBatch.h"
 #include "../Errors.h"
 

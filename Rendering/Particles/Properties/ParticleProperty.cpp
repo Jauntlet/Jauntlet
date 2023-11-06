@@ -3,10 +3,14 @@
 
 using namespace Jauntlet;
 
-ParticleProperty::ParticleProperty(float values[]) {
+ParticleProperty::ParticleProperty() {
 	// empty
 }
 
-void ParticleProperty::apply() {
+void ParticleProperty::apply(std::vector<Emission>& emissions) {
     error("ParticleProperty.apply() was called! this is a generic particle property, not to be called! its apply statement will forever do nothing!");
+}
+
+void ParticleProperty::bruh() {
+
 }
