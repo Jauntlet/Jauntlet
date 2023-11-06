@@ -33,10 +33,6 @@ public:
 
     // draw the emissions
     void draw(); // UNDOCUMENTED
-
-    // update emissions (positions, size, etc)
-    void update();
-
     std::vector<Emission> emissions; // DONTDOCUMENT
 private:
     SpriteBatch _spriteBatch;
