@@ -235,5 +235,8 @@
     <ClInclude Include="Filesystems\FileManager.h">
       <Filter>Filesystems</Filter>
     </ClInclude>
+    <ClInclude Include="Rendering\Particles\Properties\ParticleGrow.h">
+      <Filter>Rendering\Particles\Properties</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

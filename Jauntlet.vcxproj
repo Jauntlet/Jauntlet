@@ -212,6 +212,7 @@
     <ClInclude Include="Rendering\LineRenderer.h" />
     <ClInclude Include="Rendering\Particles\Emission.h" />
     <ClInclude Include="Rendering\Particles\Particle.h" />
+    <ClInclude Include="Rendering\Particles\Properties\ParticleGrow.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h" />
     <ClInclude Include="Rendering\ResourceManager.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
