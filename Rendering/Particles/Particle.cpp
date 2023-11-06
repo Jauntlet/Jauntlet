@@ -59,7 +59,7 @@ void Particle::update() {
 
     if (_emissionsCount > 0) {
         for (int i = 0; i < _properties.size(); ++i) {
-            _properties[i]->bruh();
+            _properties[i]->apply(emissions);
         }
     }
 }
