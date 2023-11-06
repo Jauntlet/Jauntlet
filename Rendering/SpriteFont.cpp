@@ -68,16 +68,12 @@ SpriteFont::SpriteFont(Camera2D* camera, const char* font, int size) :
 
 void SpriteFont::draw(SpriteBatch& spritebatch, std::string string, glm::vec2 position, glm::vec2 scaling,
 	float depth, Color color) {
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
 	// Store last used program, and then use our program.
 	GLSLProgram* storedProg = GLSLProgram::currentProgram;
 	_textProgram.use();
 
-	glUniform1i(_textProgram.getUniformLocation("imageTexture"), 0);
-	glUniformMatrix4fv(_textProgram.getUniformLocation("Projection"), 1, GL_FALSE, &_camera->getCameraMatrix()[0][0]);
+	//glUniform1i(_textProgram.getUniformLocation("imageTexture"), 0);
+	_camera->setActiveCamera();
 
 	float storedX = position.x;
 	for (auto c = string.begin(); c != string.end(); c++) {
