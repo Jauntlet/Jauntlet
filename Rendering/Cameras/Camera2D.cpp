@@ -105,6 +105,22 @@ void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {
 	_needsMatrixUpdate = true;
 }
 
+bool Camera2D::isBoxInView(const glm::vec4& destinationRect) {
+	const float MIN_DISTANCE_X = destinationRect.z / 2 + _screenWidth / _scale / 2;
+	const float MIN_DISTANCE_Y = destinationRect.w / 2 + _screenHeight / _scale / 2;
+
+	glm::vec2 centerPos = glm::vec2(destinationRect.x, destinationRect.y) + glm::vec2(destinationRect.z, destinationRect.w) / 2.0f;
+
+	glm::vec2 distVec = centerPos - _position;
+
+	float xDepth = MIN_DISTANCE_X - std::abs(distVec.x);
+	float yDepth = MIN_DISTANCE_Y - std::abs(distVec.y);
+
+	if (xDepth > 0 && yDepth > 0) {
+		return true;
+	}
+	return false;
+}
 bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) {
 	const float MIN_DISTANCE_X = dimensions.x / 2 + _screenWidth / _scale / 2;
 	const float MIN_DISTANCE_Y = dimensions.y / 2 + _screenHeight / _scale / 2;
