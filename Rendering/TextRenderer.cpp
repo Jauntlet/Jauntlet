@@ -95,7 +95,7 @@ void TextRenderer::addText(std::string text, glm::vec2 position, glm::vec2 scali
 		storedX += (currentGlyph.Advance >> 6) * scaling.x;
 	}
 }
-void TextRenderer::addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color()) {
+void TextRenderer::addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling, float depth, Color color) {
 	float storedX = position.x;
 	for (auto c = text.begin(); c != text.end(); c++) {
 		CharGlyph currentGlyph = Characters[*c];
