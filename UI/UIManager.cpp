@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "UIManager.h"
 #include "glm/fwd.hpp"
 
@@ -42,19 +44,20 @@ void UIManager::optimize() {
 
 void UIManager::draw() {
 	for (int i = 0; i < _uiBatches.size(); ++i) {
-		_uiBatches[i].draw(_camera, _scale);
+		_uiBatches[i].draw(_camera, &_scale);
 	}
 }
 
 void UIManager::setScale(float scale) {
-	_scale = &scale;
+	_scale = scale;
 }
 
 void UIManager::resolvePositions() {
 	// we've changed our resolution, recalculate
 	_recalculateOriginPinPositions();
 	for (int i = 0; i < _uiElements.size(); ++i) {
-		_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspacePtr, *_scale);
+		_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspacePtr, _scale);
+		//std::cout << *_scale << std::endl;
 	}
 }
 /*

@@ -35,7 +35,7 @@ namespace Jauntlet {
 		std::vector<UIElement*> _uiElements;
 		std::vector<GLSLProgram*> _programs;
 		std::vector<UIBatch> _uiBatches;
-		float* _scale;
+		float _scale;
 
 		// holy fucking shit i wish i could make this a const -jk
 		glm::vec2 ORIGIN_PIN_POSITIONS[9] = {glm::vec2(0.0f,0.0f),glm::vec2(0.5f,0.0f),glm::vec2(1.0f,0.0f),glm::vec2(1.0f,0.5f),glm::vec2(1.0f,1.0f),glm::vec2(0.5f,1.0f),glm::vec2(0.0f,1.0f),glm::vec2(0.0f,0.5f),glm::vec2(0.5f,0.5f)};
