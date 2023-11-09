@@ -37,9 +37,13 @@ public:
 	// Begin rendering to the TextRenderer
 	void begin();
 	// add text to be rendered
-	void addText(std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color());
+	void addText(std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color());\
 	// renders the text drawn to screen
 	void Render();
+	
+	// adds text to be rendered
+	// This override is meant for use with an external spritebatch; not for general use.
+	void addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color());
 private:
 	int _fontHeight;
 	std::map<char, CharGlyph> Characters;

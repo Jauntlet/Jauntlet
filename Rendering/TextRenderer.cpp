@@ -95,6 +95,26 @@ void TextRenderer::addText(std::string text, glm::vec2 position, glm::vec2 scali
 		storedX += (currentGlyph.Advance >> 6) * scaling.x;
 	}
 }
+void TextRenderer::addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color()) {
+	float storedX = position.x;
+	for (auto c = text.begin(); c != text.end(); c++) {
+		CharGlyph currentGlyph = Characters[*c];
+
+		if (*c == '\n') {
+			position.y -= _fontHeight * scaling.y;
+			storedX = position.x;
+		}
+
+		float x = storedX;
+		float y = position.y - (_fontHeight * scaling.y);
+
+		glm::vec4 destRect(x, y, scaling * (glm::vec2)currentGlyph.Bearing);
+
+		externalBatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, color);
+
+		storedX += (currentGlyph.Advance >> 6) * scaling.x;
+	}
+}
 
 void TextRenderer::Render() {
 	_spriteBatch.endAndRender();
