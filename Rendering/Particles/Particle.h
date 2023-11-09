@@ -36,7 +36,7 @@ public:
     // update emissions (positions, size, etc)
     void update();
 
-    void addProperty(ParticleProperty* property);
+    void addProperty(ParticleProperty& property);
 
     std::vector<Emission> emissions; // DONTDOCUMENT
 private:

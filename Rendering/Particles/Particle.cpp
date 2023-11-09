@@ -57,18 +57,16 @@ void Particle::update() {
         }
     }
 
-    if (_emissionsCount > 0) {
-        for (int i = 0; i < _properties.size(); ++i) {
-            _properties[i]->apply(emissions);
-        }
-    }
+    ParticleGrow bruh = ParticleGrow(0,100);
+    bruh.apply(emissions);
 }
 
 void Particle::emit() {
+    // there isnt really a care where we want to add an emission and not increment this counter
     ++_emissionsCount;
     emissions.push_back(Emission());
 }
 
-void Particle::addProperty(ParticleProperty* property) {
-    _properties.push_back(property);
+void Particle::addProperty(ParticleProperty& property) {
+    _properties.push_back(&property);
 }
