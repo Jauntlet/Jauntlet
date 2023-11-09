@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "UIManager.h"
 #include "glm/fwd.hpp"
 
@@ -57,7 +55,6 @@ void UIManager::resolvePositions() {
 	_recalculateOriginPinPositions();
 	for (int i = 0; i < _uiElements.size(); ++i) {
 		_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspacePtr, _scale);
-		//std::cout << *_scale << std::endl;
 	}
 }
 /*

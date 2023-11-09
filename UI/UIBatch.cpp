@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "../Rendering/GLSLProgram.h"
 #include "UIBatch.h"
 

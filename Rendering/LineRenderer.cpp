@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <iostream> //TODO:removeme
 
 #include "../Errors.h"
 #include "LineRenderer.h"
