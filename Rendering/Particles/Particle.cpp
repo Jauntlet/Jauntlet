@@ -32,7 +32,7 @@ Particle::Particle(
 void Particle::draw() {
     _spriteBatch.begin();
 
-    for (int i = 0; i < emissions.size(); ++i) {
+   for (int i = 0; i < emissions.size(); ++i) {
         emissions[i].draw(&_spriteBatch,_camera,_texture);
     }
 

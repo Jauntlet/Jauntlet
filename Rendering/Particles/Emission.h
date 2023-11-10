@@ -33,7 +33,7 @@ public:
     // the current color of our emission
     Color color;
     // the age of our emission
-    float age;
+    float age = 0.0f;
     // the life expectancy of our emission
     float lifetime = 10.0f;
 private:
