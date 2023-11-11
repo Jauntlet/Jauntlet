@@ -11,7 +11,7 @@ float JMath::Distance(const glm::vec3& a,const glm::vec3& b) {
 std::vector<std::string> JMath::Split(std::string string,const std::string& delimiter) {
 	std::vector<std::string> output;
 	
-	int delim = string.find(delimiter);
+	size_t delim = string.find(delimiter);
 
 	// if no delimiter was found
 	if (delim == -1) {
@@ -33,7 +33,7 @@ std::vector<std::string> JMath::Split(std::string string,const std::string& deli
 std::vector<std::string> JMath::Split(std::string string,const char& delimiter) {
 	std::vector<std::string> output;
 
-	int delim = string.find(delimiter);
+	size_t delim = string.find(delimiter);
 
 	// if no delimiter was found
 	if (delim == -1) {
