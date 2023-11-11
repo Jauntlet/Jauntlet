@@ -283,7 +283,7 @@ glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) {
 	for (int y = 0; y < _level.size(); ++y) {
 		for (int x = 0; x < _level[y].size(); ++x) {
 			if (_level[y][x] == tileID) {
-				options.push_back(glm::ivec2(y, x));
+				options.push_back(glm::ivec2(x, y));
 			}
 		}
 	}
