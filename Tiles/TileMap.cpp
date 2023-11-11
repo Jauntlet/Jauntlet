@@ -271,7 +271,10 @@ unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
 }
 
 glm::ivec2 TileMap::selectRandomTile() {
-	int y = rand() % _level.size();
+	int y;
+	do {
+		y = rand() % _level.size();
+	} while (_level[y].empty());
 	return glm::ivec2(rand() % _level[y].size(), y);
 }
 glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) {
@@ -284,6 +287,11 @@ glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) {
 			}
 		}
 	}
+	if (options.empty()) {
+		error("failed to find tile ID " + std::to_string(tileID) + " in tilemap ");
+		return glm::ivec2(0);
+	}
+
 	// return a random result from the tiles found
 	return options[rand() % options.size()];
 }
