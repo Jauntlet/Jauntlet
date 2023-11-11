@@ -1,12 +1,12 @@
 #include <algorithm>
-#include <fstream>
-#include <sstream>
-
+#include "../Collision/Collision2D.h"
 #include "../Errors.h"
+#include <fstream>
 #include "../JMath.h"
+#include <sstream>
 #include "TileMap.h"
 
-#include "../Collision/Collision2D.h"
+
 
 using namespace Jauntlet;
 
@@ -216,12 +216,6 @@ bool TileMap::isTileEmpty(glm::ivec2 tilePosition) {
 
 	return iterator == _tiles.end();
 }
-unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
-	if (!isValidTilePos(tilePosition)) {
-		return 0;
-	}
-	return _level[tilePosition.y][tilePosition.x];
-}
 
 glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
 	// remember that offset is in worldspace aswell.
@@ -268,6 +262,30 @@ void TileMap::changeDrawColor(Jauntlet::Color color) {
 
 bool TileMap::isValidTilePos(glm::ivec2 position) {
 	return !(position.y < 0 || position.y >= _level.size() || position.x >= _level[position.y].size() || position.x < 0);
+}
+unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
+	if (!isValidTilePos(tilePosition)) {
+		return 0;
+	}
+	return _level[tilePosition.y][tilePosition.x];
+}
+
+glm::ivec2 TileMap::selectRandomTile() {
+	int y = rand() % _level.size();
+	return glm::ivec2(rand() % _level[y].size(), y);
+}
+glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) {
+	std::vector<glm::ivec2> options;
+	// loop through the tilemap to find all tiles matching the ID
+	for (int y = 0; y < _level.size(); ++y) {
+		for (int x = 0; x < _level[y].size(); ++x) {
+			if (_level[y][x] == tileID) {
+				options.push_back(glm::ivec2(y, x));
+			}
+		}
+	}
+	// return a random result from the tiles found
+	return options[rand() % options.size()];
 }
 
 void TileMap::updateTileMap() {

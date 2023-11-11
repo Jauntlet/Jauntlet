@@ -71,8 +71,6 @@ public:
 	bool tileHasCollision(glm::ivec2 tilePosition);
 	// returns true if the tile is empty
 	bool isTileEmpty(glm::ivec2 tilePosition);
-	// returns ID of tile position.
-	unsigned int getTileID(glm::ivec2 tilePosition);
 
 	// Converts a position to be relative to the tileset: used mostly for checking tiles.
 	glm::ivec2 WorldPosToTilePos(glm::vec2 position);
@@ -96,6 +94,13 @@ public:
 
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
 	bool isValidTilePos(glm::ivec2 position);
+	// returns ID of tile position.
+	unsigned int getTileID(glm::ivec2 tilePosition);
+
+	// selects a random tile on the tilemap
+	glm::ivec2 selectRandomTile();
+	// selects a random tile on the tilmap that matches the provided tile ID
+	glm::ivec2 selectRandomTile(unsigned int tileID);
 private:
 	// Updates what tiles are drawn to screen. Run this as little as possible.
 	void updateTileMap();
