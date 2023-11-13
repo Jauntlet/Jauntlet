@@ -6,7 +6,7 @@
 #include "Jauntlet.h"
 #include "Errors.h"
 
-#if _WIN32 && NDEBUG
+#if _WIN32
 #include <Windows.h>
 #endif
 
