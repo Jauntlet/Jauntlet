@@ -1,12 +1,10 @@
-#include <algorithm>
 #include "../Collision/Collision2D.h"
 #include "../Errors.h"
-#include <fstream>
 #include "../JMath.h"
+#include <algorithm>
+#include <fstream>
 #include <sstream>
 #include "TileMap.h"
-
-
 
 using namespace Jauntlet;
 
@@ -21,14 +19,14 @@ TileMap::~TileMap() {
 	_storedTileSets.clear();
 }
 
-void TileMap::Register(std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
+void TileMap::Register(std::string filePath, TileCollision collisionType) {
 	_tiles.insert(std::make_pair(nextID++, tile(filePath, collisionType)));
 }
-void TileMap::Register(TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
+void TileMap::Register(TileSet& tileSet, TileCollision collisionType) {
 	_tiles.insert(std::make_pair(nextID++, tile(&tileSet, collisionType)));
 }
 
-void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
+void TileMap::loadTileMap(std::string filePath, float offsetX, float offsetY) {
 	_offset = glm::vec2(offsetX, offsetY);
 	
 	std::ifstream file;
@@ -271,7 +269,10 @@ unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
 }
 
 glm::ivec2 TileMap::selectRandomTile() {
-	int y;
+	int y = 0;
+	// this code is put in a do-while loop incase of a row being selected with no tiles inside of it.
+	// this does mean the potential for an infinite loop if the ENTIRE tilemap is empty, but I find it unlikely.
+	// I'd rather not slow down this function for that edge case, but its totally fine if it is added later -xm
 	do {
 		y = rand() % _level.size();
 	} while (_level[y].empty());
@@ -309,9 +310,6 @@ void TileMap::updateTileMap() {
 			if (mapIterator == _tiles.end()) {
 				continue;
 			}
-			
-			// Create the location and size of the tile
-			glm::vec4 destRect(x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize);
 
 			if (mapIterator->second.tileSet != nullptr) {
 				// tile is a tileset, process which tile should be drawn
@@ -348,11 +346,11 @@ void TileMap::updateTileMap() {
 				}
 
 				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
-				_spriteBatch.draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0, _drawColor);
+				_spriteBatch.draw({ x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize }, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0, _drawColor);
 			}
 			else {
 				// normal tile, render it as usual.
-				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0, _drawColor);
+				_spriteBatch.draw({ x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize }, _textureCache.getTexture(mapIterator->second.texture).id, 0, _drawColor);
 			}
 		}
 	}

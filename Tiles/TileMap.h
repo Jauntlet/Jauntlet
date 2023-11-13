@@ -113,7 +113,7 @@ private:
 
 	std::vector<std::vector<unsigned int>> _level;
 	SpriteBatch _spriteBatch;
-	Jauntlet::Color _drawColor = Jauntlet::Color(255, 255, 255);
+	Jauntlet::Color _drawColor;
 
 	int _tileSize;
 	glm::vec2 _offset = glm::vec2(0);
