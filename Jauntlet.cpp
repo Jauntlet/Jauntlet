@@ -13,8 +13,8 @@
 namespace Jauntlet {
 	
 	int init() {
-		// Hide the terminal on release mode
-		#if _WIN32 && NDEBUG
+		// Hide the windows terminal. We hate the windows terminal.
+		#if _WIN32
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 		#endif
 
