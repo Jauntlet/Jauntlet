@@ -9,8 +9,13 @@
 #include <SDL2/SDL_stdinc.h>
 #include <vector>
 
+#ifndef Rad2Deg
 #define Rad2Deg (180.0f / M_PI)
+#endif
+#ifndef Deg2Rad
 #define Deg2Rad (M_PI / 180.0f)
+#endif // !
+
 
 // JMath is purposefully left out of the Jauntlet Namespace to shorten the syntax to call it.
 // we want: JMath::Function(), not Jauntlet::JMath::Function(). -xm
