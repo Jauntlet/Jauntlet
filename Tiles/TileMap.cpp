@@ -1,12 +1,10 @@
+#include "../Collision/Collision2D.h"
+#include "../Errors.h"
+#include "../JMath.h"
 #include <algorithm>
 #include <fstream>
 #include <sstream>
-
-#include "../Errors.h"
-#include "../JMath.h"
 #include "TileMap.h"
-
-#include "../Collision/Collision2D.h"
 
 using namespace Jauntlet;
 
@@ -21,14 +19,14 @@ TileMap::~TileMap() {
 	_storedTileSets.clear();
 }
 
-void TileMap::Register(std::string filePath, TileCollision collisionType/*= TileCollision::NONE*/) {
+void TileMap::Register(std::string filePath, TileCollision collisionType) {
 	_tiles.insert(std::make_pair(nextID++, tile(filePath, collisionType)));
 }
-void TileMap::Register(TileSet& tileSet, TileCollision collisionType/*= TileCollision::NONE*/) {
+void TileMap::Register(TileSet& tileSet, TileCollision collisionType) {
 	_tiles.insert(std::make_pair(nextID++, tile(&tileSet, collisionType)));
 }
 
-void TileMap::loadTileMap(std::string filePath, float offsetX /*= 0*/, float offsetY /*= 0*/) {
+void TileMap::loadTileMap(std::string filePath, float offsetX, float offsetY) {
 	_offset = glm::vec2(offsetX, offsetY);
 	
 	std::ifstream file;
@@ -216,12 +214,6 @@ bool TileMap::isTileEmpty(glm::ivec2 tilePosition) {
 
 	return iterator == _tiles.end();
 }
-unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
-	if (!isValidTilePos(tilePosition)) {
-		return 0;
-	}
-	return _level[tilePosition.y][tilePosition.x];
-}
 
 glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
 	// remember that offset is in worldspace aswell.
@@ -269,6 +261,41 @@ void TileMap::changeDrawColor(Jauntlet::Color color) {
 bool TileMap::isValidTilePos(glm::ivec2 position) {
 	return !(position.y < 0 || position.y >= _level.size() || position.x >= _level[position.y].size() || position.x < 0);
 }
+unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
+	if (!isValidTilePos(tilePosition)) {
+		return 0;
+	}
+	return _level[tilePosition.y][tilePosition.x];
+}
+
+glm::ivec2 TileMap::selectRandomTile() {
+	int y = 0;
+	// this code is put in a do-while loop incase of a row being selected with no tiles inside of it.
+	// this does mean the potential for an infinite loop if the ENTIRE tilemap is empty, but I find it unlikely.
+	// I'd rather not slow down this function for that edge case, but its totally fine if it is added later -xm
+	do {
+		y = rand() % _level.size();
+	} while (_level[y].empty());
+	return glm::ivec2(rand() % _level[y].size(), y);
+}
+glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) {
+	std::vector<glm::ivec2> options;
+	// loop through the tilemap to find all tiles matching the ID
+	for (int y = 0; y < _level.size(); ++y) {
+		for (int x = 0; x < _level[y].size(); ++x) {
+			if (_level[y][x] == tileID) {
+				options.push_back(glm::ivec2(x, y));
+			}
+		}
+	}
+	if (options.empty()) {
+		error("failed to find tile ID " + std::to_string(tileID) + " in tilemap ");
+		return glm::ivec2(0);
+	}
+
+	// return a random result from the tiles found
+	return options[rand() % options.size()];
+}
 
 void TileMap::updateTileMap() {
 	_spriteBatch.begin();
@@ -283,9 +310,6 @@ void TileMap::updateTileMap() {
 			if (mapIterator == _tiles.end()) {
 				continue;
 			}
-			
-			// Create the location and size of the tile
-			glm::vec4 destRect(x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize);
 
 			if (mapIterator->second.tileSet != nullptr) {
 				// tile is a tileset, process which tile should be drawn
@@ -322,11 +346,11 @@ void TileMap::updateTileMap() {
 				}
 
 				TileSet::Tileinfo currentTile = mapIterator->second.tileSet->tileSetToTile(tileData);
-				_spriteBatch.draw(destRect, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0, _drawColor);
+				_spriteBatch.draw({ x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize }, { currentTile.UV.x, currentTile.UV.y, currentTile.UV.w, currentTile.UV.z }, _textureCache.getTexture(currentTile.texture).id, 0, _drawColor);
 			}
 			else {
 				// normal tile, render it as usual.
-				_spriteBatch.draw(destRect, _textureCache.getTexture(mapIterator->second.texture).id, 0, _drawColor);
+				_spriteBatch.draw({ x * _tileSize + _offset.x, -y * _tileSize + _offset.y, _tileSize, _tileSize }, _textureCache.getTexture(mapIterator->second.texture).id, 0, _drawColor);
 			}
 		}
 	}
