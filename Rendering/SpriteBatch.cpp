@@ -24,7 +24,7 @@ Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, GLuint Texture,
 }
 Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float radians, GLuint Texture, float Depth, const Color& Color) :
 	texture(Texture), depth(Depth) {
-	glm::vec2 halfDims(DestRect.z / 2.0f, DestRect.w / 2.0f);
+	glm::vec2 halfDims(DestRect.z * 0.5f, DestRect.w * 0.5f);
 
 	glm::vec2 tl(rotatePoint(-halfDims.x, halfDims.y, radians) + halfDims);
 	glm::vec2 bl(rotatePoint(-halfDims.x, -halfDims.y, radians) + halfDims);
