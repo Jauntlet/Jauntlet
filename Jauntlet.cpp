@@ -1,8 +1,4 @@
-#include <GL/glew.h>
 #include <SDL2/SDL.h>
-#include <exception>
-#include <fstream>
-#include "Filesystems/FileManager.h"
 #include "Jauntlet.h"
 #include "Errors.h"
 
