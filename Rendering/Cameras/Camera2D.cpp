@@ -106,8 +106,8 @@ void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {
 }
 
 bool Camera2D::isBoxInView(const glm::vec4& destinationRect) {
-	const float MIN_DISTANCE_X = destinationRect.z * 0.5f + _screenWidth / _scale * 0.5f;
-	const float MIN_DISTANCE_Y = destinationRect.w * 0.5f + _screenHeight / _scale * 0.5f;
+	const float MIN_DISTANCE_X = destinationRect.z * 0.5f + _screenWidth / (_scale * 0.5f);
+	const float MIN_DISTANCE_Y = destinationRect.w * 0.5f + _screenHeight / (_scale * 0.5f);
 
 	glm::vec2 centerPos = glm::vec2(destinationRect.x, destinationRect.y) + glm::vec2(destinationRect.z, destinationRect.w) * 0.5f;
 
@@ -122,8 +122,8 @@ bool Camera2D::isBoxInView(const glm::vec4& destinationRect) {
 	return false;
 }
 bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) {
-	const float MIN_DISTANCE_X = dimensions.x * 0.5f + _screenWidth / _scale * 0.5f;
-	const float MIN_DISTANCE_Y = dimensions.y * 0.5f + _screenHeight / _scale * 0.5f;
+	const float MIN_DISTANCE_X = dimensions.x * 0.5f + _screenWidth / (_scale * 0.5f);
+	const float MIN_DISTANCE_Y = dimensions.y * 0.5f + _screenHeight / (_scale * 0.5f);
 
 	glm::vec2 centerPos = position + dimensions * 0.5f;
 
