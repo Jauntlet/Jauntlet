@@ -161,6 +161,7 @@
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="Externals\picoPNG.cpp" />
     <ClCompile Include="Externals\tinyfiledialogs.cpp" />
+    <ClCompile Include="Filesystems\FileDialogs.cpp" />
     <ClCompile Include="Filesystems\FileManager.cpp" />
     <ClCompile Include="Inputs\InputKey.cpp" />
     <ClCompile Include="Inputs\InputManager.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Errors.h" />
     <ClInclude Include="Externals\picoPNG.h" />
     <ClInclude Include="Externals\tinyfiledialogs.h" />
+    <ClInclude Include="Filesystems\FileDialogs.h" />
     <ClInclude Include="Filesystems\FileManager.h" />
     <ClInclude Include="Inputs\InputKey.h" />
     <ClInclude Include="Inputs\InputManager.h" />
