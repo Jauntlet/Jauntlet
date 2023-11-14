@@ -47,8 +47,8 @@ void Camera2D::update() {
 	//xander wants to remove unrounded positions from the camera, as they cause shimmering. to prevent this, we round position before updating the matrix. -jk
     _cameraMatrix = glm::translate(
         _orthoMatrix,
-        glm::vec3(_screenWidth / 2.0f - (_doRounding ? round(_position.x) : _position.x),
-                  _screenHeight / 2.0f - (_doRounding ? round(_position.y) : _position.y), 0.0f));
+        glm::vec3(_screenWidth * 0.5f - (_doRounding ? round(_position.x) : _position.x),
+                  _screenHeight * 0.5f - (_doRounding ? round(_position.y) : _position.y), 0.0f));
     
 	_cameraMatrix = glm::scale(_cameraMatrix, glm::vec3(_scale, _scale, 0));
 
@@ -63,7 +63,7 @@ void Camera2D::setActiveCamera() {
 
 glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
 	// make 0 the center of the screen and invert the Y axis
-	worldCoords += glm::vec2(_screenWidth / 2, _screenHeight / 2);
+	worldCoords += glm::vec2(_screenWidth * 0.5f, _screenHeight * 0.5f);
 	// scale the coords
 	worldCoords /= _scale;
 	// Translate based on camera position
@@ -73,7 +73,7 @@ glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
 }
 glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
 	// make 0 the center of the screen and invert the Y axis
-	screenCoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
+	screenCoords -= glm::vec2(_screenWidth * 0.5f, _screenHeight * 0.5f);
 	// Translate based on camera position
 	screenCoords += glm::vec2(_position.x, -_position.y);
 	// flip the y coordinates
@@ -86,7 +86,7 @@ glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
 
 glm::vec2 Camera2D::convertScreenToWorldDisregardPosition(glm::vec2 screenCoords) {
 	// make 0 the center of the screen and invert the Y axis
-	screenCoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
+	screenCoords -= glm::vec2(_screenWidth * 0.5f, _screenHeight * 0.5f);
 	// flip the y coordinates
 	screenCoords.y *= -1;
 	// scale the coords
@@ -106,10 +106,10 @@ void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {
 }
 
 bool Camera2D::isBoxInView(const glm::vec4& destinationRect) {
-	const float MIN_DISTANCE_X = destinationRect.z / 2 + _screenWidth / _scale / 2;
-	const float MIN_DISTANCE_Y = destinationRect.w / 2 + _screenHeight / _scale / 2;
+	const float MIN_DISTANCE_X = destinationRect.z * 0.5f + _screenWidth / _scale * 0.5f;
+	const float MIN_DISTANCE_Y = destinationRect.w * 0.5f + _screenHeight / _scale * 0.5f;
 
-	glm::vec2 centerPos = glm::vec2(destinationRect.x, destinationRect.y) + glm::vec2(destinationRect.z, destinationRect.w) / 2.0f;
+	glm::vec2 centerPos = glm::vec2(destinationRect.x, destinationRect.y) + glm::vec2(destinationRect.z, destinationRect.w) * 0.5f;
 
 	glm::vec2 distVec = centerPos - _position;
 
@@ -122,10 +122,10 @@ bool Camera2D::isBoxInView(const glm::vec4& destinationRect) {
 	return false;
 }
 bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) {
-	const float MIN_DISTANCE_X = dimensions.x / 2 + _screenWidth / _scale / 2;
-	const float MIN_DISTANCE_Y = dimensions.y / 2 + _screenHeight / _scale / 2;
+	const float MIN_DISTANCE_X = dimensions.x * 0.5f + _screenWidth / _scale * 0.5f;
+	const float MIN_DISTANCE_Y = dimensions.y * 0.5f + _screenHeight / _scale * 0.5f;
 
-	glm::vec2 centerPos = position + dimensions / 2.0f;
+	glm::vec2 centerPos = position + dimensions * 0.5f;
 
 	glm::vec2 distVec = centerPos - _position;
 
