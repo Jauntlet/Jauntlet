@@ -21,9 +21,9 @@ uint8_t messageBox(const std::string& title, const std::string& message, Dialog_
 // input box method here, requires testing
 // uint8_t inputBox
 
-std::string saveFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<std::string>& filters, const std::string& filterDescription);
+std::string saveFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription);
 
-std::string openFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<std::string>& filters, const std::string& filterDescription, bool allowSelectMultiple);
+std::string openFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription, bool allowSelectMultiple);
 
 std::string selectFolderPrompt(const std::string& title, const std::string& defaultFilePath);
 

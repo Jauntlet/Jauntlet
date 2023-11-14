@@ -60,12 +60,12 @@ uint8_t Jauntlet::messageBox(const std::string& title, const std::string& messag
 
 // input box will be here
 
-std::string Jauntlet::saveFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<std::string>& filters, const std::string& filterDescription) {
-	return tinyfd_saveFileDialog(title.c_str(), defaultFilePath.c_str(), filters.size(), (const char* const*)filters.data(), filterDescription.c_str());
+std::string Jauntlet::saveFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription) {
+	return tinyfd_saveFileDialog(title.c_str(), defaultFilePath.c_str(), filters.size(), filters.data(), filterDescription.c_str());
 }
 
-std::string Jauntlet::openFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<std::string>& filters, const std::string& filterDescription, bool allowSelectMultiple) {
-	return tinyfd_openFileDialog(title.c_str(), defaultFilePath.c_str(), filters.size(), (const char* const*)filters.data(), filterDescription.c_str(), allowSelectMultiple ? 1 : 0);
+std::string Jauntlet::openFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription, bool allowSelectMultiple) {
+	return tinyfd_openFileDialog(title.c_str(), defaultFilePath.c_str(), filters.size(), filters.data(), filterDescription.c_str(), allowSelectMultiple ? 1 : 0);
 }
 
 std::string Jauntlet::selectFolderPrompt(const std::string& title, const std::string& defaultFilePath) {
