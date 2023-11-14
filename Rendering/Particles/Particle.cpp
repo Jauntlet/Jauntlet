@@ -27,6 +27,8 @@ Particle::Particle(
     _texture = Jauntlet::ResourceManager::getTexture(texture).id;
     _emissionSpeed = emissionSpeed;
     _maxEmissions = maxAliveMembers;
+
+    std::cout << position.x << std::endl;
 }
 
 void Particle::draw() {
@@ -64,7 +66,9 @@ void Particle::update() {
 void Particle::emit() {
     // there isnt really a care where we want to add an emission and not increment this counter
     ++_emissionsCount;
-    emissions.push_back(Emission());
+    Emission emission = Emission();
+    emission.position = _position;
+    emissions.push_back(emission);
 }
 
 void Particle::addProperty(ParticleProperty& property) {
