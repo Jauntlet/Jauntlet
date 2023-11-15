@@ -9,8 +9,6 @@ UITextElement::UITextElement(TextRenderer* textRenderer, std::string* text, Colo
     _position = position;
 }
 
-void UITextElement::draw(Camera2D* camera, float scale) {
-    _textRenderer->begin();
-    _textRenderer->addText(*_text, _resolvedPosition, glm::vec2(scale), 0, *_color);
-    _textRenderer->Render();
+void UITextElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
+    _textRenderer->addText(*spriteBatch,*_text, _resolvedPosition, glm::vec2(scale), 0, *_color);
 }
