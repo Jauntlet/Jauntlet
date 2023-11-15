@@ -79,10 +79,10 @@ std::string operator*(std::string& a, const int& b) {
 	}
 	return c;
 }
-std::string operator*=(std::string& a, const int& b) {
+void operator*=(std::string& a, const int& b) {
 	if (b == 0) {
 		a == "";
-		return a;
+		return;
 	}
 	else if (b < 0) {
 		a = JMath::reverse(a);
@@ -90,12 +90,18 @@ std::string operator*=(std::string& a, const int& b) {
 		for (int i = b; i < -1; i++) {
 			a += c;
 		}
-		return a;
+		return;
 	}
 	std::string c = a;
 	
 	for (int i = b; i > 1; i--) {
 		a += c;
 	}
-	return a;
+}
+
+std::string operator-(std::string& a, const int& b) {
+	return a.substr(0, a.length() - b);
+}
+void operator-=(std::string& a, const int& b) {
+	a = a.substr(0, a.length() - b);
 }

@@ -38,4 +38,6 @@ public:
 };
 
 std::string operator*(std::string& a, const int& b);
-std::string operator*=(std::string& a, const int& b);
+void operator*=(std::string& a, const int& b);
+std::string operator-(std::string& a, const int& b);
+void operator-=(std::string& a, const int& b);
