@@ -50,8 +50,10 @@ std::vector<std::string> JMath::Split(std::string string,const char& delimiter) 
 	
 	// pushes the rest of the string
 	output.push_back(string);
-	
+
 	return output;
+}
+
 std::string JMath::reverse(const std::string& string) {
 	std::string output = "";
 	for (int i = string.length() -1; i >= 0; i--) {
@@ -59,4 +61,41 @@ std::string JMath::reverse(const std::string& string) {
 	}
 	return output;
 }
+
+std::string operator*(std::string& a, const int& b) {
+	if (b == 0) return "";
+
+	std::string c = a;
+	if (b < 0) {
+		c = JMath::reverse(c);
+		for (int i = b; i < -1; i++) {
+			c += JMath::reverse(a);
+		}
+		return c;
+	}
+
+	for (int i = b; i > 1; i--) {
+		c += a;
+	}
+	return c;
+}
+std::string operator*=(std::string& a, const int& b) {
+	if (b == 0) {
+		a == "";
+		return a;
+	}
+	else if (b < 0) {
+		a = JMath::reverse(a);
+		std::string c = a;
+		for (int i = b; i < -1; i++) {
+			a += c;
+		}
+		return a;
+	}
+	std::string c = a;
+	
+	for (int i = b; i > 1; i--) {
+		a += c;
+	}
+	return a;
 }
