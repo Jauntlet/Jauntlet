@@ -52,4 +52,11 @@ std::vector<std::string> JMath::Split(std::string string,const char& delimiter) 
 	output.push_back(string);
 	
 	return output;
+std::string JMath::reverse(const std::string& string) {
+	std::string output = "";
+	for (int i = string.length() -1; i >= 0; i--) {
+		output += string[i];
+	}
+	return output;
+}
 }
