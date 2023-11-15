@@ -27,8 +27,6 @@ Particle::Particle(
     _texture = Jauntlet::ResourceManager::getTexture(texture).id;
     _emissionSpeed = emissionSpeed;
     _maxEmissions = maxAliveMembers;
-
-    std::cout << position.x << std::endl;
 }
 
 void Particle::draw() {
