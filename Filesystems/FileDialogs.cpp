@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include "FileDialogs.h"
 
 using namespace Jauntlet;
