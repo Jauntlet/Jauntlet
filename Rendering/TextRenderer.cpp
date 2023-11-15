@@ -6,7 +6,7 @@
 
 using namespace Jauntlet;
 
-GLSLProgram TextRenderer::_textProgram;
+GLSLProgram TextRenderer::textShader;
 
 TextRenderer::TextRenderer(Camera2D* camera, const char* font, int size) :
 	_fontHeight(size),
@@ -55,21 +55,19 @@ TextRenderer::TextRenderer(Camera2D* camera, const char* font, int size) :
 	FT_Done_FreeType(ft);
 
 	// Setup shader
-	if (_textProgram.isLinked) {
-		return;
+	if (!textShader.isLinked) {
+		textShader.compileShaders("Shaders/text.vert", "Shaders/text.frag");
+		textShader.addAttribute("vertexPosition");
+		textShader.addAttribute("vertexColor");
+		textShader.addAttribute("vertexUV");
+		textShader.linkShaders();
 	}
-
-	_textProgram.compileShaders("Shaders/text.vert", "Shaders/text.frag");
-	_textProgram.addAttribute("vertexPosition");
-	_textProgram.addAttribute("vertexColor");
-	_textProgram.addAttribute("vertexUV");
-	_textProgram.linkShaders();
 }
 
 void TextRenderer::begin() {
 	// Store last used program, and then use our program.
 	_storedProgram = GLSLProgram::currentProgram;
-	_textProgram.use();
+	textShader.use();
 	_camera->setActiveCamera();
 
 	_spriteBatch.begin();

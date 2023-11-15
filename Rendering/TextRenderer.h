@@ -44,6 +44,8 @@ public:
 	// adds text to be rendered
 	// This override is meant for use with an external spritebatch; not for general use.
 	void addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color());
+	
+	static GLSLProgram textShader;
 private:
 	int _fontHeight;
 	std::map<char, CharGlyph> Characters;
@@ -51,7 +53,6 @@ private:
 	Camera2D* _camera = nullptr;
 	SpriteBatch _spriteBatch;
 
-	static GLSLProgram _textProgram;
 	GLSLProgram* _storedProgram;
 };
 }
