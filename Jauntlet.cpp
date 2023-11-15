@@ -10,7 +10,7 @@ namespace Jauntlet {
 	
 	int init() {
 		// Hide the windows terminal. We hate the windows terminal.
-		#if _WIN32
+		#if _WIN32 && NDEBUG
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 		#endif
 
