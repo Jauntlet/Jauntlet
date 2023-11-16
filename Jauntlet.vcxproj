@@ -168,7 +168,6 @@
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
     <ClCompile Include="Rendering\Animation\Animation.cpp" />
-    <ClCompile Include="Rendering\Animation\AnimationManager.cpp" />
     <ClCompile Include="Rendering\Cameras\Camera2D.cpp" />
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
     <ClCompile Include="Rendering\ImageLoader.cpp" />
@@ -206,7 +205,6 @@
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
     <ClInclude Include="Rendering\Animation\Animation.h" />
-    <ClInclude Include="Rendering\Animation\AnimationManager.h" />
     <ClInclude Include="Rendering\Cameras\Camera2D.h" />
     <ClInclude Include="Rendering\GLSLProgram.h" />
     <ClInclude Include="Rendering\GLTexture.h" />

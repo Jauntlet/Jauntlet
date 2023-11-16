@@ -97,9 +97,6 @@
     <ClCompile Include="Rendering\Animation\Animation.cpp">
       <Filter>Rendering\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Animation\AnimationManager.cpp">
-      <Filter>Rendering\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\Particles\Particle.cpp">
       <Filter>Rendering\Particles</Filter>
     </ClCompile>
@@ -203,9 +200,6 @@
       <Filter>Tiles</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Animation\Animation.h">
-      <Filter>Rendering\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\Animation\AnimationManager.h">
       <Filter>Rendering\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Particles\Particle.h">

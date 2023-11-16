@@ -8,10 +8,6 @@ Animation::Animation() {
 	_spriteSize = 0.0f;
 }
 
-Animation::Animation(glm::vec2 spriteSize, glm::vec2 animationSize) {
-	_spriteSize = spriteSize.x / animationSize.x;
-}
-
 Animation::Animation(int frames) {
 	_spriteSize = 1.0f / frames;
 }
