@@ -37,7 +37,18 @@ public:
 	static std::string reverse(const std::string& string);
 };
 
+// copies the string 'b' many times
 std::string operator*(std::string& a, const int& b);
 void operator*=(std::string& a, const int& b);
+// subtract 'b' from the length of the string
 std::string operator-(std::string& a, const int& b);
 void operator-=(std::string& a, const int& b);
+// subtract the right-most instance of 'b'
+std::string operator-(std::string a, const char b);
+void operator-=(std::string& a, const char b);
+// subtract the right most instance of the string 'b'
+std::string operator-(std::string a, const std::string& b);
+void operator-=(std::string& a, const std::string& b);
+// subtract the right most instance of each char in 'b'
+std::string operator-(std::string a, const char* b);
+void operator-=(std::string& a, const char* b);

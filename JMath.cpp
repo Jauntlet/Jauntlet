@@ -105,3 +105,32 @@ std::string operator-(std::string& a, const int& b) {
 void operator-=(std::string& a, const int& b) {
 	a = a.substr(0, a.length() - b);
 }
+std::string operator-(std::string a, const char b) {
+	return a.erase(a.find_last_of(b), 1);
+}
+void operator-=(std::string& a, const char b) {
+	a.erase(a.find_last_of(b), 1);
+}
+std::string operator-(std::string a, const std::string& b) {
+	return a.erase(a.rfind(b), b.length());
+}
+void operator-=(std::string& a, const std::string& b) {
+	a.erase(a.rfind(b), b.length());
+}
+std::string operator-(std::string a, const char* b) {
+	for (int i = 0; b[i] != '\0'; i++) for (int j = a.length() - 1; j > -1; --j) {
+		if (a[j] == b[i]) {
+			a.erase(j, 1);
+			break;
+		}
+	}
+	return a;
+}
+void operator-=(std::string& a, const char* b) {
+	for (int i = 0; b[i] != '\0'; i++) for (int j = a.length() - 1; j > -1; --j) {
+		if (a[j] == b[i]) {
+			a.erase(j, 1);
+			break;
+		}
+	}
+}
