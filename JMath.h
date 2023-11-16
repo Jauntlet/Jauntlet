@@ -38,7 +38,7 @@ public:
 };
 
 // copies the string 'b' many times
-std::string operator*(std::string& a, const int& b);
+std::string operator*(std::string a, const int& b);
 void operator*=(std::string& a, const int& b);
 // subtract 'b' from the length of the string
 std::string operator-(std::string& a, const int& b);

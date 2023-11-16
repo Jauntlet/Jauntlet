@@ -62,22 +62,22 @@ std::string JMath::reverse(const std::string& string) {
 	return output;
 }
 
-std::string operator*(std::string& a, const int& b) {
+std::string operator*(std::string a, const int& b) {
 	if (b == 0) return "";
-
-	std::string c = a;
-	if (b < 0) {
-		c = JMath::reverse(c);
+	else if (b < 0) {
+		a = JMath::reverse(a);
+		std::string c = a;
 		for (int i = b; i < -1; i++) {
-			c += JMath::reverse(a);
+			a += c;
 		}
-		return c;
+		return a;
 	}
+	std::string c = a;
 
 	for (int i = b; i > 1; i--) {
-		c += a;
+		a += c;
 	}
-	return c;
+	return a;
 }
 void operator*=(std::string& a, const int& b) {
 	if (b == 0) {
