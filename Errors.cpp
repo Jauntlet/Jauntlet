@@ -17,7 +17,15 @@ std::vector<std::string> errors;
 
 namespace Jauntlet {
 	void fatalError(std::string errorString) {
-#if defined(__unix__)
+#ifdef _WIN32
+	// test for if we are running with a terminal
+	if (GetFileType(GetStdHandle(STD_INPUT_HANDLE)) == FILE_TYPE_CHAR && GetFileType(GetStdHandle(STD_OUTPUT_HANDLE)) == FILE_TYPE_CHAR) {
+		std::cout << errorString << std::endl;
+		std::cout << "Press ENTER to quit...";
+		int tmp;
+		std::cin >> tmp;
+	}
+#elif defined(__unix__)
 	// test for if we are running with a terminal
 	if (isatty(fileno(stdin)) && isatty(fileno(stdout))) {
 		std::cout << errorString << std::endl;
@@ -36,7 +44,12 @@ namespace Jauntlet {
 	}
 
 	void error(std::string errorString) {
-#if defined(__unix__)
+#ifdef _WIN32
+	// test for if we are running with a terminal
+	if (GetFileType(GetStdHandle(STD_INPUT_HANDLE)) == FILE_TYPE_CHAR && GetFileType(GetStdHandle(STD_OUTPUT_HANDLE)) == FILE_TYPE_CHAR) {
+		std::cout << errorString << std::endl;
+	}
+#elif defined(__unix__)
 	// test for if we are running with a terminal
 	if (isatty(fileno(stdin)) && isatty(fileno(stdout))) {
 		std::cout << errorString << std::endl;
