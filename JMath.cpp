@@ -55,11 +55,11 @@ std::vector<std::string> JMath::Split(std::string string,const char& delimiter) 
 }
 
 std::string JMath::reverse(const std::string& string) {
-	std::string output = "";
-	for (int i = string.length() -1; i >= 0; i--) {
-		output += string[i];
-	}
-	return output;
+#if _WIN32
+	return _strrev((char*)string.c_str());
+#elif
+	return strrev((char*)string.c_str());
+#endif
 }
 
 std::string operator*(std::string& a, const int& b) {

@@ -4,6 +4,7 @@
 #pragma once
 #include <cmath>
 #include <cstddef>
+#include <cstring>
 #include <glm/glm.hpp>
 #include <string>
 #include <SDL2/SDL_stdinc.h>
