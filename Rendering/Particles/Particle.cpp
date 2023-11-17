@@ -1,12 +1,6 @@
 #include "Particle.h"
-#include "Emission.h"
-#include "../../Time.h"
 
 #include "../ResourceManager.h"
-#include "Properties/ParticleGrow.h"
-#include "Properties/ParticleProperty.h"
-
-#include <iostream>
 
 using namespace Jauntlet;
 

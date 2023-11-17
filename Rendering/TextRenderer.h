@@ -15,7 +15,6 @@
 
 #include "../Rendering/Cameras/Camera2D.h"
 #include "SpriteBatch.h"
-#include "GLSLProgram.h"
 
 namespace Jauntlet {
 #define FIRST_PRINTABLE_CHAR (char)32

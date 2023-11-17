@@ -2,11 +2,7 @@
  * Main Contributer(s): Jack Kennedy
  */
 
-#include "../SpriteBatch.h"
-#include "Properties/ParticleProperty.h"
 #include "Properties/ParticleGrow.h"
-
-#include "Emission.h"
 
 #include <string>
 #include <vector>

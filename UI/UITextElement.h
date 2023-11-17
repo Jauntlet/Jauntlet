@@ -3,10 +3,6 @@
  */
 
 #pragma once
-
-#include <glm/glm.hpp>
-#include <string>
-
 #include "UIElement.h"
 #include "../Rendering/TextRenderer.h"
 

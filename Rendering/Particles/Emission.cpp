@@ -1,7 +1,5 @@
 #include "Emission.h"
 
-#include "../../Time.h"
-
 using namespace Jauntlet;
 
 Emission::Emission() {

@@ -7,7 +7,6 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "UIElement.h"
 #include "UIBatch.h"
 
 namespace Jauntlet {

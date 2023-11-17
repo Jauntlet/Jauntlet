@@ -1,4 +1,3 @@
-#include "../Rendering/GLSLProgram.h"
 #include "UIBatch.h"
 
 using namespace Jauntlet;

@@ -1,7 +1,3 @@
-#include <string>
-#include <glm/fwd.hpp>
-
-#include <SDL2/SDL_mouse.h>
 #include "UISpriteElement.h"
 
 using namespace Jauntlet;

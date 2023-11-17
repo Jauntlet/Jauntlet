@@ -1,4 +1,3 @@
-#include <string>
 #include "../Errors.h"
 #include "UIElement.h"
 

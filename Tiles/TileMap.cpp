@@ -1,4 +1,3 @@
-#include "../Collision/Collision2D.h"
 #include "../Errors.h"
 #include "../JMath.h"
 #include <algorithm>

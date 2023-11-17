@@ -3,13 +3,9 @@
  */
 
 #pragma once
-
 #include <glm/glm.hpp>
 #include <vector>
-
 #include "UIElement.h"
-#include "../Rendering/Cameras/Camera2D.h"
-
 
 namespace Jauntlet {
 	class GLSLProgram;

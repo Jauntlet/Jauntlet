@@ -6,6 +6,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "../GLSLProgram.h"
+#include "../../Time.h"
 
 namespace Jauntlet {
 // Camera with a 2D perspective

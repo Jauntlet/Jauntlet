@@ -2,9 +2,7 @@
 
 #include "Camera2D.h"
 #include "../../Errors.h"
-#include "../../Time.h"
 #include "glm/fwd.hpp"
-#include "../GLSLProgram.h"
 
 using namespace Jauntlet;
 

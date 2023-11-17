@@ -3,7 +3,7 @@
  */
 #pragma once
 
-#include "GLTexture.h"
+#include "ResourceManager.h"
 #include <string>
 #include <SDL2/SDL.h>
 
