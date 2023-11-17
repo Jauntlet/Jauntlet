@@ -11,6 +11,11 @@ GLSLProgram* GLSLProgram::currentProgram = nullptr;
 GLSLProgram::GLSLProgram() {
 	// Empty
 }
+GLSLProgram::~GLSLProgram() {
+	if (GLSLProgram::currentProgram == this) {
+		unuse();
+	}
+}
 
 void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {
 
@@ -38,9 +43,9 @@ void GLSLProgram::linkShaders() {
 	glLinkProgram(_programID);
 
 	// Error checking 
-	GLint isLinked = 0;
-	glGetProgramiv(_programID, GL_LINK_STATUS, (int*)&isLinked);
-	if (isLinked == GL_FALSE) {
+	GLint testLinked = 0;
+	glGetProgramiv(_programID, GL_LINK_STATUS, (int*)&testLinked);
+	if (testLinked == GL_FALSE) {
 		GLint maxLength = 0;
 		glGetProgramiv(_programID, GL_INFO_LOG_LENGTH, &maxLength);
 

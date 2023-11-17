@@ -13,7 +13,7 @@ class GLSLProgram
 {
 public:
 	GLSLProgram();
-
+	~GLSLProgram();
 	// creates both a vertex and fragment shader.
 	void compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath);
 	// links the two shaders to the program
