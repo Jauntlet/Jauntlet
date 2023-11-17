@@ -4,24 +4,20 @@
 
 using namespace Jauntlet;
 
-Animation::Animation() {
-	_spriteSize = 0.0f;
-}
-
 Animation::Animation(int frames) {
 	_spriteSize = 1.0f / frames;
 }
 
-void Animation::play(int start, int end, float frameTime) {
+void Animation::play(int start, int end, float frameTime, bool loop) {
 	_elapsedTime = 0.0f;
 	_start = start;
 	_end = end;
-	_frameTime = frameTime;
+	// absolute value so that if negative is input we don't crash the game
+	_frameTime = std::abs(frameTime);
 	_playing = true;
+	_loop = loop;
 
-	if (_frame == -1) {
-		_frame = start;
-	}
+	_frame = start;
 }
 
 void Animation::pause() {
@@ -36,22 +32,35 @@ void Animation::stop() {
 	_playing = false;
 	_frame = _start;
 }
+void Animation::stop(int frame) {
+	_playing = false;
+	_frame = frame;
+	_uv = glm::vec4(_spriteSize * _frame, 0, _spriteSize, 1);
+}
 
-void Animation::update() {
+bool Animation::update() {
 	if (!_playing) {
-		return;
+		return false;
 	}
 
-	// since this is run every frame, we'll do this.
 	_elapsedTime += Time::getDeltaTime();
 	
 	while (_elapsedTime > _frameTime) {
-		// increment by one unless above end, if so set to start.
-		_frame = ++_frame > _end ? _start : _frame;
+		++_frame;
+		if (_frame > _end) {
+			if (_loop) {
+				_frame = _start;
+			}
+			else {
+				stop();
+				return false;
+			}
+		}
 		_elapsedTime -= _frameTime;
 	}
 
 	_uv = glm::vec4(_spriteSize * _frame,0,_spriteSize,1);
+	return true;
 }
 
 glm::vec4 Animation::getUV() {
