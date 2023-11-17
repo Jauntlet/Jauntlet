@@ -1,6 +1,8 @@
 #include <SDL2/SDL.h>
 #include "Jauntlet.h"
 #include "Errors.h"
+#include "Filesystems/FileManager.h"
+#include <fstream>
 
 #if _WIN32
 #include <Windows.h>
