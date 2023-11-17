@@ -45,7 +45,7 @@ public:
 	
 	// Collects the correct window size
 	// Needed when the window is resized.
-	glm::vec2 resolveWindowSize();
+	glm::ivec2 resolveWindowSize();
 
 	// get the width of the window
 	// make sure to run resolveWindowSize() on changes of window size (read docs)

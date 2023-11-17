@@ -90,11 +90,11 @@ void Window::toggleFullscreen(bool fullscreen) {
 	SDL_SetWindowFullscreen(_sdlWindow, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 }
 
-glm::vec2 Window::resolveWindowSize() {
+glm::ivec2 Window::resolveWindowSize() {
 	SDL_GetWindowSize(_sdlWindow, &_screenWidth, &_screenHeight);
 	glViewport(0, 0, _screenWidth, _screenHeight);
 
-	return glm::vec2(_screenHeight, _screenWidth);
+	return glm::ivec2(_screenHeight, _screenWidth);
 }
 
 int Window::getWindowWidth() {
