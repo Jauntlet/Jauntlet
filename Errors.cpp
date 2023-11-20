@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -38,7 +37,6 @@ namespace Jauntlet {
 #ifdef NDEBUG
 	terminate(errorString);
 #else
-	SDL_Quit();
 	exit(-1);
 #endif
 	}
@@ -59,7 +57,6 @@ namespace Jauntlet {
 	}
 
 	void terminate() {
-		SDL_Quit();
 		dumpLog();
 
 		try {
@@ -84,7 +81,6 @@ namespace Jauntlet {
 		exit(-1);
 	}
 	void terminate(const std::string& error) {
-		SDL_Quit();
 		dumpLog();
 		int userOutput = tinyfd_messageBox("Jauntlet has Crashed!",
 			"Jauntlet has reached an unhandled exception!\n\nWould you like to send an error report to the Jauntlet Dev team?",

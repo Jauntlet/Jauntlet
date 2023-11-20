@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include "Jauntlet.h"
 #include "Errors.h"
 #include "Filesystems/FileManager.h"
@@ -28,12 +27,6 @@ namespace Jauntlet {
 
 		std::set_terminate(Jauntlet::terminate);
 		#endif
-		
-		// Initialize SDL
-		SDL_Init(SDL_INIT_EVERYTHING);
-		// allows for buffer swapping
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
 		return 0;
 	}
 }

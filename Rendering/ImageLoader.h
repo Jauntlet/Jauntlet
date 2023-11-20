@@ -4,8 +4,8 @@
 #pragma once
 
 #include "ResourceManager.h"
+#include <SDL2/SDL_surface.h>
 #include <string>
-#include <SDL2/SDL.h>
 
 namespace Jauntlet {
 // Load images

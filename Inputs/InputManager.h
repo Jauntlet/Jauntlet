@@ -3,7 +3,7 @@
  */
 #pragma once
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
 #include <glm/glm.hpp>
 #include <unordered_map>
 #include <vector>

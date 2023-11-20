@@ -1,7 +1,6 @@
 #include <string>
 #include <glm/fwd.hpp>
 
-#include <SDL2/SDL_mouse.h>
 #include "UIButtonElement.h"
 
 using namespace Jauntlet;

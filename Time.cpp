@@ -1,6 +1,5 @@
-#include <SDL2/SDL.h>
-
 #include "Time.h"
+#include <SDL2/SDL_timer.h>
 
 using namespace Jauntlet;
 
