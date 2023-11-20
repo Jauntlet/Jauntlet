@@ -2,7 +2,7 @@
 #include "../Errors.h"
 #include "../Filesystems/FileManager.h"
 #include "../Externals/picoPNG.h"
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_log.h>
 
 using namespace Jauntlet;
 
