@@ -66,3 +66,7 @@ bool Animation::update() {
 glm::vec4 Animation::getUV() {
 	return _uv;
 }
+
+int Animation::getCurrentFrame() {
+	return _frame;
+}
