@@ -50,5 +50,8 @@ private:
 	bool _loop = false;
 
 	glm::vec4 _uv = glm::vec4(0,0,1,1);
+
+	// recalculate the uv
+	void recalculateUV(); // DONTDOCUMENT
 };
 }

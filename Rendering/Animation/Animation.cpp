@@ -26,6 +26,7 @@ void Animation::pause() {
 void Animation::pause(int frame) {
 	pause();
 	_frame = frame;
+	recalculateUV();
 }
 
 void Animation::resume() {
@@ -58,7 +59,8 @@ bool Animation::update() {
 		_elapsedTime -= _frameTime;
 	}
 
-	_uv = glm::vec4(_spriteSize * _frame,0,_spriteSize,1);
+	recalculateUV();
+
 	return true;
 }
 
@@ -68,4 +70,8 @@ glm::vec4 Animation::getUV() {
 
 int Animation::getCurrentFrame() {
 	return _frame;
+}
+
+void Animation::recalculateUV() {
+	_uv = glm::vec4(_spriteSize * _frame, 0, _spriteSize, 1);
 }
