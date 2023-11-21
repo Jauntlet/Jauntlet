@@ -11,11 +11,12 @@ namespace Jauntlet {
 	{
 	public:
 		//constructor with _position;
-		UITextElement(TextRenderer* spriteFont, std::string* text, Color* color, glm::vec2* _position);
+		UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, const float scale = 1.0f);
         void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale);
     private:
 		std::string* _text;
         TextRenderer* _textRenderer;
         Color* _color;
+		float _scale;
 	};
 }
