@@ -23,6 +23,10 @@ void Animation::play(int start, int end, float frameTime, bool loop) {
 void Animation::pause() {
 	_playing = false;
 }
+void Animation::pause(int frame) {
+	pause();
+	_frame = frame;
+}
 
 void Animation::resume() {
 	_playing = true;
@@ -31,11 +35,6 @@ void Animation::resume() {
 void Animation::stop() {
 	_playing = false;
 	_frame = _start;
-}
-void Animation::stop(int frame) {
-	_playing = false;
-	_frame = frame;
-	_uv = glm::vec4(_spriteSize * _frame, 0, _spriteSize, 1);
 }
 
 bool Animation::update() {

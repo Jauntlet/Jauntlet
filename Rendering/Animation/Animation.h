@@ -24,10 +24,10 @@ public:
 	bool update();
 	// stop the animation.
 	void stop();
-	// stop the animation, jump to a specific frame
-	void stop(int frame);
 	// stops the animation.
 	void pause();
+	// pauses the animation and changes it to the desired frame immediately
+	void pause(int frame);
 	// resumes the animation and continues playing.
 	void resume();
 	// returns the correct UVs for the animation to be applied at runtime.
