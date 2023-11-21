@@ -1,5 +1,5 @@
 /* Purpose: Sets up, stores, and plays back animations through textures and their UVS.
- * Main Contributer(s): Jack Kennedy
+ * Main Contributer(s): Jack Kennedy, Xander Mooney
  */
 
 #pragma once
