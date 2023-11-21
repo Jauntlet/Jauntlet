@@ -12,7 +12,7 @@ namespace Jauntlet {
 class Animation
 {
 public:
-	Animation(int frames);
+	Animation(unsigned int frames);
 	// Play an animation.
 	// start: starting index of animation
 	// end: ending index of animation

@@ -4,7 +4,7 @@
 
 using namespace Jauntlet;
 
-Animation::Animation(int frames) {
+Animation::Animation(unsigned int frames) {
 	_spriteSize = 1.0f / frames;
 }
 
