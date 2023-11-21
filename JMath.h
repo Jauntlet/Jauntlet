@@ -6,7 +6,6 @@
 #include <cstddef>
 #include <glm/glm.hpp>
 #include <string>
-#include <SDL2/SDL_stdinc.h>
 #include <vector>
 
 #ifndef Rad2Deg

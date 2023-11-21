@@ -3,9 +3,7 @@
  */
 #pragma once
 
-#include <SDL2/SDL.h>
 #include <vector>
-
 #include "InputManager.h"
 
 namespace Jauntlet {

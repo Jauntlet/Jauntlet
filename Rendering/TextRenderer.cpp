@@ -1,4 +1,3 @@
-#include <SDL2/SDL.h>
 #include <cstdio>
 #include <freetype/freetype.h>
 #include "../Errors.h"

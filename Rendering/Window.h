@@ -3,9 +3,8 @@
  */
 #pragma once
 #include "Vertex.h"
-
+#include <SDL2/SDL_video.h>
 #include <GL/glew.h>
-#include <SDL2/SDL.h>
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
