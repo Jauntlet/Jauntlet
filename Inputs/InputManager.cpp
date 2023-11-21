@@ -78,7 +78,7 @@ void InputManager::processInput() {
 						_controllers[_event.jaxis.which].triggers.y = controllerAxis;
 						break;
 					default:
-						error("WARNING: undefined stick axis detected " + _event.jaxis.axis);
+						error("WARNING: undefined stick axis detected " + std::to_string(_event.jaxis.axis));
 						continue;
 				}
 				break;
