@@ -2,7 +2,6 @@
 #include "../Errors.h"
 #include "../Filesystems/FileManager.h"
 #include "../Externals/picoPNG.h"
-#include <SDL2/SDL_log.h>
 
 using namespace Jauntlet;
 
@@ -66,7 +65,8 @@ SDL_Surface* ImageLoader::loadPNGtoSurface(std::string filePath) {
 	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)_out.data(), width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 
 	if (surface == nullptr) {
-		SDL_Log("Failed to create icon surface: %s", SDL_GetError());
+		error("Failed to create icon Surfae!");
+		fatalError(SDL_GetError());
 	}
 
 	return surface;
