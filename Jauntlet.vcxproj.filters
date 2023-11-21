@@ -133,6 +133,9 @@
     <ClCompile Include="Filesystems\FileDialogs.cpp">
       <Filter>Filesystems</Filter>
     </ClCompile>
+    <ClCompile Include="UI\UISpriteAnimatedElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -237,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="Filesystems\FileDialogs.h">
       <Filter>Filesystems</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UISpriteAnimatedElement.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
