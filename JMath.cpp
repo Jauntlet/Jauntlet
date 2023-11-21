@@ -81,7 +81,7 @@ std::string operator*(std::string a, const int& b) {
 }
 void operator*=(std::string& a, const int& b) {
 	if (b == 0) {
-		a == "";
+		a = "";
 		return;
 	}
 	else if (b < 0) {
