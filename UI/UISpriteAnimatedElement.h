@@ -13,7 +13,6 @@ namespace Jauntlet {
 		UISpriteAnimatedElement();
 		UISpriteAnimatedElement(GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType, Animation* animation);
         void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
-		void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
     protected:
 		std::string* _text;
         Color* _color;
