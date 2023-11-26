@@ -21,15 +21,15 @@ namespace Jauntlet
 		//returns a vector2  regarding a direction (0,0 would be dead center) with a magnitude of 1.
 		glm::vec2 GetNormal();
 
-		float GetOverlap();
+		float GetOverlap() const;
 
-		bool getCollision(CircleCollider2D* parent, CircleCollider2D* other);
-		bool getCollision(CircleCollider2D* parent, BoxCollider2D* other);
-		bool getCollision(BoxCollider2D* parent, CircleCollider2D* other);
-		bool getCollision(BoxCollider2D* parent, BoxCollider2D* other);
+		bool calcCollision(CircleCollider2D* parent, CircleCollider2D* other);
+		bool calcCollision(CircleCollider2D* parent, BoxCollider2D* other);
+		bool calcCollision(BoxCollider2D* parent, CircleCollider2D* other);
+		bool calcCollision(BoxCollider2D* parent, BoxCollider2D* other);
 
-		bool getCollision(CircleCollider2D* parent, glm::vec2 other); //Circle-Position collision
-		bool getCollision(BoxCollider2D* parent, glm::vec2 other); //Box-Position collision
+		bool calcCollision(CircleCollider2D* parent, glm::vec2 other); //Circle-Position collision
+		bool calcCollision(BoxCollider2D* parent, glm::vec2 other); //Box-Position collision
 	private:
 		//still not functional
 		//std::vector<std::vector<float>> _collisionPoints; 
