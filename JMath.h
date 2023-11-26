@@ -51,3 +51,7 @@ void operator-=(std::string& a, const std::string& b);
 // subtract the right most instance of each char in 'b'
 std::string operator-(std::string a, const char* b);
 void operator-=(std::string& a, const char* b);
+
+// applies mod to both elements in a vector
+glm::ivec2 operator%(const glm::ivec2& a, const int& b);
+void operator%=(glm::ivec2& a, const int& b);
