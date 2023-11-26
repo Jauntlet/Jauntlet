@@ -40,9 +40,7 @@ public:
 	// Used by TileMaps to correctly calculate the tile to display
 	TileSet::Tileinfo tileSetToTile(unsigned int layout);
 	// Get the ID for the tileset, meant to differientiate different TileSets.
-	const int getID() {
-		return _id;
-	}
+	const int getID() const { return _id; }
 	unsigned int connectionRules = 0;
 private:
 

@@ -48,13 +48,13 @@ public:
 
 	// get the width of the window
 	// make sure to run resolveWindowSize() on changes of window size (read docs)
-	int getWindowWidth();
+	int getWindowWidth() const;
 	// get the height of the window
 	// make sure to run resolveWindowSize() on changes of window size (read docs)
-	int getWindowHeight();
+	int getWindowHeight() const;
 	// get the width and height of the window.
 	// make sure to run resolveWindowSize() on changes of window size (read docs)
-	glm::ivec2 getWindowSize();
+	glm::ivec2 getWindowSize() const;
 
 private:
 	SDL_Window* _sdlWindow;

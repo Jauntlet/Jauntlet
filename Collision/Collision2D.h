@@ -19,7 +19,7 @@ namespace Jauntlet
 		//std::vector<glm::vec2> GetCollisionPoints();
 
 		//returns a vector2  regarding a direction (0,0 would be dead center) with a magnitude of 1.
-		glm::vec2 GetNormal();
+		glm::vec2 GetNormal() const;
 
 		float GetOverlap() const;
 

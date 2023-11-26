@@ -23,11 +23,11 @@ public:
 	void setActiveCamera();
 	
 	// converts from a position in world space to a position on the screen
-	glm::vec2 convertWorldToScreen(glm::vec2 worldCoords);
+	glm::vec2 convertWorldToScreen(glm::vec2 worldCoords) const;
 	// converts from a position on the screen to a position in world space
-	glm::vec2 convertScreenToWorld(glm::vec2 screenCoords);
+	glm::vec2 convertScreenToWorld(glm::vec2 screenCoords) const;
 	// converts from a position in world space to a position on the screen
-	glm::vec2 convertScreenToWorldDisregardPosition(glm::vec2 screenCoords);
+	glm::vec2 convertScreenToWorldDisregardPosition(glm::vec2 screenCoords) const;
 	
 	// update the cameras size. This is meant for if the size of the Window is updated.
 	void updateCameraSize(int screenWidth, int screenHeight);
@@ -35,9 +35,9 @@ public:
 	void updateCameraSize(glm::ivec2 screenSize);
 
 	// Test to see if bounding box is within the cameras dimensions; good for culling
-	bool isBoxInView(const glm::vec4& destinationRect);
+	bool isBoxInView(const glm::vec4& destinationRect) const;
 	// Test to see if bounding box is within the cameras dimensions; good for culling
-	bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions);
+	bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) const;
 	
 	// defines a new position for the camera to be.
 	void setPosition(const glm::vec2& newPosition);

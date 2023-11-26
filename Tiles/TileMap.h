@@ -58,26 +58,26 @@ public:
 	void draw();
 
 	// returns adjacent tiles to position with collision. This is assuming the position is the top-left position on a square.
-	std::vector<BoxCollider2D> collectCollidingTiles(glm::vec2 position);
+	std::vector<BoxCollider2D> collectCollidingTiles(glm::vec2 position) const;
 	// returns all tiles with collision within the bounds of the box collider
 	// This method has not been fully tested and therefore may have errors -xm
-	std::vector<BoxCollider2D> collectCollidingTiles(BoxCollider2D collider);
+	std::vector<BoxCollider2D> collectCollidingTiles(BoxCollider2D collider) const;
 	// TODO: std::vector<BoxCollider2D> collectCollidingTiles(glm::vec4 boundingBox);
 	
 	// returns true if designated tile position overlaps with provided bounding box.
-	bool doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox);
+	bool doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox) const;
 
 	// returns true if the tile position has a collision.
-	bool tileHasCollision(glm::ivec2 tilePosition);
+	bool tileHasCollision(glm::ivec2 tilePosition) const;
 	// returns true if the tile is empty
-	bool isTileEmpty(glm::ivec2 tilePosition);
+	bool isTileEmpty(glm::ivec2 tilePosition) const;
 
 	// Converts a position to be relative to the tileset: used mostly for checking tiles.
-	glm::ivec2 WorldPosToTilePos(glm::vec2 position);
+	glm::ivec2 WorldPosToTilePos(glm::vec2 position) const;
 	// Converts a position relative to the tileset to a position relative to the world.
-	glm::vec2 TilePosToWorldPos(glm::ivec2 position);
+	glm::vec2 TilePosToWorldPos(glm::ivec2 position) const;
 	// Rounds the world position to the nearest tile
-	glm::vec2 RoundWorldPos(glm::vec2 position);
+	glm::vec2 RoundWorldPos(glm::vec2 position) const;
 
 	// Updates what a tile is based on ID. 
 	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
@@ -93,14 +93,14 @@ public:
 	void changeDrawColor(Jauntlet::Color color);
 
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
-	bool isValidTilePos(glm::ivec2 position);
+	bool isValidTilePos(glm::ivec2 position) const;
 	// returns ID of tile position.
-	unsigned int getTileID(glm::ivec2 tilePosition);
+	unsigned int getTileID(glm::ivec2 tilePosition) const;
 
 	// selects a random tile on the tilemap
-	glm::ivec2 selectRandomTile();
+	glm::ivec2 selectRandomTile() const;
 	// selects a random tile on the tilmap that matches the provided tile ID
-	glm::ivec2 selectRandomTile(unsigned int tileID);
+	glm::ivec2 selectRandomTile(unsigned int tileID) const;
 private:
 	// Updates what tiles are drawn to screen. Run this as little as possible.
 	void updateTileMap();

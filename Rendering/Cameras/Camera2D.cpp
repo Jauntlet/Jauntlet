@@ -59,7 +59,7 @@ void Camera2D::setActiveCamera() {
 	}
 }
 
-glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
+glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) const {
 	// make 0 the center of the screen and invert the Y axis
 	worldCoords += glm::vec2(_screenWidth * 0.5f, _screenHeight * 0.5f);
 	// scale the coords
@@ -69,7 +69,7 @@ glm::vec2 Camera2D::convertWorldToScreen(glm::vec2 worldCoords) {
 
 	return worldCoords;
 }
-glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
+glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) const {
 	// make 0 the center of the screen and invert the Y axis
 	screenCoords -= glm::vec2(_screenWidth * 0.5f, _screenHeight * 0.5f);
 	// Translate based on camera position
@@ -82,7 +82,7 @@ glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) {
 	return screenCoords;
 }
 
-glm::vec2 Camera2D::convertScreenToWorldDisregardPosition(glm::vec2 screenCoords) {
+glm::vec2 Camera2D::convertScreenToWorldDisregardPosition(glm::vec2 screenCoords) const {
 	// make 0 the center of the screen and invert the Y axis
 	screenCoords -= glm::vec2(_screenWidth * 0.5f, _screenHeight * 0.5f);
 	// flip the y coordinates
@@ -112,7 +112,7 @@ void Camera2D::updateCameraSize(glm::ivec2 screenSize) {
 	_needsMatrixUpdate = true;
 }
 
-bool Camera2D::isBoxInView(const glm::vec4& destinationRect) {
+bool Camera2D::isBoxInView(const glm::vec4& destinationRect) const {
 	const float MIN_DISTANCE_X = destinationRect.z * 0.5f + _screenWidth * _scale * 0.5f;
 	const float MIN_DISTANCE_Y = destinationRect.w * 0.5f + _screenHeight * _scale * 0.5f;
 
@@ -128,7 +128,7 @@ bool Camera2D::isBoxInView(const glm::vec4& destinationRect) {
 	}
 	return false;
 }
-bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) {
+bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions) const {
 	const float MIN_DISTANCE_X = dimensions.x * 0.5f + _screenWidth * _scale * 0.5f;
 	const float MIN_DISTANCE_Y = dimensions.y * 0.5f + _screenHeight * _scale * 0.5f;
 

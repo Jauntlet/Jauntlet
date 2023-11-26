@@ -17,7 +17,7 @@ void CircleCollider2D::SetRadius(float value) {
 	_radius = value;
 }
 
-float CircleCollider2D::GetRadius() {
+float CircleCollider2D::GetRadius() const {
 	return _radius;
 }
 
@@ -31,15 +31,15 @@ BoxCollider2D::BoxCollider2D(glm::vec2 size, glm::vec2 pos, glm::vec2 offset) : 
 	position = pos;
 }
 
-float BoxCollider2D::GetWidth() {
+float BoxCollider2D::GetWidth() const {
 	return _size.x;
 }
 
-float BoxCollider2D::GetHeight() {
+float BoxCollider2D::GetHeight() const {
 	return _size.y;
 }
 
-glm::vec2 BoxCollider2D::GetSize() {
+glm::vec2 BoxCollider2D::GetSize() const {
 	return _size;
 }
 

@@ -26,10 +26,10 @@ public:
 	void addAttribute(const std::string& attributeName);
 
 	// returns the GLint of the location of a uniform
-	GLint getUniformLocation(const std::string& uniformName);
+	GLint getUniformLocation(const std::string& uniformName) const;
 
 	// returns the id of the program
-	GLuint getId() { return _programID; };
+	GLuint getId() const { return _programID; };
 
 	// enable the use of the program
 	void use();

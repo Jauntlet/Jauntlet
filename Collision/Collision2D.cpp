@@ -15,11 +15,11 @@ Collision2D::Collision2D() {
 //}
 
 //returns a vector2 regarding a direction (0,0 would be dead center) with a magnitude of 1.
-glm::vec2 Collision2D::GetNormal() {
+glm::vec2 Collision2D::GetNormal() const {
 	return _normal;
 }
 
-float Collision2D::GetOverlap() {
+float Collision2D::GetOverlap() const {
 	return _overlap;
 }
 

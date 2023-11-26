@@ -22,7 +22,7 @@ namespace Jauntlet
 		CircleCollider2D(float radius, float x, float y, glm::vec2 offset = glm::vec2(0, 0));
 		CircleCollider2D(float radius, glm::vec2 pos, glm::vec2 offset = glm::vec2(0, 0));
 		
-		float GetRadius();
+		float GetRadius() const;
 
 		//allows the changing of the radius
 		void SetRadius(float value);
@@ -38,9 +38,9 @@ namespace Jauntlet
 		BoxCollider2D(float width, float height, float x, float y, float offsetX = 0, float offsetY = 0);
 		BoxCollider2D(glm::vec2 size, glm::vec2 pos, glm::vec2 offset = glm::vec2(0, 0));
 
-		float GetWidth();
-		float GetHeight();
-		glm::vec2 GetSize();
+		float GetWidth() const;
+		float GetHeight() const;
+		glm::vec2 GetSize() const;
 
 		void SetWidth(float width);
 		void SetHeight(float height);

@@ -115,7 +115,7 @@ void TileMap::draw() {
 	_spriteBatch.render();
 }
 
-std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
+std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) const {
 	std::vector<BoxCollider2D> colliders;
 	std::vector<std::pair<float, glm::vec2>> colliderMap;
 
@@ -156,7 +156,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(glm::vec2 position) {
 
 	return colliders;
 }
-std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider) {
+std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider) const {
 	glm::ivec2 lowerBound = collider.position - _offset;
 	lowerBound /= _tileSize;
 
@@ -186,7 +186,7 @@ std::vector<BoxCollider2D> TileMap::collectCollidingTiles(BoxCollider2D collider
 	return colliders;
 }
 
-bool TileMap::doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox) {
+bool TileMap::doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox) const {
 	glm::vec2 newTilePos = TilePosToWorldPos(tilePos);
 
 	return (boundingBox.x < newTilePos.x + _tileSize &&
@@ -195,7 +195,7 @@ bool TileMap::doesTileOverlap(glm::ivec2 tilePos, glm::vec4 boundingBox) {
 		boundingBox.y + boundingBox.w > newTilePos.y);
 }
 
-bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
+bool TileMap::tileHasCollision(glm::ivec2 tilePosition) const {
 	if (!isValidTilePos(tilePosition)) {
 		return false;
 	}
@@ -204,7 +204,7 @@ bool TileMap::tileHasCollision(glm::ivec2 tilePosition) {
 
 	return !(iterator == _tiles.end() || iterator->second.tileCollision == TileCollision::NONE);
 }
-bool TileMap::isTileEmpty(glm::ivec2 tilePosition) {
+bool TileMap::isTileEmpty(glm::ivec2 tilePosition) const {
 	if (!isValidTilePos(tilePosition)) {
 		return true;
 	}
@@ -214,14 +214,14 @@ bool TileMap::isTileEmpty(glm::ivec2 tilePosition) {
 	return iterator == _tiles.end();
 }
 
-glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) {
+glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) const {
 	// remember that offset is in worldspace aswell.
 	return glm::vec2((position.x - _offset.x) / _tileSize, (-position.y + _offset.y) / _tileSize);
 }
-glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) {
+glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) const  {
 	return glm::vec2((position.x - _offset.x) * _tileSize, (-position.y + _offset.y) * _tileSize);
 }
-glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) {
+glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) const {
 	return glm::vec2(((int)(position.x / _tileSize) - (position.x < 0 ? 1 : 0)) * _tileSize + (int)_offset.x % _tileSize, ((int)(position.y / _tileSize) + (position.y < 0 ? -1 : 0)) * _tileSize - (int)_offset.y % _tileSize);
 }
 
@@ -257,17 +257,17 @@ void TileMap::changeDrawColor(Jauntlet::Color color) {
 	_needsTileUpdate = true;
 }
 
-bool TileMap::isValidTilePos(glm::ivec2 position) {
+bool TileMap::isValidTilePos(glm::ivec2 position) const {
 	return !(position.y < 0 || position.y >= _level.size() || position.x >= _level[position.y].size() || position.x < 0);
 }
-unsigned int TileMap::getTileID(glm::ivec2 tilePosition) {
+unsigned int TileMap::getTileID(glm::ivec2 tilePosition) const {
 	if (!isValidTilePos(tilePosition)) {
 		return 0;
 	}
 	return _level[tilePosition.y][tilePosition.x];
 }
 
-glm::ivec2 TileMap::selectRandomTile() {
+glm::ivec2 TileMap::selectRandomTile() const {
 	int y = 0;
 	// this code is put in a do-while loop incase of a row being selected with no tiles inside of it.
 	// this does mean the potential for an infinite loop if the ENTIRE tilemap is empty, but I find it unlikely.
@@ -277,7 +277,7 @@ glm::ivec2 TileMap::selectRandomTile() {
 	} while (_level[y].empty());
 	return glm::ivec2(rand() % _level[y].size(), y);
 }
-glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) {
+glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) const {
 	std::vector<glm::ivec2> options;
 	// loop through the tilemap to find all tiles matching the ID
 	for (int y = 0; y < _level.size(); ++y) {

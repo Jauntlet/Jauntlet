@@ -97,12 +97,12 @@ glm::ivec2 Window::resolveWindowSize() {
 	return glm::ivec2(_screenHeight, _screenWidth);
 }
 
-int Window::getWindowWidth() {
+int Window::getWindowWidth() const {
 	return _screenWidth; 
 }
-int Window::getWindowHeight() {
+int Window::getWindowHeight() const {
 	return _screenHeight; 
 }
-glm::ivec2 Window::getWindowSize() {
+glm::ivec2 Window::getWindowSize() const {
 	return glm::ivec2(_screenWidth, _screenHeight); 
 }

@@ -64,11 +64,11 @@ bool Animation::update() {
 	return true;
 }
 
-glm::vec4 Animation::getUV() {
+glm::vec4 Animation::getUV() const {
 	return _uv;
 }
 
-int Animation::getCurrentFrame() {
+int Animation::getCurrentFrame() const {
 	return _frame;
 }
 

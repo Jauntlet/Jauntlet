@@ -31,9 +31,9 @@ public:
 	// resumes the animation and continues playing.
 	void resume();
 	// returns the correct UVs for the animation to be applied at runtime.
-	glm::vec4 getUV();
+	glm::vec4 getUV() const;
 	// returns the current frame the animation is on.
-	int getCurrentFrame();
+	int getCurrentFrame() const;
 private:
 	float _elapsedTime = 0;
 	
