@@ -22,8 +22,6 @@ namespace Jauntlet {
 		void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
 		void click() { _onClick(); };
     protected:
-		std::string* _text;
-        Color* _color;
 		std::function<void()> _onClick;
 		glm::vec2 _size;
 		glm::vec2 _resolvedSize;
