@@ -1,4 +1,5 @@
 #include "JMath.h"
+#include <iomanip>
 
 float JMath::Distance(const glm::vec2& a,const glm::vec2& b) {
 	return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
@@ -133,4 +134,29 @@ void operator-=(std::string& a, const char* b) {
 			break;
 		}
 	}
+}
+
+std::ostream& operator<<(std::ostream& a, const glm::vec2& b) {
+	a << b.x << ", " << b.y;
+	return a;
+}
+std::ostream& operator<<(std::ostream& a, const glm::ivec2& b) {
+	a << b.x << ", " << b.y;
+	return a;
+}
+std::ostream& operator<<(std::ostream& a, const glm::vec3& b) {
+	a << b.x << ", " << b.y << ", " << b.z;
+	return a;
+}
+std::ostream& operator<<(std::ostream& a, const glm::ivec3& b) {
+	a << b.x << ", " << b.y << ", " << b.z;
+	return a;
+}
+std::ostream& operator<<(std::ostream& a, const glm::vec4& b) {
+	a << b.x << ", " << b.y << ", " << b.z << b.w;
+	return a;
+}
+std::ostream& operator<<(std::ostream& a, const glm::ivec4& b) {
+	a << b.x << ", " << b.y << ", " << b.z << b.w;
+	return a;
 }

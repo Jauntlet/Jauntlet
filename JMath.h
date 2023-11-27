@@ -51,3 +51,11 @@ void operator-=(std::string& a, const std::string& b);
 // subtract the right most instance of each char in 'b'
 std::string operator-(std::string a, const char* b);
 void operator-=(std::string& a, const char* b);
+
+// allows printing vectors easily
+std::ostream& operator<<(std::ostream& a, const glm::vec2& b);
+std::ostream& operator<<(std::ostream& a, const glm::ivec2& b);
+std::ostream& operator<<(std::ostream& a, const glm::vec3& b);
+std::ostream& operator<<(std::ostream& a, const glm::ivec3& b);
+std::ostream& operator<<(std::ostream& a, const glm::vec4& b);
+std::ostream& operator<<(std::ostream& a, const glm::ivec4& b);
