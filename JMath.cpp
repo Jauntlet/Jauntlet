@@ -134,10 +134,3 @@ void operator-=(std::string& a, const char* b) {
 		}
 	}
 }
-
-glm::ivec2 operator%(const glm::ivec2& a, const int& b) {
-	return glm::ivec2(a.x % b, a.y % b);
-}
-void operator%=(glm::ivec2& a, const int& b) {
-	a = glm::ivec2(a.x % b, a.y % b);
-}
