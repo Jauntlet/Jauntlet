@@ -29,6 +29,12 @@ public:
     // draw the emissions
     void draw(); // UNDOCUMENTED
 
+    // resume emission emitting
+    void resumeEmitting();
+
+    // stop emission emitting
+    void stopEmitting();
+
     // update emissions (positions, size, etc)
     void update();
 
@@ -50,6 +56,8 @@ private:
     float _timer = 0;
 
     float _emissionSpeed;
+
+    bool _doEmit = true;
 
     void emit();
 };

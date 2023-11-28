@@ -37,7 +37,9 @@ void Particle::update() {
     _timer += Time::getDeltaTime();
     
     while (_emissionsCount < _maxEmissions && _timer > _emissionSpeed) {
-        emit();
+        if (_doEmit) {
+            emit();
+        }
         _timer -= _emissionSpeed;
     }
 
@@ -56,8 +58,9 @@ void Particle::update() {
 }
 
 void Particle::emit() {
-    // there isnt really a care where we want to add an emission and not increment this counter
+    // there isnt really a case where we want to add an emission and not increment this counter
     ++_emissionsCount;
+
     Emission emission = Emission();
     emission.position = _position;
     emissions.push_back(emission);
@@ -65,4 +68,12 @@ void Particle::emit() {
 
 void Particle::addProperty(ParticleProperty& property) {
     _properties.push_back(&property);
+}
+
+void Particle::resumeEmitting() {
+    _doEmit = true;
+}
+
+void Particle::stopEmitting() {
+    _doEmit = false;
 }
