@@ -37,7 +37,11 @@ void Animation::stop() {
 	_playing = false;
 	_frame = _start;
 }
-
+void Animation::stop(int frame) {
+	_playing = false;
+	_frame = frame;
+	recalculateUV();
+}
 bool Animation::update() {
 	if (!_playing) {
 		return false;
@@ -57,9 +61,9 @@ bool Animation::update() {
 			}
 		}
 		_elapsedTime -= _frameTime;
+		recalculateUV();
 	}
 
-	recalculateUV();
 
 	return true;
 }

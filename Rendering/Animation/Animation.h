@@ -24,9 +24,11 @@ public:
 	bool update();
 	// stop the animation.
 	void stop();
+	// stop the animation and set it to a specific frame.
+	void stop(int frame);
 	// pauses the animation.
 	void pause();
-	// pauses the animation and changes it to the desired frame immediately
+	// pauses the animation and changes it to the desired frame.
 	void pause(int frame);
 	// resumes the animation and continues playing.
 	void resume();
