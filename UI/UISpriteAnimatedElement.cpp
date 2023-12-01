@@ -1,3 +1,4 @@
+#include <iostream>
 #include "UISpriteAnimatedElement.h"
 
 using namespace Jauntlet;
@@ -12,6 +13,41 @@ UISpriteAnimatedElement::UISpriteAnimatedElement(GLuint textureId, glm::vec2* po
     _position = position;
     _size = size;
     _animation = animation;
+}
+
+void UISpriteAnimatedElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
+    switch (_originPin) {
+        case UIElement::ORIGIN_PIN::TOP_LEFT:
+            _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale + _size.y * scale);
+            break;
+        case UIElement::ORIGIN_PIN::TOP:
+            _unresolvedPosition = glm::vec2(_position->x * scale - ((_size.x * scale) / 2), _position->y * scale + _size.y * scale);
+            break;
+        case UIElement::ORIGIN_PIN::TOP_RIGHT:
+            _unresolvedPosition = glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale  + _size.y * scale);
+            break;
+        case UIElement::ORIGIN_PIN::RIGHT:
+            _unresolvedPosition = glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale + ((_size.y * scale) / 2));
+            break;
+        case UIElement::ORIGIN_PIN::BOTTOM_RIGHT:
+            _unresolvedPosition = glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale);
+            break;
+        case UIElement::ORIGIN_PIN::BOTTOM:
+            _unresolvedPosition = glm::vec2(_position->x * scale - ((_size.x * scale ) / 2), _position->y * scale);
+            break;
+        case UIElement::ORIGIN_PIN::BOTTOM_LEFT:
+            _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale);
+            break;
+        case UIElement::ORIGIN_PIN::LEFT:
+            _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale + ((_size.y * scale) / 2));
+            break;
+        case UIElement::ORIGIN_PIN::CENTER:
+            _unresolvedPosition = glm::vec2(_position->x * scale - ((_size.x * scale) / 2), _position->y * scale + ((_size.y * scale) / 2));
+            break;
+    }
+
+    _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(_unresolvedPosition);
+    _resolvedSize = _size * scale; // we will handle scaling later.
 }
 
 void UISpriteAnimatedElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
