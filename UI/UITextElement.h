@@ -13,6 +13,7 @@ namespace Jauntlet {
 		//constructor with _position;
 		UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, const float scale = 1.0f);
         void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale);
+		void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
     private:
 		std::string* _text;
         TextRenderer* _textRenderer;
