@@ -113,6 +113,43 @@ void TextRenderer::addText(SpriteBatch& externalBatch, std::string text, glm::ve
 	}
 }
 
+glm::vec2 TextRenderer::calculateTextSize(std::string text, glm::vec2 scaling) {
+	// HACK
+	glm::vec2 position = glm::vec2(0); // TODO: FIXME
+
+	float storedX = 0;
+
+	float currentLineMaxY = 0;
+	float maxY = 0;
+	float maxX = 0;
+	for (auto c = text.begin(); c != text.end(); c++) {
+		CharGlyph currentGlyph = Characters[*c];
+
+		if (*c == '\n') {
+			position.y -= _fontHeight * scaling.y;
+			storedX = position.x;
+
+			currentLineMaxY = 0;
+			maxY += currentLineMaxY;
+		}
+
+		float x = storedX;
+		float y = position.y - (_fontHeight * scaling.y);
+
+		currentLineMaxY = y > currentLineMaxY ? y : currentLineMaxY;
+
+		glm::vec4 destRect(x, y, scaling * (glm::vec2)currentGlyph.Bearing);
+
+		storedX += (currentGlyph.Advance >> 6) * scaling.x;
+
+		maxX = storedX > maxX ? storedX : maxX;
+	}
+
+	maxY += currentLineMaxY;
+
+	return glm::vec2(maxX, maxY);
+}
+
 void TextRenderer::Render() {
 	_spriteBatch.endAndRender();
 

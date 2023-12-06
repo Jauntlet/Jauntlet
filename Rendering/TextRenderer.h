@@ -44,6 +44,8 @@ public:
 	// This override is meant for use with an external spritebatch; not for general use.
 	void addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling = glm::vec2(1), float depth = 0, Color color = Color());
 	
+	glm::vec2 calculateTextSize(std::string text, glm::vec2 scaling);
+
 	static GLSLProgram textShader;
 private:
 	int _fontHeight;
