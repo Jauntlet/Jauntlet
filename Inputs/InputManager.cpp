@@ -32,7 +32,6 @@ void InputManager::processInput() {
 	// but doing so creates a "compiler error" where the variable is non-accessible to other case statements.
 	// I disagree fully with this. This is stupid and dumb. -xm
 	float controllerAxis = 0;
-	deltaScroll = 0;
 
 	deltaScroll = 0;
 	
@@ -172,7 +171,7 @@ bool InputManager::windowResized() {
 		_windowResized = false;
 		return true;
 	}
-	return false;
+	else return false;
 }
 
 bool InputManager::quitGameCalled() {
@@ -185,7 +184,7 @@ glm::vec2 InputManager::getMouseCoords() {
 
 glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 	if (controllerID >= _controllers.size()) {
-		error("Warning: Tried to get Axis on non-existent Controller");
+		error("WARNING: Tried to get Axis on non-existent Controller");
 		return glm::vec2(0);
 	}
 	switch (type) {
