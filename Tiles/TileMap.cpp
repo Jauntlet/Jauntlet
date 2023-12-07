@@ -219,7 +219,7 @@ glm::ivec2 TileMap::WorldPosToTilePos(glm::vec2 position) const {
 	return glm::vec2((position.x - _offset.x) / _tileSize, (-position.y + _offset.y) / _tileSize);
 }
 glm::vec2 TileMap::TilePosToWorldPos(glm::ivec2 position) const  {
-	return glm::vec2((position.x - _offset.x) * _tileSize, (-position.y + _offset.y) * _tileSize);
+	return glm::vec2(position.x * _tileSize + _offset.x, -position.y * _tileSize + _offset.y);
 }
 glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) const {
 	return glm::vec2(((int)(position.x / _tileSize) - (position.x < 0 ? 1 : 0)) * _tileSize, ((int)(position.y / _tileSize) + (position.y < 0 ? -1 : 0)) * _tileSize);
