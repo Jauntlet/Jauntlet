@@ -1,6 +1,6 @@
 #include "Window.h"
 #include "../Errors.h"
-#include "Images/ImageLoader.h"
+#include "Textures/ImageLoader.h"
 
 using namespace Jauntlet;
 

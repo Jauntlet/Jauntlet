@@ -10,8 +10,8 @@
 #include <vector>
 
 #include "../Collision/Collider2D.h"
-#include "../Rendering/Images/SpriteBatch.h"
-#include "../Rendering/Images/TextureCache.h"
+#include "../Rendering/Textures/SpriteBatch.h"
+#include "../Rendering/Textures/TextureCache.h"
 #include "TileSet.h"
 
 namespace Jauntlet {

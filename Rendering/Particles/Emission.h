@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "../Images/SpriteBatch.h" // Jauntlet::SpriteBatch
+#include "../Textures/SpriteBatch.h" // Jauntlet::SpriteBatch
 #include "../Cameras/Camera2D.h" // Jauntlet::Camera2DImages/
 
 #pragma once

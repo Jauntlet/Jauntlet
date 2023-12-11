@@ -10,7 +10,7 @@
 
 #include "../Rendering/Cameras/Camera2D.h"
 #include "glm/fwd.hpp"
-#include "../Rendering/Images/SpriteBatch.h"
+#include "../Rendering/Textures/SpriteBatch.h"
 
 namespace Jauntlet {
 	class UIElement
