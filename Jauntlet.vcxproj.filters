@@ -34,6 +34,9 @@
     <Filter Include="Filesystems">
       <UniqueIdentifier>{27f1be88-8946-4dd0-8e0f-d515a2f57a09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering\Textures">
+      <UniqueIdentifier>{26f9b2be-b7c7-4d24-8906-b4e72efdf75f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UITextElement.cpp">
@@ -48,22 +51,10 @@
     <ClCompile Include="Rendering\GLSLProgram.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\ImageLoader.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\LineRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\ResourceManager.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\SpriteBatch.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\TextRenderer.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\TextureCache.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Collision\Collider2D.cpp">
@@ -136,6 +127,18 @@
     <ClCompile Include="UI\UISpriteAnimatedElement.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\Textures\ImageLoader.cpp">
+      <Filter>Rendering\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Textures\ResourceManager.cpp">
+      <Filter>Rendering\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Textures\SpriteBatch.cpp">
+      <Filter>Rendering\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Textures\TextureCache.cpp">
+      <Filter>Rendering\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -150,25 +153,10 @@
     <ClInclude Include="Rendering\GLSLProgram.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\GLTexture.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\ImageLoader.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Rendering\LineRenderer.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\ResourceManager.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\SpriteBatch.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="Rendering\TextRenderer.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\TextureCache.h">
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Vertex.h">
@@ -243,6 +231,21 @@
     </ClInclude>
     <ClInclude Include="UI\UISpriteAnimatedElement.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Textures\GLTexture.h">
+      <Filter>Rendering\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Textures\ImageLoader.h">
+      <Filter>Rendering\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Textures\ResourceManager.h">
+      <Filter>Rendering\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Textures\SpriteBatch.h">
+      <Filter>Rendering\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Textures\TextureCache.h">
+      <Filter>Rendering\Textures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
