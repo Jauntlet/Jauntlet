@@ -1,7 +1,7 @@
 #include "ImageLoader.h"
-#include "../Errors.h"
-#include "../Filesystems/FileManager.h"
-#include "../Externals/picoPNG.h"
+#include "../../Errors.h"
+#include "../../Filesystems/FileManager.h"
+#include "../../Externals/picoPNG.h"
 
 using namespace Jauntlet;
 

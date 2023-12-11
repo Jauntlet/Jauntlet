@@ -1,6 +1,6 @@
 #include <algorithm>
 #include "SpriteBatch.h"
-#include "../Errors.h"
+#include "../../Errors.h"
 
 using namespace Jauntlet;
 

@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "Vertex.h"
+#include "../Vertex.h"
 
 namespace Jauntlet {
 // defines the order for sprites to be drawn

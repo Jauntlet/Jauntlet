@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-#include "../ResourceManager.h"
+#include "../Images/ResourceManager.h"
 
 using namespace Jauntlet;
 

@@ -14,7 +14,7 @@
 #include <cstring>
 
 #include "../Rendering/Cameras/Camera2D.h"
-#include "SpriteBatch.h"
+#include "Images/SpriteBatch.h"
 
 namespace Jauntlet {
 #define FIRST_PRINTABLE_CHAR (char)32
