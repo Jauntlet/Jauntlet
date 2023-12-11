@@ -175,6 +175,7 @@
     <ClCompile Include="Rendering\Particles\Particle.cpp" />
     <ClCompile Include="Rendering\Particles\Properties\ParticleGrow.cpp" />
     <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp" />
+    <ClCompile Include="Rendering\ProgressBar.cpp" />
     <ClCompile Include="Rendering\TextRenderer.cpp" />
     <ClCompile Include="Rendering\Textures\ImageLoader.cpp" />
     <ClCompile Include="Rendering\Textures\ResourceManager.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Rendering\Particles\Particle.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleGrow.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h" />
+    <ClInclude Include="Rendering\ProgressBar.h" />
     <ClInclude Include="Rendering\TextRenderer.h" />
     <ClInclude Include="Rendering\Textures\GLTexture.h" />
     <ClInclude Include="Rendering\Textures\ImageLoader.h" />

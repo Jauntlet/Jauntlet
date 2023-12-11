@@ -139,6 +139,9 @@
     <ClCompile Include="Rendering\Textures\TextureCache.cpp">
       <Filter>Rendering\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\ProgressBar.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UITextElement.h">
@@ -246,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="Rendering\Textures\TextureCache.h">
       <Filter>Rendering\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\ProgressBar.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
