@@ -3,7 +3,9 @@
  */
 #pragma once
 
+#include "../Errors.h"
 #include <GL/glew.h>
+#include <string>
 
 namespace Jauntlet {
 struct Position {
@@ -17,6 +19,15 @@ struct Color {
 	GLubyte a;
 
 	Color() : r(255), g(255), b(255), a(255) { }
+	Color(std::string hex) : a(255){
+		try {
+		r=std::stoi(hex.substr(0,2),0,16);
+		g=std::stoi(hex.substr(2,2),0,16);
+		b=std::stoi(hex.substr(4,2),0,16);
+		} catch (...) {
+		Jauntlet::fatalError("String " + hex + " is not a hexcode.");
+		}
+	}
 	Color(GLubyte R, GLubyte G, GLubyte B, GLubyte A) : r(R), g(G), b(B), a(A) { }
 	Color(GLubyte R, GLubyte G, GLubyte B) : r(R), g(G), b(B), a(255) { }
 
