@@ -15,6 +15,9 @@ namespace Jauntlet {
 		UIButtonToggleableElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType);
         //constructor with _position;
 		void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
+		
+		// manually override if the button displays as clicked or not
+		void setClicked(bool clicked);
     private:
 		
 	};

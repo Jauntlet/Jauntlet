@@ -26,3 +26,7 @@ void UIButtonToggleableElement::draw(Camera2D* camera, SpriteBatch* spriteBatch,
     
     spriteBatch->draw({_resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y}, {_clicked * 0.5, 0, 0.5, 1}, _textureId);
 }
+
+void UIButtonToggleableElement::setClicked(bool clicked) {
+    _clicked = clicked;
+}
