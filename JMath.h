@@ -4,7 +4,7 @@
 #pragma once
 #include <cmath>
 #include <cstddef>
-#include <glm/glm.hpp>
+#include <glm/fwd.hpp>
 #include <string>
 #include <vector>
 

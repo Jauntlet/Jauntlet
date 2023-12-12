@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "../GLSLProgram.h"
 #include "../../Time.h"

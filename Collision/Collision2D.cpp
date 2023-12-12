@@ -1,7 +1,5 @@
 #include <cmath>
-#include <glm/glm.hpp>
-
-#include "../JMath.h"
+#include <glm/geometric.hpp>
 #include "Collision2D.h"
 
 using namespace Jauntlet;

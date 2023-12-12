@@ -3,7 +3,8 @@
  */
 #pragma once
 
-#include <glm/glm.hpp>
+#include "../JMath.h"
+#include <glm/vec2.hpp>
 #include <vector>
 
 namespace Jauntlet

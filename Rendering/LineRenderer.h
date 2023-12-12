@@ -5,7 +5,8 @@
 // THIS CLASS IS CURRENTLY IN-DEVELOPMENT AND DOES NOT ACTUALLY WORK
 #pragma once
 
-#include <glm/glm.hpp>
+#include <glm/fwd.hpp>
+#include <glm/mat4x4.hpp>
 #include <vector>
 
 namespace Jauntlet {

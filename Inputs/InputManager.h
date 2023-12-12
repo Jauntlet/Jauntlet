@@ -4,7 +4,8 @@
 #pragma once
 
 #include <SDL2/SDL_events.h>
-#include <glm/glm.hpp>
+#include <glm/vec2.hpp>
+#include <glm/fwd.hpp>
 #include <unordered_map>
 #include <vector>
 

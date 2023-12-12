@@ -1,4 +1,7 @@
 #include "JMath.h"
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <iomanip>
 
 float JMath::Distance(const glm::vec2& a,const glm::vec2& b) {

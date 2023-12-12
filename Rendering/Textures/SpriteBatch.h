@@ -4,7 +4,8 @@
 #pragma once
 
 #include <GL/glew.h>
-#include <glm/glm.hpp>
+#include <glm/vec4.hpp>
+#include <glm/vec2.hpp>
 #include <vector>
 
 #include "../Vertex.h"

@@ -5,7 +5,8 @@
 #include "Vertex.h"
 #include <SDL2/SDL_video.h>
 #include <GL/glew.h>
-#include <glm/glm.hpp>
+#include <glm/fwd.hpp>
+#include <glm/vec2.hpp>
 #include <string>
 #include <vector>
 

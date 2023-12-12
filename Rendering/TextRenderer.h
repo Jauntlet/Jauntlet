@@ -9,7 +9,6 @@
 #include FT_TRIGONOMETRY_H // Include additional FreeType headers as needed
 #include FT_GLYPH_H
 
-#include <glm/glm.hpp>
 #include <map>
 #include <cstring>
 

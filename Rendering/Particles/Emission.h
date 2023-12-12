@@ -3,7 +3,6 @@
  */
 
 #include <glm/fwd.hpp>
-#include <glm/glm.hpp>
 #include <vector>
 
 #include "../Textures/SpriteBatch.h" // Jauntlet::SpriteBatch

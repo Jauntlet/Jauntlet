@@ -3,10 +3,8 @@
  */
 #pragma once
 
-#include <glm/glm.hpp>
-#include <vector>
-
 #include "Collider2D.h"
+#include <vector>
 
 namespace Jauntlet
 {
