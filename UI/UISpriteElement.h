@@ -13,7 +13,6 @@ namespace Jauntlet {
         virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
 		virtual void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
     private:
-		std::string* _text;
         Color* _color;
 		glm::vec2 _size;
 		glm::vec2 _resolvedSize;

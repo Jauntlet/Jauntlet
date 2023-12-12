@@ -9,6 +9,14 @@ UITextElement::UITextElement(TextRenderer* textRenderer, std::string* text, Colo
     _position = position;
     _scale = scale;
 }
+UITextElement::UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, ORIGIN_PIN positionPinType, const float scale) {
+    _text = text;
+    _textRenderer = textRenderer;
+    _color = color;
+    _position = position;
+    _scale = scale;
+    _originPin = positionPinType;
+}
 
 void UITextElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
 
