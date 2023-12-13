@@ -42,7 +42,8 @@ public:
 	void toggleFullscreen();
 	// Toggles fullscreen, true = fullscreen
 	void toggleFullscreen(bool fullscreen);
-	
+	// Returns true if window is fullscreened
+	bool isFullscreen();
 	// Collects the correct window size
 	// Needed when the window is resized.
 	glm::ivec2 resolveWindowSize();
