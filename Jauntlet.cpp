@@ -10,8 +10,8 @@
 namespace Jauntlet {
 	
 	int init() {
-		// Hide the windows terminal. We hate the windows terminal.
 		#if _WIN32 && NDEBUG
+		// Hide the windows terminal. We hate the windows terminal.
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 		#endif
 
@@ -27,6 +27,9 @@ namespace Jauntlet {
 
 		std::set_terminate(Jauntlet::terminate);
 		#endif
+
+		// always dump the logs at exit.
+		std::atexit(Jauntlet::dumpLog);
 		return 0;
 	}
 }

@@ -16,6 +16,16 @@ Camera2D::Camera2D(int screenWidth, int screenHeight, bool doRounding) {
 	_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
 	_doRounding = doRounding;
 }
+Camera2D::Camera2D(glm::vec2 screenSize, bool doRounding) {
+	_screenWidth = screenSize.x;
+	_screenHeight = screenSize.y;
+
+	_screenVector.x = (float)screenSize.x;
+	_screenVector.y = (float)screenSize.y;
+
+	_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
+	_doRounding = doRounding;
+}
 
 void Camera2D::update() {
 	if (_doTransitionScale && _transitionScale != _scale) {
