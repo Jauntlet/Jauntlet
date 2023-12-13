@@ -16,6 +16,7 @@ public:
 	enum class TRANSITION_TYPE {POSITION, SCALE};
 
 	Camera2D(int screenWidth, int screenHeight, bool doRounding = true);
+	Camera2D(glm::vec2 screenSize, bool doRounding = true);
 	// update the camera
 	void update();
 	// Makes this camera the camera objects are rendered to.
