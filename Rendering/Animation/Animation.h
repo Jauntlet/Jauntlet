@@ -4,8 +4,7 @@
 
 #pragma once
 
-#include <glm/fwd.hpp>
-#include <glm/vec4.hpp>
+#include <glm/ext/vector_float4.hpp>
 #include <string>
 
 namespace Jauntlet {

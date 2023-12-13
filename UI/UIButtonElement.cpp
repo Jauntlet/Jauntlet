@@ -1,5 +1,5 @@
 #include <string>
-#include <glm/fwd.hpp>
+#include <glm/ext/vector_float2.hpp>
 
 #include "UIButtonElement.h"
 

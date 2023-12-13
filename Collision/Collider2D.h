@@ -4,7 +4,7 @@
 #pragma once
 
 #include "../JMath.h"
-#include <glm/vec2.hpp>
+#include <glm/ext/vector_float2.hpp>
 #include <vector>
 
 namespace Jauntlet

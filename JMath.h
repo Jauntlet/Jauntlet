@@ -4,7 +4,12 @@
 #pragma once
 #include <cmath>
 #include <cstddef>
-#include <glm/fwd.hpp>
+#include <glm/ext/vector_int2.hpp>
+#include <glm/ext/vector_float2.hpp>
+#include <glm/ext/vector_int3.hpp>
+#include <glm/ext/vector_float3.hpp>
+#include <glm/ext/vector_int4.hpp>
+#include <glm/ext/vector_float4.hpp>
 #include <string>
 #include <vector>
 

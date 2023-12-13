@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
+#include <glm/ext/vector_float2.hpp>
 #include <vector>
 
 #include "UIBatch.h"

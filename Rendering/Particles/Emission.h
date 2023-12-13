@@ -2,7 +2,7 @@
  * Main Contributer(s): Jack Kennedy
  */
 
-#include <glm/fwd.hpp>
+#include <glm/ext/vector_float2.hpp>
 #include <vector>
 
 #include "../Textures/SpriteBatch.h" // Jauntlet::SpriteBatch

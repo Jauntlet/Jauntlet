@@ -5,8 +5,8 @@
 #pragma once
 
 #include <functional>
-#include <glm/fwd.hpp>
-#include <glm/glm.hpp>
+#include <glm/ext/vector_float4.hpp>
+#include <glm/ext/vector_float2.hpp>
 #include <string>
 
 #include "../Inputs/InputManager.h"

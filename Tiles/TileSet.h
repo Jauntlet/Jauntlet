@@ -4,7 +4,7 @@
 #pragma once
 
 #include <string>
-#include <glm/glm.hpp>
+#include <glm/ext/vector_float4.hpp>
 
 namespace Jauntlet {
 class TileSet

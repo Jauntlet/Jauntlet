@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
+#include <glm/ext/vector_float2.hpp>
 #include <string>
 
 #include "../Rendering/Cameras/Camera2D.h"
