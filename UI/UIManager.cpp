@@ -3,10 +3,6 @@
 
 using namespace Jauntlet;
 
-UIManager::UIManager() {
-	// empty
-}
-
 UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
 }
