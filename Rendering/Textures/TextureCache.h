@@ -15,7 +15,7 @@ class TextureCache
 public:
 	TextureCache();
 	// gets a texture based on filepaths
-	GLTexture getTexture(std::string& filePath);
+	GLTexture getTexture(const std::string& filePath);
 private:
 	std::map<std::string, GLTexture> _textureMap;
 };
