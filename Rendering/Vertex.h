@@ -19,6 +19,7 @@ struct Color {
 	GLubyte a;
 
 	Color() : r(255), g(255), b(255), a(255) { }
+	// Do not include # in string.
 	Color(std::string hex) : a(255){
 		try {
 		r=std::stoi(hex.substr(0,2),0,16);
