@@ -51,7 +51,7 @@ private:
 
 	SpriteBatch _spriteBatch;
 
-	GLSLProgram* _storedProgram;
+	GLSLProgram* _storedProgram = nullptr;
 };
 }
 
