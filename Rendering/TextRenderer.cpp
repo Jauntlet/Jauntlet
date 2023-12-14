@@ -90,6 +90,7 @@ void TextRenderer::addText(std::string text, glm::vec2 position, glm::vec2 scali
 		storedX += (currentGlyph.Advance >> 6) * scaling.x;
 	}
 }
+// This is an override for text rendering meant to be used by a UIManager that accepts the UIManagers own spriteBatch, not really meant for use elsewhere -xm
 void TextRenderer::addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling, float depth, Color color) {
 	float storedX = position.x;
 	for (auto c = text.begin(); c != text.end(); c++) {
@@ -108,6 +109,14 @@ void TextRenderer::addText(SpriteBatch& externalBatch, std::string text, glm::ve
 		externalBatch.draw(destRect, { 0, 0, 1, 1 }, currentGlyph.TextureID, 0, color);
 
 		storedX += (currentGlyph.Advance >> 6) * scaling.x;
+	}
+}
+
+void TextRenderer::Render() {
+	_spriteBatch.endAndRender();
+
+	if (_storedProgram != nullptr) {
+		_storedProgram->use();
 	}
 }
 
@@ -146,12 +155,4 @@ glm::vec2 TextRenderer::calculateTextSize(std::string text, glm::vec2 scaling) {
 	maxY += currentLineMaxY;
 
 	return glm::vec2(maxX, maxY);
-}
-
-void TextRenderer::Render() {
-	_spriteBatch.endAndRender();
-
-	if (_storedProgram != nullptr) {
-		_storedProgram->use();
-	}
 }
