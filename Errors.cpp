@@ -20,23 +20,18 @@ namespace Jauntlet {
 	// test for if we are running with a terminal
 	if (GetFileType(GetStdHandle(STD_INPUT_HANDLE)) == FILE_TYPE_CHAR && GetFileType(GetStdHandle(STD_OUTPUT_HANDLE)) == FILE_TYPE_CHAR) {
 		std::cout << errorString << std::endl;
-		std::cout << "Press ENTER to quit...";
-		int tmp;
-		std::cin >> tmp;
 	}
 #elif defined(__unix__)
 	// test for if we are running with a terminal
 	if (isatty(fileno(stdin)) && isatty(fileno(stdout))) {
 		std::cout << errorString << std::endl;
-		std::cout << "Press ENTER to quit...";
-		int tmp;
-		std::cin >> tmp;
 	}
 #endif // if neither run, then the platform is unsupported. Support for these platforms may come if we get access to PCs with them.
 
 #ifdef NDEBUG
 	terminate(errorString);
 #else
+	dumpLog();
 	exit(-1);
 #endif
 	}
@@ -57,12 +52,17 @@ namespace Jauntlet {
 	}
 
 	void terminate() {
-		dumpLog();
-
 		try {
 			std::rethrow_exception(std::current_exception());
+			// we dump the log anyways if throwing the exception didn't crash somehow
+			dumpLog();
 		}
 		catch (const std::exception& ex) {
+			errors.push_back("Jauntlet Crash information:");
+			errors.push_back(typeid(ex).name());
+			errors.push_back(ex.what());
+			dumpLog();
+
 			int userOutput = tinyfd_messageBox("Jauntlet has Crashed!",
 				"Jauntlet has reached an unhandled exception!\n\nWould you like to send an error report to the Jauntlet Dev team?",
 				"yesno", "error", 1);
@@ -81,6 +81,7 @@ namespace Jauntlet {
 		exit(-1);
 	}
 	void terminate(const std::string& error) {
+		errors.push_back(error);
 		dumpLog();
 		int userOutput = tinyfd_messageBox("Jauntlet has Crashed!",
 			"Jauntlet has reached an unhandled exception!\n\nWould you like to send an error report to the Jauntlet Dev team?",
