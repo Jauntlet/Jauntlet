@@ -7,9 +7,8 @@ using namespace Jauntlet;
 
 GLSLProgram TextRenderer::textShader;
 
-TextRenderer::TextRenderer(Camera2D* camera, const char* font, int size) :
-	_fontHeight(size),
-	_camera(camera)
+TextRenderer::TextRenderer(const char* font, int size) :
+	_fontHeight(size)
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -67,7 +66,6 @@ void TextRenderer::begin() {
 	// Store last used program, and then use our program.
 	_storedProgram = GLSLProgram::currentProgram;
 	textShader.use();
-	_camera->setActiveCamera();
 
 	_spriteBatch.begin();
 }

@@ -30,7 +30,7 @@ class TextRenderer
 {
 public:
 	// Empty constructor. Use init();
-	TextRenderer(Camera2D* camera, const char* font, int size);
+	TextRenderer(const char* font, int size);
 	
 	// Begin rendering to the TextRenderer
 	void begin();
@@ -50,7 +50,6 @@ private:
 	int _fontHeight;
 	std::map<char, CharGlyph> Characters;
 
-	Camera2D* _camera = nullptr;
 	SpriteBatch _spriteBatch;
 
 	GLSLProgram* _storedProgram;
