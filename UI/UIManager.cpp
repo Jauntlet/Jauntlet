@@ -12,6 +12,22 @@ void UIManager::addElement(UIElement* uiElement, GLSLProgram* program) {
 	_programs.push_back(program);
 }
 
+void UIManager::removeElement(UIElement* uiElement) {
+	// for every ui batch
+	for (int i = 0; i < _uiBatches.size(); i++) {
+		// try and remove the element from the uiBatch
+		if (_uiBatches[i].removeElement(uiElement)) {
+			// if we removed one
+			if (_uiBatches[i].isEmpty()) {
+				// if the current ui batch is empty, remove it
+				_uiBatches.erase(_uiBatches.begin() + i);
+			}
+			// then dont try to remove any more
+			return;
+		}
+	}
+}
+
 void UIManager::optimize() {
 	// we dont want duplicate batches
 	_uiBatches.clear();

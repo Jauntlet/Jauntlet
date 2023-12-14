@@ -19,6 +19,10 @@ namespace Jauntlet {
 		UIBatch(GLSLProgram* program, UIElement* UIElement);
         // add an element to the ui batch
 		void addElement(UIElement* UIElement);
+		// add an element to the ui batch
+		bool removeElement(UIElement* UIElement);
+		// return if the uiBatch is empty
+		bool isEmpty() {return _UIElements.size() == 0;};
 		// draw
 		void draw(Camera2D* _camera, float* _scale);
 		// resolve positions

@@ -15,6 +15,16 @@ void UIBatch::addElement(UIElement* UIElement) {
     _UIElements.push_back(UIElement);
 }
 
+bool UIBatch::removeElement(UIElement* UIElement) {
+	for (int i = 0; i < _UIElements.size(); i++) {
+		if (_UIElements[i] == UIElement) {
+			_UIElements.erase(_UIElements.begin() + i);
+			return true;
+		}
+	}
+	return false;
+}
+
 void UIBatch::draw(Camera2D* _camera, float* _scale) {
 
 	GLSLProgram* storedProgram = GLSLProgram::currentProgram;

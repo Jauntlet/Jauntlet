@@ -16,6 +16,8 @@ namespace Jauntlet {
 		UIManager(Camera2D* camera);
 		// update all ui elements to fit the resolution
 		void addElement(UIElement* uiElement, GLSLProgram* program);
+		// update all ui elements to fit the resolution
+		void removeElement(UIElement* uiElement);
 		// draw all hud elements
 		void draw();
 		// set the hud scale
