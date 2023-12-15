@@ -33,21 +33,34 @@ void UIManager::optimize() {
 	_uiBatches.clear();
 
 	for(int i = 0; i < _uiElements.size(); ++i) {
-		GLSLProgram* program = _programs[i];
+		// create a program based on our uiElement
+		GLSLProgram* program = _programs[i]; // its worth noting _programs lines up with _uiElements
+		
+		// create a temporary batch to grab our programs with
 		UIBatch temporaryBatch(program, _uiElements[i]);
 
+		// we havent added any elements to this batch yet
 		int addedElements = 0;
 
-		for (int i2 = i + 1; i2 < _uiElements.size(); ++i2) {
+		// grab all elements (the current one and ones after it)
+		for (int i2 = i; i2 < _uiElements.size(); ++i2) {
+			// if an element's program matches the program we got earlier
 			if (_programs[i2] == program) {
+				// add it to our new batch
 				temporaryBatch.addElement(_uiElements[i2]);
+				// we just added an element
 				++addedElements;
+			} else {
+				// this means that we dont have any elements after this matching the same program, so we can close this UIBatch
+				break;
 			}
 		}
-
+		
+		// add our new uiBatch to our uiBatches list
 		_uiBatches.push_back(temporaryBatch);
 
-		i += addedElements;
+		// this ensures if we added more than one batch that we skip over the extra ones.
+		i += addedElements - 1;
 	}
 
 }
