@@ -28,6 +28,12 @@ void UIManager::removeElement(UIElement* uiElement) {
 	}
 }
 
+void UIManager::removeAllElements() {
+	for (int i = 0; i < _uiBatches.size(); i++) {
+		_uiBatches[i].clearBatch();
+	}
+}
+
 void UIManager::optimize() {
 	// we dont want duplicate batches
 	_uiBatches.clear();

@@ -21,6 +21,8 @@ namespace Jauntlet {
 		void addElement(UIElement* UIElement);
 		// add an element to the ui batch
 		bool removeElement(UIElement* UIElement);
+		// remove all elements from the UIBatch
+		void clearBatch();
 		// return if the uiBatch is empty
 		bool isEmpty() {return _UIElements.size() == 0;};
 		// draw

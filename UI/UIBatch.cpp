@@ -24,6 +24,9 @@ bool UIBatch::removeElement(UIElement* UIElement) {
 	}
 	return false;
 }
+void UIBatch::clearBatch() {
+	_UIElements.clear();
+}
 
 void UIBatch::draw(Camera2D* _camera, float* _scale) {
 
