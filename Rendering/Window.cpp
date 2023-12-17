@@ -38,7 +38,7 @@ Window::Window(std::string windowName, int screenWidth, int screenHeight, unsign
 	}
 
 	// tells you your version of OpenGL
-	std::printf("*** OpenGL Version: %s ***\n", glGetString(GL_VERSION));
+	Jauntlet::error("OpenGL Version: " + std::to_string(*glGetString(GL_VERSION)));
 
 	// this turns on VSync (0 = off, 1 = on)
 	SDL_GL_SetSwapInterval(0);
