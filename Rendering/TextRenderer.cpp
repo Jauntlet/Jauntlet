@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <freetype/freetype.h>
+#include <glm/fwd.hpp>
 #include "../Errors.h"
 #include "TextRenderer.h"
 
@@ -121,38 +122,41 @@ void TextRenderer::Render() {
 }
 
 glm::vec2 TextRenderer::calculateTextSize(std::string text, glm::vec2 scaling) {
-	// HACK
-	glm::vec2 position = glm::vec2(0); // TODO: FIXME
+	float lineWidth = 0.0f;
 
-	float storedX = 0;
+	float maxLineWidth = 0.0f;
+	float combinedLineHeights = 0.0f;
 
-	float currentLineMaxY = 0;
-	float maxY = 0;
-	float maxX = 0;
+	bool multiline = false;
+	
 	for (auto c = text.begin(); c != text.end(); c++) {
 		CharGlyph currentGlyph = Characters[*c];
 
 		if (*c == '\n') {
-			position.y -= _fontHeight * scaling.y;
-			storedX = position.x;
+			// if lineWidth is larger than maxLineWidth, set maxLineWidth to lineWidth 
+			maxLineWidth = lineWidth > maxLineWidth ? lineWidth : maxLineWidth;
+			// reset lineWidth
+			lineWidth = 0.0f;
 
-			currentLineMaxY = 0;
-			maxY += currentLineMaxY;
+			// we are on a new line, just use the max font height
+			combinedLineHeights += _fontHeight * 0.5f * scaling.y;
+
+			multiline = true;
 		}
 
-		float x = storedX;
-		float y = position.y - (_fontHeight * scaling.y);
-
-		currentLineMaxY = y > currentLineMaxY ? y : currentLineMaxY;
-
 		glm::vec4 destRect(x, y, scaling * (glm::vec2)currentGlyph.Bearing);
+		// add on our characters width to our total width for this line
+		lineWidth += (currentGlyph.Advance >> 6) * scaling.x;
 
-		storedX += (currentGlyph.Advance >> 6) * scaling.x;
 
-		maxX = storedX > maxX ? storedX : maxX;
 	}
 
-	maxY += currentLineMaxY;
+	// this code is just in case we've never done a new line in the text
 
-	return glm::vec2(maxX, maxY);
+	// if we never cleared lineWidth for maxLineWidth, set it to lineWidth
+	maxLineWidth = maxLineWidth == 0.0f ? lineWidth : maxLineWidth;
+	// if we dont have a multiline string then just use the default font scaling
+	combinedLineHeights = multiline ? combinedLineHeights : _fontHeight * scaling.y;
+
+	return glm::vec2(maxLineWidth, combinedLineHeights);
 }
