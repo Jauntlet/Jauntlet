@@ -1,5 +1,6 @@
 #include <fstream>
 #include <vector>
+#include <bit>
 #include "../Errors.h"
 #include "FileManager.h"
 
@@ -34,6 +35,97 @@ const bool FileManager::readFileToBuffer(const std::string& filePath, std::vecto
 	file.close();
 
 	return true;
+}
+
+char* FileManager::readWAVFile(const std::string& filePath, uint8_t& channels, int32_t& sampleRate, uint8_t& bitsPerSample, int32_t& size) {
+	std::ifstream file(filePath, std::ios::binary);
+	if (!file.is_open()) {
+		Jauntlet::error("Could not open WAV \"" + filePath + "\"");
+		return nullptr;
+	}
+
+	// -- Processing the Header of the WAV to make sure its valid. --
+	char buffer[4];
+	// reading the word RIFF; the ChunkID
+	if (!file.read(buffer, 4) || std::strncmp(buffer, "RIFF", 4) != 0) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the RIFF");
+		return nullptr;
+	}
+	// reading the size of the file; the ChunkSize
+	if (!file.read(buffer, 4)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the size of the file");
+		return nullptr;
+	}
+	// reading the format ("WAVE")
+	if (!file.read(buffer, 4) || std::strncmp(buffer, "WAVE", 4) != 0) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the format!");
+		return nullptr;
+	}
+	// reading SubChunk1ID, should be "fmt " and its corresponding SubChunk1Size (always 16)
+	if (!file.read(buffer, 4) || !file.read(buffer, 4)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read fmt/0");
+		return nullptr;
+	}
+	// reading the AudioFormat PCM, should always 1 unless there is some form of compression.
+	if (!file.read(buffer, 2)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the PCM");
+		return nullptr;
+	}
+	// reading NumChannels
+	if (!file.read(buffer, 2)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the number of channels");
+		return nullptr;
+	}
+	channels = bufferToInt(buffer, 2);
+
+	// reading the SampleRate
+	if (!file.read(buffer, 4)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the sample rate");
+		return nullptr;
+	}
+	sampleRate = bufferToInt(buffer, 4);
+
+	// reading the byteRate
+	if (!file.read(buffer, 4)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the byte rate");
+		return nullptr;
+	}
+	// reading the block align
+	if (!file.read(buffer, 2)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the block align");
+		return nullptr;
+	}
+	// reading the bitsPerSample
+	if (!file.read(buffer, 2)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read bits per sample");
+		return nullptr;
+	}
+	bitsPerSample = bufferToInt(buffer, 2);
+
+	// Reading "data" (SubChunk2ID)
+	if (!file.read(buffer, 4) || std::strncmp(buffer, "data", 4) != 0) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read data chunk header");
+		return nullptr;
+	}
+	// Reading the size of the data
+	if (!file.read(buffer, 4)) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the size of the data");
+		return nullptr;
+	}
+	size = bufferToInt(buffer, 4);
+
+	// --  Done processing the header --
+
+	// making sure the file is still good to go
+	if (file.eof() || file.fail()) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has no data to be read.");
+		return nullptr;
+	}
+
+	// return the WAV data.
+	char* data = new char[size];
+	file.read(data, size);
+	return data;
 }
 
 const bool FileManager::findFolder(const std::string& folderPath) {
@@ -77,4 +169,16 @@ const void FileManager::openLink(const std::string& link) {
 #elif __linux__
 	execl("/usr/bin/xdg-open", "xdg-open", link.c_str(), nullptr);
 #endif
+}
+
+// bufferToInt function provided by https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/.
+const int32_t FileManager::bufferToInt(char* buffer, size_t len) {
+	int32_t a = 0;
+	if (std::endian::native == std::endian::little) {
+		std::memcpy(&a, buffer, len);
+	}
+	else for (size_t i = 0; i < len; ++i) {
+		reinterpret_cast<char*>(&a)[3 - i] = buffer[i];
+	}
+	return a;
 }
