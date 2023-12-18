@@ -37,9 +37,6 @@ Window::Window(std::string windowName, int screenWidth, int screenHeight, unsign
 		fatalError("Could not initialize glew!");
 	}
 
-	// tells you your version of OpenGL
-	Jauntlet::error("OpenGL Version: " + std::to_string(*glGetString(GL_VERSION)));
-
 	// this turns on VSync (0 = off, 1 = on)
 	SDL_GL_SetSwapInterval(0);
 

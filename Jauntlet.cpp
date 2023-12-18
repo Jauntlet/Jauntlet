@@ -2,6 +2,7 @@
 #include "Errors.h"
 #include "Filesystems/FileManager.h"
 #include <fstream>
+#include <GL/glew.h>
 
 #if _WIN32
 #include <Windows.h>
@@ -20,6 +21,9 @@ namespace Jauntlet {
 		std::ofstream errorFile;
 		errorFile.open("Logs/Latest.log");
 		errorFile.close();
+
+		// tells you your version of OpenGL
+		Jauntlet::error("OpenGL Version: " + std::to_string(*glGetString(GL_VERSION)));
 
 		// We only want to use our termination script on release builds so that we don't intercept crash logging for IDEs,
 		// this is actually only useful for Linux developers, where all builds will run the termination script whilst developing,

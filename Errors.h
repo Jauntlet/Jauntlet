@@ -17,5 +17,4 @@ namespace Jauntlet {
 
 	void dumpLog();
 
-	static std::vector<std::string> errors;
 }
