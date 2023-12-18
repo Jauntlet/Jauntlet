@@ -144,17 +144,14 @@ glm::vec2 TextRenderer::calculateTextSize(std::string text, glm::vec2 scaling) {
 			multiline = true;
 		}
 
-		glm::vec4 destRect(x, y, scaling * (glm::vec2)currentGlyph.Bearing);
 		// add on our characters width to our total width for this line
 		lineWidth += (currentGlyph.Advance >> 6) * scaling.x;
-
-
 	}
 
 	// this code is just in case we've never done a new line in the text
 
-	// if we never cleared lineWidth for maxLineWidth, set it to lineWidth
-	maxLineWidth = maxLineWidth == 0.0f ? lineWidth : maxLineWidth;
+	// if we dont have a multiline string then just use the last set lineWidth
+	maxLineWidth = multiline ? maxLineWidth : lineWidth;
 	// if we dont have a multiline string then just use the default font scaling
 	combinedLineHeights = multiline ? combinedLineHeights : _fontHeight * scaling.y;
 
