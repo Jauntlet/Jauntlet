@@ -1,5 +1,5 @@
 /* Purpose: Manages Sounds and represents the point in which you hear sounds from
- * Main Contributer(s): Xander Mooney / Jack Kennedy
+ * Main Contributer(s): Xander Mooney
  */
 #pragma once
 #include <AL/al.h>
