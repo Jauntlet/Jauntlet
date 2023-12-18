@@ -27,7 +27,7 @@ public:
 	static char* readWAVFile(const std::string& filePath, uint8_t& channels, int32_t& sampleRate, uint8_t& bitsPerSample, int32_t& size);
 
 	// Finds the specified folder, returns true if found.
-	static const bool findFolder(const std::string& folderPath);
+	static const bool findFile(const std::string& filePath);
 	// Create a folder at designated file path
 	// returns true if folder is successfully created.
 	// Most times a folder could not be created if either the path provided is invalid, or the folder already exists.

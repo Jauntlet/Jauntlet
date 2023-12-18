@@ -129,9 +129,9 @@ char* FileManager::readWAVFile(const std::string& filePath, uint8_t& channels, i
 	return data;
 }
 
-const bool FileManager::findFolder(const std::string& folderPath) {
+const bool FileManager::findFile(const std::string& filePath) {
 	struct stat sb;
-	if (stat(folderPath.c_str(), &sb) == 0) {
+	if (stat(filePath.c_str(), &sb) == 0) {
 		return true;
 	}
 	return false;
