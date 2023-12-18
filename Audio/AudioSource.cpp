@@ -63,4 +63,5 @@ bool AudioSource::playWAV(const std::string& sound) {
 	alSourcePlay(source);
 	// store source and buffer for later processing
 	_sources.emplace_back(source, buffer);
+	return true;
 }
