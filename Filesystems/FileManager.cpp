@@ -1,11 +1,12 @@
 #include <fstream>
 #include <vector>
-#include <bit>
 #include "../Errors.h"
 #include "FileManager.h"
 
 #if _WIN32
 #include <Windows.h>
+#elif __linux__
+#include <cstring>
 #endif
 
 using namespace Jauntlet;
@@ -171,14 +172,23 @@ const void FileManager::openLink(const std::string& link) {
 #endif
 }
 
-// bufferToInt function provided by https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/.
+// bufferToInt function provided by https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/, modified for older compilers
 const int32_t FileManager::bufferToInt(char* buffer, size_t len) {
 	int32_t a = 0;
-	if (std::endian::native == std::endian::little) {
+	if (!isBigEndian()) {
 		std::memcpy(&a, buffer, len);
 	}
 	else for (size_t i = 0; i < len; ++i) {
 		reinterpret_cast<char*>(&a)[3 - i] = buffer[i];
 	}
 	return a;
+}
+
+const bool FileManager::isBigEndian() {
+	union {
+        uint32_t i;
+        char c[4];
+    } endian = {0x01020304};
+
+    return endian.c[0] == 1;
 }

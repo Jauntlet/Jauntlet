@@ -75,7 +75,7 @@ bool AudioListener::checkALErrors() {
             fatalError("AL_OUT_OF_MEMORY: the requested operation resulted in OpenAL running out of memory");
             break;
         default:
-            error("UNKNOWN AL ERROR: " + ALerror);
+            error("UNKNOWN AL ERROR: " + std::to_string(ALerror));
         }
         return false;
 	}
@@ -102,7 +102,7 @@ bool AudioListener::checkALCErrors() {
             fatalError("ALC_OUT_OF_MEMORY: an unknown enum value was passed to an OpenAL function");
             break;
         default:
-            fatalError("UNKNOWN ALC ERROR: " + ALCerror);
+            fatalError("UNKNOWN ALC ERROR: " + std::to_string(ALCerror));
         }
         return false;
     }

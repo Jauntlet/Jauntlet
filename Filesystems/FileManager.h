@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <cstdint>
 #endif
 
 
@@ -41,5 +42,6 @@ public:
 	static const void openLink(const std::string& link);
 private:
 	static const int32_t bufferToInt(char* buffer, size_t len);
+	static const bool isBigEndian();
 };
 }
