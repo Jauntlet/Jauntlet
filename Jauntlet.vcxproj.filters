@@ -37,6 +37,9 @@
     <Filter Include="Rendering\Textures">
       <UniqueIdentifier>{26f9b2be-b7c7-4d24-8906-b4e72efdf75f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{3bcbb863-5ccf-4185-810c-60d42f945b0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UITextElement.cpp">
@@ -141,6 +144,12 @@
     </ClCompile>
     <ClCompile Include="Rendering\ProgressBar.cpp">
       <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\AudioListener.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\AudioSource.cpp">
+      <Filter>Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +261,12 @@
     </ClInclude>
     <ClInclude Include="Rendering\ProgressBar.h">
       <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\AudioListener.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\AudioSource.h">
+      <Filter>Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -157,6 +157,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Audio\AudioListener.cpp" />
+    <ClCompile Include="Audio\AudioSource.cpp" />
     <ClCompile Include="Collision\Collider2D.cpp" />
     <ClCompile Include="Collision\Collision2D.cpp" />
     <ClCompile Include="Errors.cpp" />
@@ -196,6 +198,8 @@
     <ClCompile Include="UI\UITextElement.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Audio\AudioListener.h" />
+    <ClInclude Include="Audio\AudioSource.h" />
     <ClInclude Include="Collision\Collider2D.h" />
     <ClInclude Include="Collision\Collision2D.h" />
     <ClInclude Include="Errors.h" />
