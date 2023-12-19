@@ -196,6 +196,7 @@
     <ClCompile Include="UI\UIButtonToggleableElement.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
+    <ClCompile Include="UI\UIProgressBarElement.cpp" />
     <ClCompile Include="UI\UISpriteAnimatedElement.cpp" />
     <ClCompile Include="UI\UISpriteElement.cpp" />
     <ClCompile Include="UI\UITextElement.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="UI\UIButtonToggleableElement.h" />
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\UIManager.h" />
+    <ClInclude Include="UI\UIProgressBarElement.h" />
     <ClInclude Include="UI\UISpriteAnimatedElement.h" />
     <ClInclude Include="UI\UISpriteElement.h" />
     <ClInclude Include="UI\UITextElement.h" />
