@@ -6,7 +6,7 @@ ProgressBar::ProgressBar(const std::string& texture1, const glm::vec4& texture1U
 	_fullTexture(ResourceManager::getTexture(texture2).id),
 	_UV1(texture1UV),
 	_UV2(texture2UV),
-	_position(glm::vec2(dest.x, dest.y)),
+	position(glm::vec2(dest.x, dest.y)),
 	_size(glm::vec2(dest.z, dest.w))
 {
 	// Empty
@@ -16,24 +16,17 @@ ProgressBar::ProgressBar(const std::string& texture, const glm::vec4& texture1UV
 	_fullTexture(ResourceManager::getTexture(texture).id),
 	_UV1(texture1UV),
 	_UV2(texture2UV),
-	_position(glm::vec2(dest.x, dest.y)),
+	position(glm::vec2(dest.x, dest.y)),
 	_size(glm::vec2(dest.z, dest.w))
 {
 	// Empty
 }
 
-void ProgressBar::setProgress(const float& newProgress) {
-	_progress = newProgress;
-}
-void ProgressBar::setPosition(glm::vec2 newPosition) {
-	_position = newPosition;
-}
-
 void ProgressBar::draw(SpriteBatch& batch) {
-	if (_progress != 0) {
-		batch.draw(glm::vec4(_position, _size.x * _progress, _size.y), glm::vec4(_UV1.x, _UV1.y, _UV1.z * _progress, _UV1.w), _fullTexture);
+	if (progress != 0) {
+		batch.draw(glm::vec4(position, _size.x * progress, _size.y), glm::vec4(_UV1.x, _UV1.y, _UV1.z * progress, _UV1.w), _fullTexture);
 	}
-	if (_progress != 1) {
-		batch.draw(glm::vec4(_position.x + _size.x * _progress, _position.y, _size.x * (1 - _progress), _size.y), glm::vec4(_UV2.x, _UV2.y, _UV2.z * (1 - _progress), _UV1.w), _emptyTexture);
+	if (progress != 1) {
+		batch.draw(glm::vec4(position.x + _size.x * progress, position.y, _size.x * (1 - progress), _size.y), glm::vec4(_UV2.x + _UV2.z * progress, _UV2.y, _UV2.z * (1 - progress), _UV1.w), _emptyTexture);
 	}
 }
