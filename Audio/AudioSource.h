@@ -22,7 +22,6 @@ struct AudioStream {
 	ALenum format;
 	size_t cursor = 0;
 	std::vector<char> soundData;
-	bool processing = true; // reads false if no more data needs to be pushed to it.
 };
 
 class AudioSource

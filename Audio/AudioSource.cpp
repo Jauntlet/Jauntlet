@@ -25,13 +25,11 @@ void AudioSource::update() {
 				alGetSourcei(_sources[i].source, AL_LOOPING, &looping);
 
 				size_t dataSize = BUFFER_SIZE;
-				if (_sources[i].cursor + BUFFER_SIZE > _sources[i].soundData.size()) {
-					dataSize = _sources[i].soundData.size() - _sources[i].cursor;
+				if (_sources[i].cursor + BUFFER_SIZE > _sources[i].size) {
+					dataSize = _sources[i].size - _sources[i].cursor;
 				}
 
 				if (dataSize == 0) {
-					_sources[i].processing = false;
-					
 					int buffersLeft = 0;
 					alGetSourcei(_sources[i].source, AL_BUFFERS_QUEUED, &buffersLeft);
 
@@ -55,7 +53,7 @@ void AudioSource::update() {
 						std::memcpy(&data[dataSize], &_sources[i].soundData[_sources[i].cursor], BUFFER_SIZE - dataSize);
 					}
 					else {
-						_sources[i].cursor = _sources[i].soundData.size();
+						_sources[i].cursor = _sources[i].size;
 					}
 				}
 		
