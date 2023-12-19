@@ -20,9 +20,6 @@ void AudioSource::update() {
 				
 				char* data = new char[BUFFER_SIZE];
 				std::memset(data, 0, BUFFER_SIZE);
-				
-				int looping = 0;
-				alGetSourcei(_sources[i].source, AL_LOOPING, &looping);
 
 				size_t dataSize = BUFFER_SIZE;
 				if (_sources[i].cursor + BUFFER_SIZE > _sources[i].size) {
@@ -48,9 +45,8 @@ void AudioSource::update() {
 
 				
 				if (dataSize < BUFFER_SIZE) {
-					if (looping == AL_TRUE) {
+					if (_sources[i].looping) {
 						_sources[i].cursor = 0;
-						std::memcpy(&data[dataSize], &_sources[i].soundData[_sources[i].cursor], BUFFER_SIZE - dataSize);
 					}
 					else {
 						_sources[i].cursor = _sources[i].size;
@@ -107,8 +103,6 @@ bool AudioSource::playWAV(const std::string& sound) {
 	alSourcef(stream.source, AL_GAIN, 1.0f);
 	alSource3f(stream.source, AL_POSITION, _position.x, _position.y, _position.z);
 	alSource3f(stream.source, AL_VELOCITY, 0, 0, 0);
-	alSourcei(stream.source, AL_LOOPING, AL_FALSE);
-	//alSourcei(source, AL_BUFFER, buffer);
 
 	// attach buffers and play source
 	alSourceQueueBuffers(stream.source, NUM_BUFFERS, &stream.buffers[0]);

@@ -21,6 +21,7 @@ struct AudioStream {
 	ALsizei size;
 	ALenum format;
 	size_t cursor = 0;
+	bool looping = false;
 	std::vector<char> soundData;
 };
 
