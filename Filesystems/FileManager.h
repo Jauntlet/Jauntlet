@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include "../Audio/AudioSource.h"
 
 #if _WIN32
 #include <Windows.h>
@@ -24,7 +25,7 @@ public:
 	// reads files to a data buffer. Returns true if it found the file, false otherwise. The data is returned into the second field.
 	static const bool readFileToBuffer(const std::string& filePath, std::vector<unsigned char>& buffer);
 	
-	static char* readWAVFile(const std::string& filePath, uint8_t& channels, int32_t& sampleRate, uint8_t& bitsPerSample, int32_t& size);
+	static std::vector<char> readWAVFile(const std::string& filePath, Jauntlet::AudioStream& audioStream);
 
 	// Finds the specified folder, returns true if found.
 	static const bool findFile(const std::string& filePath);

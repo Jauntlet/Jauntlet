@@ -38,11 +38,11 @@ const bool FileManager::readFileToBuffer(const std::string& filePath, std::vecto
 	return true;
 }
 
-char* FileManager::readWAVFile(const std::string& filePath, uint8_t& channels, int32_t& sampleRate, uint8_t& bitsPerSample, int32_t& size) {
+std::vector<char> FileManager::readWAVFile(const std::string& filePath, Jauntlet::AudioStream& audioStream) {
 	std::ifstream file(filePath, std::ios::binary);
 	if (!file.is_open()) {
 		Jauntlet::error("Could not open WAV \"" + filePath + "\"");
-		return nullptr;
+		return std::vector<char>();
 	}
 
 	// -- Processing the Header of the WAV to make sure its valid. --
@@ -50,12 +50,12 @@ char* FileManager::readWAVFile(const std::string& filePath, uint8_t& channels, i
 	// reading the word RIFF; the ChunkID
 	if (!file.read(buffer, 4) || std::strncmp(buffer, "RIFF", 4) != 0) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the RIFF");
-		return nullptr;
+		return std::vector<char>();
 	}
 	// reading the size of the file; the ChunkSize
 	if (!file.read(buffer, 4)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the size of the file");
-		return nullptr;
+		return std::vector<char>();
 	}
 	// reading the format ("WAVE")
 	if (!file.read(buffer, 4) || std::strncmp(buffer, "WAVE", 4) != 0) {
@@ -75,14 +75,14 @@ char* FileManager::readWAVFile(const std::string& filePath, uint8_t& channels, i
 	// reading NumChannels
 	if (!file.read(buffer, 2)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the number of channels");
-		return nullptr;
+		return std::vector<char>();
 	}
 	channels = bufferToInt(buffer, 2);
 
 	// reading the SampleRate
 	if (!file.read(buffer, 4)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the sample rate");
-		return nullptr;
+		return std::vector<char>();
 	}
 	sampleRate = bufferToInt(buffer, 4);
 
@@ -99,14 +99,14 @@ char* FileManager::readWAVFile(const std::string& filePath, uint8_t& channels, i
 	// reading the bitsPerSample
 	if (!file.read(buffer, 2)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read bits per sample");
-		return nullptr;
+		return std::vector<char>();
 	}
 	bitsPerSample = bufferToInt(buffer, 2);
 
 	// Reading "data" (SubChunk2ID)
 	if (!file.read(buffer, 4) || std::strncmp(buffer, "data", 4) != 0) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read data chunk header");
-		return nullptr;
+		return std::vector<char>();
 	}
 	// Reading the size of the data
 	if (!file.read(buffer, 4)) {
@@ -120,13 +120,13 @@ char* FileManager::readWAVFile(const std::string& filePath, uint8_t& channels, i
 	// making sure the file is still good to go
 	if (file.eof() || file.fail()) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has no data to be read.");
-		return nullptr;
+		return std::vector<char>();
 	}
 
 	// return the WAV data.
-	char* data = new char[size];
-	file.read(data, size);
-	return data;
+	std::vector<char> output(audioStream.size);
+	file.read(output.data(), audioStream.size);
+	return output;
 }
 
 const bool FileManager::findFile(const std::string& filePath) {
