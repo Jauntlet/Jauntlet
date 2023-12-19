@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <freetype/freetype.h>
 #include <glm/fwd.hpp>
+#include <iostream>
 #include "../Errors.h"
 #include "TextRenderer.h"
 
@@ -154,6 +155,18 @@ glm::vec2 TextRenderer::calculateTextSize(std::string text, glm::vec2 scaling) {
 	maxLineWidth = multiline ? maxLineWidth : lineWidth;
 	// if we dont have a multiline string then just use the default font scaling
 	combinedLineHeights = multiline ? combinedLineHeights : _fontHeight * scaling.y;
+
+	// by default we calculate the total as the combined total of the distance between the start of the first glyph to the start of the next glyph
+	// at the end we just need the regular glyph width since it doesnt have a glyph after it.
+	// hack, doesnt work on multiline //TODO: FIXME
+	if (!multiline && Characters.size() > 0) {
+		// get the last glyph
+		CharGlyph currentGlyph = Characters[Characters.size() - 1];
+		// get the space AFTER the character
+		float spaceAfterCharacter = ((currentGlyph.Advance >> 6) - currentGlyph.Bearing.x) * scaling.x;
+		// subtract that from our max width
+		maxLineWidth -= spaceAfterCharacter;
+	}
 
 	return glm::vec2(maxLineWidth, combinedLineHeights);
 }
