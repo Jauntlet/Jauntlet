@@ -60,48 +60,76 @@ std::vector<char> FileManager::readWAVFile(const std::string& filePath, Jauntlet
 	// reading the format ("WAVE")
 	if (!file.read(buffer, 4) || std::strncmp(buffer, "WAVE", 4) != 0) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the format!");
-		return nullptr;
+		return std::vector<char>();
 	}
-	// reading SubChunk1ID, should be "fmt " and its corresponding SubChunk1Size (always 16)
-	if (!file.read(buffer, 4) || !file.read(buffer, 4)) {
-		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read fmt/0");
-		return nullptr;
+	// reading SubChunk1ID, should be "fmt ", if not, we check for a JUNK section, which can appear in some WAV files.
+	if (!file.read(buffer, 4) || std::strncmp(buffer, "fmt ", 4) != 0) {
+		if (std::strncmp(buffer, "JUNK", 4) != 0) {
+			Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read fmt/0");
+			return std::vector<char>();
+		}
+		// WAV has a JUNK section, we need to read the size and then promptly discard it.
+		if (!file.read(buffer, 4)) {
+			Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: invalid JUNK size.");
+			return std::vector<char>();
+		}
+		int32_t junkSize = bufferToInt(buffer, 4);
+
+		// the junk size is always even, if its odd there is an empty byte at the end.
+		if (junkSize % 2 != 0) {
+			++junkSize;
+		}
+		// skip junk section
+		file.seekg(junkSize, std::ios::cur);
+
+		if (!file) {
+			Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: file ends during JUNK header");
+			return std::vector<char>();
+		}
+
+		// retry reading the "fmt "
+		if (!file.read(buffer, 4)) {
+			Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read fmt/0");
+			return std::vector<char>();
+		}
 	}
-	// reading the AudioFormat PCM, should always 1 unless there is some form of compression.
-	if (!file.read(buffer, 2)) {
-		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the PCM");
-		return nullptr;
+	
+	// reads past the "fmt " subchunk (always 16) and AudioFormat PCM (1 unless there is compression)
+	file.seekg(6, std::ios::cur);
+	
+	if (!file) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: file ended during fmt and PCM subchunks");
+		return std::vector<char>();
 	}
+
 	// reading NumChannels
 	if (!file.read(buffer, 2)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the number of channels");
 		return std::vector<char>();
 	}
-	channels = bufferToInt(buffer, 2);
+	audioStream.channels = bufferToInt(buffer, 2);
 
 	// reading the SampleRate
 	if (!file.read(buffer, 4)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the sample rate");
 		return std::vector<char>();
 	}
-	sampleRate = bufferToInt(buffer, 4);
+	audioStream.sampleRate = bufferToInt(buffer, 4);
 
-	// reading the byteRate
-	if (!file.read(buffer, 4)) {
-		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the byte rate");
-		return nullptr;
+	// read past the byteRate and block align data sections
+	file.seekg(6, std::ios::cur);
+
+	if (!file) {
+		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: file ended during byteRate and block align data sections");
+		return std::vector<char>();
 	}
-	// reading the block align
-	if (!file.read(buffer, 2)) {
-		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the block align");
-		return nullptr;
-	}
+
 	// reading the bitsPerSample
 	if (!file.read(buffer, 2)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read bits per sample");
 		return std::vector<char>();
 	}
-	bitsPerSample = bufferToInt(buffer, 2);
+	audioStream.bitsPerSample = bufferToInt(buffer, 2);
 
 	// Reading "data" (SubChunk2ID)
 	if (!file.read(buffer, 4) || std::strncmp(buffer, "data", 4) != 0) {
@@ -111,9 +139,9 @@ std::vector<char> FileManager::readWAVFile(const std::string& filePath, Jauntlet
 	// Reading the size of the data
 	if (!file.read(buffer, 4)) {
 		Jauntlet::error("WAV file \"" + filePath + "\" has an invalid header: could not read the size of the data");
-		return nullptr;
+		return std::vector<char>();
 	}
-	size = bufferToInt(buffer, 4);
+	audioStream.size = bufferToInt(buffer, 4);
 
 	// --  Done processing the header --
 
