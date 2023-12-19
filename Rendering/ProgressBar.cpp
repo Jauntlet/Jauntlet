@@ -22,11 +22,18 @@ ProgressBar::ProgressBar(const std::string& texture, const glm::vec4& texture1UV
 	// Empty
 }
 
-void ProgressBar::setProgress(const float& newProgress) {
+void ProgressBar::setProgress(const float newProgress) {
 	_progress = newProgress;
 }
-void ProgressBar::setPosition(glm::vec2 newPosition) {
+void ProgressBar::setPosition(const glm::vec2& newPosition) {
 	_position = newPosition;
+}
+
+float ProgressBar::getProgress() const {
+	return _progress;
+}
+glm::vec2 ProgressBar::getPosition() const {
+	return _position;
 }
 
 void ProgressBar::draw(SpriteBatch& batch) {
