@@ -41,6 +41,6 @@ void ProgressBar::draw(SpriteBatch& batch) {
 		batch.draw(glm::vec4(_position, _size.x * _progress, _size.y), glm::vec4(_UV1.x, _UV1.y, _UV1.z * _progress, _UV1.w), _fullTexture);
 	}
 	if (_progress != 1) {
-		batch.draw(glm::vec4(_position.x + _size.x * _progress, _position.y, _size.x * (1 - _progress), _size.y), glm::vec4(_UV2.x, _UV2.y, _UV2.z * (1 - _progress), _UV1.w), _emptyTexture);
+		batch.draw(glm::vec4(_position.x + _size.x * _progress, _position.y, _size.x * (1 - _progress), _size.y), glm::vec4(_UV2.x + _UV2.z * _progress, _UV2.y, _UV2.z * (1 - _progress), _UV1.w), _emptyTexture);
 	}
 }
