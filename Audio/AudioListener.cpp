@@ -1,8 +1,6 @@
 #include "AudioListener.h"
 #include <cstddef>
 
-#include <iostream> // REMOVE
-
 using namespace Jauntlet;
 
 AudioListener::AudioListener() {
