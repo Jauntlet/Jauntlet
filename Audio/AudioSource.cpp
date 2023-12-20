@@ -2,6 +2,10 @@
 #include "../Filesystems/FileManager.h"
 #include "../Errors.h"
 
+#ifdef __linux
+#include <cstring>
+#endif
+
 using namespace Jauntlet;
 
 AudioSource::AudioSource(const glm::vec3& position) {
