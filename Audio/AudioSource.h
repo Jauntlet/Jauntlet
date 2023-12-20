@@ -31,7 +31,7 @@ public:
 
 	void update();
 
-	bool playWAV(const std::string& sound);
+	bool playWAV(const std::string& sound, bool loops = false);
 private:
 	std::vector<AudioStream> _sources;
 	glm::vec3 _position = glm::vec3(0);

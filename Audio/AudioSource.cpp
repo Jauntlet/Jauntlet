@@ -63,8 +63,9 @@ void AudioSource::update() {
 	}
 }
 
-bool AudioSource::playWAV(const std::string& sound) {
+bool AudioSource::playWAV(const std::string& sound, bool loops) {
 	AudioStream stream;
+	stream.looping = loops;
 
 	stream.soundData = FileManager::readWAVFile(sound, stream);
 
