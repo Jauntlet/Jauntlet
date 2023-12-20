@@ -91,19 +91,12 @@ bool AudioSource::playWAV(const std::string& sound, bool loops) {
 		return false;
 	}
 
-	// This assumes that the soundData is bigger than NUM_BUFFERS * BUFFER_SIZE. FIX THIS 
-	if (BUFFER_SIZE * NUM_BUFFERS < stream.size) {
-		for (size_t i = 0; i < NUM_BUFFERS; ++i) {
-				alBufferData(stream.buffers[i], stream.format, &stream.soundData[stream.cursor], BUFFER_SIZE, stream.sampleRate);
-				stream.cursor += BUFFER_SIZE;
-		}
-	}
-	else {
-		int bufSize = stream.size / NUM_BUFFERS;
-		for (size_t i = 0; i < NUM_BUFFERS; ++i) {
-			alBufferData(stream.buffers[i], stream.format, &stream.soundData[stream.cursor], bufSize, stream.sampleRate);
-			stream.cursor += bufSize;
-		}
+	// if BUFFER_SIZE * NUM_BUFFERS is smaller than the audios file size, we want to divide the audio evenly between the 4 buffers.
+	int bufSize = BUFFER_SIZE * NUM_BUFFERS < stream.size ? BUFFER_SIZE : stream.size / NUM_BUFFERS;
+	
+	for (size_t i = 0; i < NUM_BUFFERS; ++i) {
+		alBufferData(stream.buffers[i], stream.format, &stream.soundData[stream.cursor], bufSize, stream.sampleRate);
+		stream.cursor += bufSize;
 	}
 
 	// set source values
