@@ -177,6 +177,9 @@ const bool FileManager::createFolder(const std::string& folderPath) {
 	return true;
 #endif
 }
+const bool deleteFile(const std::string& filePath) {
+	return remove(filePath.c_str());
+}
 
 const std::string FileManager::toAbsoluteFilePath(const std::string& filePath) {
 // while Windows doesn't care if a file directory exists or not to turn it into a true filepath, Linux very much does.

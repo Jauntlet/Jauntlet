@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "../Audio/AudioSource.h"
+#include <cstdio>
 
 #if _WIN32
 #include <Windows.h>
@@ -33,6 +34,9 @@ public:
 	// returns true if folder is successfully created.
 	// Most times a folder could not be created if either the path provided is invalid, or the folder already exists.
 	static const bool createFolder(const std::string& folderPath);
+	// Deletes file from storage
+	// Returns false if the file does not exist, or the file could not be removed
+	static const bool deleteFile(const std::string& filePath);
 	
 	// Takes a file/folder path that is localized to the project and makes an absolute path.
 	// EX: "Build" -> "C:\Users\[Username]\Project\Build"
