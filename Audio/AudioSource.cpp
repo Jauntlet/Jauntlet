@@ -30,33 +30,30 @@ void AudioSource::update() {
 					dataSize = _sources[i].size - _sources[i].cursor;
 				}
 
-				if (dataSize == 0) {
-					int buffersLeft = 0;
-					alGetSourcei(_sources[i].source, AL_BUFFERS_QUEUED, &buffersLeft);
-
-					if (buffersLeft == 0) {
-						alDeleteSources(1, &_sources[i].source);
-						alDeleteBuffers(NUM_BUFFERS, &_sources[i].buffers[0]);
-						_sources.erase(_sources.begin() + i);
-						--i;
-						break;
-					}
-					continue;
+				if (dataSize != 0) {
+					std::memcpy(&data[0], &_sources[i].soundData[_sources[i].cursor], dataSize);
+					_sources[i].cursor += dataSize;
 				}
-
-				std::memcpy(&data[0], &_sources[i].soundData[_sources[i].cursor], dataSize);
-				_sources[i].cursor += dataSize;
-
 				
 				if (dataSize < BUFFER_SIZE) {
 					if (_sources[i].looping) {
 						_sources[i].cursor = 0;
 					}
 					else {
-						_sources[i].cursor = _sources[i].size;
+						int buffersLeft = 0;
+						alGetSourcei(_sources[i].source, AL_BUFFERS_QUEUED, &buffersLeft);
+
+						if (buffersLeft == 0) {
+							alDeleteSources(1, &_sources[i].source);
+							alDeleteBuffers(NUM_BUFFERS, &_sources[i].buffers[0]);
+							_sources.erase(_sources.begin() + i);
+							--i;
+							break;
+						}
+						continue;
 					}
 				}
-		
+				
 				alBufferData(buffer, _sources[i].format, data, BUFFER_SIZE, _sources[i].sampleRate);
 				alSourceQueueBuffers(_sources[i].source, 1, &buffer);
 				
@@ -95,10 +92,18 @@ bool AudioSource::playWAV(const std::string& sound) {
 	}
 
 	// This assumes that the soundData is bigger than NUM_BUFFERS * BUFFER_SIZE. FIX THIS 
-	for (size_t i = 0; i < NUM_BUFFERS; ++i) {
-		//if (stream.cursor + BUFFER_SIZE <= stream.cursor) {}
-		alBufferData(stream.buffers[i], stream.format, &stream.soundData[i * BUFFER_SIZE], BUFFER_SIZE, stream.sampleRate);
-		stream.cursor += BUFFER_SIZE;
+	if (BUFFER_SIZE * NUM_BUFFERS < stream.size) {
+		for (size_t i = 0; i < NUM_BUFFERS; ++i) {
+				alBufferData(stream.buffers[i], stream.format, &stream.soundData[stream.cursor], BUFFER_SIZE, stream.sampleRate);
+				stream.cursor += BUFFER_SIZE;
+		}
+	}
+	else {
+		int bufSize = stream.size / NUM_BUFFERS;
+		for (size_t i = 0; i < NUM_BUFFERS; ++i) {
+			alBufferData(stream.buffers[i], stream.format, &stream.soundData[stream.cursor], bufSize, stream.sampleRate);
+			stream.cursor += bufSize;
+		}
 	}
 
 	// set source values
