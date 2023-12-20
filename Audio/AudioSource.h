@@ -12,7 +12,6 @@ const size_t BUFFER_SIZE = 65536; // 32kb of data in each buffer
 
 namespace Jauntlet {
 struct AudioStream {
-	std::string fileName;
 	ALuint source;
 	ALuint buffers[NUM_BUFFERS];
 	uint8_t channels;
