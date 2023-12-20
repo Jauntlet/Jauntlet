@@ -38,8 +38,7 @@ void AudioSource::update() {
 				if (dataSize < BUFFER_SIZE) {
 					if (_sources[i].looping) {
 						_sources[i].cursor = 0;
-					}
-					else {
+					} else {
 						int buffersLeft = 0;
 						alGetSourcei(_sources[i].source, AL_BUFFERS_QUEUED, &buffersLeft);
 
@@ -54,7 +53,7 @@ void AudioSource::update() {
 					}
 				}
 				
-				alBufferData(buffer, _sources[i].format, data, BUFFER_SIZE, _sources[i].sampleRate);
+				alBufferData(buffer, _sources[i].format, data, dataSize, _sources[i].sampleRate);
 				alSourceQueueBuffers(_sources[i].source, 1, &buffer);
 				
 				delete[] data;
