@@ -11,6 +11,12 @@ using namespace Jauntlet;
 AudioSource::AudioSource(const glm::vec3& position) {
 	_position = position;
 }
+AudioSource::~AudioSource() {
+	for (size_t i = 0; i < _sources.size(); ++i) {
+		alDeleteSources(1, &_sources[i].source);
+		alDeleteBuffers(NUM_BUFFERS, &_sources[i].buffers[0]);
+	}
+}
 
 void AudioSource::update() {
 	ALint buffersProcessed = 0;

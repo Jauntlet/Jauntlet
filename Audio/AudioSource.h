@@ -28,6 +28,7 @@ class AudioSource
 {
 public:
 	AudioSource(const glm::vec3& position = glm::vec3(0));
+	~AudioSource();
 
 	void update();
 
