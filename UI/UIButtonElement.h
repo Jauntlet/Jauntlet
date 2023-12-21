@@ -21,6 +21,11 @@ namespace Jauntlet {
         void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
 		void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
 		void click() { _onClick(); };
+
+		// Returns true if the button was pressed this frame
+		bool isPressed();
+		// Returns true if the button is currently pressed down
+		bool isDown();
     protected:
 		std::function<void()> _onClick;
 		glm::vec2 _size;
