@@ -87,6 +87,12 @@ void UIManager::hideAllElements() {
 	}
 }
 
+void UIManager::showAllElements() {
+	for (int i = 0; i < _uiElements.size(); ++i) {
+		_uiElements[i]->visible = true;
+	}
+}
+
 void UIManager::resolvePositions() {
 	// we've changed our resolution, recalculate
 	_recalculateOriginPinPositions();

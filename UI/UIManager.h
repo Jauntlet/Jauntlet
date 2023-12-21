@@ -32,6 +32,8 @@ namespace Jauntlet {
 		
 		// Hides every element within the UIManager
 		void hideAllElements();
+		// Shows every element within the UIManager
+		void showAllElements();
 
 		// fix all hud elements after resize
 		void resolvePositions();
