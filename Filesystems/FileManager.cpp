@@ -177,7 +177,7 @@ const bool FileManager::createFolder(const std::string& folderPath) {
 	return true;
 #endif
 }
-const bool deleteFile(const std::string& filePath) {
+const bool FileManager::deleteFile(const std::string& filePath) {
 	return remove(filePath.c_str());
 }
 
