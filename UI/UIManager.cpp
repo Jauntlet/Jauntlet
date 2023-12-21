@@ -81,6 +81,12 @@ void UIManager::setScale(float scale) {
 	_scale = scale;
 }
 
+void UIManager::hideAllElements() {
+	for (int i = 0; i < _uiElements.size(); ++i) {
+		_uiElements[i]->visible = false;
+	}
+}
+
 void UIManager::resolvePositions() {
 	// we've changed our resolution, recalculate
 	_recalculateOriginPinPositions();

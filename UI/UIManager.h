@@ -16,16 +16,23 @@ namespace Jauntlet {
 		UIManager(Camera2D* camera);
 		// update all ui elements to fit the resolution
 		void addElement(UIElement* uiElement, GLSLProgram* program);
+		
 		// remove specified element from the UI
 		void removeElement(UIElement* uiElement);
 		// remove all elements from the UI
 		void removeAllElements();
+		
 		// draw all hud elements
 		void draw();
+		
 		// set the hud scale
 		void setScale(float scale);
 		// set the hud scale with x and y scaling seperately
 		void setScale(glm::vec2 scale);
+		
+		// Hides every element within the UIManager
+		void hideAllElements();
+
 		// fix all hud elements after resize
 		void resolvePositions();
 		// orders all hud elements into batches before drawing
