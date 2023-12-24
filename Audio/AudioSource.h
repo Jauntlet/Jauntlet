@@ -32,10 +32,14 @@ public:
 
 	void update();
 
+	void setPosition(const glm::vec3& newPos);
+	glm::vec3 getPosition();
+
 	bool playWAV(const std::string& sound, bool loops = false);
+	
 private:
-	std::vector<AudioStream> _sources;
 	glm::vec3 _position = glm::vec3(0);
+	std::vector<AudioStream> _sources;
 };
 
 }

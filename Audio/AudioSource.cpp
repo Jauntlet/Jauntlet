@@ -68,6 +68,17 @@ void AudioSource::update() {
 	}
 }
 
+void AudioSource::setPosition(const glm::vec3& newPos) {
+	_position = newPos;
+
+	for (size_t i = 0; i < _sources.size(); ++i) {
+		alSource3f(_sources[i].source, AL_POSITION, _position.x, _position.y, _position.z);
+	}
+}
+glm::vec3 AudioSource::getPosition() {
+	return _position;
+}
+
 bool AudioSource::playWAV(const std::string& sound, bool loops) {
 	AudioStream stream;
 	stream.looping = loops;
