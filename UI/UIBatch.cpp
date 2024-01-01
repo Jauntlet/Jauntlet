@@ -34,7 +34,7 @@ void UIBatch::draw(Camera2D* _camera, float* _scale) {
 
 	_program->use();
 	
-	_camera->setActiveCamera();
+	_camera->setActive();
 
 	_spriteBatch.begin();
 

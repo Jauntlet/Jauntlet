@@ -22,7 +22,7 @@ public:
 	// update the camera
 	void update();
 	// Makes this camera the camera objects are rendered to.
-	void setActiveCamera();
+	void setActive();
 	
 	// converts from a position in world space to a position on the screen
 	glm::vec2 convertWorldToScreen(glm::vec2 worldCoords) const;
@@ -32,9 +32,9 @@ public:
 	glm::vec2 convertScreenToWorldDisregardPosition(glm::vec2 screenCoords) const;
 	
 	// update the cameras size. This is meant for if the size of the Window is updated.
-	void updateCameraSize(int screenWidth, int screenHeight);
+	void updateSize(int screenWidth, int screenHeight);
 	// update the cameras size. This is meant for if the size of the Window is updated.
-	void updateCameraSize(glm::ivec2 screenSize);
+	void updateSize(glm::ivec2 screenSize);
 
 	// Test to see if bounding box is within the cameras dimensions; good for culling
 	bool isBoxInView(const glm::vec4& destinationRect) const;
@@ -60,7 +60,7 @@ public:
 	void clearTransitions();
 	
 	// get the cameras matrix
-	glm::mat4 getCameraMatrix() { return _cameraMatrix; }
+	glm::mat4 getMatrix() { return _cameraMatrix; }
 	
 	// multiply the position of the camera by a float
 	void multiplyPosition(float scale);
@@ -70,7 +70,7 @@ public:
 	void multiply(float scale);
 
 	// get the cameras width and height as a vec2 for maths
-	glm::vec2 getCameraSize(); // UNDOCUMENTED
+	glm::vec2 getSize(); // UNDOCUMENTED
 
 private:
 	float _scale = 1;

@@ -63,9 +63,9 @@ void Camera2D::update() {
 	_needsMatrixUpdate = false;
 }
 
-void Camera2D::setActiveCamera() {
+void Camera2D::setActive() {
 	if (GLSLProgram::currentProgram != nullptr) {
-		glUniformMatrix4fv(GLSLProgram::currentProgram->getUniformLocation("Projection"), 1, GL_FALSE, &getCameraMatrix()[0][0]);
+		glUniformMatrix4fv(GLSLProgram::currentProgram->getUniformLocation("Projection"), 1, GL_FALSE, &getMatrix()[0][0]);
 	}
 }
 
@@ -103,7 +103,7 @@ glm::vec2 Camera2D::convertScreenToWorldDisregardPosition(glm::vec2 screenCoords
 	return screenCoords;
 }
 
-void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {
+void Camera2D::updateSize(int screenWidth, int screenHeight) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
 
@@ -112,7 +112,7 @@ void Camera2D::updateCameraSize(int screenWidth, int screenHeight) {
 
 	_needsMatrixUpdate = true;
 }
-void Camera2D::updateCameraSize(glm::ivec2 screenSize) {
+void Camera2D::updateSize(glm::ivec2 screenSize) {
 	_screenWidth = screenSize.x;
 	_screenHeight = screenSize.y;
 
@@ -224,6 +224,6 @@ void Camera2D::multiply(float scale) {
 	_needsMatrixUpdate = true;
 }
 
-glm::vec2 Camera2D::getCameraSize() {
+glm::vec2 Camera2D::getSize() {
 	return _screenVector;
 }
