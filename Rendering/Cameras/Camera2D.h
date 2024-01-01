@@ -71,6 +71,7 @@ public:
 
 	// get the cameras width and height as a vec2 for maths
 	glm::vec2 getSize(); // UNDOCUMENTED
+	glm::vec2 getPosition(); // UNDOCUMENTED
 
 private:
 	float _scale = 1;

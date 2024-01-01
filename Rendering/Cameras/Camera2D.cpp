@@ -227,3 +227,6 @@ void Camera2D::multiply(float scale) {
 glm::vec2 Camera2D::getSize() {
 	return _screenVector;
 }
+glm::vec2 Camera2D::getPosition() {
+	return _position;
+}
