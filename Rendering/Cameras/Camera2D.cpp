@@ -92,17 +92,6 @@ glm::vec2 Camera2D::convertScreenToWorld(glm::vec2 screenCoords) const {
 	return screenCoords;
 }
 
-glm::vec2 Camera2D::convertScreenToWorldDisregardPosition(glm::vec2 screenCoords) const {
-	// make 0 the center of the screen and invert the Y axis
-	screenCoords -= glm::vec2(_screenWidth * 0.5f, _screenHeight * 0.5f);
-	// flip the y coordinates
-	screenCoords.y *= -1;
-	// scale the coords
-	screenCoords /= _scale;
-	
-	return screenCoords;
-}
-
 void Camera2D::updateSize(int screenWidth, int screenHeight) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
