@@ -156,10 +156,10 @@ std::ostream& operator<<(std::ostream& a, const glm::ivec3& b) {
 	return a;
 }
 std::ostream& operator<<(std::ostream& a, const glm::vec4& b) {
-	a << b.x << ", " << b.y << ", " << b.z << b.w;
+	a << b.x << ", " << b.y << ", " << b.z << ", " << b.w;
 	return a;
 }
 std::ostream& operator<<(std::ostream& a, const glm::ivec4& b) {
-	a << b.x << ", " << b.y << ", " << b.z << b.w;
+	a << b.x << ", " << b.y << ", " << b.z << ", " << b.w;
 	return a;
 }
