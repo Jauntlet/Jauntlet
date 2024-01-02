@@ -163,3 +163,11 @@ std::ostream& operator<<(std::ostream& a, const glm::ivec4& b) {
 	a << b.x << ", " << b.y << ", " << b.z << ", " << b.w;
 	return a;
 }
+
+glm::vec2 operator/(const glm::vec2& a, const glm::vec2& b) {
+	return glm::vec2(a.x / b.x, a.y / b.y);
+}
+void operator/=(glm::vec2& a, const glm::vec2& b) {
+	a.x /= b.x;
+	a.y /= b.y;
+}

@@ -64,3 +64,7 @@ std::ostream& operator<<(std::ostream& a, const glm::vec3& b);
 std::ostream& operator<<(std::ostream& a, const glm::ivec3& b);
 std::ostream& operator<<(std::ostream& a, const glm::vec4& b);
 std::ostream& operator<<(std::ostream& a, const glm::ivec4& b);
+
+// vector division
+glm::vec2 operator/(const glm::vec2& a, const glm::vec2& b);
+void operator/=(glm::vec2& a, const glm::vec2& b);
