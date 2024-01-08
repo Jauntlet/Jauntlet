@@ -73,7 +73,7 @@ namespace Jauntlet {
 				errorFile.close();
 
 				// Email does not exist yet.
-				std::string output = "mailto:nonexistent@gmail.com?subject=Jauntlet%20Crash%20Report&body=Hello,%20I%20have%20experienced%20a%20crash%20within%20the%20Jauntlet%20Engine.%20Below%20I%20attached%20my%20crash%20report:%0A%0AAttach%20the%20file%20located%20at:%20";
+				std::string output = "mailto:Jauntlet95@gmail.com?subject=Jauntlet%20Crash%20Report&body=Hello,%20I%20have%20experienced%20a%20crash%20within%20the%20Jauntlet%20Engine.%20Below%20I%20attached%20my%20crash%20report:%0A%0AAttach%20the%20file%20located%20at:%20";
 				output += FileManager::toAbsoluteFilePath("Logs/Latest.log");
 				FileManager::openLink(output);
 			}
