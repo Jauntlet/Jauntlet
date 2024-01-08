@@ -24,9 +24,7 @@ void InputManager::processInput() {
 	}
 
 	// updates previous key map via foreach loop
-	for (auto& it : _keyMap) {
-		_previousKeyMap[it.first] = it.second;
-	}
+	_previousKeyMap = _keyMap;
 
 	// I wanted to declare this only within the case statement where we are dealing with controllerAxis's,
 	// but doing so creates a "compiler error" where the variable is non-accessible to other case statements.
