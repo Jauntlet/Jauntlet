@@ -74,10 +74,10 @@ void TextRenderer::begin() {
 
 void TextRenderer::addText(std::string text, glm::vec2 position, glm::vec2 scaling, float depth, Color color) {
 	float storedX = position.x;
-	for (auto c = text.begin(); c != text.end(); c++) {
-		CharGlyph currentGlyph = Characters[*c];
+	for (char c : text) {
+		CharGlyph currentGlyph = Characters[c];
 
-		if (*c == '\n') {
+		if (c == '\n') {
 			position.y -= _fontHeight * scaling.y;
 			storedX = position.x;
 		}
@@ -95,10 +95,10 @@ void TextRenderer::addText(std::string text, glm::vec2 position, glm::vec2 scali
 // This is an override for text rendering meant to be used by a UIManager that accepts the UIManagers own spriteBatch, not really meant for use elsewhere -xm
 void TextRenderer::addText(SpriteBatch& externalBatch, std::string text, glm::vec2 position, glm::vec2 scaling, float depth, Color color) {
 	float storedX = position.x;
-	for (auto c = text.begin(); c != text.end(); c++) {
-		CharGlyph currentGlyph = Characters[*c];
+	for (char c : text) {
+		CharGlyph currentGlyph = Characters[c];
 
-		if (*c == '\n') {
+		if (c == '\n') {
 			position.y -= _fontHeight * scaling.y;
 			storedX = position.x;
 		}
@@ -130,10 +130,10 @@ glm::vec2 TextRenderer::calculateTextSize(std::string text, glm::vec2 scaling) {
 
 	bool multiline = false;
 	
-	for (auto c = text.begin(); c != text.end(); c++) {
-		CharGlyph currentGlyph = Characters[*c];
+	for (char c : text) {
+		CharGlyph currentGlyph = Characters[c];
 
-		if (*c == '\n') {
+		if (c == '\n') {
 			// if lineWidth is larger than maxLineWidth, set maxLineWidth to lineWidth 
 			maxLineWidth = lineWidth > maxLineWidth ? lineWidth : maxLineWidth;
 			// reset lineWidth
