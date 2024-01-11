@@ -14,7 +14,7 @@ void UIManager::addElement(UIElement* uiElement, GLSLProgram* program) {
 
 void UIManager::removeElement(UIElement* uiElement) {
 	// for every ui batch
-	for (int i = 0; i < _uiBatches.size(); i++) {
+	for (size_t i = 0; i < _uiBatches.size(); i++) {
 		// try and remove the element from the uiBatch
 		if (_uiBatches[i].removeElement(uiElement)) {
 			// if we removed one
@@ -29,7 +29,7 @@ void UIManager::removeElement(UIElement* uiElement) {
 }
 
 void UIManager::removeAllElements() {
-	for (int i = 0; i < _uiBatches.size(); i++) {
+	for (size_t i = 0; i < _uiBatches.size(); i++) {
 		_uiBatches[i].clearBatch();
 	}
 }
@@ -38,7 +38,7 @@ void UIManager::optimize() {
 	// we dont want duplicate batches
 	_uiBatches.clear();
 
-	for(int i = 0; i < _uiElements.size(); ++i) {
+	for(size_t i = 0; i < _uiElements.size(); ++i) {
 		// create a program based on our uiElement
 		GLSLProgram* program = _programs[i]; // its worth noting _programs lines up with _uiElements
 		
@@ -49,7 +49,7 @@ void UIManager::optimize() {
 		int addedElements = 0;
 
 		// grab all elements (the current one and ones after it)
-		for (int i2 = i; i2 < _uiElements.size(); ++i2) {
+		for (size_t i2 = i; i2 < _uiElements.size(); ++i2) {
 			// if an element's program matches the program we got earlier
 			if (_programs[i2] == program) {
 				// add it to our new batch
@@ -72,7 +72,7 @@ void UIManager::optimize() {
 }
 
 void UIManager::draw() {
-	for (int i = 0; i < _uiBatches.size(); ++i) {
+	for (size_t i = 0; i < _uiBatches.size(); ++i) {
 		_uiBatches[i].draw(_camera, &_scale);
 	}
 }
@@ -82,13 +82,13 @@ void UIManager::setScale(float scale) {
 }
 
 void UIManager::hideAllElements() {
-	for (int i = 0; i < _uiElements.size(); ++i) {
+	for (size_t i = 0; i < _uiElements.size(); ++i) {
 		_uiElements[i]->visible = false;
 	}
 }
 
 void UIManager::showAllElements() {
-	for (int i = 0; i < _uiElements.size(); ++i) {
+	for (size_t i = 0; i < _uiElements.size(); ++i) {
 		_uiElements[i]->visible = true;
 	}
 }
@@ -96,7 +96,7 @@ void UIManager::showAllElements() {
 void UIManager::resolvePositions() {
 	// we've changed our resolution, recalculate
 	_recalculateOriginPinPositions();
-	for (int i = 0; i < _uiElements.size(); ++i) {
+	for (size_t i = 0; i < _uiElements.size(); ++i) {
 		_uiElements[i]->resolvePosition(_camera, _calculatedOriginPinPositionsInScreenspacePtr, _scale);
 	}
 }

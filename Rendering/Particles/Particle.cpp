@@ -26,7 +26,7 @@ Particle::Particle(
 void Particle::draw() {
     _spriteBatch.begin();
 
-   for (int i = 0; i < emissions.size(); ++i) {
+   for (size_t i = 0; i < emissions.size(); ++i) {
         emissions[i].draw(&_spriteBatch,_camera,_texture);
     }
 
@@ -43,7 +43,7 @@ void Particle::update() {
         _timer -= _emissionSpeed;
     }
 
-    for (int i = 0; i < emissions.size(); ++i) {
+    for (size_t i = 0; i < emissions.size(); ++i) {
         emissions[i].update();
 
         if (emissions[i].age > emissions[i].lifetime) {

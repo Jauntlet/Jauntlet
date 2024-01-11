@@ -16,7 +16,7 @@ void UIBatch::addElement(UIElement* UIElement) {
 }
 
 bool UIBatch::removeElement(UIElement* UIElement) {
-	for (int i = 0; i < _UIElements.size(); i++) {
+	for (size_t i = 0; i < _UIElements.size(); i++) {
 		if (_UIElements[i] == UIElement) {
 			_UIElements.erase(_UIElements.begin() + i);
 			return true;
@@ -38,7 +38,7 @@ void UIBatch::draw(Camera2D* _camera, float* _scale) {
 
 	_spriteBatch.begin();
 
-	for (int i = 0; i < _UIElements.size(); ++i) {
+	for (size_t i = 0; i < _UIElements.size(); ++i) {
 		if (_UIElements[i]->visible) {
 			_UIElements[i]->draw(_camera, &_spriteBatch, *_scale);
 		}
@@ -57,7 +57,7 @@ void UIBatch::draw(Camera2D* _camera, float* _scale) {
 }
 
 void UIBatch::resolvePositions(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
-	for (int i = 0; i < _UIElements.size(); ++i) {
+	for (size_t i = 0; i < _UIElements.size(); ++i) {
 		_UIElements[i]->resolvePosition(camera, resolvedPins, scale);
 	}
 }

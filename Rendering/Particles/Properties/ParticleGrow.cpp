@@ -8,7 +8,7 @@ ParticleGrow::ParticleGrow(float startSize, float endSize) {
 }
 
 void ParticleGrow::apply(std::vector<Emission>& emissions) {
-    for (int i = 0; i < emissions.size(); ++i) {
+    for (size_t i = 0; i < emissions.size(); ++i) {
         emissions[i].size = glm::vec2(_startSize - _sizeDiff * (emissions[i].age / emissions[i].lifetime));
     }
 }
