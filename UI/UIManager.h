@@ -47,9 +47,9 @@ namespace Jauntlet {
 		std::vector<UIBatch> _uiBatches;
 		float _scale;
 
+		// im going to name my baby this -jk
 		glm::vec2 ORIGIN_PIN_POSITIONS[9] = {glm::vec2(0.0f,0.0f),glm::vec2(0.5f,0.0f),glm::vec2(1.0f,0.0f),glm::vec2(1.0f,0.5f),glm::vec2(1.0f,1.0f),glm::vec2(0.5f,1.0f),glm::vec2(0.0f,1.0f),glm::vec2(0.0f,0.5f),glm::vec2(0.5f,0.5f)};
 
-		// im going to name my baby this -jk
 		glm::vec2 _calculatedOriginPinPositionsInScreenspace[9];
 
 		glm::vec2* _calculatedOriginPinPositionsInScreenspacePtr = _calculatedOriginPinPositionsInScreenspace;
