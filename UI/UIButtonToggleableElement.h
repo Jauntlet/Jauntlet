@@ -18,6 +18,8 @@ namespace Jauntlet {
 		
 		// manually override if the button displays as clicked or not
 		void setClicked(bool clicked);
+
+		bool isClicked();
     private:
 		
 	};

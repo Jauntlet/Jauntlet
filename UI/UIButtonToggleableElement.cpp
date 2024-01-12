@@ -30,3 +30,7 @@ void UIButtonToggleableElement::draw(Camera2D* camera, SpriteBatch* spriteBatch,
 void UIButtonToggleableElement::setClicked(bool clicked) {
     _clicked = clicked;
 }
+
+bool UIButtonToggleableElement::isClicked() {
+    return _clicked;
+}
