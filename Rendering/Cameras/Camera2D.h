@@ -68,9 +68,9 @@ public:
 	void multiply(float scale);
 
 	// get the cameras width and height as a vec2
-	glm::vec2 getSize(); // UNDOCUMENTED
-	glm::vec2 getPosition(); // UNDOCUMENTED
-	float getScale(); // UNDOCUMENTED
+	glm::vec2 getSize();
+	glm::vec2 getPosition();
+	float getScale(); 
 private:
 	float _scale = 1;
 	float _transitionScale = 1;
