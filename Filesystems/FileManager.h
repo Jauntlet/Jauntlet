@@ -1,4 +1,4 @@
-/* Purpose: Reads binary files into memory
+/* Purpose: Handles all file related operations in Jauntlet. This may be filepaths management, or reading binary files into memory.
  * Main Contributer(s): Xander Mooney
  */
 #pragma once

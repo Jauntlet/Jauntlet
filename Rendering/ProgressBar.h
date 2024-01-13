@@ -1,3 +1,6 @@
+/* Purpose: Used to interpolate between two images based on a scale from 0-1
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 #include "Textures/SpriteBatch.h"
 #include "Textures/ResourceManager.h"

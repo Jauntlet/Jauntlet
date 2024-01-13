@@ -1,3 +1,6 @@
+/* Purpose: Property for a particle to grow over its lifespan.
+ * Main Contributer(s): Jack Kennedy
+ */
 #pragma once
 
 #include "ParticleProperty.h"

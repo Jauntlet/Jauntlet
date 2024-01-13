@@ -1,3 +1,6 @@
+/* Purpose: Support for Progress Bars within the UI system. Used to interpolate between two images between a scale of 0-1.
+ * Main Contributer(s): Xander Mooney
+ */
 #pragma once
 #include "UIElement.h"
 #include "../Rendering/ProgressBar.h"

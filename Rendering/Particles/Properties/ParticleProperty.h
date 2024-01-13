@@ -1,3 +1,6 @@
+/* Purpose: Base method to handle all possible properties for particles
+ * Main Contributer(s): Jack Kennedy
+ */
 #pragma once
 
 #include "../Emission.h"
