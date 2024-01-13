@@ -11,10 +11,11 @@ namespace Jauntlet {
 	extern void fatalError(const std::string& errorString);
 	// Gives a warning to the console / logging system
 	extern void error(const std::string& errorString);
+	// Logs information to the console / logging system
+	extern void log(const std::string& string);
 
 	void terminate();
 	void terminate(const std::string& error);
 
 	void dumpLog();
-
 }
