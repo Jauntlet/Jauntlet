@@ -54,9 +54,6 @@
     <ClCompile Include="Rendering\GLSLProgram.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\LineRenderer.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\TextRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
@@ -166,9 +163,6 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\GLSLProgram.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Rendering\LineRenderer.h">
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\TextRenderer.h">
