@@ -28,14 +28,14 @@ public:
 
 	// Clears what is rendered on screen.
 	// WARNING: resets ALL window screens
-	void clearScreen();
+	static void clearScreen();
 	// Swaps the windows buffer, should be done every draw frame
 	void swapBuffer();
 	// tells SDL to draw to the selected window, only needed if multiple windows exist.
 	void setDrawTarget();
 
 	// sets the default color of the window.
-	void setBackgroundColor(Color color);
+	static void setBackgroundColor(Color color);
 	// set the icon of the window.
 	// if your icon does not appear, it could be because it is too large.
 	void setWindowIcon(std::string filepath);
