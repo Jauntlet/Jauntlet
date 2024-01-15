@@ -19,6 +19,7 @@ class Window
 {
 public:
 	Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
+	~Window();
 
 	// Clears what is rendered on screen.
 	// WARNING: resets ALL window screens

@@ -45,6 +45,10 @@ Window::Window(std::string windowName, int screenWidth, int screenHeight, unsign
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
+Window::~Window() {
+	SDL_DestroyWindow(_sdlWindow);
+}
+
 void Window::clearScreen() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
