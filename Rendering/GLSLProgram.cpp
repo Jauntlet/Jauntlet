@@ -18,7 +18,6 @@ GLSLProgram::~GLSLProgram() {
 }
 
 void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {
-
 	_programID = glCreateProgram();
 
 	_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
