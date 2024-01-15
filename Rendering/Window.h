@@ -26,7 +26,7 @@ public:
 	void clearScreen();
 	// Swaps the windows buffer, should be done every draw frame
 	void swapBuffer();
-	
+
 	// sets the default color of the window.
 	void setBackgroundColor(Color color);
 	// set the icon of the window.
@@ -48,6 +48,9 @@ public:
 	// Collects the correct window size
 	// Needed when the window is resized.
 	glm::ivec2 resolveWindowSize();
+	
+	// Forces window to top of view, and locks users control on the window
+	void forceFocus();
 
 	// get the width of the window
 	// make sure to run resolveWindowSize() on changes of window size (read docs)

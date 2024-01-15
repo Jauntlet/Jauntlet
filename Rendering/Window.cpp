@@ -58,6 +58,7 @@ void Window::swapBuffer() {
 	SDL_GL_SwapWindow(_sdlWindow);
 }
 
+
 void Window::setBackgroundColor(Color color) {
 	glClearColor(color.r / static_cast<GLclampf>(255), color.g / static_cast<GLclampf>(255), color.b / static_cast<GLclampf>(255), 1);
 }
@@ -97,6 +98,10 @@ glm::ivec2 Window::resolveWindowSize() {
 	glViewport(0, 0, _screenWidth, _screenHeight);
 
 	return glm::ivec2(_screenHeight, _screenWidth);
+}
+
+void Window::forceFocus() {
+	SDL_RaiseWindow(_sdlWindow);
 }
 
 int Window::getWindowWidth() const {
