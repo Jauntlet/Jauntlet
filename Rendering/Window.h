@@ -3,6 +3,7 @@
  */
 #pragma once
 #include "Vertex.h"
+#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
 #include <GL/glew.h>
 #include <glm/ext/vector_float2.hpp>
@@ -19,6 +20,10 @@ class Window
 {
 public:
 	Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags);
+	// Shared Windows are windows that share context information between eachother.
+	// This is a recommended approach for if you are using multiple windows as otherwise both windows would require you to properly
+	// set up their information, usually resulting in the copying of a ton of information.
+	Window(std::string windowName, Jauntlet::Window* sharedWindow, int screenWidth, int screenHeight, unsigned int currentFlags);
 	~Window();
 
 	// Clears what is rendered on screen.
@@ -26,6 +31,8 @@ public:
 	void clearScreen();
 	// Swaps the windows buffer, should be done every draw frame
 	void swapBuffer();
+	// tells SDL to draw to the selected window, only needed if multiple windows exist.
+	void setDrawTarget();
 
 	// sets the default color of the window.
 	void setBackgroundColor(Color color);
@@ -64,6 +71,7 @@ public:
 
 private:
 	SDL_Window* _sdlWindow;
+	SDL_GLContext _context;
 	int _screenWidth, _screenHeight;
 };
 }
