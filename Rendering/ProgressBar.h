@@ -16,7 +16,7 @@ public:
 	glm::vec2 position;
 	float progress = 0;
 protected:
-	GLuint _emptyTexture, _fullTexture;
+	unsigned int _emptyTexture, _fullTexture;
 	glm::vec4 _UV1, _UV2;
 	glm::vec2 _size;
 };

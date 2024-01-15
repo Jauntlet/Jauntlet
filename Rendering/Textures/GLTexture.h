@@ -3,12 +3,10 @@
  */
 #pragma once
 
-#include <GL/glew.h>
-
 namespace Jauntlet {
 // struct for Textures
 struct GLTexture {
-	GLuint id;
+	unsigned int id;
 	int width;
 	int height;
 };

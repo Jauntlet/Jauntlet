@@ -7,7 +7,7 @@ UISpriteAnimatedElement::UISpriteAnimatedElement() {
     //empty
 }
 
-UISpriteAnimatedElement::UISpriteAnimatedElement(GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType, Animation* animation) {
+UISpriteAnimatedElement::UISpriteAnimatedElement(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType, Animation* animation) {
     _textureId = textureId;
     _originPin = positionPinType;
     _position = position;

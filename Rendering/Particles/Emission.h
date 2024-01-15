@@ -17,7 +17,7 @@ public:
     Emission();
 
     // draw the emission
-    void draw(SpriteBatch* spriteBatch, Camera2D* camera, GLuint texture); // DONTDOCUMENT
+    void draw(SpriteBatch* spriteBatch, Camera2D* camera, unsigned int texture); // DONTDOCUMENT
 
     // update the emission
     void update();

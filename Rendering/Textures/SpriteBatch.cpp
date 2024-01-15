@@ -5,7 +5,7 @@
 
 using namespace Jauntlet;
 
-Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, GLuint Texture, float Depth, const Color& Color) :
+Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, unsigned int Texture, float Depth, const Color& Color) :
 	texture(Texture), depth(Depth) {
 	topLeft.color = Color;
 	topLeft.setPosition(DestRect.x, DestRect.y + DestRect.w);
@@ -23,7 +23,7 @@ Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, GLuint Texture,
 	topRight.setPosition(DestRect.x + DestRect.z, DestRect.y + DestRect.w);
 	topRight.setUV(UvRect.x + UvRect.z, UvRect.y + UvRect.w);
 }
-Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float radians, GLuint Texture, float Depth, const Color& Color) :
+Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float radians, unsigned int Texture, float Depth, const Color& Color) :
 	texture(Texture), depth(Depth) {
 	glm::vec2 halfDims(DestRect.z * 0.5f, DestRect.w * 0.5f);
 
@@ -63,22 +63,22 @@ void SpriteBatch::begin(GlyphSortType sortType) {
 	_glyphs.clear();
 }
 
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, unsigned int texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, uvRect, texture, depth, color);
 }
-void SpriteBatch::draw(const glm::vec4& destRect, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, unsigned int texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, glm::vec4(0,0,1,1), texture, depth, color);
 }
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, float angle, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, float angle, unsigned int texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, uvRect, angle, texture, depth, color);
 }
-void SpriteBatch::draw(const glm::vec4& destRect, float angle, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, float angle, unsigned int texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, glm::vec4(0, 0, 1, 1), angle, texture, depth, color);
 }
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, const glm::vec2& angle, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, const glm::vec2& angle, unsigned int texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, uvRect, atan2(angle.y, angle.x), texture, depth, color);
 }
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec2& angle, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec2& angle, unsigned int texture, float depth, const Color& color) {
 	_glyphs.emplace_back(destRect, glm::vec4(0, 0, 1, 1), atan2(angle.y, angle.x), texture, depth, color);
 }
 

@@ -29,7 +29,7 @@ public:
 	GLint getUniformLocation(const std::string& uniformName) const;
 
 	// returns the id of the program
-	GLuint getId() const { return _programID; };
+	unsigned int getId() const { return _programID; };
 
 	// enable the use of the program
 	void use();
@@ -40,12 +40,12 @@ public:
 private:
 
 	// function to compile an individual shader
-	void compileShader(const std::string& filePath, GLuint id);
+	void compileShader(const std::string& filePath, unsigned int id);
 
 	int _numAttributes = 0;
 
-	GLuint _programID = 0;
-	GLuint _vertexShaderID = 0;
-	GLuint _fragmentShaderID = 0;
+	unsigned int _programID = 0;
+	unsigned int _vertexShaderID = 0;
+	unsigned int _fragmentShaderID = 0;
 };
 }

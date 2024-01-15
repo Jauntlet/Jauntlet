@@ -13,10 +13,10 @@ struct Position {
 	float y;
 };
 struct Color {
-	GLubyte r;
-	GLubyte g;
-	GLubyte b;
-	GLubyte a;
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+	uint8_t a;
 
 	Color() : r(255), g(255), b(255), a(255) { }
 	// Do not include # in string.
@@ -29,10 +29,10 @@ struct Color {
 		Jauntlet::fatalError("String " + hex + " is not a hexcode.");
 		}
 	}
-	Color(GLubyte R, GLubyte G, GLubyte B, GLubyte A) : r(R), g(G), b(B), a(A) { }
-	Color(GLubyte R, GLubyte G, GLubyte B) : r(R), g(G), b(B), a(255) { }
+	Color(uint8_t R, uint8_t G, uint8_t B, uint8_t A) : r(R), g(G), b(B), a(A) { }
+	Color(uint8_t R, uint8_t G, uint8_t B) : r(R), g(G), b(B), a(255) { }
 
-	void setColor(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha) {
+	void setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
 		r = red;
 		g = green;
 		b = blue;
@@ -56,7 +56,7 @@ struct Vertex {
 		uv.v = 0;
 	}
 	// setters
-	void setColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a) {
+	void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
 		color.r = r;
 		color.g = g;
 		color.b = b;

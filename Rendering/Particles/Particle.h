@@ -48,7 +48,7 @@ private:
     Camera2D* _camera;
     glm::vec2 _position;
 
-    GLuint _texture;
+    unsigned int _texture;
 
     uint8_t _maxEmissions = 0;
     uint8_t _emissionsCount = 0;

@@ -6,7 +6,7 @@ Emission::Emission() {
     
 }
 
-void Emission::draw(SpriteBatch* spriteBatch, Camera2D* camera, GLuint texture) {
+void Emission::draw(SpriteBatch* spriteBatch, Camera2D* camera, unsigned int texture) {
     spriteBatch->draw(glm::vec4(position.x - size.x * 0.5f,position.y  - size.y * 0.5f,size.x,size.y), texture, 0, Jauntlet::Color(255,255,255,255));
 }
 

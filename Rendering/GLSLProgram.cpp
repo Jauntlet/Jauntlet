@@ -74,8 +74,8 @@ void GLSLProgram::addAttribute(const std::string& attributeName) {
 }
 
 
-GLint GLSLProgram::getUniformLocation(const std::string& uniformName) const {
 	GLint location = glGetUniformLocation(_programID, uniformName.c_str());
+int GLSLProgram::getUniformLocation(const std::string& uniformName) const {
 	if (location == GL_INVALID_INDEX) {
 		fatalError("Uniform " + uniformName + " not found in shader!");
 	}
@@ -107,7 +107,7 @@ void GLSLProgram::unuse() {
 	currentProgram = nullptr; // no program is in use
 }
 
-void GLSLProgram::compileShader(const std::string& filePath, GLuint id) {
+void GLSLProgram::compileShader(const std::string& filePath, unsigned int id) {
 	std::ifstream vertexFile(filePath);
 	if (vertexFile.fail()) {
 		perror(filePath.c_str());

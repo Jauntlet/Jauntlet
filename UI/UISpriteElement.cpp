@@ -6,7 +6,7 @@ UISpriteElement::UISpriteElement() {
     //empty
 }
 
-UISpriteElement::UISpriteElement(GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
+UISpriteElement::UISpriteElement(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
     _textureId = textureId;
     _originPin = positionPinType;
     _position = position;
