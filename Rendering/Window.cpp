@@ -156,6 +156,11 @@ void Window::forceFocus() {
 	SDL_RaiseWindow(_sdlWindow);
 }
 
+glm::ivec2 Window::getPosition() const {
+	glm::ivec2 output{};
+	SDL_GetWindowPosition(_sdlWindow, &output.x, &output.y);
+	return output;
+}
 int Window::getWindowWidth() const {
 	return _screenWidth; 
 }

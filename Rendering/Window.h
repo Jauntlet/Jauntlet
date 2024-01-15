@@ -59,6 +59,8 @@ public:
 	// Forces window to top of view, and locks users control on the window
 	void forceFocus();
 
+	// Gets the windows position on the users screen
+	glm::ivec2 getPosition() const;
 	// get the width of the window
 	// make sure to run resolveWindowSize() on changes of window size (read docs)
 	int getWindowWidth() const;
