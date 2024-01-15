@@ -29,8 +29,8 @@ Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float radians, 
 
 	glm::vec2 tl(rotatePoint(-halfDims.x, halfDims.y, radians) + halfDims);
 	glm::vec2 bl(rotatePoint(-halfDims.x, -halfDims.y, radians) + halfDims);
-	glm::vec2 br(rotatePoint(halfDims.x, -halfDims.y, radians) + halfDims);
-	glm::vec2 tr(rotatePoint(halfDims.x, halfDims.y, radians) + halfDims);
+	glm::vec2 tr(tl.x + DestRect.z * cos(radians), tl.y + DestRect.z * sin(radians));
+	glm::vec2 br(bl.x + DestRect.z * cos(radians), bl.y + DestRect.z * sin(radians));
 
 	topLeft.color = Color;
 	topLeft.setPosition(DestRect.x + tl.x, DestRect.y + tl.y);
