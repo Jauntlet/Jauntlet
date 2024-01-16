@@ -1,8 +1,6 @@
 #include "TextureCache.h"
 #include "ImageLoader.h"
 
-using namespace Jauntlet;
-
 TextureCache::TextureCache() {
 }
 

@@ -11,7 +11,6 @@
 #include <string>
 #include <vector>
 
-namespace Jauntlet {
 // We are setting each ENUM to a different bit so that we can use bitwise operators to have multiple flags at once.
 // invisible = 001, fullscreen = 010, borderless = 100. This means we can properly combine the flags.
 enum WindowFlags { INVISIBLE = 0x1, FULLSCREEN = 0x2, BORDERLESS = 0x4, RESIZEABLE = 0x8 };
@@ -23,7 +22,7 @@ public:
 	// Shared Windows are windows that share context information between eachother.
 	// This is a recommended approach for if you are using multiple windows as otherwise both windows would require you to properly
 	// set up their information, usually resulting in the copying of a ton of information.
-	Window(std::string windowName, Jauntlet::Window* sharedWindow, int screenWidth, int screenHeight, unsigned int currentFlags);
+	Window(std::string windowName, Window* sharedWindow, int screenWidth, int screenHeight, unsigned int currentFlags);
 	~Window();
 
 	// Clears what is rendered on screen.
@@ -76,4 +75,3 @@ private:
 	SDL_GLContext _context;
 	int _screenWidth, _screenHeight;
 };
-}

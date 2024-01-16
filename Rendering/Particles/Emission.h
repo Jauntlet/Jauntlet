@@ -10,7 +10,6 @@
 
 #pragma once
 
-namespace Jauntlet {
 class Emission
 {
 public:
@@ -36,4 +35,3 @@ public:
     float lifetime = 10.0f;
 private:
 };
-}

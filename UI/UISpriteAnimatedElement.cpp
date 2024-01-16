@@ -1,8 +1,6 @@
 #include <iostream>
 #include "UISpriteAnimatedElement.h"
 
-using namespace Jauntlet;
-
 UISpriteAnimatedElement::UISpriteAnimatedElement() {
     //empty
 }

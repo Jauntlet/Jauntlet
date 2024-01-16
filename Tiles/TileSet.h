@@ -6,7 +6,6 @@
 #include <string>
 #include <glm/ext/vector_float4.hpp>
 
-namespace Jauntlet {
 class TileSet
 {
 public:
@@ -48,4 +47,3 @@ private:
 	
 	TileSet::Tileinfo _mainTiles[25];
 };
-}

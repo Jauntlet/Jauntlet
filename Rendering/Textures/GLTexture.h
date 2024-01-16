@@ -3,11 +3,9 @@
  */
 #pragma once
 
-namespace Jauntlet {
 // struct for Textures
 struct GLTexture {
 	unsigned int id;
 	int width;
 	int height;
 };
-}

@@ -4,7 +4,7 @@
 #pragma once
 #include "UIElement.h"
 #include "../Rendering/ProgressBar.h"
-namespace Jauntlet {
+
 class UIProgressBarElement : public UIElement, public ProgressBar {
 public:
 	UIProgressBarElement(const std::string& texture1, const glm::vec4& texture1UV, const std::string& texture2, const glm::vec4& texture2UV, const glm::vec4& dest, UIElement::ORIGIN_PIN pinType = UIElement::ORIGIN_PIN::TOP_LEFT);
@@ -15,5 +15,3 @@ public:
 protected:
 	glm::vec2 _resolvedSize, _resolvedPosition;
 };
-}
-

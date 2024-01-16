@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 
-namespace Jauntlet {
 enum class Dialog_Icon { INFO, WARNING, ERROR, QUESTION };
 enum class Dialog_Type { OK, OKCANCEL, YESNO, YESNOCANCEL};
 enum class Dialog_DefaultButton { CANCEL, OK, YES, NO };
@@ -28,5 +27,4 @@ std::string openFilePrompt(const std::string& title, const std::string& defaultF
 std::string selectFolderPrompt(const std::string& title, const std::string& defaultFilePath);
 
 // Color chooser here, requires testing
-}
 // Jauntlet::Color colorChooser

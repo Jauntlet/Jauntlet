@@ -3,8 +3,6 @@
 #include "InputManager.h"
 #include <string>
 
-using namespace Jauntlet;
-
 InputManager::InputManager() {
 	// Empty
 }
@@ -75,7 +73,7 @@ void InputManager::processInput() {
 						_controllers[_event.jaxis.which].triggers.y = controllerAxis;
 						break;
 					default:
-						error("WARNING: undefined stick axis detected " + std::to_string(_event.jaxis.axis));
+						Jauntlet::error("WARNING: undefined stick axis detected " + std::to_string(_event.jaxis.axis));
 						continue;
 				}
 				break;
@@ -182,7 +180,7 @@ glm::vec2 InputManager::getMouseCoords() {
 
 glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 	if (controllerID >= _controllers.size()) {
-		error("WARNING: Tried to get Axis on non-existent Controller");
+		Jauntlet::error("WARNING: Tried to get Axis on non-existent Controller");
 		return glm::vec2(0);
 	}
 	switch (type) {
@@ -195,7 +193,7 @@ glm::vec2 InputManager::getControllerAxis(Axis type, int controllerID) {
 		case Axis::dPad:
 			return _controllers[controllerID].dPad;
 		default:
-		error("WARNING: invalid parameter passed into getControllerAxis!");
+		Jauntlet::error("WARNING: invalid parameter passed into getControllerAxis!");
 		return glm::vec2(0);
 	}
 }
@@ -224,7 +222,7 @@ glm::vec2 InputManager::getControllerAxis(Axis type) {
 		}
 		break;
 	default:
-		error("WARNING: invalid parameter passed into getControllerAxis!");
+		Jauntlet::error("WARNING: invalid parameter passed into getControllerAxis!");
 		return glm::vec2(0);
 	}
 	

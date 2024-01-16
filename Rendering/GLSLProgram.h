@@ -7,7 +7,6 @@
 #include <GL/glew.h>
 #include <string>
 
-namespace Jauntlet {
 // GLSLProgram is the main shader used by the program, using a vertex and fragment shader
 class GLSLProgram
 {
@@ -48,4 +47,3 @@ private:
 	unsigned int _vertexShaderID = 0;
 	unsigned int _fragmentShaderID = 0;
 };
-}

@@ -5,8 +5,6 @@
 #include "../Errors.h"
 #include "TextRenderer.h"
 
-using namespace Jauntlet;
-
 GLSLProgram TextRenderer::textShader;
 
 TextRenderer::TextRenderer(const char* font, int size) :
@@ -17,12 +15,12 @@ TextRenderer::TextRenderer(const char* font, int size) :
 
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft)) {
-		fatalError("FREETYPE library failed to initialize!");
+		Jauntlet::fatalError("FREETYPE library failed to initialize!");
 	}
 
 	FT_Face face;
 	if (FT_New_Face(ft, font, 0, &face)) {
-		fatalError("FREETYPE failed to load font: " + (std::string)font);
+		Jauntlet::fatalError("FREETYPE failed to load font: " + (std::string)font);
 	}
 	// setting width to 0 lets the function dynamically determine the width.
 	FT_Set_Pixel_Sizes(face, 0, _fontHeight);
@@ -31,7 +29,7 @@ TextRenderer::TextRenderer(const char* font, int size) :
 
 	for (unsigned char c = FIRST_PRINTABLE_CHAR; c < LAST_PRINTABLE_CHAR; c++) {
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-			error("Failed to load Font Glyph: " + std::to_string(*font) + " of char " + std::to_string(c));
+			Jauntlet::error("Failed to load Font Glyph: " + std::to_string(*font) + " of char " + std::to_string(c));
 			continue;
 		}
 		unsigned int texture;

@@ -9,7 +9,6 @@
 #include <unordered_map>
 #include <vector>
 
-namespace Jauntlet {
 enum class Axis { LeftStick, RightStick, Triggers, dPad };
 	
 // Stores and manages the state of keys, aswell as other SDL events
@@ -80,4 +79,3 @@ private:
 
 	std::vector<Controller> _controllers;
 };
-}

@@ -8,7 +8,6 @@
 #include <glm/vec3.hpp>
 #include "../Filesystems/FileManager.h"
 
-namespace Jauntlet {
 class AudioListener
 {
 public:
@@ -38,4 +37,3 @@ private:
 	ALCdevice* _device;
 	ALCcontext* _context;
 };
-}

@@ -14,8 +14,6 @@
 #include "../Rendering/Textures/TextureCache.h"
 #include "TileSet.h"
 
-namespace Jauntlet {
-
 enum class TileCollision { NONE = 0, SQUARE = 1};
 
 // This is probably an unintuitive way to handle this, however we need to be able to efficentely link the chars from the level file to the texture or tileset based on what it is.
@@ -90,7 +88,7 @@ public:
 	void resetOffset();
 	// Updates the color of the tilemap
 	// Running this repeatedly could be a performance bottleneck, especially on large tilemaps, as this recompiles the tile formations. Tilemaps only do this a max of once per frame.
-	void changeDrawColor(Jauntlet::Color color);
+	void changeDrawColor(Color color);
 
 	// Checks if the specified position is a valid tile position. This prevents errors checking tiles in a non-existent location.
 	bool isValidTilePos(glm::ivec2 position) const;
@@ -113,7 +111,7 @@ private:
 
 	std::vector<std::vector<unsigned int>> _level;
 	SpriteBatch _spriteBatch;
-	Jauntlet::Color _drawColor;
+	Color _drawColor;
 
 	int _tileSize;
 	glm::vec2 _offset = glm::vec2(0);
@@ -125,4 +123,3 @@ private:
 
 	TextureCache& _textureCache;
 };
-}

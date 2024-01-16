@@ -7,7 +7,6 @@
 #include <vector>
 #include "UIElement.h"
 
-namespace Jauntlet {
 	class GLSLProgram;
 
 	class UIBatch
@@ -35,4 +34,3 @@ namespace Jauntlet {
 
 		SpriteBatch _spriteBatch;
 	};
-}

@@ -7,7 +7,6 @@
 #include <SDL2/SDL_surface.h>
 #include <string>
 
-namespace Jauntlet {
 // Load images
 class ImageLoader
 {
@@ -24,4 +23,3 @@ private:
 	// loads the missing texture file if it exists
 	static GLTexture loadMissingTexture();
 };
-}

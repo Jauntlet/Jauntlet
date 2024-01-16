@@ -1,7 +1,5 @@
 #include "TileSet.h"
 
-using namespace Jauntlet;
-
 static int _lastestID = 0;
 
 TileSet::TileSet(std::string AllSidesCovered, std::string NoSidesCovered,//psychos only

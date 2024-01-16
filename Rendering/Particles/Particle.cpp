@@ -2,19 +2,16 @@
 
 #include "../Textures/ResourceManager.h"
 
-using namespace Jauntlet;
-
 Particle::Particle(
+        // the properties
         Camera2D* camera,
         glm::vec2 position,
-        // the properties
         std::string texture,
         // pre determined
         uint8_t maxAliveMembers,
         bool emitContinuously,
         float emissionSpeed,
         Color startingColor
-        
         ) {
     _camera = camera;
     _position = position;
@@ -34,7 +31,7 @@ void Particle::draw() {
 }
 
 void Particle::update() {
-    _timer += Time::getDeltaTime();
+    _timer += Jauntlet::Time::getDeltaTime();
     
     while (_emissionsCount < _maxEmissions && _timer > _emissionSpeed) {
         if (_doEmit) {

@@ -10,7 +10,6 @@
 
 #include "../Vertex.h"
 
-namespace Jauntlet {
 // defines the order for sprites to be drawn
 enum class GlyphSortType {
 	NONE, FRONT_TO_BACK, BACK_TO_FRONT, TEXTURE
@@ -120,4 +119,3 @@ private:
 
 	std::vector<RenderBatch> _renderBatches;
 };
-}

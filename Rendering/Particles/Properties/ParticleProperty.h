@@ -5,7 +5,6 @@
 
 #include "../Emission.h"
 
-namespace Jauntlet {
 class ParticleProperty
 {
 public:
@@ -17,4 +16,3 @@ public:
 private:
     
 };
-}

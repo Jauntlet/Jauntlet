@@ -1,7 +1,5 @@
 #include "ParticleGrow.h"
 
-using namespace Jauntlet;
-
 ParticleGrow::ParticleGrow(float startSize, float endSize) {
 	_startSize = startSize;
     _sizeDiff = startSize - endSize;

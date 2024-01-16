@@ -1,7 +1,5 @@
 #include "UIButtonToggleableElement.h"
 
-using namespace Jauntlet;
-
 UIButtonToggleableElement::UIButtonToggleableElement() {
     // empty
 }

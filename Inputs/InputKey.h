@@ -6,7 +6,6 @@
 #include <vector>
 #include "InputManager.h"
 
-namespace Jauntlet {
 // Stores multiple keycodes together that have the same functionality
 class InputKey
 {
@@ -29,5 +28,3 @@ private:
 	 std::vector<SDL_KeyCode> _keys;
 	 InputManager* _inputManager;
 };
-};
-

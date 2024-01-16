@@ -9,7 +9,6 @@
 
 #pragma once
 
-namespace Jauntlet {
 class Particle
 {
 public:
@@ -61,4 +60,3 @@ private:
 
     void emit();
 };
-}

@@ -9,7 +9,6 @@
 
 #include "UIBatch.h"
 
-namespace Jauntlet {
 	class UIManager
 	{
 	public:
@@ -57,5 +56,3 @@ namespace Jauntlet {
 		// recalculate the origin pin positions.
 		void _recalculateOriginPinPositions();
 	};
-}
-

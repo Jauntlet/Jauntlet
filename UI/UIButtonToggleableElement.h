@@ -7,7 +7,6 @@
 
 #include "UIButtonElement.h"
 
-namespace Jauntlet {
 	class UIButtonToggleableElement : public UIButtonElement
 	{
 	public:
@@ -23,4 +22,3 @@ namespace Jauntlet {
     private:
 		
 	};
-}

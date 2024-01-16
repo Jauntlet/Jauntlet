@@ -1,7 +1,5 @@
 #include "UITextElement.h"
 
-using namespace Jauntlet;
-
 UITextElement::UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, const float scale) {
     _text = text;
     _textRenderer = textRenderer;

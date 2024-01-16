@@ -18,15 +18,13 @@
 #include <cstdint>
 #endif
 
-
-namespace Jauntlet {
 class FileManager
 {
 public:
 	// reads files to a data buffer. Returns true if it found the file, false otherwise. The data is returned into the second field.
 	static const bool readFileToBuffer(const std::string& filePath, std::vector<unsigned char>& buffer);
 	
-	static std::vector<char> readWAVFile(const std::string& filePath, Jauntlet::AudioStream& audioStream);
+	static std::vector<char> readWAVFile(const std::string& filePath, AudioStream& audioStream);
 
 	// Finds the specified folder, returns true if found.
 	static const bool findFile(const std::string& filePath);
@@ -49,4 +47,3 @@ private:
 	static const int32_t bufferToInt(char* buffer, size_t len);
 	static const bool isBigEndian();
 };
-}

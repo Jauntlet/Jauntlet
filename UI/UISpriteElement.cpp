@@ -1,7 +1,5 @@
 #include "UISpriteElement.h"
 
-using namespace Jauntlet;
-
 UISpriteElement::UISpriteElement() {
     //empty
 }

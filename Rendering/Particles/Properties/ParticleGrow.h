@@ -5,7 +5,6 @@
 
 #include "ParticleProperty.h"
 
-namespace Jauntlet {
 class ParticleGrow : public ParticleProperty
 {
 public:
@@ -18,4 +17,3 @@ private:
     float _startSize = 0;
     float _sizeDiff = 10;
 };
-}

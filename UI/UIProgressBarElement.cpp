@@ -3,8 +3,6 @@
  */
 #include "UIProgressBarElement.h"
 
-using namespace Jauntlet;
-
 UIProgressBarElement::UIProgressBarElement(const std::string& texture1, const glm::vec4& texture1UV, const std::string& texture2, const glm::vec4& texture2UV, const glm::vec4& dest, UIElement::ORIGIN_PIN pinType) : 
 	ProgressBar(texture1, texture1UV, texture2, texture2UV, dest)
 {
