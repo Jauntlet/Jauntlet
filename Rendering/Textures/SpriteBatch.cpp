@@ -99,7 +99,7 @@ void SpriteBatch::end() {
 }
 
 void SpriteBatch::render() { 
-
+#ifdef OPENGL
 	glBindVertexArray(_vaoID);
 
 	for (int i = 0; i < _renderBatches.size(); ++i) {
@@ -109,6 +109,7 @@ void SpriteBatch::render() {
 	}
 
 	glBindVertexArray(0);
+#endif
 }
 
 void SpriteBatch::endAndRender() {
@@ -150,6 +151,7 @@ void SpriteBatch::createRenderBatches() {
 		vertices[cv++] = _glyphPointers[cg]->topLeft;
 	}
 
+#ifdef OPENGL
 	glBindBuffer(GL_ARRAY_BUFFER, _vboID);
 	// orphan the buffer (basically kill it)
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
@@ -157,10 +159,11 @@ void SpriteBatch::createRenderBatches() {
 	glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+#endif
 }
 
 void SpriteBatch::createVertexArray() {
-
+#ifdef OPENGL
 	if (glGetError() != GL_NO_ERROR) {
 		fatalError("Tried to initialize a SpriteBatch before a window is created! Please reorder your initialization order!");
 	}
@@ -189,6 +192,7 @@ void SpriteBatch::createVertexArray() {
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
 
 	glBindVertexArray(0);
+#endif
 }
 
 void SpriteBatch::sortGlyphs() {

@@ -5,7 +5,17 @@
 $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Vulkan|x64'">
+    <LocalDebuggerEnvironment>$(SolutionDir)dependencies\x64
+$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerEnvironment>$(SolutionDir)dependencies\x64
+$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Vulkan|x64'">
     <LocalDebuggerEnvironment>$(SolutionDir)dependencies\x64
 $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>

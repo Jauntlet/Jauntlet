@@ -2,14 +2,24 @@
 #include "../Errors.h"
 #include "Textures/ImageLoader.h"
 
+#ifdef VULKAN
+#include <SDL2/SDL_vulkan.h>
+
+#include <iostream> // REMOVE
+#endif
+
 using namespace Jauntlet;
 
-Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) 
-	: 
-	_screenHeight(screenHeight), 
-	_screenWidth(screenWidth) 
+Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags)
+	:
+	_screenHeight(screenHeight),
+	_screenWidth(screenWidth)
 {
+#ifdef OPENGL
 	Uint32 flags = SDL_WINDOW_OPENGL;
+#elif VULKAN
+	Uint32 flags = SDL_WINDOW_VULKAN;
+#endif
 
 	if (currentFlags & INVISIBLE) {
 		flags |= SDL_WINDOW_HIDDEN;
@@ -30,6 +40,7 @@ Window::Window(std::string windowName, int screenWidth, int screenHeight, unsign
 		fatalError("SDL Window could not be created!");
 	}
 
+#ifdef OPENGL
 	// Have OpenGL work on the window
 	_context = SDL_GL_CreateContext(_sdlWindow);
 	if (_context == nullptr) {
@@ -47,14 +58,59 @@ Window::Window(std::string windowName, int screenWidth, int screenHeight, unsign
 	// Enables Alpha Blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+#elif VULKAN
+	VkApplicationInfo appInfo{};
+	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+	appInfo.pApplicationName = windowName.c_str();
+	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+	appInfo.pEngineName = "Jauntlet";
+	appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+	appInfo.apiVersion = VK_API_VERSION_1_0;
+
+	VkInstanceCreateInfo createInfo{};
+	createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+	createInfo.pApplicationInfo = &appInfo;
+
+	uint32_t extensionCount = 0;
+	SDL_Vulkan_GetInstanceExtensions(_sdlWindow, &extensionCount, nullptr);
+	const char** extensions = new const char* [extensionCount];
+	SDL_Vulkan_GetInstanceExtensions(_sdlWindow, &extensionCount, extensions);
+
+#ifdef __APPLE__
+	std::vector<const char*> requiredExtensions;
+
+	for (uint32_t i = 0; i < extensionCount; ++i) {
+		requiredExtensions.push_back(extensions[i]);
+	}
+	requiredExtensions.emplace_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
+
+	createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+	createInfo.enabledExtensionCount = (uint32_t)requiredExtensions.size();
+	createInfo.ppEnabledExtensionNames = requiredExtensions.data();
+#endif
+
+	createInfo.enabledExtensionCount = extensionCount;
+	createInfo.ppEnabledExtensionNames = extensions;
+	createInfo.enabledLayerCount = 0;
+
+	if (vkCreateInstance(&createInfo, nullptr, &_context) != VK_SUCCESS) {
+		Jauntlet::fatalError("Failed to create Vulkan instance!");
+	}
+
+	delete[] extensions;
+#endif
 }
 
-Window::Window(std::string windowName, Jauntlet::Window* sharedWindow, int screenWidth, int screenHeight, unsigned int currentFlags) 
+Window::Window(std::string windowName, Jauntlet::Window* sharedWindow, int screenWidth, int screenHeight, unsigned int currentFlags)
 	: 
 	_screenHeight(screenHeight), 
 	_screenWidth(screenWidth) 
 {
+#ifdef OPENGL
 	Uint32 flags = SDL_WINDOW_OPENGL;
+#elif VULKAN
+	Uint32 flags = SDL_WINDOW_VULKAN;
+#endif
 
 	if (currentFlags & INVISIBLE) {
 		flags |= SDL_WINDOW_HIDDEN;
@@ -75,6 +131,7 @@ Window::Window(std::string windowName, Jauntlet::Window* sharedWindow, int scree
 		fatalError("SDL Window could not be created!");
 	}
 
+#ifdef OPENGL
 	// Have OpenGL work on the window
 	_context = sharedWindow->_context;
 
@@ -90,29 +147,44 @@ Window::Window(std::string windowName, Jauntlet::Window* sharedWindow, int scree
 	// Enables Alpha Blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+#elif VULKAN
+	_context = sharedWindow->_context;
+#endif
 }
 
 Window::~Window() {
-	SDL_DestroyWindow(_sdlWindow);
+#ifdef OPENGL
 	SDL_GL_DeleteContext(_context);
+#elif VULKAN
+	vkDestroyInstance(_context, nullptr);
+#endif
+	SDL_DestroyWindow(_sdlWindow);
 }
 
 void Window::clearScreen() {
+#ifdef OPENGL
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+#endif
 }
 
 void Window::swapBuffer() {
+#ifdef OPENGL
 	SDL_GL_SwapWindow(_sdlWindow);
+#endif
 }
 
 void Window::setDrawTarget() {
+#ifdef OPENGL
 	SDL_GL_MakeCurrent(_sdlWindow, _context);
+#endif
 }
 
 
 void Window::setBackgroundColor(Color color) {
+#ifdef OPENGL
 	glClearColor(color.r / static_cast<GLclampf>(255), color.g / static_cast<GLclampf>(255), color.b / static_cast<GLclampf>(255), 1);
+#endif
 }
 void Window::setWindowIcon(std::string filepath) {
 	SDL_Surface* icon = ImageLoader::loadPNGtoSurface(filepath);
@@ -147,7 +219,9 @@ bool Window::isFullscreen() {
 
 glm::ivec2 Window::resolveWindowSize() {
 	SDL_GetWindowSize(_sdlWindow, &_screenWidth, &_screenHeight);
+#ifdef OPENGL
 	glViewport(0, 0, _screenWidth, _screenHeight);
+#endif
 
 	return glm::ivec2(_screenHeight, _screenWidth);
 }

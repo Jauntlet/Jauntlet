@@ -4,7 +4,9 @@
  */
 #pragma once
 
+#ifdef OPENGL
 #include <GL/glew.h>
+#endif
 #include <string>
 
 namespace Jauntlet {
@@ -26,7 +28,7 @@ public:
 	void addAttribute(const std::string& attributeName);
 
 	// returns the GLint of the location of a uniform
-	GLint getUniformLocation(const std::string& uniformName) const;
+	int getUniformLocation(const std::string& uniformName) const;
 
 	// returns the id of the program
 	unsigned int getId() const { return _programID; };

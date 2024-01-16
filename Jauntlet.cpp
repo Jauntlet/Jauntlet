@@ -2,10 +2,15 @@
 #include "Errors.h"
 #include "Filesystems/FileManager.h"
 #include <fstream>
-#include <GL/glew.h>
 
 #if _WIN32
 #include <Windows.h>
+#endif
+
+#ifdef VULKAN
+#else
+#define OPENGL
+#include <GL/glew.h>
 #endif
 
 namespace Jauntlet {
@@ -22,9 +27,12 @@ namespace Jauntlet {
 		errorFile.open("Logs/Latest.log");
 		errorFile.close();
 
+		#ifdef OPENGL
 		// tells you your version of OpenGL
-		Jauntlet::error("OpenGL Version: " + std::to_string(*glGetString(GL_VERSION)));
-
+		Jauntlet::log("OpenGL Version: " + std::to_string(*glGetString(GL_VERSION)));
+		#elif VULKAN
+		Jauntlet::log("Vulkan Version");
+		#endif
 		// We only want to use our termination script on release builds so that we don't intercept crash logging for IDEs,
 		// this is actually only useful for Linux developers, where all builds will run the termination script whilst developing,
 		// Windows users will find that when running through VS that VS overrides std::set_terminate anyways. -xm

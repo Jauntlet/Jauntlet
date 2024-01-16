@@ -18,6 +18,7 @@ GLSLProgram::~GLSLProgram() {
 }
 
 void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath) {
+#ifdef OPENGL
 	_programID = glCreateProgram();
 
 	_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -29,13 +30,14 @@ void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const 
 	if (_fragmentShaderID == 0) {
 		fatalError("New fragment shader failed to be created!");
 	}
+#endif
 
 	compileShader(vertexShaderFilePath, _vertexShaderID);
 	compileShader(fragmentShaderFilePath, _fragmentShaderID);
 }
 
 void GLSLProgram::linkShaders() {
-
+#ifdef OPENGL
 	// Attach and link shaders to program
 	glAttachShader(_programID, _vertexShaderID);
 	glAttachShader(_programID, _fragmentShaderID);
@@ -64,22 +66,28 @@ void GLSLProgram::linkShaders() {
 	glDetachShader(_programID, _fragmentShaderID);
 	glDeleteShader(_vertexShaderID);
 	glDeleteShader(_fragmentShaderID);
+#endif
 
 	isLinked = true;
 }
 
 void GLSLProgram::addAttribute(const std::string& attributeName) {
+#ifdef OPENGL
 	glBindAttribLocation(_programID, _numAttributes, attributeName.c_str());
+#endif
 	_numAttributes++;
 }
 
 
-	GLint location = glGetUniformLocation(_programID, uniformName.c_str());
 int GLSLProgram::getUniformLocation(const std::string& uniformName) const {
+#ifdef OPENGL
+	int location = glGetUniformLocation(_programID, uniformName.c_str());
 	if (location == GL_INVALID_INDEX) {
 		fatalError("Uniform " + uniformName + " not found in shader!");
 	}
 	return location;
+#endif
+	return 0;
 }
 
 void GLSLProgram::use() {
@@ -90,19 +98,23 @@ void GLSLProgram::use() {
 		currentProgram->unuse();
 	}
 
+#ifdef OPENGL
 	glUseProgram(_programID);
 	for (int i = 0; i < _numAttributes; ++i) {
 		glEnableVertexAttribArray(i);
 	}
+#endif
 
 	currentProgram = this;
 }
 void GLSLProgram::unuse() {
+#ifdef OPENGL
 	glUseProgram(0);
 	
 	for (int i = 0; i < _numAttributes; ++i) {
 		glDisableVertexAttribArray(i);
 	}
+#endif
 
 	currentProgram = nullptr; // no program is in use
 }
@@ -123,6 +135,7 @@ void GLSLProgram::compileShader(const std::string& filePath, unsigned int id) {
 
 	vertexFile.close();
 
+#ifdef OPENGL
 	const char* contentsPtr = fileContents.c_str();
 	glShaderSource(id, 1, &contentsPtr, nullptr);
 
@@ -144,4 +157,5 @@ void GLSLProgram::compileShader(const std::string& filePath, unsigned int id) {
 		std::printf("%s\n", &(errorLog[0]));
 		fatalError("Shader '" + filePath + "' failed to compile!");
 	}
+#endif
 }

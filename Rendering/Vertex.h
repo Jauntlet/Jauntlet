@@ -4,8 +4,11 @@
 #pragma once
 
 #include "../Errors.h"
-#include <GL/glew.h>
 #include <string>
+
+#ifdef OPENGL
+#include <GL/glew.h>
+#endif
 
 namespace Jauntlet {
 struct Position {

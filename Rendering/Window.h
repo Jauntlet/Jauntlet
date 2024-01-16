@@ -5,11 +5,16 @@
 #include "Vertex.h"
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
-#include <GL/glew.h>
 #include <glm/ext/vector_float2.hpp>
 #include <glm/ext/vector_int2.hpp>
 #include <string>
 #include <vector>
+
+#ifdef OPENGL
+#include <GL/glew.h>
+#elif VULKAN
+#include <vulkan/vulkan.h>
+#endif
 
 namespace Jauntlet {
 // We are setting each ENUM to a different bit so that we can use bitwise operators to have multiple flags at once.
@@ -73,7 +78,11 @@ public:
 
 private:
 	SDL_Window* _sdlWindow;
+#ifdef OPENGL
 	SDL_GLContext _context;
+#elif VULKAN
+	VkInstance _context;
+#endif
 	int _screenWidth, _screenHeight;
 };
 }

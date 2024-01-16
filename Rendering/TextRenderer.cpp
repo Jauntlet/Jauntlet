@@ -12,8 +12,10 @@ GLSLProgram TextRenderer::textShader;
 TextRenderer::TextRenderer(const char* font, int size) :
 	_fontHeight(size)
 {
+#ifdef OPENGL
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+#endif
 
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft)) {
@@ -27,14 +29,18 @@ TextRenderer::TextRenderer(const char* font, int size) :
 	// setting width to 0 lets the function dynamically determine the width.
 	FT_Set_Pixel_Sizes(face, 0, _fontHeight);
 
+#ifdef OPENGL
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // This disables byte-alignment restrictions.
+#endif
 
 	for (unsigned char c = FIRST_PRINTABLE_CHAR; c < LAST_PRINTABLE_CHAR; c++) {
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
 			error("Failed to load Font Glyph: " + std::to_string(*font) + " of char " + std::to_string(c));
 			continue;
 		}
-		unsigned int texture;
+		unsigned int texture = 0;
+
+#ifdef OPENGL
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width, face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
@@ -43,6 +49,7 @@ TextRenderer::TextRenderer(const char* font, int size) :
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+#endif
 
 		CharGlyph character = { texture, glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
 								glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap_top), static_cast<unsigned int>(face->glyph->advance.x)

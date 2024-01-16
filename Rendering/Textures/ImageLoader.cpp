@@ -3,6 +3,10 @@
 #include "../../Filesystems/FileManager.h"
 #include "../../Externals/picoPNG.h"
 
+#ifdef OPENGL
+#include <GL/glew.h>
+#endif
+
 using namespace Jauntlet;
 
 static std::vector<unsigned char> _out;
@@ -22,7 +26,7 @@ GLTexture ImageLoader::loadPNG(std::string filePath) {
 	if (errorCode != 0) {
 		return loadMissingTexture();
 	}
-
+#ifdef OPENGL
 	glGenTextures(1, &(texture.id));
 
 	glBindTexture(GL_TEXTURE_2D, texture.id);
@@ -41,7 +45,7 @@ GLTexture ImageLoader::loadPNG(std::string filePath) {
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-
+#endif
 	texture.width = width;
 	texture.height = height;
 
@@ -93,7 +97,7 @@ GLTexture ImageLoader::loadMissingTexture() {
 	if (errorCode != 0) {
 		fatalError("failed to decode image \"" + ResourceManager::getMissingTexture() + "\" with error: " + std::to_string(errorCode));
 	}
-
+#ifdef OPENGL
 	glGenTextures(1, &(texture.id));
 
 	glBindTexture(GL_TEXTURE_2D, texture.id);
@@ -107,6 +111,7 @@ GLTexture ImageLoader::loadMissingTexture() {
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+#endif
 
 	texture.width = width;
 	texture.height = height;

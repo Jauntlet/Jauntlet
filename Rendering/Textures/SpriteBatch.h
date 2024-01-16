@@ -3,12 +3,14 @@
  */
 #pragma once
 
-#include <GL/glew.h>
 #include <glm/vec4.hpp>
 #include <glm/vec2.hpp>
 #include <vector>
-
 #include "../Vertex.h"
+
+#ifdef OPENGL
+#include <GL/glew.h>
+#endif
 
 namespace Jauntlet {
 // defines the order for sprites to be drawn
