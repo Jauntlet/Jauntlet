@@ -21,31 +21,31 @@ void UIText::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float sc
     glm::vec2 _size = _textRenderer->calculateTextSize(*_text, glm::vec2(_scale));
     glm::vec2 pin;
     switch (_originPin) {
-        case UIElement::ORIGIN_PIN::TOP_LEFT:
+        case ORIGIN_PIN::TOP_LEFT:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale, _position->y * scale));
             break;
-        case UIElement::ORIGIN_PIN::TOP:
+        case ORIGIN_PIN::TOP:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale - ((_size.x * scale) * 0.5f), _position->y * scale));
             break;
-        case UIElement::ORIGIN_PIN::TOP_RIGHT:
+        case ORIGIN_PIN::TOP_RIGHT:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale));
             break;
-        case UIElement::ORIGIN_PIN::RIGHT:
+        case ORIGIN_PIN::RIGHT:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale));
             break;
-        case UIElement::ORIGIN_PIN::BOTTOM_RIGHT:
+        case ORIGIN_PIN::BOTTOM_RIGHT:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale - _size.x * scale, _position->y * scale - _size.y * scale));
             break;
-        case UIElement::ORIGIN_PIN::BOTTOM:
+        case ORIGIN_PIN::BOTTOM:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale - ((_size.x * scale ) * 0.5f),_position->y * scale - _size.y * scale));
             break;
-        case UIElement::ORIGIN_PIN::BOTTOM_LEFT:
+        case ORIGIN_PIN::BOTTOM_LEFT:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale, _position->y * scale - _size.y * scale));
             break;
-        case UIElement::ORIGIN_PIN::LEFT:
+        case ORIGIN_PIN::LEFT:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale, _position->y * scale - ((_size.y * scale) * 0.5f)));
             break;
-        case UIElement::ORIGIN_PIN::CENTER:
+        case ORIGIN_PIN::CENTER:
             _resolvedPosition = resolvedPins[(int)(_originPin)] + camera->convertScreenToWorld(glm::vec2(_position->x * scale - ((_size.x * scale) * 0.5f), _position->y * scale - ((_size.y * scale) * 0.5f)));
             break;
     }
