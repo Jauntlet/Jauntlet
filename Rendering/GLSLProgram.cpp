@@ -74,8 +74,8 @@ void GLSLProgram::addAttribute(const std::string& attributeName) {
 }
 
 
-	GLint location = glGetUniformLocation(_programID, uniformName.c_str());
 int GLSLProgram::getUniformLocation(const std::string& uniformName) const {
+	GLint location = glGetUniformLocation(_programID, uniformName.c_str());
 	if (location == GL_INVALID_INDEX) {
 		fatalError("Uniform " + uniformName + " not found in shader!");
 	}

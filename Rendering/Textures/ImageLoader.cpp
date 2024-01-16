@@ -2,6 +2,7 @@
 #include "../../Errors.h"
 #include "../../Filesystems/FileManager.h"
 #include "../../Externals/picoPNG.h"
+#include <GL/glew.h>
 
 using namespace Jauntlet;
 
