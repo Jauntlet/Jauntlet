@@ -9,7 +9,7 @@ UIButtonElement::UIButtonElement() {
     // Empty
 }
 
-UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
+UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void()> onClick, unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
     _inputManager = inputManager;
     _onClick = onClick;
     _textureId = textureId;
