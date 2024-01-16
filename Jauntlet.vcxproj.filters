@@ -85,7 +85,7 @@
     <ClCompile Include="Tiles\TileSet.cpp">
       <Filter>Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Animation\Animation.cpp">
+    <ClCompile Include="Rendering\Animation\SpriteAnimation.cpp">
       <Filter>Rendering\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Particles\Particle.cpp">
@@ -199,7 +199,7 @@
     <ClInclude Include="Tiles\TileSet.h">
       <Filter>Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\Animation\Animation.h">
+    <ClInclude Include="Rendering\Animation\SpriteAnimation.h">
       <Filter>Rendering\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Particles\Particle.h">

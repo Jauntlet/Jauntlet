@@ -173,7 +173,7 @@
     <ClCompile Include="Inputs\InputManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
-    <ClCompile Include="Rendering\Animation\Animation.cpp" />
+    <ClCompile Include="Rendering\Animation\SpriteAnimation.cpp" />
     <ClCompile Include="Rendering\Cameras\Camera2D.cpp" />
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
     <ClCompile Include="Rendering\Particles\Emission.cpp" />
@@ -214,7 +214,7 @@
     <ClInclude Include="Inputs\InputManager.h" />
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
-    <ClInclude Include="Rendering\Animation\Animation.h" />
+    <ClInclude Include="Rendering\Animation\SpriteAnimation.h" />
     <ClInclude Include="Rendering\Cameras\Camera2D.h" />
     <ClInclude Include="Rendering\GLSLProgram.h" />
     <ClInclude Include="Rendering\Particles\Emission.h" />

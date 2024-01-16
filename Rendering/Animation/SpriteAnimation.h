@@ -7,11 +7,10 @@
 #include <glm/ext/vector_float4.hpp>
 #include <string>
 
-namespace Jauntlet {
-class Animation
+class SpriteAnimation
 {
 public:
-	Animation(unsigned int frames);
+	SpriteAnimation(unsigned int frames);
 	// Play an animation.
 	// start: starting index of animation
 	// end: ending index of animation
@@ -55,4 +54,3 @@ private:
 	// recalculate the uv
 	void recalculateUV(); // DONTDOCUMENT
 };
-}
