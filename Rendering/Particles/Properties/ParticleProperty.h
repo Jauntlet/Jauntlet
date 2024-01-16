@@ -3,7 +3,7 @@
  */
 #pragma once
 
-#include "../Emission.h"
+#include "../Particle.h"
 
 class ParticleProperty
 {
@@ -12,7 +12,7 @@ public:
 	ParticleProperty(); // UNDOCUMENTED
 
     // method to only be used by a particle to apply the property onto said particle
-    virtual void apply(std::vector<Emission>& emissions); // DONTDOCUMENT
+    virtual void apply(std::vector<Particle>& emissions); // DONTDOCUMENT
 private:
     
 };

@@ -12,7 +12,7 @@ public:
 	ParticleGrow(float startSize, float endSize); // UNDOCUMENTED
 
     // method to only be used by a particle to apply the property onto said particle
-    void apply(std::vector<Emission>& emissions) override; // DONTDOCUMENT
+    void apply(std::vector<Particle>& emissions) override; // DONTDOCUMENT
 private:
     float _startSize = 0;
     float _sizeDiff = 10;

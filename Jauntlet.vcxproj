@@ -176,8 +176,8 @@
     <ClCompile Include="Rendering\Animation\SpriteAnimation.cpp" />
     <ClCompile Include="Rendering\Cameras\Camera2D.cpp" />
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
-    <ClCompile Include="Rendering\Particles\Emission.cpp" />
     <ClCompile Include="Rendering\Particles\Particle.cpp" />
+    <ClCompile Include="Rendering\Particles\ParticleEmitter.cpp" />
     <ClCompile Include="Rendering\Particles\Properties\ParticleGrow.cpp" />
     <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp" />
     <ClCompile Include="Rendering\ProgressBar.cpp" />
@@ -217,8 +217,8 @@
     <ClInclude Include="Rendering\Animation\SpriteAnimation.h" />
     <ClInclude Include="Rendering\Cameras\Camera2D.h" />
     <ClInclude Include="Rendering\GLSLProgram.h" />
-    <ClInclude Include="Rendering\Particles\Emission.h" />
     <ClInclude Include="Rendering\Particles\Particle.h" />
+    <ClInclude Include="Rendering\Particles\ParticleEmitter.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleGrow.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h" />
     <ClInclude Include="Rendering\ProgressBar.h" />
