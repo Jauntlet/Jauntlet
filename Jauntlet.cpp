@@ -7,12 +7,6 @@
 #include <Windows.h>
 #endif
 
-#ifdef VULKAN
-#else
-#define OPENGL
-#include <GL/glew.h>
-#endif
-
 namespace Jauntlet {
 	
 	int init() {

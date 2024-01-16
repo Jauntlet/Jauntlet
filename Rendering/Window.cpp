@@ -4,8 +4,6 @@
 
 #ifdef VULKAN
 #include <SDL2/SDL_vulkan.h>
-
-#include <iostream> // REMOVE
 #endif
 
 using namespace Jauntlet;

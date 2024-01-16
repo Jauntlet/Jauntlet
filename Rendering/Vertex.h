@@ -6,6 +6,10 @@
 #include "../Errors.h"
 #include <string>
 
+#if __unix__
+#include <cstdint>
+#endif
+
 #ifdef OPENGL
 #include <GL/glew.h>
 #endif

@@ -2,6 +2,7 @@
  * Main Contributer(s): Xander Mooney
  */
 #pragma once
+#include "../Jauntlet.h"
 #include "Vertex.h"
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
