@@ -1,8 +1,6 @@
 #include "AudioListener.h"
 #include <cstddef>
 
-using namespace Jauntlet;
-
 AudioListener::AudioListener() {
 	 _device = alcOpenDevice(NULL);
      _context = alcCreateContext(_device, NULL);
@@ -58,22 +56,22 @@ bool AudioListener::checkALErrors() {
 	if (ALerror != AL_NO_ERROR) {
 		switch (ALerror) {
         case AL_INVALID_NAME:
-            fatalError("AL_INVALID_NAME: a bad name (ID) was passed to an OpenAL function");
+            Jauntlet::fatalError("AL_INVALID_NAME: a bad name (ID) was passed to an OpenAL function");
             break;
         case AL_INVALID_ENUM:
-            fatalError("AL_INVALID_ENUM: an invalid enum value was passed to an OpenAL function");
+            Jauntlet::fatalError("AL_INVALID_ENUM: an invalid enum value was passed to an OpenAL function");
             break;
         case AL_INVALID_VALUE:
-            fatalError("AL_INVALID_VALUE: an invalid value was passed to an OpenAL function");
+            Jauntlet::fatalError("AL_INVALID_VALUE: an invalid value was passed to an OpenAL function");
             break;
         case AL_INVALID_OPERATION:
-            fatalError("AL_INVALID_OPERATION: the requested operation is not valid");
+            Jauntlet::fatalError("AL_INVALID_OPERATION: the requested operation is not valid");
             break;
         case AL_OUT_OF_MEMORY:
-            fatalError("AL_OUT_OF_MEMORY: the requested operation resulted in OpenAL running out of memory");
+            Jauntlet::fatalError("AL_OUT_OF_MEMORY: the requested operation resulted in OpenAL running out of memory");
             break;
         default:
-            error("UNKNOWN AL ERROR: " + std::to_string(ALerror));
+            Jauntlet::error("UNKNOWN AL ERROR: " + std::to_string(ALerror));
         }
         return false;
 	}
@@ -85,22 +83,22 @@ bool AudioListener::checkALCErrors() {
         switch (ALCerror)
         {
         case ALC_INVALID_VALUE:
-            fatalError("ALC_INVALID_VALUE: an invalid value was passed to an OpenAL function");
+            Jauntlet::fatalError("ALC_INVALID_VALUE: an invalid value was passed to an OpenAL function");
             break;
         case ALC_INVALID_DEVICE:
-            fatalError("ALC_INVALID_DEVICE: a bad device was passed to an OpenAL function");
+            Jauntlet::fatalError("ALC_INVALID_DEVICE: a bad device was passed to an OpenAL function");
             break;
         case ALC_INVALID_CONTEXT:
-            fatalError("ALC_INVALID_CONTEXT: a bad context was passed to an OpenAL function");
+            Jauntlet::fatalError("ALC_INVALID_CONTEXT: a bad context was passed to an OpenAL function");
             break;
         case ALC_INVALID_ENUM:
-            fatalError("ALC_INVALID_ENUM: an unknown enum value was passed to an OpenAL function");
+            Jauntlet::fatalError("ALC_INVALID_ENUM: an unknown enum value was passed to an OpenAL function");
             break;
         case ALC_OUT_OF_MEMORY:
-            fatalError("ALC_OUT_OF_MEMORY: an unknown enum value was passed to an OpenAL function");
+            Jauntlet::fatalError("ALC_OUT_OF_MEMORY: an unknown enum value was passed to an OpenAL function");
             break;
         default:
-            fatalError("UNKNOWN ALC ERROR: " + std::to_string(ALCerror));
+            Jauntlet::fatalError("UNKNOWN ALC ERROR: " + std::to_string(ALCerror));
         }
         return false;
     }

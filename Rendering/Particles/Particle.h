@@ -1,64 +1,36 @@
-/* Purpose: Sets up and plays particle effect animations.
+/* Purpose: An individual thing made by a particle
  * Main Contributer(s): Jack Kennedy
  */
 
-#include "Properties/ParticleGrow.h"
-
-#include <string>
+#include <glm/ext/vector_float2.hpp>
 #include <vector>
+
+#include "../Textures/SpriteBatch.h" // Jauntlet::SpriteBatch
+#include "../Cameras/Camera2D.h" // Jauntlet::Camera2DImages/
 
 #pragma once
 
-namespace Jauntlet {
-class Particle
-{
+class Particle {
 public:
-    Particle(
-        Camera2D* camera,
-        glm::vec2 position,
-        // the properties
-        std::string texture,
-        // pre determined
-        uint8_t maxAliveMembers = 10,
-        bool emitContinuously = true,
-        float emissionSpeed = 1,
-        Color startingColor = Color()
-        
-        ); // UNDOCUMENTED
+    Particle();
 
-    // draw the emissions
-    void draw(); // UNDOCUMENTED
+    // draw the emission
+    void draw(SpriteBatch* spriteBatch, Camera2D* camera, unsigned int texture); // DONTDOCUMENT
 
-    // resume emission emitting
-    void resumeEmitting();
-
-    // stop emission emitting
-    void stopEmitting();
-
-    // update emissions (positions, size, etc)
+    // update the emission
     void update();
 
-    void addProperty(ParticleProperty& property);
-
-    std::vector<Emission> emissions; // DONTDOCUMENT
+    // our current position
+    glm::vec2 position = glm::vec2(0);
+    // our current size
+    glm::vec2 size = glm::vec2(10);
+    // the movement we make in one second
+    glm::vec2 movement = glm::vec2(0,10);
+    // the current color of our emission
+    Color color;
+    // the age of our emission
+    float age = 0.0f;
+    // the life expectancy of our emission
+    float lifetime = 10.0f;
 private:
-    SpriteBatch _spriteBatch;
-    std::vector<ParticleProperty*> _properties;
-
-    Camera2D* _camera;
-    glm::vec2 _position;
-
-    unsigned int _texture;
-
-    uint8_t _maxEmissions = 0;
-    uint8_t _emissionsCount = 0;
-
-    float _timer = 0;
-
-    float _emissionSpeed;
-
-    bool _doEmit = true;
-
-    void emit();
 };
-}

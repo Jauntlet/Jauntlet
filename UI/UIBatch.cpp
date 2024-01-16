@@ -1,7 +1,5 @@
 #include "UIBatch.h"
 
-using namespace Jauntlet;
-
 UIBatch::UIBatch(GLSLProgram* program) {
 	_program = program;
 }

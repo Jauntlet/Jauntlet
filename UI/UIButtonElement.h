@@ -26,7 +26,7 @@ namespace Jauntlet {
 		bool isPressed();
 		// Returns true if the button is currently pressed down
 		bool isDown();
-    protected:
+	protected:
 		std::function<void()> _onClick;
 		glm::vec2 _size;
 		glm::vec2 _resolvedSize;

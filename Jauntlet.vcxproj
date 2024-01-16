@@ -316,11 +316,11 @@
     <ClCompile Include="Inputs\InputManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
-    <ClCompile Include="Rendering\Animation\Animation.cpp" />
+    <ClCompile Include="Rendering\Animation\SpriteAnimation.cpp" />
     <ClCompile Include="Rendering\Cameras\Camera2D.cpp" />
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
-    <ClCompile Include="Rendering\Particles\Emission.cpp" />
     <ClCompile Include="Rendering\Particles\Particle.cpp" />
+    <ClCompile Include="Rendering\Particles\ParticleEmitter.cpp" />
     <ClCompile Include="Rendering\Particles\Properties\ParticleGrow.cpp" />
     <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp" />
     <ClCompile Include="Rendering\ProgressBar.cpp" />
@@ -334,14 +334,14 @@
     <ClCompile Include="Tiles\TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UI\UIBatch.cpp" />
-    <ClCompile Include="UI\UIButtonElement.cpp" />
-    <ClCompile Include="UI\UIButtonToggleableElement.cpp" />
+    <ClCompile Include="UI\UIButton.cpp" />
+    <ClCompile Include="UI\UIButtonToggleable.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
-    <ClCompile Include="UI\UIProgressBarElement.cpp" />
-    <ClCompile Include="UI\UISpriteAnimatedElement.cpp" />
-    <ClCompile Include="UI\UISpriteElement.cpp" />
-    <ClCompile Include="UI\UITextElement.cpp" />
+    <ClCompile Include="UI\UIProgressBar.cpp" />
+    <ClCompile Include="UI\UISpriteAnimated.cpp" />
+    <ClCompile Include="UI\UISprite.cpp" />
+    <ClCompile Include="UI\UIText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioListener.h" />
@@ -357,11 +357,11 @@
     <ClInclude Include="Inputs\InputManager.h" />
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
-    <ClInclude Include="Rendering\Animation\Animation.h" />
+    <ClInclude Include="Rendering\Animation\SpriteAnimation.h" />
     <ClInclude Include="Rendering\Cameras\Camera2D.h" />
     <ClInclude Include="Rendering\GLSLProgram.h" />
-    <ClInclude Include="Rendering\Particles\Emission.h" />
     <ClInclude Include="Rendering\Particles\Particle.h" />
+    <ClInclude Include="Rendering\Particles\ParticleEmitter.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleGrow.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h" />
     <ClInclude Include="Rendering\ProgressBar.h" />
@@ -377,14 +377,14 @@
     <ClInclude Include="Tiles\TileSet.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UI\UIBatch.h" />
-    <ClInclude Include="UI\UIButtonElement.h" />
-    <ClInclude Include="UI\UIButtonToggleableElement.h" />
+    <ClInclude Include="UI\UIButton.h" />
+    <ClInclude Include="UI\UIButtonToggleable.h" />
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\UIManager.h" />
-    <ClInclude Include="UI\UIProgressBarElement.h" />
-    <ClInclude Include="UI\UISpriteAnimatedElement.h" />
-    <ClInclude Include="UI\UISpriteElement.h" />
-    <ClInclude Include="UI\UITextElement.h" />
+    <ClInclude Include="UI\UIProgressBar.h" />
+    <ClInclude Include="UI\UISpriteAnimated.h" />
+    <ClInclude Include="UI\UISprite.h" />
+    <ClInclude Include="UI\UIText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

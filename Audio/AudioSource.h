@@ -10,7 +10,6 @@
 const size_t NUM_BUFFERS = 4;
 const size_t BUFFER_SIZE = 65536; // 32kb of data in each buffer
 
-namespace Jauntlet {
 struct AudioStream {
 	ALuint source;
 	ALuint buffers[NUM_BUFFERS];
@@ -41,5 +40,3 @@ private:
 	glm::vec3 _position = glm::vec3(0);
 	std::vector<AudioStream> _sources;
 };
-
-}

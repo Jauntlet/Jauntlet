@@ -6,8 +6,6 @@
 #include <cstring>
 #endif
 
-using namespace Jauntlet;
-
 AudioSource::AudioSource(const glm::vec3& position) {
 	_position = position;
 }

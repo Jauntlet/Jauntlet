@@ -15,7 +15,6 @@
 #include "../Rendering/Cameras/Camera2D.h"
 #include "Textures/SpriteBatch.h"
 
-namespace Jauntlet {
 #define FIRST_PRINTABLE_CHAR (char)32
 #define LAST_PRINTABLE_CHAR (char)126
 
@@ -53,5 +52,3 @@ private:
 
 	GLSLProgram* _storedProgram = nullptr;
 };
-}
-

@@ -3,8 +3,6 @@
 #include "../Errors.h"
 #include "GLSLProgram.h"
 
-using namespace Jauntlet;
-
 // initialize static member
 GLSLProgram* GLSLProgram::currentProgram = nullptr;
 
@@ -23,12 +21,12 @@ void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const 
 
 	_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	if (_vertexShaderID == 0) {
-		fatalError("New vertex shader failed to be created!");
+		Jauntlet::fatalError("New vertex shader failed to be created!");
 	}
 
 	_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	if (_fragmentShaderID == 0) {
-		fatalError("New fragment shader failed to be created!");
+		Jauntlet::fatalError("New fragment shader failed to be created!");
 	}
 #endif
 
@@ -58,7 +56,7 @@ void GLSLProgram::linkShaders() {
 		glDeleteShader(_fragmentShaderID);
 
 		std::printf("%s\n", &(errorLog[0]));
-		fatalError("Shaders failed to link to program!");
+		Jauntlet::fatalError("Shaders failed to link to program!");
 	}
 
 	// Always detach shaders after linking
@@ -81,9 +79,9 @@ void GLSLProgram::addAttribute(const std::string& attributeName) {
 
 int GLSLProgram::getUniformLocation(const std::string& uniformName) const {
 #ifdef OPENGL
-	int location = glGetUniformLocation(_programID, uniformName.c_str());
+	GLint location = glGetUniformLocation(_programID, uniformName.c_str());
 	if (location == GL_INVALID_INDEX) {
-		fatalError("Uniform " + uniformName + " not found in shader!");
+		Jauntlet::fatalError("Uniform " + uniformName + " not found in shader!");
 	}
 	return location;
 #endif
@@ -123,7 +121,7 @@ void GLSLProgram::compileShader(const std::string& filePath, unsigned int id) {
 	std::ifstream vertexFile(filePath);
 	if (vertexFile.fail()) {
 		perror(filePath.c_str());
-		fatalError("Failed to open " + filePath);
+		Jauntlet::fatalError("Failed to open " + filePath);
 	}
 
 	std::string fileContents = "";
@@ -155,7 +153,7 @@ void GLSLProgram::compileShader(const std::string& filePath, unsigned int id) {
 		// process error and delete shader
 		glDeleteShader(id);
 		std::printf("%s\n", &(errorLog[0]));
-		fatalError("Shader '" + filePath + "' failed to compile!");
+		Jauntlet::fatalError("Shader '" + filePath + "' failed to compile!");
 	}
 #endif
 }

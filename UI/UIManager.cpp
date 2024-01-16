@@ -1,8 +1,6 @@
 #include "UIManager.h"
 #include "glm/fwd.hpp"
 
-using namespace Jauntlet;
-
 UIManager::UIManager(Camera2D* camera) {
 	_camera = camera;
 }

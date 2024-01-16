@@ -14,7 +14,6 @@
 #include <GL/glew.h>
 #endif
 
-namespace Jauntlet {
 struct Position {
 	float x;
 	float y;
@@ -78,4 +77,3 @@ struct Vertex {
 		uv.v = v;
 	}
 };
-}

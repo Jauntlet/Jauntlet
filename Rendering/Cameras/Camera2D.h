@@ -10,7 +10,6 @@
 #include "../GLSLProgram.h"
 #include "../../Time.h"
 
-namespace Jauntlet {
 // Camera with a 2D perspective
 class Camera2D
 {
@@ -93,4 +92,3 @@ private:
 
 	bool _doRounding = true;
 };
-}

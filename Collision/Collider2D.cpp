@@ -1,7 +1,5 @@
 #include "Collider2D.h"
 
-using namespace Jauntlet;
-
 //constructor; requires a radius and position (x & y).
 CircleCollider2D::CircleCollider2D(float radius, float x, float y, glm::vec2 offset) : _radius(radius), _offset(offset) {
 	position = glm::vec2(x, y);

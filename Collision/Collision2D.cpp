@@ -2,7 +2,6 @@
 #include <glm/geometric.hpp>
 #include "Collision2D.h"
 
-using namespace Jauntlet;
 
 Collision2D::Collision2D() {
 	// Empty

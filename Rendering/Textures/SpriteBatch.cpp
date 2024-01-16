@@ -3,8 +3,6 @@
 #include "SpriteBatch.h"
 #include "../../Errors.h"
 
-using namespace Jauntlet;
-
 Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, unsigned int Texture, float Depth, const Color& Color) :
 	texture(Texture), depth(Depth) {
 	topLeft.color = Color;
@@ -165,7 +163,7 @@ void SpriteBatch::createRenderBatches() {
 void SpriteBatch::createVertexArray() {
 #ifdef OPENGL
 	if (glGetError() != GL_NO_ERROR) {
-		fatalError("Tried to initialize a SpriteBatch before a window is created! Please reorder your initialization order!");
+		Jauntlet::fatalError("Tried to initialize a SpriteBatch before a window is created! Please reorder your initialization order!");
 	}
 
 	if (_vaoID == 0) {
@@ -207,7 +205,7 @@ void SpriteBatch::sortGlyphs() {
 		case GlyphSortType::NONE:
 			break;
 		default:
-			error("invalid sort type found in spritebatch!");
+			Jauntlet::error("invalid sort type found in spritebatch!");
 			break;
 	}
 }

@@ -9,8 +9,6 @@
 #include <cstring>
 #endif
 
-using namespace Jauntlet;
-
 const bool FileManager::readFileToBuffer(const std::string& filePath, std::vector<unsigned char>& buffer) {
 	std::ifstream file(filePath, std::ios::binary);
 	if (file.fail()) {
@@ -38,7 +36,7 @@ const bool FileManager::readFileToBuffer(const std::string& filePath, std::vecto
 	return true;
 }
 
-std::vector<char> FileManager::readWAVFile(const std::string& filePath, Jauntlet::AudioStream& audioStream) {
+std::vector<char> FileManager::readWAVFile(const std::string& filePath, AudioStream& audioStream) {
 	std::ifstream file(filePath, std::ios::binary);
 	if (!file.is_open()) {
 		Jauntlet::error("Could not open WAV \"" + filePath + "\"");

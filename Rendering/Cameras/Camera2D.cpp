@@ -4,8 +4,6 @@
 #include "../../Errors.h"
 #include "glm/fwd.hpp"
 
-using namespace Jauntlet;
-
 Camera2D::Camera2D(int screenWidth, int screenHeight, bool doRounding) {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;

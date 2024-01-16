@@ -1,9 +1,8 @@
 #include "ProgressBar.h"
 
-using namespace Jauntlet;
 ProgressBar::ProgressBar(const std::string& texture1, const glm::vec4& texture1UV, const std::string& texture2, const glm::vec4& texture2UV, const glm::vec4& dest) :
-	_emptyTexture(ResourceManager::getTexture(texture1).id),
-	_fullTexture(ResourceManager::getTexture(texture2).id),
+	_emptyTexture(Jauntlet::ResourceManager::getTexture(texture1).id),
+	_fullTexture(Jauntlet::ResourceManager::getTexture(texture2).id),
 	_UV1(texture1UV),
 	_UV2(texture2UV),
 	position(glm::vec2(dest.x, dest.y)),
@@ -12,8 +11,8 @@ ProgressBar::ProgressBar(const std::string& texture1, const glm::vec4& texture1U
 	// Empty
 }
 ProgressBar::ProgressBar(const std::string& texture, const glm::vec4& texture1UV, const glm::vec4& texture2UV, const glm::vec4& dest) : 
-	_emptyTexture(ResourceManager::getTexture(texture).id),
-	_fullTexture(ResourceManager::getTexture(texture).id),
+	_emptyTexture(Jauntlet::ResourceManager::getTexture(texture).id),
+	_fullTexture(Jauntlet::ResourceManager::getTexture(texture).id),
 	_UV1(texture1UV),
 	_UV2(texture2UV),
 	position(glm::vec2(dest.x, dest.y)),

@@ -6,12 +6,10 @@
 #include <SDL2/SDL_vulkan.h>
 #endif
 
-using namespace Jauntlet;
-
-Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags)
-	:
-	_screenHeight(screenHeight),
-	_screenWidth(screenWidth)
+Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) 
+	: 
+	_screenHeight(screenHeight), 
+	_screenWidth(screenWidth) 
 {
 #ifdef OPENGL
 	Uint32 flags = SDL_WINDOW_OPENGL;
@@ -35,19 +33,19 @@ Window::Window(std::string windowName, int screenWidth, int screenHeight, unsign
 	// create the window
 	_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);
 	if (_sdlWindow == nullptr) {
-		fatalError("SDL Window could not be created!");
+		Jauntlet::fatalError("SDL Window could not be created!");
 	}
 
 #ifdef OPENGL
 	// Have OpenGL work on the window
 	_context = SDL_GL_CreateContext(_sdlWindow);
 	if (_context == nullptr) {
-		fatalError("SDL_GL context could not be created!");
+		Jauntlet::fatalError("SDL_GL context could not be created!");
 	}
 	// enable GLEW for older PCs that don't support everything modern
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
-		fatalError("Could not initialize glew!");
+		Jauntlet::fatalError("Could not initialize glew!");
 	}
 
 	// this turns on VSync (0 = off, 1 = on)
@@ -99,7 +97,7 @@ Window::Window(std::string windowName, int screenWidth, int screenHeight, unsign
 #endif
 }
 
-Window::Window(std::string windowName, Jauntlet::Window* sharedWindow, int screenWidth, int screenHeight, unsigned int currentFlags)
+Window::Window(std::string windowName, Window* sharedWindow, int screenWidth, int screenHeight, unsigned int currentFlags) 
 	: 
 	_screenHeight(screenHeight), 
 	_screenWidth(screenWidth) 
@@ -126,7 +124,7 @@ Window::Window(std::string windowName, Jauntlet::Window* sharedWindow, int scree
 	// create the window
 	_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);
 	if (_sdlWindow == nullptr) {
-		fatalError("SDL Window could not be created!");
+		Jauntlet::fatalError("SDL Window could not be created!");
 	}
 
 #ifdef OPENGL
@@ -136,7 +134,7 @@ Window::Window(std::string windowName, Jauntlet::Window* sharedWindow, int scree
 	// enable GLEW for older PCs that don't support everything modern
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
-		fatalError("Could not initialize glew!");
+		Jauntlet::fatalError("Could not initialize glew!");
 	}
 
 	// this turns on VSync (0 = off, 1 = on)

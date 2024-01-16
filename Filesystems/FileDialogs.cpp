@@ -2,9 +2,7 @@
 
 #include "FileDialogs.h"
 
-using namespace Jauntlet;
-
-uint8_t Jauntlet::notifyPopup(const std::string& title, const std::string& message, Dialog_Icon icon) {
+uint8_t notifyPopup(const std::string& title, const std::string& message, Dialog_Icon icon) {
 	switch (icon) {
 	case (Dialog_Icon::INFO): 
 		return tinyfd_notifyPopup(title.c_str(), message.c_str(), "info");
@@ -16,7 +14,7 @@ uint8_t Jauntlet::notifyPopup(const std::string& title, const std::string& messa
 	}
 }
 
-uint8_t Jauntlet::messageBox(const std::string& title, const std::string& message, Dialog_Type type, Dialog_Icon icon, Dialog_DefaultButton defaultButton) {
+uint8_t messageBox(const std::string& title, const std::string& message, Dialog_Type type, Dialog_Icon icon, Dialog_DefaultButton defaultButton) {
 	std::string dialog, logo;
 	switch (type) {
 	case (Dialog_Type::OKCANCEL):
@@ -62,15 +60,15 @@ uint8_t Jauntlet::messageBox(const std::string& title, const std::string& messag
 
 // input box will be here
 
-std::string Jauntlet::saveFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription) {
+std::string saveFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription) {
 	return tinyfd_saveFileDialog(title.c_str(), defaultFilePath.c_str(), filters.size(), filters.data(), filterDescription.c_str());
 }
 
-std::string Jauntlet::openFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription, bool allowSelectMultiple) {
+std::string openFilePrompt(const std::string& title, const std::string& defaultFilePath, const std::vector<const char*>& filters, const std::string& filterDescription, bool allowSelectMultiple) {
 	return tinyfd_openFileDialog(title.c_str(), defaultFilePath.c_str(), filters.size(), filters.data(), filterDescription.c_str(), allowSelectMultiple ? 1 : 0);
 }
 
-std::string Jauntlet::selectFolderPrompt(const std::string& title, const std::string& defaultFilePath) {
+std::string selectFolderPrompt(const std::string& title, const std::string& defaultFilePath) {
 	return tinyfd_selectFolderDialog(title.c_str(), defaultFilePath.c_str());
 }
 

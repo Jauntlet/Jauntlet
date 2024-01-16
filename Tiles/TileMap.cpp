@@ -5,8 +5,6 @@
 #include <sstream>
 #include "TileMap.h"
 
-using namespace Jauntlet;
-
 TileMap::TileMap(TextureCache& textureCache, int tileSize) : _tileSize(tileSize), _textureCache(textureCache) {
 	// Empty
 }
@@ -32,7 +30,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX, float offsetY) {
 	file.open(filePath);
 
 	if (file.fail()) {
-		fatalError("Failed to open TileMap \"" + filePath + "\"");
+		Jauntlet::fatalError("Failed to open TileMap \"" + filePath + "\"");
 	}
 
 	std::string line;
@@ -83,7 +81,7 @@ void TileMap::loadTileMap(std::string filePath, float offsetX, float offsetY) {
 					continue;
 				}
 				catch (...) {
-					fatalError("offset of: " + line + " is invalid!");
+					Jauntlet::fatalError("offset of: " + line + " is invalid!");
 				}
 			}
 		}
@@ -227,7 +225,7 @@ glm::vec2 TileMap::RoundWorldPos(glm::vec2 position) const {
 
 void TileMap::UpdateTile(glm::ivec2 position, unsigned int newID) {
 	if (position.y < 0 || position.x < 0) {
-		error("WARNING: Tried to overwrite a negative tileposition: " + std::to_string(position.x) + ", " + std::to_string(position.y));
+		Jauntlet::error("WARNING: Tried to overwrite a negative tileposition: " + std::to_string(position.x) + ", " + std::to_string(position.y));
 		return;
 	}
 
@@ -252,7 +250,7 @@ void TileMap::AddOffset(glm::vec2 offset) {
 void TileMap::resetOffset() {
 	_offset = glm::vec2(0);
 }
-void TileMap::changeDrawColor(Jauntlet::Color color) {
+void TileMap::changeDrawColor(Color color) {
 	_drawColor = color;
 	_needsTileUpdate = true;
 }
@@ -288,7 +286,7 @@ glm::ivec2 TileMap::selectRandomTile(unsigned int tileID) const {
 		}
 	}
 	if (options.empty()) {
-		error("failed to find tile ID " + std::to_string(tileID) + " in tilemap ");
+		Jauntlet::error("failed to find tile ID " + std::to_string(tileID) + " in tilemap ");
 		return glm::ivec2(0);
 	}
 

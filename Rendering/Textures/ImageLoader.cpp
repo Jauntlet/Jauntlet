@@ -7,7 +7,6 @@
 #include <GL/glew.h>
 #endif
 
-using namespace Jauntlet;
 
 static std::vector<unsigned char> _out;
 
@@ -39,7 +38,7 @@ GLTexture ImageLoader::loadPNG(std::string filePath) {
 
 	// Check for an error with openGL. An error occurs here if OpenGL isn't initialized.
 	if (glGetError() != GL_NO_ERROR) {
-		fatalError("Attempted to create a texture before a window is created! Please try to grab the texture later in program execution!");
+		Jauntlet::fatalError("Attempted to create a texture before a window is created! Please try to grab the texture later in program execution!");
 	}
 	
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -57,20 +56,20 @@ SDL_Surface* ImageLoader::loadPNGtoSurface(std::string filePath) {
 	unsigned long width, height;
 
 	if (!FileManager::readFileToBuffer(filePath, in)) {
-		fatalError("Failed to load PNG " + filePath + " file to buffer!");
+		Jauntlet::fatalError("Failed to load PNG " + filePath + " file to buffer!");
 	}
 
 	int errorCode = decodePNG(_out, width, height, &(in[0]), in.size());
 
 	if (errorCode != 0) {
-		fatalError("decodePNG failed with error: " + std::to_string(errorCode));
+		Jauntlet::fatalError("decodePNG failed with error: " + std::to_string(errorCode));
 	}
 
 	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)_out.data(), width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 
 	if (surface == nullptr) {
-		error("Failed to create icon Surfae!");
-		fatalError(SDL_GetError());
+		Jauntlet::error("Failed to create icon Surfae!");
+		Jauntlet::fatalError(SDL_GetError());
 	}
 
 	return surface;
@@ -88,14 +87,14 @@ GLTexture ImageLoader::loadMissingTexture() {
 	std::vector<unsigned char> out;
 	unsigned long width, height;
 
-	if (!FileManager::readFileToBuffer(ResourceManager::getMissingTexture(), in)) {
-		fatalError("Failed to load PNG \"" + ResourceManager::getMissingTexture() + "\" file to buffer!");
+	if (!FileManager::readFileToBuffer(Jauntlet::ResourceManager::getMissingTexture(), in)) {
+		Jauntlet::fatalError("Failed to load PNG \"" + Jauntlet::ResourceManager::getMissingTexture() + "\" file to buffer!");
 	}
 
 	int errorCode = decodePNG(out, width, height, &(in[0]), in.size());
 
 	if (errorCode != 0) {
-		fatalError("failed to decode image \"" + ResourceManager::getMissingTexture() + "\" with error: " + std::to_string(errorCode));
+		Jauntlet::fatalError("failed to decode image \"" + Jauntlet::ResourceManager::getMissingTexture() + "\" with error: " + std::to_string(errorCode));
 	}
 #ifdef OPENGL
 	glGenTextures(1, &(texture.id));
