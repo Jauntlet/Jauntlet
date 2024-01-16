@@ -2,7 +2,7 @@
 
 #include "../../Time.h"
 
-SpriteAnimation::Animation(unsigned int frames) {
+SpriteAnimation::SpriteAnimation(unsigned int frames) {
 	_spriteSize = 1.0f / frames;
 }
 

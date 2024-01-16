@@ -42,7 +42,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UI\UITextElement.cpp">
+    <ClCompile Include="UI\UIText.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\UIElement.cpp">
@@ -67,13 +67,13 @@
     <ClCompile Include="Jauntlet.cpp" />
     <ClCompile Include="JMath.cpp" />
     <ClCompile Include="Time.cpp" />
-    <ClCompile Include="UI\UIButtonElement.cpp">
+    <ClCompile Include="UI\UIButton.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\UISpriteElement.cpp">
+    <ClCompile Include="UI\UISprite.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\UIButtonToggleableElement.cpp">
+    <ClCompile Include="UI\UIButtonToggleable.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\UIBatch.cpp">
@@ -124,7 +124,7 @@
     <ClCompile Include="Filesystems\FileDialogs.cpp">
       <Filter>Filesystems</Filter>
     </ClCompile>
-    <ClCompile Include="UI\UISpriteAnimatedElement.cpp">
+    <ClCompile Include="UI\UISpriteAnimated.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Textures\ImageLoader.cpp">
@@ -148,12 +148,12 @@
     <ClCompile Include="Audio\AudioSource.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="UI\UIProgressBarElement.cpp">
+    <ClCompile Include="UI\UIProgressBar.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UI\UITextElement.h">
+    <ClInclude Include="UI\UIText.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIElement.h">
@@ -181,13 +181,13 @@
     <ClInclude Include="Jauntlet.h" />
     <ClInclude Include="JMath.h" />
     <ClInclude Include="Time.h" />
-    <ClInclude Include="UI\UIButtonElement.h">
+    <ClInclude Include="UI\UIButton.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\UISpriteElement.h">
+    <ClInclude Include="UI\UISprite.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\UIButtonToggleableElement.h">
+    <ClInclude Include="UI\UIButtonToggleable.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIBatch.h">
@@ -238,7 +238,7 @@
     <ClInclude Include="Filesystems\FileDialogs.h">
       <Filter>Filesystems</Filter>
     </ClInclude>
-    <ClInclude Include="UI\UISpriteAnimatedElement.h">
+    <ClInclude Include="UI\UISpriteAnimated.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Textures\GLTexture.h">
@@ -265,7 +265,7 @@
     <ClInclude Include="Audio\AudioSource.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="UI\UIProgressBarElement.h">
+    <ClInclude Include="UI\UIProgressBar.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,17 +1,17 @@
-#include "UISpriteElement.h"
+#include "UISprite.h"
 
-UISpriteElement::UISpriteElement() {
+UISprite::UISprite() {
     //empty
 }
 
-UISpriteElement::UISpriteElement(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
+UISprite::UISprite(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
     _textureId = textureId;
     _originPin = positionPinType;
     _position = position;
     _size = size;
 }
 
-void UISpriteElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
+void UISprite::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
     switch (_originPin) {
         case UIElement::ORIGIN_PIN::TOP_LEFT:
             _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale + _size.y * scale);
@@ -46,6 +46,6 @@ void UISpriteElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins,
     _resolvedSize = _size * scale; // we will handle scaling later.
 }
 
-void UISpriteElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
+void UISprite::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
     spriteBatch->draw({_resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y}, _textureId);
 }

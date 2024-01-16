@@ -1,15 +1,13 @@
 #include <string>
 #include <glm/ext/vector_float2.hpp>
 
-#include "UIButtonElement.h"
+#include "UIButton.h"
 
-using namespace Jauntlet;
-
-UIButtonElement::UIButtonElement() {
+UIButton::UIButton() {
     // Empty
 }
 
-UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
+UIButton::UIButton(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType) {
     _inputManager = inputManager;
     _onClick = onClick;
     _textureId = textureId;
@@ -18,7 +16,7 @@ UIButtonElement::UIButtonElement(InputManager* inputManager, std::function<void(
     _size = size;
 }
 
-void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
+void UIButton::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
     switch (_originPin) {
         case UIElement::ORIGIN_PIN::TOP_LEFT:
             _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale + _size.y * scale);
@@ -60,7 +58,7 @@ void UIButtonElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins,
     };
 }
 
-void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
+void UIButton::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
     glm::vec2 mousecoords = _inputManager->getMouseCoords();
 
     _clicked = false;
@@ -79,7 +77,7 @@ void UIButtonElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float sca
     spriteBatch->draw({_resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y}, {_clicked * 0.5, 0, 0.5, 1}, _textureId);
 }
 
-bool UIButtonElement::isPressed() {
+bool UIButton::isPressed() {
     glm::vec2 mousecoords = _inputManager->getMouseCoords();
 
     if (_inputManager->isKeyPressed(SDL_BUTTON_LEFT) && mousecoords.x >= _onScreenButtonVec4.x && mousecoords.y >= _onScreenButtonVec4.w && mousecoords.x <= _onScreenButtonVec4.y && mousecoords.y <= _onScreenButtonVec4.z) {
@@ -88,7 +86,7 @@ bool UIButtonElement::isPressed() {
     
     return false;
 }
-bool UIButtonElement::isDown() {
+bool UIButton::isDown() {
     glm::vec2 mousecoords = _inputManager->getMouseCoords();
 
     if (_inputManager->isKeyDown(SDL_BUTTON_LEFT) && mousecoords.x >= _onScreenButtonVec4.x && mousecoords.y >= _onScreenButtonVec4.w && mousecoords.x <= _onScreenButtonVec4.y && mousecoords.y <= _onScreenButtonVec4.z) {

@@ -1,20 +1,20 @@
 /* Purpose: UI Element and Progress Bar parity
  * Main Contributer(s): Xander Mooney
  */
-#include "UIProgressBarElement.h"
+#include "UIProgressBar.h"
 
-UIProgressBarElement::UIProgressBarElement(const std::string& texture1, const glm::vec4& texture1UV, const std::string& texture2, const glm::vec4& texture2UV, const glm::vec4& dest, UIElement::ORIGIN_PIN pinType) : 
+UIProgressBar::UIProgressBar(const std::string& texture1, const glm::vec4& texture1UV, const std::string& texture2, const glm::vec4& texture2UV, const glm::vec4& dest, UIElement::ORIGIN_PIN pinType) : 
 	ProgressBar(texture1, texture1UV, texture2, texture2UV, dest)
 {
     _originPin = pinType;
 }
-UIProgressBarElement::UIProgressBarElement(const std::string& texture, const glm::vec4& texture1UV, const glm::vec4& texture2UV, const glm::vec4& dest, UIElement::ORIGIN_PIN pinType) :
+UIProgressBar::UIProgressBar(const std::string& texture, const glm::vec4& texture1UV, const glm::vec4& texture2UV, const glm::vec4& dest, UIElement::ORIGIN_PIN pinType) :
 	ProgressBar(texture, texture1UV, texture2UV, dest)
 {
     _originPin = pinType;
 }
 
-void UIProgressBarElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) { 
+void UIProgressBar::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) { 
     if (progress != 0) {
         spriteBatch->draw(glm::vec4(_resolvedPosition, _resolvedSize.x * progress, _resolvedSize.y), glm::vec4(_UV1.x, _UV1.y, _UV1.z * progress, _UV1.w), _fullTexture);
     }
@@ -22,7 +22,7 @@ void UIProgressBarElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, floa
         spriteBatch->draw(glm::vec4(_resolvedPosition.x + _resolvedSize.x * progress, _resolvedPosition.y, _resolvedSize.x * (1 - progress), _resolvedSize.y), glm::vec4(_UV2.x + _UV2.z * progress, _UV2.y, _UV2.z * (1 - progress), _UV1.w), _emptyTexture);
     }
 };
-void UIProgressBarElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
+void UIProgressBar::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
     glm::vec2 _unresolvedPosition;
 
     switch (_originPin) {

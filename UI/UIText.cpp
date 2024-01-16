@@ -1,13 +1,13 @@
-#include "UITextElement.h"
+#include "UIText.h"
 
-UITextElement::UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, const float scale) {
+UIText::UIText(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, const float scale) {
     _text = text;
     _textRenderer = textRenderer;
     _color = color;
     _position = position;
     _scale = scale;
 }
-UITextElement::UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, ORIGIN_PIN positionPinType, const float scale) {
+UIText::UIText(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, ORIGIN_PIN positionPinType, const float scale) {
     _text = text;
     _textRenderer = textRenderer;
     _color = color;
@@ -16,7 +16,7 @@ UITextElement::UITextElement(TextRenderer* textRenderer, std::string* text, Colo
     _originPin = positionPinType;
 }
 
-void UITextElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
+void UIText::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
 
     glm::vec2 _size = _textRenderer->calculateTextSize(*_text, glm::vec2(_scale));
     glm::vec2 pin;
@@ -51,6 +51,6 @@ void UITextElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, f
     }
 }
 
-void UITextElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
+void UIText::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
     _textRenderer->addText(*spriteBatch,*_text, _resolvedPosition, glm::vec2(scale * _scale), 0, *_color);
 }

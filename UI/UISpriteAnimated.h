@@ -3,14 +3,14 @@
  */
 #pragma once
 
-#include "UISpriteElement.h"
-#include "../Rendering/Animation/Animation.h"
+#include "UISprite.h"
+#include "../Rendering/Animation/SpriteAnimation.h"
 
-class UISpriteAnimatedElement : public UISpriteElement
+class UISpriteAnimated : public UISprite
 {
 public:
-	UISpriteAnimatedElement();
-	UISpriteAnimatedElement(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType, Animation* animation);
+	UISpriteAnimated();
+	UISpriteAnimated(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType, SpriteAnimation* animation);
 	void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
        void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
    protected:
@@ -20,5 +20,5 @@ public:
 	glm::vec2 _resolvedSize;
 	unsigned int _textureId;
 	glm::vec2 _unresolvedPosition;
-	Animation* _animation;
+	SpriteAnimation* _animation;
 };

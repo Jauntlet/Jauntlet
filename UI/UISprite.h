@@ -4,11 +4,11 @@
 #pragma once
 #include "UIElement.h"
 
-class UISpriteElement : public UIElement
+class UISprite : public UIElement
 {
 public:
-	UISpriteElement();
-	UISpriteElement(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType);
+	UISprite();
+	UISprite(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType);
        virtual void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
 	virtual void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
    private:

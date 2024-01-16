@@ -6,11 +6,11 @@
 #include "UIElement.h"
 #include "../Rendering/TextRenderer.h"
 
-class UITextElement : public UIElement
+class UIText : public UIElement
 {
 public:
-	UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, const float scale = 1.0f);
-	UITextElement(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, ORIGIN_PIN positionPinType, const float scale = 1.0f);
+	UIText(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, const float scale = 1.0f);
+	UIText(TextRenderer* textRenderer, std::string* text, Color* color, glm::vec2* position, ORIGIN_PIN positionPinType, const float scale = 1.0f);
 
        void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
 	void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;

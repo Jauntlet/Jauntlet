@@ -1,11 +1,11 @@
 #include <iostream>
-#include "UISpriteAnimatedElement.h"
+#include "UISpriteAnimated.h"
 
-UISpriteAnimatedElement::UISpriteAnimatedElement() {
+UISpriteAnimated::UISpriteAnimated() {
     //empty
 }
 
-UISpriteAnimatedElement::UISpriteAnimatedElement(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType, Animation* animation) {
+UISpriteAnimated::UISpriteAnimated(unsigned int textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType, SpriteAnimation* animation) {
     _textureId = textureId;
     _originPin = positionPinType;
     _position = position;
@@ -13,7 +13,7 @@ UISpriteAnimatedElement::UISpriteAnimatedElement(unsigned int textureId, glm::ve
     _animation = animation;
 }
 
-void UISpriteAnimatedElement::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
+void UISpriteAnimated::resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) {
     switch (_originPin) {
         case UIElement::ORIGIN_PIN::TOP_LEFT:
             _unresolvedPosition = glm::vec2(_position->x * scale, _position->y * scale + _size.y * scale);
@@ -48,6 +48,6 @@ void UISpriteAnimatedElement::resolvePosition(Camera2D* camera, glm::vec2* resol
     _resolvedSize = _size * scale; // we will handle scaling later.
 }
 
-void UISpriteAnimatedElement::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
+void UISpriteAnimated::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
     spriteBatch->draw({_resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y},_animation->getUV(), _textureId);
 }
