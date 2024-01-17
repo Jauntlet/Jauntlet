@@ -151,6 +151,9 @@
     <ClCompile Include="UI\UIProgressBar.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\Cameras\Camera.cpp">
+      <Filter>Rendering\Cameras</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UIText.h">
@@ -267,6 +270,9 @@
     </ClInclude>
     <ClInclude Include="UI\UIProgressBar.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Cameras\Camera.h">
+      <Filter>Rendering\Cameras</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
