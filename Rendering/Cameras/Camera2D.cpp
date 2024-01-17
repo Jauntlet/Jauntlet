@@ -57,7 +57,7 @@ void Camera2D::update() {
 
 void Camera2D::setActive() {
 	if (GLSLProgram::currentProgram != nullptr) {
-		glUniformMatrix4fv(GLSLProgram::currentProgram->getUniformLocation("Projection"), 1, GL_FALSE, &getMatrix()[0][0]);
+		glUniformMatrix4fv(GLSLProgram::currentProgram->getUniformLocation("Projection"), 1, GL_FALSE, &_cameraMatrix[0][0]);
 	}
 }
 
