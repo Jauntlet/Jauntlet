@@ -4,11 +4,17 @@
 #include<glm/gtx/rotate_vector.hpp>
 #include<glm/gtx/vector_angle.hpp>
 
-Camera::Camera(int screenWidth, int screenHeight) {
-	_screenSize = glm::ivec2(screenWidth, screenHeight);
+Camera::Camera(int screenWidth, int screenHeight) 
+	:
+	_screenSize(screenWidth, screenHeight)
+{
+	// Empty
 }
-Camera::Camera(glm::ivec2 screenSize) {
-	_screenSize = screenSize;
+Camera::Camera(glm::ivec2 screenSize) 
+	:
+	_screenSize(screenSize)
+{
+	// Empty
 }
 
 void Camera::update() {
