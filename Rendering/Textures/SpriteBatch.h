@@ -30,7 +30,7 @@ public:
 	Vertex bottomRight;
 private:
 	// rotate point, extremely optimized just for this case.
-	glm::vec2 rotatePoint(const float& x, const float& y, const float& angle);
+	glm::vec2 rotatePoint(float x, float y, float angle);
 };
 // stores a texture, and information about rendering it
 class RenderBatch {

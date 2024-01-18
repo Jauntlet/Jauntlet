@@ -47,7 +47,7 @@ Glyph::Glyph(const glm::vec4& DestRect, const glm::vec4& UvRect, float radians, 
 	topRight.setUV(UvRect.x + UvRect.z, UvRect.y + UvRect.w);
 }
 
-glm::vec2 Glyph::rotatePoint(const float& x, const float& y, const float& angle) {
+glm::vec2 Glyph::rotatePoint(float x, float y, float angle) {
 	return glm::vec2(x * cos(angle) - y * sin(angle), x * sin(angle) + y * cos(angle));
 }
 
