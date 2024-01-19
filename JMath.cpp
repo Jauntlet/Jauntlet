@@ -15,7 +15,7 @@ float JMath::Distance(const glm::vec3& a,const glm::vec3& b) {
 
 std::vector<std::string> JMath::Split(const std::string& string,const std::string& delimiter) {
 	std::vector<std::string> output;
-	output.reserve(sizeof(char) * string.length());
+	output.reserve(sizeof(char) * string.length() * 2);
 
 	size_t start = 0;
 	size_t delim = string.find_first_of(delimiter);
@@ -39,7 +39,7 @@ std::vector<std::string> JMath::Split(const std::string& string,const std::strin
 }
 std::vector<std::string> JMath::Split(const std::string& string, const char delimiter) {
 	std::vector<std::string> output;
-	output.reserve(sizeof(char) * string.length());
+	output.reserve(sizeof(char) * string.length() * 2);
 
 	size_t start = 0;
 	size_t delim = string.find_first_of(delimiter);
@@ -61,6 +61,28 @@ std::vector<std::string> JMath::Split(const std::string& string, const char deli
 	output.emplace_back(string.data() + start);
 
 	return output;
+}
+void JMath::Split(const std::string& string, const char delimiter, std::vector<std::string>& output) {
+	output.reserve(sizeof(char) * string.length() * 2);
+
+	size_t start = 0;
+	size_t delim = string.find_first_of(delimiter);
+
+	// if no delimiter was found
+	if (delim == -1) {
+		output.emplace_back(string);
+		// most Split functions in other languages returns an empty string at the 1st index if there is no delimiter in the string. This is for consistency. -xm
+		output.emplace_back("");
+		return;
+	}
+
+	do {
+		output.emplace_back(string.data() + start, delim - start);
+		start = delim + 1;
+	} while ((delim = string.find_first_of(delimiter, start)) != std::string::npos);
+
+	// pushes the rest of the string
+	output.emplace_back(string.data() + start);
 }
 
 std::string JMath::reverse(const std::string& string) {

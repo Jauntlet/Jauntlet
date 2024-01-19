@@ -37,6 +37,9 @@ public:
 	// splits a string based on the provided delimiter, splitting as many times as needed.
 	// if no delimiter is found, the 0th element will be the full string and the 1th element will be an empty string.
 	static std::vector<std::string> Split(const std::string& string, const char delimiter);
+	// splits a string based on the provided delimiter, splitting as many times as needed.
+	// if no delimiter is found, the 0th element will be the full string and the 1th element will be an empty string.
+	static void Split(const std::string& string, const char delimiter, std::vector<std::string>& output);
 
 	static std::string reverse(const std::string& string);
 };
