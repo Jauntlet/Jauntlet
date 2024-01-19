@@ -174,19 +174,19 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 		if (line[0] == 'v' && line[1] == ' ') {
 			std::vector<std::string> split; 
 			JMath::Split(line, ' ', split);
-			vertices.emplace_back(std::strtod(split[1].data(), NULL), std::strtod(split[2].data(), NULL), std::strtod(split[3].data(), NULL));
+			vertices.emplace_back(std::strtof(split[1].data(), NULL), std::strtof(split[2].data(), NULL), std::strtof(split[3].data(), NULL));
 		}
 		// lines that start with 'vt' are a texture coordinate
 		else if (line[0] == 'v' && line[1] == 't') {
 			std::vector<std::string> split; 
 			JMath::Split(line, ' ', split);
-			uvs.emplace_back(std::strtod(split[1].data(), NULL), std::strtod(split[2].data(), NULL));
+			uvs.emplace_back(std::strtof(split[1].data(), NULL), std::strtof(split[2].data(), NULL));
 		} 
 		// lines that start with 'vn' are normals.
 		else if (line[0] == 'v' && line[1] == 'n') {
 			std::vector<std::string> split;
 			JMath::Split(line, ' ', split);
-			normals.emplace_back(std::strtod(split[1].data(), NULL), std::strtod(split[2].data(), NULL), std::strtod(split[3].data(), NULL));
+			normals.emplace_back(std::strtof(split[1].data(), NULL), std::strtof(split[2].data(), NULL), std::strtof(split[3].data(), NULL));
 		} 
 		// lines that start with 'f' are a face.
 		else if (line[0] == 'f') {
