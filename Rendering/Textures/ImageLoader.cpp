@@ -22,7 +22,7 @@ GLTexture ImageLoader::loadPNG(std::string filePath) {
 		return loadMissingTexture();
 	}
 
-	glGenTextures(1, &(texture.id));
+	glGenTextures(1, &texture.id);
 
 	glBindTexture(GL_TEXTURE_2D, texture.id);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, &(out[0]));
