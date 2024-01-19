@@ -97,7 +97,6 @@ void SpriteBatch::end() {
 }
 
 void SpriteBatch::render() { 
-
 	glBindVertexArray(_vaoID);
 
 	for (int i = 0; i < _renderBatches.size(); ++i) {

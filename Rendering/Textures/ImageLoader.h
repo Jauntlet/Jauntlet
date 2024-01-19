@@ -12,10 +12,10 @@ class ImageLoader
 {
 public:
 	// loads a PNG based on the file path.
-	static GLTexture loadPNG(std::string filePath);
+	static GLTexture loadPNG(const std::string& filePath);
 	// loads a PNG and saves it to a SDL_Surface
 	// !!! Remember to free the surface when you are done using it with ImageLoader::freeSurface(SDL_Surface* surface); !!!
-	static SDL_Surface* loadPNGtoSurface(std::string filePath);
+	static SDL_Surface* loadPNGtoSurface(const std::string& filePath);
 	// Frees stored surface memory 
 	// Forgetting this could lead to a memory leak!
 	static void freeSurface(SDL_Surface* surface);

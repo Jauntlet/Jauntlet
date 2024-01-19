@@ -6,7 +6,7 @@
 
 static std::vector<unsigned char> _out;
 
-GLTexture ImageLoader::loadPNG(std::string filePath) {
+GLTexture ImageLoader::loadPNG(const std::string& filePath) {
 	GLTexture texture = {};
 
 	std::vector<unsigned char> in, out;
@@ -47,7 +47,7 @@ GLTexture ImageLoader::loadPNG(std::string filePath) {
 	return texture;
 }
 
-SDL_Surface* ImageLoader::loadPNGtoSurface(std::string filePath) {
+SDL_Surface* ImageLoader::loadPNGtoSurface(const std::string& filePath) {
 	std::vector<unsigned char> in;
 	unsigned long width, height;
 
