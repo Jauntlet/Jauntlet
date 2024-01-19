@@ -3,6 +3,8 @@
 #include "../Errors.h"
 #include "FileManager.h"
 #include "../JMath.h"
+#include <charconv>
+#include <sstream>
 
 #if _WIN32
 #include <Windows.h>
@@ -170,34 +172,37 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 	while (getline(file, line)) {
 		// lines that start with a 'v' are a vertex
 		if (line[0] == 'v' && line[1] == ' ') {
-			std::vector<std::string> split = JMath::Split(line, ' ');
-			vertices.emplace_back(std::stod(split[1]), std::stod(split[2]), std::stod(split[3]));
+			std::vector<std::string> split; 
+			JMath::Split(line, ' ', split);
+			vertices.emplace_back(std::strtod(split[1].data(), NULL), std::strtod(split[2].data(), NULL), std::strtod(split[3].data(), NULL));
 		}
 		// lines that start with 'vt' are a texture coordinate
 		else if (line[0] == 'v' && line[1] == 't') {
-			std::vector<std::string> split = JMath::Split(line, ' ');
-			uvs.emplace_back(std::stod(split[1]), std::stod(split[2]));
+			std::vector<std::string> split; 
+			JMath::Split(line, ' ', split);
+			uvs.emplace_back(std::strtod(split[1].data(), NULL), std::strtod(split[2].data(), NULL));
 		} 
 		// lines that start with 'vn' are normals.
 		else if (line[0] == 'v' && line[1] == 'n') {
-			std::vector<std::string> split = JMath::Split(line, ' ');
-			normals.emplace_back(std::stod(split[1]), std::stod(split[2]), std::stod(split[3]));
+			std::vector<std::string> split;
+			JMath::Split(line, ' ', split);
+			normals.emplace_back(std::strtod(split[1].data(), NULL), std::strtod(split[2].data(), NULL), std::strtod(split[3].data(), NULL));
 		} 
 		// lines that start with 'f' are a face.
 		else if (line[0] == 'f') {
-			std::vector<std::string> splitSpaces = JMath::Split(line, ' ');
-			// erase 'f'
-			splitSpaces.erase(splitSpaces.begin());
+			std::vector<std::string> splitSpaces;
+			JMath::Split(line.data() + 2, ' ', splitSpaces);
 			// make sure there are only three points on a face
 			if (splitSpaces.size() == 4) {
 				Jauntlet::error("OBJ \"" + filePath + "\" is not triangulated! Please re-export the model whilst triangulated.");
 				return false;
 			}
 			for (std::string& info : splitSpaces) {
-				std::vector<std::string> splitSlashes = JMath::Split(info, '/');
-				out_vertices.emplace_back(vertices[stoi(splitSlashes[0]) - 1]);
-				out_uvs.emplace_back(uvs[stoi(splitSlashes[1]) - 1]);
-				out_normals.emplace_back(normals[stoi(splitSlashes[2]) - 1]);
+				std::vector<std::string> splitSlashes;
+				JMath::Split(info, '/', splitSlashes);
+				out_vertices.emplace_back(vertices[atoi(splitSlashes[0].data()) - 1]);
+				out_uvs.emplace_back(uvs[atoi(splitSlashes[1].data()) - 1]);
+				out_normals.emplace_back(normals[atoi(splitSlashes[2].data()) - 1]);
 			}
 		}
 	}
