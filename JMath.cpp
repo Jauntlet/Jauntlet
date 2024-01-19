@@ -22,18 +22,18 @@ std::vector<std::string> JMath::Split(const std::string& string,const std::strin
 
 	// if no delimiter was found
 	if (delim == -1) {
-		output.push_back(string);
+		output.emplace_back(string);
 		// most Split functions in other languages returns an empty string at the 1st index if there is no delimiter in the string. This is for consistency. -xm
-		output.push_back("");
+		output.emplace_back("");
 		return output;
 	}
 
 	do {
-		output.push_back(string.substr(start, delim - start));
+		output.emplace_back(string.substr(start, delim - start));
 		start = delim + delimiter.length();
 	} while ((delim = string.find(delimiter, start)) != std::string::npos);
 	
-	output.push_back(string.substr(start));
+	output.emplace_back(string.substr(start));
 
 	return output;
 }
@@ -46,19 +46,19 @@ std::vector<std::string> JMath::Split(const std::string& string, const char deli
 
 	// if no delimiter was found
 	if (delim == -1) {
-		output.push_back(string);
+		output.emplace_back(string);
 		// most Split functions in other languages returns an empty string at the 1st index if there is no delimiter in the string. This is for consistency. -xm
-		output.push_back("");
+		output.emplace_back("");
 		return output;
 	}
 
 	do {
-		output.push_back(string.substr(start, delim - start));
+		output.emplace_back(string.substr(start, delim - start));
 		start = delim + 1;
 	} while ((delim = string.find(delimiter, start)) != std::string::npos);
 	
 	// pushes the rest of the string
-	output.push_back(string.substr(start));
+	output.emplace_back(string.substr(start));
 
 	return output;
 }
