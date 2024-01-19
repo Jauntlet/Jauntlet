@@ -2,6 +2,7 @@
 #include <vector>
 #include "../Errors.h"
 #include "FileManager.h"
+#include "../JMath.h"
 
 #if _WIN32
 #include <Windows.h>
@@ -155,6 +156,53 @@ std::vector<char> FileManager::readWAVFile(const std::string& filePath, AudioStr
 	return output;
 }
 
+bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3>& out_normals) {
+	std::vector<glm::vec3> vertices, normals;
+	std::vector<glm::vec2> uvs;
+	
+	std::ifstream file(filePath, std::ios::in);
+	if (!file.is_open()) {
+		Jauntlet::error("Could not open OBJ \"" + filePath + "\"");
+		return false;
+	}
+
+	std::string line;
+	while (getline(file, line)) {
+		// lines that start with a 'v' are a vertex
+		if (line.substr(0, 2) == "v ") {
+			std::vector<std::string> split = JMath::Split(line, ' ');
+			vertices.emplace_back(std::stod(split[1]), std::stod(split[2]), std::stod(split[3]));
+		}
+		// lines that start with 'vt' are a texture coordinate
+		else if (line.substr(0, 2) == "vt") {
+			std::vector<std::string> split = JMath::Split(line, ' ');
+			uvs.emplace_back(std::stod(split[1]), std::stod(split[2]));
+		} 
+		// lines that start with 'vn' are normals.
+		else if (line.substr(0, 2) == "vn") {
+			std::vector<std::string> split = JMath::Split(line, ' ');
+			normals.emplace_back(std::stod(split[1]), std::stod(split[2]), std::stod(split[3]));
+		} 
+		// lines that start with 'f' are a face.
+		else if (line[0] == 'f') {
+			std::vector<std::string> splitSpaces = JMath::Split(line, ' ');
+			// erase 'f'
+			splitSpaces.erase(splitSpaces.begin());
+			// make sure there are only three points on a face
+			if (splitSpaces.size() == 4) {
+				Jauntlet::error("OBJ \"" + filePath + "\" is not triangulated! Please re-export the model whilst triangulated.");
+				return false;
+			}
+			for (std::string& info : splitSpaces) {
+				std::vector<std::string> splitSlashes = JMath::Split(info, '/');
+				out_vertices.emplace_back(vertices[stoi(splitSlashes[0]) - 1]);
+				out_uvs.emplace_back(uvs[stoi(splitSlashes[1]) - 1]);
+				out_normals.emplace_back(normals[stoi(splitSlashes[2]) - 1]);
+			}
+		}
+	}
+	return true;
+}
 const bool FileManager::findFile(const std::string& filePath) {
 	struct stat sb;
 	if (stat(filePath.c_str(), &sb) == 0) {

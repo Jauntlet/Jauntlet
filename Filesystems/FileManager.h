@@ -7,6 +7,7 @@
 #include <vector>
 #include "../Audio/AudioSource.h"
 #include <cstdio>
+#include <glm/vec2.hpp>
 
 #if _WIN32
 #include <Windows.h>
@@ -24,7 +25,12 @@ public:
 	// reads files to a data buffer. Returns true if it found the file, false otherwise. The data is returned into the second field.
 	static const bool readFileToBuffer(const std::string& filePath, std::vector<unsigned char>& buffer);
 	
+	// takes the filepath location for a WAV file and converts it into a vector of chars for audio streaming.
 	static std::vector<char> readWAVFile(const std::string& filePath, AudioStream& audioStream);
+	
+	// takes the filepath location for an OBJ file and converts it into various info for rendering a 3D object.
+	// Returns true on successful read
+	static bool readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3>& out_normals);
 
 	// Finds the specified folder, returns true if found.
 	static const bool findFile(const std::string& filePath);
