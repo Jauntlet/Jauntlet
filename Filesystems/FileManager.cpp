@@ -169,17 +169,17 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 	std::string line;
 	while (getline(file, line)) {
 		// lines that start with a 'v' are a vertex
-		if (line.substr(0, 2) == "v ") {
+		if (line[0] == 'v' && line[1] == ' ') {
 			std::vector<std::string> split = JMath::Split(line, ' ');
 			vertices.emplace_back(std::stod(split[1]), std::stod(split[2]), std::stod(split[3]));
 		}
 		// lines that start with 'vt' are a texture coordinate
-		else if (line.substr(0, 2) == "vt") {
+		else if (line[0] == 'v' && line[1] == 't') {
 			std::vector<std::string> split = JMath::Split(line, ' ');
 			uvs.emplace_back(std::stod(split[1]), std::stod(split[2]));
 		} 
 		// lines that start with 'vn' are normals.
-		else if (line.substr(0, 2) == "vn") {
+		else if (line[0] == 'v' && line[1] == 'n') {
 			std::vector<std::string> split = JMath::Split(line, ' ');
 			normals.emplace_back(std::stod(split[1]), std::stod(split[2]), std::stod(split[3]));
 		} 
