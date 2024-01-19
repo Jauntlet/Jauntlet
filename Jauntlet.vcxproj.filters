@@ -154,6 +154,9 @@
     <ClCompile Include="Rendering\Cameras\Camera.cpp">
       <Filter>Rendering\Cameras</Filter>
     </ClCompile>
+    <ClCompile Include="Rendering\Model.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UIText.h">
@@ -273,6 +276,9 @@
     </ClInclude>
     <ClInclude Include="Rendering\Cameras\Camera.h">
       <Filter>Rendering\Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Model.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

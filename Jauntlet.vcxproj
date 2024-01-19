@@ -177,6 +177,7 @@
     <ClCompile Include="Rendering\Cameras\Camera.cpp" />
     <ClCompile Include="Rendering\Cameras\Camera2D.cpp" />
     <ClCompile Include="Rendering\GLSLProgram.cpp" />
+    <ClCompile Include="Rendering\Model.cpp" />
     <ClCompile Include="Rendering\Particles\Particle.cpp" />
     <ClCompile Include="Rendering\Particles\ParticleEmitter.cpp" />
     <ClCompile Include="Rendering\Particles\Properties\ParticleGrow.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Rendering\Cameras\Camera.h" />
     <ClInclude Include="Rendering\Cameras\Camera2D.h" />
     <ClInclude Include="Rendering\GLSLProgram.h" />
+    <ClInclude Include="Rendering\Model.h" />
     <ClInclude Include="Rendering\Particles\Particle.h" />
     <ClInclude Include="Rendering\Particles\ParticleEmitter.h" />
     <ClInclude Include="Rendering\Particles\Properties\ParticleGrow.h" />
