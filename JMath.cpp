@@ -18,7 +18,7 @@ std::vector<std::string> JMath::Split(const std::string& string,const std::strin
 	output.reserve(sizeof(char) * string.length());
 
 	size_t start = 0;
-	size_t delim = string.find(delimiter);
+	size_t delim = string.find_first_of(delimiter);
 
 	// if no delimiter was found
 	if (delim == -1) {
@@ -29,11 +29,11 @@ std::vector<std::string> JMath::Split(const std::string& string,const std::strin
 	}
 
 	do {
-		output.emplace_back(string.substr(start, delim - start));
+		output.emplace_back(string.data() + start, delim - start);
 		start = delim + delimiter.length();
-	} while ((delim = string.find(delimiter, start)) != std::string::npos);
+	} while ((delim = string.find_first_of(delimiter, start)) != std::string::npos);
 	
-	output.emplace_back(string.substr(start));
+	output.emplace_back(string.data() + start);
 
 	return output;
 }
@@ -42,7 +42,7 @@ std::vector<std::string> JMath::Split(const std::string& string, const char deli
 	output.reserve(sizeof(char) * string.length());
 
 	size_t start = 0;
-	size_t delim = string.find(delimiter);
+	size_t delim = string.find_first_of(delimiter);
 
 	// if no delimiter was found
 	if (delim == -1) {
@@ -53,12 +53,12 @@ std::vector<std::string> JMath::Split(const std::string& string, const char deli
 	}
 
 	do {
-		output.emplace_back(string.substr(start, delim - start));
+		output.emplace_back(string.data() + start, delim - start);
 		start = delim + 1;
-	} while ((delim = string.find(delimiter, start)) != std::string::npos);
+	} while ((delim = string.find_first_of(delimiter, start)) != std::string::npos);
 	
 	// pushes the rest of the string
-	output.emplace_back(string.substr(start));
+	output.emplace_back(string.data() + start);
 
 	return output;
 }
