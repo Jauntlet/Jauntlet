@@ -3,6 +3,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 #include <iomanip>
+#include <algorithm>
 
 float JMath::Distance(const glm::vec2& a,const glm::vec2& b) {
 	return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
@@ -14,7 +15,8 @@ float JMath::Distance(const glm::vec3& a,const glm::vec3& b) {
 
 std::vector<std::string> JMath::Split(const std::string& string,const std::string& delimiter) {
 	std::vector<std::string> output;
-	
+	output.reserve(sizeof(char) * string.length());
+
 	size_t start = 0;
 	size_t delim = string.find(delimiter);
 
@@ -37,6 +39,7 @@ std::vector<std::string> JMath::Split(const std::string& string,const std::strin
 }
 std::vector<std::string> JMath::Split(const std::string& string, const char delimiter) {
 	std::vector<std::string> output;
+	output.reserve(sizeof(char) * string.length());
 
 	size_t start = 0;
 	size_t delim = string.find(delimiter);
