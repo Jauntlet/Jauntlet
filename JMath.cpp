@@ -12,9 +12,10 @@ float JMath::Distance(const glm::vec3& a,const glm::vec3& b) {
 	return std::sqrt(std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2)) + std::pow(a.z + b.z, 2));
 }
 
-std::vector<std::string> JMath::Split(std::string string,const std::string& delimiter) {
+std::vector<std::string> JMath::Split(const std::string& string,const std::string& delimiter) {
 	std::vector<std::string> output;
 	
+	size_t start = 0;
 	size_t delim = string.find(delimiter);
 
 	// if no delimiter was found
@@ -26,17 +27,18 @@ std::vector<std::string> JMath::Split(std::string string,const std::string& deli
 	}
 
 	do {
-		output.push_back(string.substr(0, delim));
-		string.erase(0, delim + delimiter.length());
-	} while ((delim = string.find(delimiter)) != std::string::npos);
+		output.push_back(string.substr(start, delim - start));
+		start = delim + delimiter.length();
+	} while ((delim = string.find(delimiter, start)) != std::string::npos);
 	
-	output.push_back(string);
+	output.push_back(string.substr(start));
 
 	return output;
 }
-std::vector<std::string> JMath::Split(std::string string,const char& delimiter) {
+std::vector<std::string> JMath::Split(const std::string& string, const char delimiter) {
 	std::vector<std::string> output;
 
+	size_t start = 0;
 	size_t delim = string.find(delimiter);
 
 	// if no delimiter was found
@@ -48,12 +50,12 @@ std::vector<std::string> JMath::Split(std::string string,const char& delimiter) 
 	}
 
 	do {
-		output.push_back(string.substr(0, delim));
-		string.erase(0, delim + 1);
-	} while ((delim = string.find(delimiter)) != std::string::npos);
+		output.push_back(string.substr(start, delim - start));
+		start = delim + 1;
+	} while ((delim = string.find(delimiter, start)) != std::string::npos);
 	
 	// pushes the rest of the string
-	output.push_back(string);
+	output.push_back(string.substr(start));
 
 	return output;
 }
