@@ -1,10 +1,12 @@
+#include <algorithm>
+#include <charconv>
 #include <fstream>
+#include <sstream>
+#include <unordered_map>
 #include <vector>
 #include "../Errors.h"
 #include "FileManager.h"
 #include "../JMath.h"
-#include <charconv>
-#include <sstream>
 
 #if _WIN32
 #include <Windows.h>
@@ -158,9 +160,20 @@ std::vector<char> FileManager::readWAVFile(const std::string& filePath, AudioStr
 	return output;
 }
 
-bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
+// Allows for Vec3s to be put in an unordered map. May be moved to JMath later if needed elsewhere. -xm
+struct Vec3Map {
+	size_t operator()(const glm::vec3& k) const {
+		return std::hash<float>()(k.x) ^ std::hash<float>()(k.y) ^ std::hash<float>()(k.z);
+	}
+	bool operator()(const glm::vec3& a, const glm::vec3& b) const {
+		return a.x == b.x && a.y == b.y && a.z == b.z;
+	}
+};
+
+bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
  	std::vector<glm::vec3> vertices, normals;
 	std::vector<glm::vec2> uvs;
+	std::unordered_map<glm::vec3, unsigned short, Vec3Map, Vec3Map> vertexMap;
 	
 	std::ifstream file(filePath, std::ios::in);
 	if (!file.is_open()) {
@@ -200,9 +213,21 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 			for (std::string& info : splitSpaces) {
 				std::vector<std::string> splitSlashes;
 				JMath::Split(info, '/', splitSlashes);
-				out_vertices.emplace_back(vertices[atoi(splitSlashes[0].data()) - 1]);
-				out_uvs.emplace_back(uvs[atoi(splitSlashes[1].data()) - 1]);
-				out_normals.emplace_back(normals[atoi(splitSlashes[2].data()) - 1]);
+				
+				unsigned short vertIndex = atoi(splitSlashes[0].data()) - 1;
+				auto it = vertexMap.find(vertices[vertIndex]);
+				if (it == vertexMap.end() || out_uvs[it->second] != uvs[atoi(splitSlashes[1].data()) - 1]) {
+					unsigned short newIndex = static_cast<unsigned short>(out_vertices.size());
+					vertexMap[vertices[vertIndex]] = newIndex;
+
+					out_vertices.emplace_back(vertices[vertIndex]);
+					out_uvs.emplace_back(uvs[atoi(splitSlashes[1].data()) - 1]);
+					out_normals.emplace_back(normals[atoi(splitSlashes[2].data()) - 1]);
+					out_indices.emplace_back(newIndex);
+				}
+				else {
+					out_indices.emplace_back(it->second);
+				}
 			}
 		}
 	}
