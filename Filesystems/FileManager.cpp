@@ -170,10 +170,10 @@ struct Vec3Map {
 	}
 };
 
-bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
+bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned int>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
  	std::vector<glm::vec3> vertices, normals;
 	std::vector<glm::vec2> uvs;
-	std::unordered_map<glm::vec3, unsigned short, Vec3Map, Vec3Map> vertexMap;
+	std::unordered_map<glm::vec3, unsigned int, Vec3Map, Vec3Map> vertexMap;
 	
 	std::ifstream file(filePath, std::ios::in);
 	if (!file.is_open()) {
@@ -214,10 +214,10 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 				std::vector<std::string> splitSlashes;
 				JMath::Split(info, '/', splitSlashes);
 				
-				unsigned short vertIndex = atoi(splitSlashes[0].data()) - 1;
+				unsigned int vertIndex = atoi(splitSlashes[0].data()) - 1;
 				auto it = vertexMap.find(vertices[vertIndex]);
 				if (it == vertexMap.end() || out_uvs[it->second] != uvs[atoi(splitSlashes[1].data()) - 1]) {
-					unsigned short newIndex = static_cast<unsigned short>(out_vertices.size());
+					unsigned int newIndex = static_cast<unsigned int>(out_vertices.size());
 					vertexMap[vertices[vertIndex]] = newIndex;
 
 					out_vertices.emplace_back(vertices[vertIndex]);
