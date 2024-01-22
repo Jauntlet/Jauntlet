@@ -167,6 +167,7 @@
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="Externals\picoPNG.cpp" />
     <ClCompile Include="Externals\tinyfiledialogs.cpp" />
+    <ClCompile Include="Externals\yyjson.c" />
     <ClCompile Include="Filesystems\FileDialogs.cpp" />
     <ClCompile Include="Filesystems\FileManager.cpp" />
     <ClCompile Include="Inputs\InputKey.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Errors.h" />
     <ClInclude Include="Externals\picoPNG.h" />
     <ClInclude Include="Externals\tinyfiledialogs.h" />
+    <ClInclude Include="Externals\yyjson.h" />
     <ClInclude Include="Filesystems\FileDialogs.h" />
     <ClInclude Include="Filesystems\FileManager.h" />
     <ClInclude Include="Inputs\InputKey.h" />
