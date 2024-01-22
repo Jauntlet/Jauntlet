@@ -1,7 +1,4 @@
-#include <algorithm>
-#include <charconv>
 #include <fstream>
-#include <sstream>
 #include <unordered_map>
 #include <vector>
 #include "../Errors.h"
@@ -191,7 +188,7 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 		}
 		// lines that start with 'vt' are a texture coordinate
 		else if (line[0] == 'v' && line[1] == 't') {
-			std::vector<std::string> split; 
+			std::vector<std::string> split;
 			JMath::Split(line, ' ', split);
 			uvs.emplace_back(std::strtof(split[1].data(), NULL), std::strtof(split[2].data(), NULL));
 		} 
@@ -233,6 +230,7 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 	}
 	return true;
 }
+
 const bool FileManager::findFile(const std::string& filePath) {
 	struct stat sb;
 	if (stat(filePath.c_str(), &sb) == 0) {

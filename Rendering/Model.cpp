@@ -50,7 +50,6 @@ void Model::draw() {
 
 	glBindTexture(GL_TEXTURE_2D, _textureID);
 	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, (void*)0);
-	//glDrawArrays(GL_TRIANGLES, 0, _vertices.size());
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
