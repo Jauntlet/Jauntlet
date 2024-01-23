@@ -1,24 +1,22 @@
 #include "ImageLoader.h"
 #include "../../Errors.h"
 #include "../../Filesystems/FileManager.h"
-#include "../../Externals/picoPNG.h"
 #include <GL/glew.h>
+#define STB_IMAGE_IMPLEMENTATION
+#define STBI_NO_FAILURE_STRINGS
+#include "../../Externals/stb_image.h"
 
-static std::vector<unsigned char> _out;
+static stbi_uc* _out;
 
 GLTexture ImageLoader::loadPNG(const std::string& filePath) {
 	GLTexture texture = {};
 
-	std::vector<unsigned char> in, out;
-	unsigned long width, height;
+	stbi_uc* out;
+	int width, height;
 
-	if (!FileManager::readFileToBuffer(filePath, in)) {
-		return loadMissingTexture();
-	}
+	out = stbi_load(filePath.data(), &width, &height, NULL, 0);
 
-	int errorCode = decodePNG(out, width, height, &(in[0]), in.size());
-
-	if (errorCode != 0) {
+	if (out == NULL) {
 		return loadMissingTexture();
 	}
 
@@ -48,20 +46,15 @@ GLTexture ImageLoader::loadPNG(const std::string& filePath) {
 }
 
 SDL_Surface* ImageLoader::loadPNGtoSurface(const std::string& filePath) {
-	std::vector<unsigned char> in;
-	unsigned long width, height;
+	int width, height;
 
-	if (!FileManager::readFileToBuffer(filePath, in)) {
-		Jauntlet::fatalError("Failed to load PNG " + filePath + " file to buffer!");
+	_out = stbi_load(filePath.data(), &width, &height, NULL, 0);
+
+	if (_out == NULL) {
+		Jauntlet::fatalError("Failed to load surface: \"" + filePath + "\"");
 	}
 
-	int errorCode = decodePNG(_out, width, height, &(in[0]), in.size());
-
-	if (errorCode != 0) {
-		Jauntlet::fatalError("decodePNG failed with error: " + std::to_string(errorCode));
-	}
-
-	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)_out.data(), width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)_out, width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 
 	if (surface == nullptr) {
 		Jauntlet::error("Failed to create icon Surfae!");
@@ -71,26 +64,21 @@ SDL_Surface* ImageLoader::loadPNGtoSurface(const std::string& filePath) {
 	return surface;
 }
 void ImageLoader::freeSurface(SDL_Surface* surface) {
-	_out.clear();
+	delete _out;
+	_out = nullptr;
 	SDL_FreeSurface(surface);
 }
 
 GLTexture ImageLoader::loadMissingTexture() {
 	GLTexture texture = {};
 
-	std::vector<unsigned char> in;
+	stbi_uc* out;
+	int width, height;
 
-	std::vector<unsigned char> out;
-	unsigned long width, height;
+	out = stbi_load(Jauntlet::ResourceManager::getMissingTexture().data(), &width, &height, NULL, 0);
 
-	if (!FileManager::readFileToBuffer(Jauntlet::ResourceManager::getMissingTexture(), in)) {
-		Jauntlet::fatalError("Failed to load PNG \"" + Jauntlet::ResourceManager::getMissingTexture() + "\" file to buffer!");
-	}
-
-	int errorCode = decodePNG(out, width, height, &(in[0]), in.size());
-
-	if (errorCode != 0) {
-		Jauntlet::fatalError("failed to decode image \"" + Jauntlet::ResourceManager::getMissingTexture() + "\" with error: " + std::to_string(errorCode));
+	if (out == NULL) {
+		return loadMissingTexture();
 	}
 
 	glGenTextures(1, &(texture.id));

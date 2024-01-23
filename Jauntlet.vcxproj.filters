@@ -91,9 +91,6 @@
     <ClCompile Include="Rendering\Particles\ParticleEmitter.cpp">
       <Filter>Rendering\Particles</Filter>
     </ClCompile>
-    <ClCompile Include="Externals\picoPNG.cpp">
-      <Filter>Externals</Filter>
-    </ClCompile>
     <ClCompile Include="Externals\tinyfiledialogs.cpp">
       <Filter>Externals</Filter>
     </ClCompile>
@@ -214,7 +211,7 @@
     <ClInclude Include="Rendering\Particles\ParticleEmitter.h">
       <Filter>Rendering\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="Externals\picoPNG.h">
+    <ClInclude Include="Externals\stb_image.h">
       <Filter>Externals</Filter>
     </ClInclude>
     <ClInclude Include="Externals\tinyfiledialogs.h">

@@ -165,7 +165,6 @@
     <ClCompile Include="Collision\Collider2D.cpp" />
     <ClCompile Include="Collision\Collision2D.cpp" />
     <ClCompile Include="Errors.cpp" />
-    <ClCompile Include="Externals\picoPNG.cpp" />
     <ClCompile Include="Externals\tinyfiledialogs.cpp" />
     <ClCompile Include="Externals\yyjson.c" />
     <ClCompile Include="Filesystems\FileDialogs.cpp" />
@@ -209,7 +208,7 @@
     <ClInclude Include="Collision\Collider2D.h" />
     <ClInclude Include="Collision\Collision2D.h" />
     <ClInclude Include="Errors.h" />
-    <ClInclude Include="Externals\picoPNG.h" />
+    <ClInclude Include="Externals\stb_image.h" />
     <ClInclude Include="Externals\tinyfiledialogs.h" />
     <ClInclude Include="Externals\yyjson.h" />
     <ClInclude Include="Filesystems\FileDialogs.h" />
