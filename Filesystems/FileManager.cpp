@@ -263,7 +263,7 @@ const std::string FileManager::toAbsoluteFilePath(const std::string& filePath) {
 try {
 	return realpath(filePath.c_str(), NULL);
 } catch (...) {
-	fatalError("Tried to find the filepath of a directory that doesn't exist: " + filePath);
+	Jauntlet::fatalError("Tried to find the filepath of a directory that doesn't exist: " + filePath);
 	return NULL;
 }
 #endif
