@@ -1,6 +1,5 @@
 #pragma once
 #include "GLSLProgram.h"
-#include "Textures/ImageLoader.h"
 #include "../Filesystems/FileManager.h"
 #include <glm/mat4x4.hpp>
 

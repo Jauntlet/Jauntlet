@@ -1,6 +1,6 @@
 #include "Window.h"
 #include "../Errors.h"
-#include "Textures/ImageLoader.h"
+#include "../Filesystems/FileManager.h"
 
 Window::Window(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) 
 	: 
@@ -113,11 +113,11 @@ void Window::setBackgroundColor(Color color) {
 	glClearColor(color.r / static_cast<GLclampf>(255), color.g / static_cast<GLclampf>(255), color.b / static_cast<GLclampf>(255), 1);
 }
 void Window::setWindowIcon(std::string filepath) {
-	SDL_Surface* icon = ImageLoader::loadPNGtoSurface(filepath);
+	SDL_Surface* icon = FileManager::loadImageToSurface(filepath);
 
 	SDL_SetWindowIcon(_sdlWindow, icon);
 
-	ImageLoader::freeSurface(icon);
+	FileManager::freeSurface(icon);
 }
 void Window::setWindowTitle(std::string newTitle) {
 	SDL_SetWindowTitle(_sdlWindow, newTitle.c_str());

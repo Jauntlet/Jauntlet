@@ -8,6 +8,8 @@
 #include "../Audio/AudioSource.h"
 #include <cstdio>
 #include <glm/vec2.hpp>
+#include "../Rendering/Textures/ResourceManager.h"
+#include <SDL2/SDL_surface.h>
 
 #if _WIN32
 #include <Windows.h>
@@ -27,10 +29,19 @@ public:
 	
 	// takes the filepath location for a WAV file and converts it into a vector of chars for audio streaming.
 	static std::vector<char> readWAVFile(const std::string& filePath, AudioStream& audioStream);
-	
 	// takes the filepath location for an OBJ file and converts it into various info for rendering a 3D object.
 	// Returns true on successful read
 	static bool readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned int>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals);
+	// loads an image based on the file path for rendering.
+	// Supports PNG, JPEG, BMP, PSD, TGA, HDR, PIC, PPM, PGM
+	static Texture readImage(const std::string& filePath);
+
+	// loads a PNG and saves it to a SDL_Surface
+	// !!! Remember to free the surface when you are done using it with ImageLoader::freeSurface(SDL_Surface* surface); !!!
+	static SDL_Surface* loadImageToSurface(const std::string& filePath);
+	// Frees stored surface memory 
+	// Forgetting to do this after `loadImageToSurface` leads to leaked memory.
+	static void freeSurface(SDL_Surface* surface);
 
 	// Finds the specified folder, returns true if found.
 	static const bool findFile(const std::string& filePath);
@@ -42,9 +53,9 @@ public:
 	// Returns false if the file does not exist, or the file could not be removed
 	static const bool deleteFile(const std::string& filePath);
 	
-	// Takes a file/folder path that is localized to the project and makes an absolute path.
-	// EX: "Build" -> "C:\Users\[Username]\Project\Build"
-	// !!! Causes a crash on Linux if the filepath does not exist !!!
+	// Takes a file/folder path that is localized to the project and makes an absolute path
+	// EX: "Build" -> "C:\Users\[Username]\Project\Build".
+	// Causes a crash on Linux if the filepath does not exist.
 	static const std::string toAbsoluteFilePath(const std::string& filePath);
 
 	// Opens a link in the users default browser. 

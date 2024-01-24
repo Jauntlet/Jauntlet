@@ -23,7 +23,7 @@ Model::Model(const std::string& filePath, const std::string& texturePath) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(unsigned int), &_indices[0], GL_STATIC_DRAW);
 
-	_textureID = ImageLoader::loadPNG(texturePath).id;
+	_textureID = FileManager::readImage(texturePath).id;
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

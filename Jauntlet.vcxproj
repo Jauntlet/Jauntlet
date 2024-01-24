@@ -184,7 +184,6 @@
     <ClCompile Include="Rendering\Particles\Properties\ParticleProperty.cpp" />
     <ClCompile Include="Rendering\ProgressBar.cpp" />
     <ClCompile Include="Rendering\TextRenderer.cpp" />
-    <ClCompile Include="Rendering\Textures\ImageLoader.cpp" />
     <ClCompile Include="Rendering\Textures\ResourceManager.cpp" />
     <ClCompile Include="Rendering\Textures\SpriteBatch.cpp" />
     <ClCompile Include="Rendering\Textures\TextureCache.cpp" />
@@ -229,7 +228,6 @@
     <ClInclude Include="Rendering\ProgressBar.h" />
     <ClInclude Include="Rendering\TextRenderer.h" />
     <ClInclude Include="Rendering\Textures\Texture.h" />
-    <ClInclude Include="Rendering\Textures\ImageLoader.h" />
     <ClInclude Include="Rendering\Textures\ResourceManager.h" />
     <ClInclude Include="Rendering\Textures\SpriteBatch.h" />
     <ClInclude Include="Rendering\Textures\TextureCache.h" />

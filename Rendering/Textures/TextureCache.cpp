@@ -1,5 +1,5 @@
 #include "TextureCache.h"
-#include "ImageLoader.h"
+#include "../../Filesystems/FileManager.h"
 
 TextureCache::TextureCache() {
 }
@@ -9,7 +9,7 @@ Texture TextureCache::getTexture(const std::string& filePath) {
 
 	// if its equal to the end, then it could not be found.
 	if (mapIterator == _textureMap.end()) {
-		Texture newTexture = ImageLoader::loadPNG(filePath);
+		Texture newTexture = FileManager::readImage(filePath);
 
 		_textureMap.insert(make_pair(filePath, newTexture));
 
