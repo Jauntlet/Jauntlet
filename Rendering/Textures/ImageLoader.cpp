@@ -64,7 +64,7 @@ SDL_Surface* ImageLoader::loadPNGtoSurface(const std::string& filePath) {
 	return surface;
 }
 void ImageLoader::freeSurface(SDL_Surface* surface) {
-	delete _out;
+	stbi_image_free(_out);
 	_out = nullptr;
 	SDL_FreeSurface(surface);
 }
