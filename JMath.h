@@ -13,12 +13,16 @@
 #include <string>
 #include <vector>
 
+#ifndef M_PI_2
+#define M_PI_2 1.57079632679489661923 // pi/2
+#endif
+
 #ifndef Rad2Deg
 #define Rad2Deg (180.0f / M_PI)
 #endif
 #ifndef Deg2Rad
 #define Deg2Rad (M_PI / 180.0f)
-#endif // !
+#endif
 
 
 // JMath is purposefully left out of the Jauntlet Namespace to shorten the syntax to call it.
