@@ -5,7 +5,7 @@ using namespace Jauntlet;
 TextureCache ResourceManager::_textureCache;
 std::string ResourceManager::_missingTexture;
 
-GLTexture ResourceManager::getTexture(const std::string& texturePath) {
+Texture ResourceManager::getTexture(const std::string& texturePath) {
 	return _textureCache.getTexture(texturePath);
 }
 

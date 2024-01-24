@@ -4,7 +4,7 @@
 #pragma once
 
 // struct for Textures
-struct GLTexture {
+struct Texture {
 	unsigned int id;
 	int width;
 	int height;

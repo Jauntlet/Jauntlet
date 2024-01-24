@@ -13,7 +13,7 @@ class ResourceManager
 {
 public:
 	// gets a texture from the texturecache
-	static GLTexture getTexture(const std::string& texturePath);
+	static Texture getTexture(const std::string& texturePath);
 
 	static void setMissingTexture(const std::string& filePath);
 

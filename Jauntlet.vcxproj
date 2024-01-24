@@ -228,7 +228,7 @@
     <ClInclude Include="Rendering\Particles\Properties\ParticleProperty.h" />
     <ClInclude Include="Rendering\ProgressBar.h" />
     <ClInclude Include="Rendering\TextRenderer.h" />
-    <ClInclude Include="Rendering\Textures\GLTexture.h" />
+    <ClInclude Include="Rendering\Textures\Texture.h" />
     <ClInclude Include="Rendering\Textures\ImageLoader.h" />
     <ClInclude Include="Rendering\Textures\ResourceManager.h" />
     <ClInclude Include="Rendering\Textures\SpriteBatch.h" />

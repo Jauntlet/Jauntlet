@@ -8,8 +8,8 @@
 
 static stbi_uc* _out;
 
-GLTexture ImageLoader::loadPNG(const std::string& filePath) {
-	GLTexture texture = {};
+Texture ImageLoader::loadPNG(const std::string& filePath) {
+	Texture texture = {};
 
 	stbi_uc* out;
 	int width, height;
@@ -69,8 +69,8 @@ void ImageLoader::freeSurface(SDL_Surface* surface) {
 	SDL_FreeSurface(surface);
 }
 
-GLTexture ImageLoader::loadMissingTexture() {
-	GLTexture texture = {};
+Texture ImageLoader::loadMissingTexture() {
+	Texture texture = {};
 
 	stbi_uc* out;
 	int width, height;

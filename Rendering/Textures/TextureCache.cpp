@@ -4,12 +4,12 @@
 TextureCache::TextureCache() {
 }
 
-GLTexture TextureCache::getTexture(const std::string& filePath) {
+Texture TextureCache::getTexture(const std::string& filePath) {
 	auto mapIterator = _textureMap.find(filePath);
 
 	// if its equal to the end, then it could not be found.
 	if (mapIterator == _textureMap.end()) {
-		GLTexture newTexture = ImageLoader::loadPNG(filePath);
+		Texture newTexture = ImageLoader::loadPNG(filePath);
 
 		_textureMap.insert(make_pair(filePath, newTexture));
 

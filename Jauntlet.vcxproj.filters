@@ -247,7 +247,7 @@
     <ClInclude Include="UI\UISpriteAnimated.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="Rendering\Textures\GLTexture.h">
+    <ClInclude Include="Rendering\Textures\Texture.h">
       <Filter>Rendering\Textures</Filter>
     </ClInclude>
     <ClInclude Include="Rendering\Textures\ImageLoader.h">
