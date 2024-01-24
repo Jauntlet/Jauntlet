@@ -218,13 +218,13 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 				
 				unsigned int vertIndex = atoi(splitSlashes[0].data()) - 1;
 				auto it = vertexMap.find(vertices[vertIndex]);
-				if (it == vertexMap.end() || out_uvs[it->second] != uvs[atoi(splitSlashes[1].data()) - 1]) {
+				if (it == vertexMap.end() || out_uvs[it->second] != uvs[atoi(splitSlashes[1].data()) - 1.0f]) {
 					unsigned int newIndex = static_cast<unsigned int>(out_vertices.size());
 					vertexMap[vertices[vertIndex]] = newIndex;
 
 					out_vertices.emplace_back(vertices[vertIndex]);
-					out_uvs.emplace_back(uvs[atoi(splitSlashes[1].data()) - 1]);
-					out_normals.emplace_back(normals[atoi(splitSlashes[2].data()) - 1]);
+					out_uvs.emplace_back(uvs[atoi(splitSlashes[1].data()) - 1.0f]);
+					out_normals.emplace_back(normals[atoi(splitSlashes[2].data()) - 1.0f]);
 					out_indices.emplace_back(newIndex);
 				}
 				else {
