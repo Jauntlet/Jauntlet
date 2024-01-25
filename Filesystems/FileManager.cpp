@@ -295,8 +295,6 @@ SDL_Surface* FileManager::loadImageToSurface(const std::string& filePath) {
 	return surface;
 }
 void FileManager::freeSurface(SDL_Surface* surface) {
-	stbi_image_free(_out);
-	_out = nullptr;
 	SDL_FreeSurface(surface);
 }
 
