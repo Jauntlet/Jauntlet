@@ -270,26 +270,28 @@ Texture FileManager::readImage(const std::string& filePath) {
 	texture.width = width;
 	texture.height = height;
 
+	stbi_image_free(out);
+
 	return texture;
 }
 
-static stbi_uc* _out = nullptr;
 SDL_Surface* FileManager::loadImageToSurface(const std::string& filePath) {
 	int width, height;
 
-	_out = stbi_load(filePath.data(), &width, &height, NULL, 0);
+	stbi_uc* out = stbi_load(filePath.data(), &width, &height, NULL, 0);
 
-	if (_out == NULL) {
+	if (out == NULL) {
 		Jauntlet::fatalError("Failed to load surface: \"" + filePath + "\"");
 	}
 
-	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)_out, width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)out, width, height, 32, width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 
 	if (surface == nullptr) {
 		Jauntlet::error("Failed to create icon Surfae!");
 		Jauntlet::fatalError(SDL_GetError());
 	}
 
+	stbi_image_free(out);
 	return surface;
 }
 void FileManager::freeSurface(SDL_Surface* surface) {
