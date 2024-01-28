@@ -6,10 +6,27 @@
 // Meant to preserve the speed of yyjson, however may cause slight performance decreases.
 // to use yyjson without the wrapper, use `#include<Jauntlet/Externals/yyjson.h>, and follow its documentation here: https://ibireme.github.io/yyjson/doc/doxygen/html/md_doc__a_p_i.html
 namespace JSON {
-	typedef yyjson_doc Document;
+	// Run-time options for reading JSON
 	typedef yyjson_read_flag ReadFlag;
-	//typedef yyjson_val Value;
+	// A JSON value that can be changed
+	typedef yyjson_mut_val MutuableValue;
 	
+	// The main document that holds all of the JSON values and strings.
+	class Document {
+	public:
+		yyjson_doc* rawValue;
+
+		Document(yyjson_doc* rValue) : rawValue(rValue) {};
+		Document(const char* path, ReadFlag flag = 0);
+		Document(std::string path, ReadFlag flag = 0);
+		~Document() { yyjson_doc_free(rawValue); };
+
+		// prevents accidental copying of documents
+		Document(const Document& other) = delete;
+		Document& operator=(const Document& other) = delete;
+	};
+	
+	// An immutable JSON value
 	class Value {
 	public:
 		yyjson_val* rawValue;
@@ -41,10 +58,5 @@ namespace JSON {
 		Value operator[](const char* value);
 	};
 
-	Document* readFile(const std::string& path, ReadFlag flag);
-	Document* readFile(const std::string& path);
-	Document* readFile(const char* path, ReadFlag flag);
-	Document* readFile(const char* path);
-
-	Value getRoot(Document* document);
+	Value getRoot(Document& document);
 }

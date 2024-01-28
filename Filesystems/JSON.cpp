@@ -2,17 +2,17 @@
 
 using namespace JSON;
 
-Document* JSON::readFile(const std::string& path, ReadFlag flag) {
-	return yyjson_read_file(path.data(), flag, NULL, NULL);
+Document::Document(const char* path, ReadFlag flag) 
+	:
+	rawValue(yyjson_read_file(path, flag, NULL, NULL))
+{
+	// Empty
 }
-Document* JSON::readFile(const std::string& path) {
-	return yyjson_read_file(path.data(), 0, NULL, NULL);
-}
-Document* JSON::readFile(const char* path, ReadFlag flag) {
-	return yyjson_read_file(path, flag, NULL, NULL);
-}
-Document* JSON::readFile(const char* path) {
-	return yyjson_read_file(path, 0, NULL, NULL);
+Document::Document(std::string path, ReadFlag flag)
+	:
+	rawValue(yyjson_read_file(path.data(), flag, NULL, NULL)) 
+{
+	// Empty
 }
 
 bool Value::toBool() {
@@ -51,11 +51,11 @@ Value Value::operator[](const char* value) {
 	return yyjson_obj_get(rawValue, value);
 }
 
-Value JSON::getRoot(Document* document) {
-	return Value(yyjson_doc_get_root(document));
+Value JSON::getRoot(Document& document) {
+	return Value(yyjson_doc_get_root(document.rawValue));
 }
 
-Value JSON::OBJIterator::operator[](const char* value) {
+Value OBJIterator::operator[](const char* value) {
 	return Value(yyjson_obj_iter_get(this, value));
 }
 
