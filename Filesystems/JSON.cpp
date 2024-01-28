@@ -58,3 +58,7 @@ Value JSON::getRoot(Document* document) {
 Value JSON::OBJIterator::operator[](const char* value) {
 	return Value(yyjson_obj_iter_get(this, value));
 }
+
+Value OBJIterator::next() {
+	return yyjson_obj_iter_next(this);
+}

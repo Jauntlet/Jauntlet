@@ -31,9 +31,12 @@ namespace JSON {
 		Value operator[](const char* value);
 	};
 
+	// Made for faster iteration through an object. Best to use when iterating through a single object many times over.
 	class OBJIterator : public yyjson_obj_iter {
 	public:
 		OBJIterator(Value object) : yyjson_obj_iter(yyjson_obj_iter_with(object.rawValue)) {};
+		
+		Value next();
 
 		Value operator[](const char* value);
 	};
