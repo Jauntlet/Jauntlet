@@ -154,6 +154,9 @@
     <ClCompile Include="Externals\yyjson.c">
       <Filter>Externals</Filter>
     </ClCompile>
+    <ClCompile Include="Filesystems\JSON.cpp">
+      <Filter>Filesystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\UIText.h">
@@ -276,6 +279,9 @@
     </ClInclude>
     <ClInclude Include="Externals\yyjson.h">
       <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="Filesystems\JSON.h">
+      <Filter>Filesystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -169,6 +169,7 @@
     <ClCompile Include="Externals\yyjson.c" />
     <ClCompile Include="Filesystems\FileDialogs.cpp" />
     <ClCompile Include="Filesystems\FileManager.cpp" />
+    <ClCompile Include="Filesystems\JSON.cpp" />
     <ClCompile Include="Inputs\InputKey.cpp" />
     <ClCompile Include="Inputs\InputManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Externals\yyjson.h" />
     <ClInclude Include="Filesystems\FileDialogs.h" />
     <ClInclude Include="Filesystems\FileManager.h" />
+    <ClInclude Include="Filesystems\JSON.h" />
     <ClInclude Include="Inputs\InputKey.h" />
     <ClInclude Include="Inputs\InputManager.h" />
     <ClInclude Include="Jauntlet.h" />
