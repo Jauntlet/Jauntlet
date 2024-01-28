@@ -18,6 +18,6 @@ private:
 
 	std::vector<glm::vec3> _vertices, _normals;
 	std::vector<glm::vec2> _uvs;
-	std::vector<unsigned int> _indices;
+	std::vector<unsigned short> _indices;
 };
 

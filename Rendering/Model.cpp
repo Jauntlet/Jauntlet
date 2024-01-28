@@ -21,7 +21,7 @@ Model::Model(const std::string& filePath, const std::string& texturePath) {
 
 	glGenBuffers(1, &_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(unsigned int), &_indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(unsigned short), &_indices[0], GL_STATIC_DRAW);
 
 	_textureID = FileManager::readImage(texturePath).id;
 
@@ -49,7 +49,7 @@ void Model::draw() {
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	glBindTexture(GL_TEXTURE_2D, _textureID);
-	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_SHORT, (void*)0);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
