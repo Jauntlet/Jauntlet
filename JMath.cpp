@@ -166,6 +166,8 @@ void operator-=(std::string& a, const char* b) {
 	}
 }
 
+// Vector Printing, used only during debugging as its not usuable outside of that.
+#ifndef NDEBUG
 std::ostream& operator<<(std::ostream& a, const glm::vec2& b) {
 	a << b.x << ", " << b.y;
 	return a;
@@ -190,6 +192,7 @@ std::ostream& operator<<(std::ostream& a, const glm::ivec4& b) {
 	a << b.x << ", " << b.y << ", " << b.z << ", " << b.w;
 	return a;
 }
+#endif
 
 glm::vec2 operator/(const glm::vec2& a, const glm::vec2& b) {
 	return glm::vec2(a.x / b.x, a.y / b.y);
