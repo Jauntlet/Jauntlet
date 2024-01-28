@@ -238,11 +238,10 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 
 Texture FileManager::readImage(const std::string& filePath) {
 	Texture texture = {};
+	int width, height, channels;
 
-	stbi_uc* out;
-	int width, height;
 
-	out = stbi_load(filePath.data(), &width, &height, NULL, 0);
+	stbi_uc* out = stbi_load(filePath.data(), &width, &height, &channels, 0);
 
 	if (out == NULL) {
 		Jauntlet::fatalError("Failed to load image: \"" + filePath + "\"");
@@ -251,7 +250,14 @@ Texture FileManager::readImage(const std::string& filePath) {
 	glGenTextures(1, &texture.id);
 
 	glBindTexture(GL_TEXTURE_2D, texture.id);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, out);
+	//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	if (channels == 4) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, out);
+	} else if (channels == 3) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, out);
+	} else {
+		Jauntlet::fatalError("image \"" + filePath + "\" has an invalid channel count");
+	}
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
