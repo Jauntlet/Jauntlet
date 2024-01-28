@@ -255,7 +255,7 @@ bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& 
 	binFile.read(bin.data(), binLength);
 	binFile.close();
 	
-	JSON::Value attributes = root["meshes"][0]["primitives"][0]["attributes"];
+	JSON::Value attributes = root["meshes"].first()["primitives"].first()["attributes"];
 	JSON::Value accessors = root["accessors"];
 	JSON::Value bufferViews = root["bufferViews"];
 
@@ -278,7 +278,7 @@ bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& 
 		out_normals.emplace_back(normalBuffer[bytePos], normalBuffer[bytePos + 1], normalBuffer[bytePos + 2]);
 	}
 
-	JSON::Value indiciesAccessor = accessors[root["meshes"][0]["primitives"][0]["indices"].toUint()];
+	JSON::Value indiciesAccessor = accessors[root["meshes"].first()["primitives"].first()["indices"].toUint()];
 	unsigned short* indicieBuffer = (unsigned short*)(bin.data() + bufferViews[indiciesAccessor["bufferView"].toUint()]["byteOffset"].toUint());
 
 	uint64_t indicieCount = indiciesAccessor["count"].toUint();
@@ -287,10 +287,10 @@ bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& 
 		out_indices.emplace_back(indicieBuffer[i]);
 	}
 
-	const char* a = root["images"][0]["uri"].toString();
+	const char* a = root["images"].first()["uri"].toString();
 
 	// find and load the texture
-	out_textureID = readImage(std::string(filePath.data(), filePath.find_last_of('/') != std::string::npos ? filePath.find_last_of('/') + 1 : filePath.length()) + std::string(root["images"][0]["uri"].toString())).id;
+	out_textureID = readImage(std::string(filePath.data(), filePath.find_last_of('/') != std::string::npos ? filePath.find_last_of('/') + 1 : filePath.length()) + std::string(root["images"].first()["uri"].toString())).id;
 
 	return true;
 }

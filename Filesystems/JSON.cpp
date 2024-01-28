@@ -51,6 +51,13 @@ Value Value::operator[](const char* value) {
 	return yyjson_obj_get(rawValue, value);
 }
 
+Value Value::first() {
+	return yyjson_arr_get_first(rawValue);
+}
+Value Value::last() {
+	return yyjson_arr_get_last(rawValue);
+}
+
 Value JSON::getRoot(Document& document) {
 	return Value(yyjson_doc_get_root(document.rawValue));
 }

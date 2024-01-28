@@ -44,6 +44,13 @@ namespace JSON {
 		
 		const char* getTypeDesc();
 
+		// returns the first element in an array.
+		// returns NULL if element is not an array.
+		Value first();
+		// returns the last element in an array.
+		// returns NULL if element is not an array.
+		Value last();
+
 		Value operator[](int index);
 		Value operator[](const char* value);
 	};
