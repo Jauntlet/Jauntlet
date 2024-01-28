@@ -33,15 +33,33 @@ namespace JSON {
 
 		Value(yyjson_val* rValue) : rawValue(rValue) {};
 
+		// returns the contents if the value is a Bool
+		// returns NULL if value is not a bool, or is NULL
 		bool toBool();
+		// returns the contents if the value is an Int
+		// returns 0 if value is NULL or not an int
 		int toInt();
+		// returns the contents if the value is an uint64_t
+		// returns 0 if value is NULL or not an uint64_t
 		uint64_t toUint();
+		// returns the contents length (string, array, object)
+		// returns 0 if value is NULL or not a valid option
 		size_t getLength();
+		// returns the contents if the value is a double
+		// returns 0.0 if value is NULL or not a double
 		double toDouble();
+		// returns the contents if the value is raw
+		// returns NULL if value is NULL or not raw
 		const char* toRaw();
+		// returns the contents if the value is an int64_t
+		// returns 0 if value is NULL or not an int64_t
 		int64_t toSint();
+		// returns the contents if the value is a string
+		// returns NULL if value is NULL or not a string
 		const char* toString();
 		
+		// Returns the values JSON type as a readable string.
+		// meant for debugging
 		const char* getTypeDesc();
 
 		// returns the first element in an array.
