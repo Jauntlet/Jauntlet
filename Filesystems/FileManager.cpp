@@ -4,6 +4,7 @@
 #include "../Errors.h"
 #include "FileManager.h"
 #include "../JMath.h"
+#include "../Filesystems/JSON.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_NO_FAILURE_STRINGS
@@ -172,7 +173,7 @@ struct Vec3Map {
 	}
 };
 
-bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned int>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
+bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
  	std::vector<glm::vec3> vertices, normals;
 	std::vector<glm::vec2> uvs;
 	std::unordered_map<glm::vec3, unsigned int, Vec3Map, Vec3Map> vertexMap;
@@ -236,6 +237,59 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 	return true;
 }
 
+bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
+	JSON::Document doc(filePath.data(), 0);
+	JSON::Value root = JSON::getRoot(doc);
+
+	// get the first buffer section
+	JSON::Value buffers = root["buffers"][0];
+
+	// get information from buffers section
+	uint64_t binLength = buffers["byteLength"].toUint();
+
+	std::string binPath = std::string(filePath.data(), filePath.find_last_of('/') != std::string::npos ? filePath.find_last_of('/') + 1 : filePath.length()) + buffers["uri"].toString();
+	
+	// read binFile into bin vector
+	std::ifstream binFile(binPath, std::ios::binary);
+	std::vector<char> bin(binLength);
+	binFile.read(bin.data(), binLength);
+	binFile.close();
+	
+	JSON::Value attributes = root["meshes"][0]["primitives"][0]["attributes"];
+	JSON::Value accessors = root["accessors"];
+	JSON::Value bufferViews = root["bufferViews"];
+
+	// store information for the vertex buffers
+	JSON::Value vertAccessor = accessors[attributes["POSITION"].toUint()];
+	float* vertBuffer = (float*)(bin.data() + bufferViews[vertAccessor["bufferView"].toUint()]["byteOffset"].toUint());
+
+	// same thing as above for uvs and normals, we just don't store the accessors.
+	float* uvBuffer = (float*)(bin.data() + bufferViews[accessors[attributes["TEXCOORD_0"].toUint()]["bufferView"].toUint()]["byteOffset"].toUint());
+	float* normalBuffer = (float*)(bin.data() + bufferViews[accessors[attributes["NORMAL"].toUint()]["bufferView"].toUint()]["byteOffset"].toUint());
+
+	uint64_t vertCount = vertAccessor["count"].toUint();
+	out_vertices.reserve(sizeof(glm::vec3) * vertCount);
+	out_uvs.reserve(sizeof(glm::vec2) * vertCount);
+	out_normals.reserve(sizeof(glm::vec3) * vertCount);
+	for (uint64_t i = 0; i < vertCount; ++i) {
+		uint64_t bytePos = i * 3;
+		out_vertices.emplace_back(vertBuffer[bytePos], -vertBuffer[bytePos + 2], vertBuffer[bytePos + 1]);
+		out_uvs.emplace_back(uvBuffer[i * 2], 1.0f - uvBuffer[i * 2 + 1]);
+		out_normals.emplace_back(normalBuffer[bytePos], normalBuffer[bytePos + 1], normalBuffer[bytePos + 2]);
+	}
+
+	JSON::Value indiciesAccessor = accessors[root["meshes"][0]["primitives"][0]["indices"].toUint()];
+	unsigned short* indicieBuffer = (unsigned short*)(bin.data() + bufferViews[indiciesAccessor["bufferView"].toUint()]["byteOffset"].toUint());
+
+	uint64_t indicieCount = indiciesAccessor["count"].toUint();
+	out_indices.reserve(sizeof(unsigned short) * indicieCount);
+	for (uint64_t i = 0; i < indicieCount; ++i) {
+		out_indices.emplace_back(indicieBuffer[i]);
+	}
+
+	return true;
+}
+
 Texture FileManager::readImage(const std::string& filePath) {
 	Texture texture = {};
 	int width, height, channels;
@@ -250,7 +304,7 @@ Texture FileManager::readImage(const std::string& filePath) {
 	glGenTextures(1, &texture.id);
 
 	glBindTexture(GL_TEXTURE_2D, texture.id);
-	//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
 	if (channels == 4) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, out);
 	} else if (channels == 3) {

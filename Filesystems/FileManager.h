@@ -31,7 +31,10 @@ public:
 	static std::vector<char> readWAVFile(const std::string& filePath, AudioStream& audioStream);
 	// takes the filepath location for an OBJ file and converts it into various info for rendering a 3D object.
 	// Returns true on successful read
-	static bool readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned int>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals);
+	static bool readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals);
+	
+	static bool readGLTF(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals);
+
 	// loads an image based on the file path for rendering.
 	// Supports PNG, JPEG, BMP, PSD, TGA, HDR, PIC, PPM, PGM
 	static Texture readImage(const std::string& filePath);
