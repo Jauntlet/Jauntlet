@@ -237,7 +237,7 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 	return true;
 }
 
-bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals) {
+bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals, unsigned int& out_textureID) {
 	JSON::Document doc(filePath.data(), 0);
 	JSON::Value root = JSON::getRoot(doc);
 
@@ -286,6 +286,11 @@ bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& 
 	for (uint64_t i = 0; i < indicieCount; ++i) {
 		out_indices.emplace_back(indicieBuffer[i]);
 	}
+
+	const char* a = root["images"][0]["uri"].toString();
+
+	// find and load the texture
+	out_textureID = readImage(std::string(filePath.data(), filePath.find_last_of('/') != std::string::npos ? filePath.find_last_of('/') + 1 : filePath.length()) + std::string(root["images"][0]["uri"].toString())).id;
 
 	return true;
 }

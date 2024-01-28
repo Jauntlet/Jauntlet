@@ -33,7 +33,7 @@ public:
 	// Returns true on successful read
 	static bool readOBJ(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals);
 	
-	static bool readGLTF(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals);
+	static bool readGLTF(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals, unsigned int& out_textureID);
 
 	// loads an image based on the file path for rendering.
 	// Supports PNG, JPEG, BMP, PSD, TGA, HDR, PIC, PPM, PGM

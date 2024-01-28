@@ -3,8 +3,11 @@
 #include <glm/ext/matrix_transform.hpp>
 #include "../Errors.h"
 
-Model::Model(const std::string& filePath, const std::string& texturePath) {
-	if (!FileManager::readOBJ(filePath, _vertices, _indices, _uvs, _normals)) {
+Model::Model(ModelType type, const std::string& filePath, const std::string& texturePath) {
+	if (type == ModelType::OBJ && !FileManager::readOBJ(filePath, _vertices, _indices, _uvs, _normals)) {
+		Jauntlet::fatalError("Failed to load model \"" + filePath + "\"");
+	}
+	else if (type == ModelType::GLTF && !FileManager::readGLTF(filePath, _vertices, _indices, _uvs, _normals, _textureID)) {
 		Jauntlet::fatalError("Failed to load model \"" + filePath + "\"");
 	}
 
@@ -23,7 +26,9 @@ Model::Model(const std::string& filePath, const std::string& texturePath) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(unsigned short), &_indices[0], GL_STATIC_DRAW);
 
-	_textureID = FileManager::readImage(texturePath).id;
+	if (_textureID == 0) {
+		_textureID = FileManager::readImage(texturePath).id;
+	}
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);

@@ -3,17 +3,21 @@
 #include "../Filesystems/FileManager.h"
 #include <glm/mat4x4.hpp>
 
+enum class ModelType { GLTF, OBJ };
+
 class Model
 {
 public:
-	Model(const std::string& filePath, const std::string& texturePath);
+	// ModelType determines what type of file the model should expect to load; either a GTLF or an OBJ.
+	// texturePath is only required if you are loading an OBJ.
+	Model(ModelType type, const std::string& filePath, const std::string& texturePath = "");
 	~Model();
 
 	void draw();
 
 	glm::vec3 position = glm::vec3(0);
 private:
-	unsigned int _vertexArrayID, _textureID;
+	unsigned int _vertexArrayID, _textureID = 0;
 	unsigned int _vertexBuffer, _uvBuffer, _indexBuffer;
 
 	std::vector<glm::vec3> _vertices, _normals;
