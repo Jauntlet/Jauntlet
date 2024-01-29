@@ -86,6 +86,12 @@ namespace JSON {
 
 		Value operator[](int index);
 		Value operator[](const char* value);
+		bool operator!=(std::nullptr_t ptr) {
+			return ptr != rawValue;
+		}
+		bool operator==(std::nullptr_t ptr) {
+			return ptr == rawValue;
+		}
 	};
 
 	class MutableValue {

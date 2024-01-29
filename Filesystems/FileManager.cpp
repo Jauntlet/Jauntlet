@@ -288,7 +288,10 @@ bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& 
 	}
 
 	// find and load the texture
-	out_textureID = readImage(std::string(filePath.data(), filePath.find_last_of('/') != std::string::npos ? filePath.find_last_of('/') + 1 : filePath.length()) + std::string(root["images"].first()["uri"].toString())).id;
+	JSON::Value imagePath = root["images"].first()["uri"];
+	if (imagePath != nullptr) {
+		out_textureID = readImage(std::string(filePath.data(), filePath.find_last_of('/') != std::string::npos ? filePath.find_last_of('/') + 1 : filePath.length()) + std::string(root["images"].first()["uri"].toString())).id;
+	}
 
 	return true;
 }
