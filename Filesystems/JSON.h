@@ -8,8 +8,7 @@
 namespace JSON {
 	// Run-time options for reading JSON
 	typedef yyjson_read_flag ReadFlag;
-	// A JSON value that can be changed
-	typedef yyjson_mut_val MutuableValue;
+	typedef yyjson_write_flag WriteFlag;
 	
 	// The main document that holds all of the JSON values and strings.
 	class Document {
@@ -21,9 +20,25 @@ namespace JSON {
 		Document(std::string path, ReadFlag flag = 0);
 		~Document() { yyjson_doc_free(rawValue); };
 
+		void writeTo(const char* path, WriteFlag flag = 0) { yyjson_write_file(path, rawValue, flag, NULL, NULL); };
+
 		// prevents accidental copying of documents
 		Document(const Document& other) = delete;
 		Document& operator=(const Document& other) = delete;
+	};
+	
+	class MutableDocument {
+	public:
+		yyjson_mut_doc* rawValue;
+
+		MutableDocument() { rawValue = yyjson_mut_doc_new(NULL); };
+		~MutableDocument() { yyjson_mut_doc_free(rawValue); };
+
+		void writeTo(const char* path, WriteFlag flag = 0) { yyjson_mut_write_file(path, rawValue, flag, NULL, NULL); }
+
+		// prevents accidental copying of MutableDocuments
+		MutableDocument(const MutableDocument& other) = delete;
+		MutableDocument& operator=(const MutableDocument& other) = delete;
 	};
 	
 	// An immutable JSON value
@@ -71,6 +86,32 @@ namespace JSON {
 
 		Value operator[](int index);
 		Value operator[](const char* value);
+	};
+
+	class MutableValue {
+	public:
+		yyjson_mut_val* rawValue;
+
+		MutableValue(MutableDocument& doc, const char* string) { rawValue = yyjson_mut_str(doc.rawValue, string); }
+		MutableValue(MutableDocument& doc, int integer) { rawValue = yyjson_mut_int(doc.rawValue, integer); }
+		void setDocRoot(MutableDocument& doc) { yyjson_mut_doc_set_root(doc.rawValue, rawValue); }
+	};
+
+	class MutableArray {
+	public:
+		yyjson_mut_val* rawValue;
+
+		MutableArray(MutableDocument& doc) { rawValue = yyjson_mut_arr(doc.rawValue); }
+		void append(JSON::MutableValue& val) { yyjson_mut_arr_append(rawValue, val.rawValue); }
+		void setDocRoot(MutableDocument& doc) { yyjson_mut_doc_set_root(doc.rawValue, rawValue); }
+	};
+
+	class MutableObject {
+	public:
+		yyjson_mut_val* rawValue;
+		
+		MutableObject(MutableDocument& doc) { rawValue = yyjson_mut_obj(doc.rawValue); }
+		void setDocRoot(MutableDocument& doc) { yyjson_mut_doc_set_root(doc.rawValue, rawValue); }
 	};
 
 	// Made for faster iteration through an object. Best to use when iterating through a single object many times over.
