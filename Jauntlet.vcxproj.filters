@@ -151,11 +151,8 @@
     <ClCompile Include="Rendering\Model.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Externals\yyjson.c">
+    <ClCompile Include="Externals\yyjson.cpp">
       <Filter>Externals</Filter>
-    </ClCompile>
-    <ClCompile Include="Filesystems\JSON.cpp">
-      <Filter>Filesystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

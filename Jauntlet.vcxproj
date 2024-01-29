@@ -166,10 +166,9 @@
     <ClCompile Include="Collision\Collision2D.cpp" />
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="Externals\tinyfiledialogs.cpp" />
-    <ClCompile Include="Externals\yyjson.c" />
+    <ClCompile Include="Externals\yyjson.cpp" />
     <ClCompile Include="Filesystems\FileDialogs.cpp" />
     <ClCompile Include="Filesystems\FileManager.cpp" />
-    <ClCompile Include="Filesystems\JSON.cpp" />
     <ClCompile Include="Inputs\InputKey.cpp" />
     <ClCompile Include="Inputs\InputManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
