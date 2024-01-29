@@ -300,7 +300,6 @@ Texture FileManager::readImage(const std::string& filePath) {
 	Texture texture = {};
 	int width, height, channels;
 
-
 	stbi_uc* out = stbi_load(filePath.data(), &width, &height, &channels, 0);
 
 	if (out == NULL) {
