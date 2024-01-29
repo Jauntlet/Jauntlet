@@ -42,7 +42,12 @@ Model::~Model() {
 }
 
 void Model::draw() {
-	glUniform3f(GLSLProgram::currentProgram->getUniformLocation("modelPosition"), position.x, position.y, position.z);
+	// currently we calculate the modelTransform every frame which can be pretty intensive,
+	// however making it only calculate when the position/rotation changes requires us to make both
+	// members private: something we were pretty proud of not doing until this point. 
+	// This will have to be discussed soon -xm
+	_modelTransform = glm::translate(glm::mat4(1.0f), position) * glm::toMat4(rotation);
+	glUniformMatrix4fv(GLSLProgram::currentProgram->getUniformLocation("modelTransform"), 1, GL_FALSE, &_modelTransform[0][0]);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -58,4 +63,8 @@ void Model::draw() {
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+}
+
+void Model::EulerToRotation(const glm::vec3& EulerAngle) {
+	rotation = glm::quat(EulerAngle);
 }
