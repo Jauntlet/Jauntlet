@@ -287,8 +287,6 @@ bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& 
 		out_indices.emplace_back(indicieBuffer[i]);
 	}
 
-	const char* a = root["images"].first()["uri"].toString();
-
 	// find and load the texture
 	out_textureID = readImage(std::string(filePath.data(), filePath.find_last_of('/') != std::string::npos ? filePath.find_last_of('/') + 1 : filePath.length()) + std::string(root["images"].first()["uri"].toString())).id;
 
