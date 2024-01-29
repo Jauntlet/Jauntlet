@@ -71,6 +71,12 @@ namespace JSON {
 
 		Value operator[](int index);
 		Value operator[](const char* value);
+		bool operator!=(std::nullptr_t ptr) {
+			return ptr != rawValue;
+		}
+		bool operator==(std::nullptr_t ptr) {
+			return ptr == rawValue;
+		}
 	};
 
 	// Made for faster iteration through an object. Best to use when iterating through a single object many times over.
