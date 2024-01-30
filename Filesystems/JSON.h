@@ -140,15 +140,15 @@ namespace JSON {
 	public:
 		MutableArray(MutableDocument& doc) : MutableValue(yyjson_mut_arr(doc.rawValue)) {}
 		MutableArray(MutableDocument& doc, bool* vals, size_t count) : MutableValue(yyjson_mut_arr_with_bool(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, int64_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, uint64_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, double* vals, size_t count) : MutableValue(yyjson_mut_arr_with_real(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, int8_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint8(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, int16_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint16(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, int32_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint32(doc.rawValue, vals, count)) {}
+		MutableArray(MutableDocument& doc, int64_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, uint8_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint8(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, uint16_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint16(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, uint32_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint32(doc.rawValue, vals, count)) {}
+		MutableArray(MutableDocument& doc, uint64_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, float* vals, size_t count) : MutableValue(yyjson_mut_arr_with_float(doc.rawValue, vals, count)) {}
 		MutableArray(MutableDocument& doc, const char** vals, size_t count) : MutableValue(yyjson_mut_arr_with_str(doc.rawValue, vals, count)) {}
 		MutableArray(yyjson_mut_val* array) : MutableValue(array) {}
@@ -156,6 +156,12 @@ namespace JSON {
 		// appends another value to the end of the array
 		// returns false on error
 		bool append(JSON::MutableValue& val) { return yyjson_mut_arr_append(rawValue, val.rawValue); }
+		bool append(MutableDocument& document, bool val) { return yyjson_mut_arr_add_bool(document.rawValue, rawValue, val); }
+		bool append(MutableDocument& document, uint64_t val) { return yyjson_mut_arr_add_uint(document.rawValue, rawValue, val); }
+		bool append(MutableDocument& document, int64_t val) { return yyjson_mut_arr_add_sint(document.rawValue, rawValue, val); }
+		bool append(MutableDocument& document, double val) { return yyjson_mut_arr_add_real(document.rawValue, rawValue, val); }
+		bool append(MutableDocument& document, const char* val) { return yyjson_mut_arr_add_str(document.rawValue, rawValue, val); }
+
 		// appends a new array to the end of the array
 		MutableArray appendArray(MutableDocument& document) { return yyjson_mut_arr_add_arr(document.rawValue, rawValue); }
 		MutableObject appendObject(MutableDocument& document);
