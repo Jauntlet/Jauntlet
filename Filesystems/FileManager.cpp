@@ -313,6 +313,7 @@ Texture FileManager::readImage(const std::string& filePath) {
 	if (channels == 4) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, out);
 	} else if (channels == 3) {
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, out);
 	} else {
 		Jauntlet::fatalError("image \"" + filePath + "\" has an invalid channel count");
