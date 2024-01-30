@@ -239,7 +239,7 @@ bool FileManager::readOBJ(const std::string& filePath, std::vector<glm::vec3>& o
 
 bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& out_vertices, std::vector<unsigned short>& out_indices, std::vector<glm::vec2>& out_uvs, std::vector<glm::vec3>& out_normals, unsigned int& out_textureID) {
 	JSON::Document doc(filePath.data(), 0);
-	JSON::Value root = JSON::getRoot(doc);
+	JSON::Value root = doc.getRoot();
 
 	// get the first buffer section
 	JSON::Value buffers = root["buffers"][0];

@@ -10,6 +10,85 @@ namespace JSON {
 	typedef yyjson_read_flag ReadFlag;
 	typedef yyjson_write_flag WriteFlag;
 	
+	// An immutable JSON value
+	class Value {
+	public:
+		yyjson_val* rawValue;
+
+		Value(yyjson_val* rValue) : rawValue(rValue) {}
+
+		// returns the contents if the value is a Bool
+		// returns NULL if value is not a bool, or is NULL
+		bool toBool() {
+			return yyjson_get_bool(rawValue);
+		}
+		// returns the contents if the value is an Int
+		// returns 0 if value is NULL or not an int
+		int toInt() {
+			return yyjson_get_int(rawValue);
+		}
+		// returns the contents if the value is an uint64_t
+		// returns 0 if value is NULL or not an uint64_t
+		uint64_t toUint() {
+			return yyjson_get_uint(rawValue);
+		}
+		// returns the contents length (string, array, object)
+		// returns 0 if value is NULL or not a valid option
+		size_t getLength() {
+			return yyjson_get_len(rawValue);
+		}
+		// returns the contents if the value is a double
+		// returns 0.0 if value is NULL or not a double
+		double toDouble() {
+			return yyjson_get_num(rawValue);
+		}
+		// returns the contents if the value is raw
+		// returns NULL if value is NULL or not raw
+		const char* toRaw() {
+			return yyjson_get_raw(rawValue);
+		}
+		// returns the contents if the value is an int64_t
+		// returns 0 if value is NULL or not an int64_t
+		int64_t toSint() {
+			return yyjson_get_sint(rawValue);
+		}
+		// returns the contents if the value is a string
+		// returns NULL if value is NULL or not a string
+		const char* toString() {
+			return yyjson_get_str(rawValue);
+		}
+
+		// Returns the values JSON type as a readable string.
+		// meant for debugging
+		const char* getTypeDesc() {
+			return yyjson_get_type_desc(rawValue);
+		}
+
+		// returns the first element in an array.
+		// returns NULL if element is not an array.
+		Value first() {
+			return yyjson_arr_get_first(rawValue);
+		}
+		// returns the last element in an array.
+		// returns NULL if element is not an array.
+		Value last() {
+			return yyjson_arr_get_last(rawValue);
+		}
+
+		Value operator[](int index) {
+			return yyjson_arr_get(rawValue, index);
+		}
+		Value operator[](const char* value) {
+			return yyjson_obj_get(rawValue, value);
+		}
+		bool operator!=(std::nullptr_t ptr) {
+			return ptr != rawValue;
+		}
+		bool operator==(std::nullptr_t ptr) {
+			return ptr == rawValue;
+		}
+	};
+
 	// The main document that holds all of the JSON values and strings.
 	class Document {
 	public:
@@ -50,85 +129,6 @@ namespace JSON {
 		// prevents accidental copying of MutableDocuments
 		MutableDocument(const MutableDocument& other) = delete;
 		MutableDocument& operator=(const MutableDocument& other) = delete;
-	};
-	
-	// An immutable JSON value
-	class Value {
-	public:
-		yyjson_val* rawValue;
-
-		Value(yyjson_val* rValue) : rawValue(rValue) {}
-
-		// returns the contents if the value is a Bool
-		// returns NULL if value is not a bool, or is NULL
-		bool toBool() { 
-			return yyjson_get_bool(rawValue);
-		}
-		// returns the contents if the value is an Int
-		// returns 0 if value is NULL or not an int
-		int toInt() { 
-			return yyjson_get_int(rawValue);
-		}
-		// returns the contents if the value is an uint64_t
-		// returns 0 if value is NULL or not an uint64_t
-		uint64_t toUint() { 
-			return yyjson_get_uint(rawValue);
-		}
-		// returns the contents length (string, array, object)
-		// returns 0 if value is NULL or not a valid option
-		size_t getLength() { 
-			return yyjson_get_len(rawValue);
-		}
-		// returns the contents if the value is a double
-		// returns 0.0 if value is NULL or not a double
-		double toDouble() { 
-			return yyjson_get_num(rawValue);
-		}
-		// returns the contents if the value is raw
-		// returns NULL if value is NULL or not raw
-		const char* toRaw() { 
-			return yyjson_get_raw(rawValue);
-		}
-		// returns the contents if the value is an int64_t
-		// returns 0 if value is NULL or not an int64_t
-		int64_t toSint() { 
-			return yyjson_get_sint(rawValue);
-		}
-		// returns the contents if the value is a string
-		// returns NULL if value is NULL or not a string
-		const char* toString() { 
-			return yyjson_get_str(rawValue);
-		}
-		
-		// Returns the values JSON type as a readable string.
-		// meant for debugging
-		const char* getTypeDesc() { 
-			return yyjson_get_type_desc(rawValue);
-		}
-
-		// returns the first element in an array.
-		// returns NULL if element is not an array.
-		Value first() { 
-			return yyjson_arr_get_first(rawValue);
-		}
-		// returns the last element in an array.
-		// returns NULL if element is not an array.
-		Value last() { 
-			return yyjson_arr_get_last(rawValue);
-		}
-
-		Value operator[](int index) { 
-			return yyjson_arr_get(rawValue, index);
-		}
-		Value operator[](const char* value) { 
-			return yyjson_obj_get(rawValue, value);
-		}
-		bool operator!=(std::nullptr_t ptr) { 
-			return ptr != rawValue;
-		}
-		bool operator==(std::nullptr_t ptr) { 
-			return ptr == rawValue;
-		}
 	};
 
 	class MutableValue {
