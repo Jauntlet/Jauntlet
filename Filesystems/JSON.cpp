@@ -70,9 +70,18 @@ Value Document::getRoot() {
 void Document::writeTo(const char* path, WriteFlag flag) { 
 	yyjson_write_file(path, rawValue, flag, NULL, NULL); 
 }
+const char* Document::write(WriteFlag flag ) {
+	return yyjson_write(rawValue, flag, NULL);
+}
+MutableDocument Document::copy() {
+	return yyjson_doc_mut_copy(rawValue, NULL);
+}
 
+void MutableDocument::setRoot(MutableValue& val) { 
+	yyjson_mut_doc_set_root(rawValue, val.rawValue); 
+}
 MutableValue MutableDocument::getRoot() { 
-	return MutableValue(yyjson_mut_doc_get_root(rawValue)); 
+	return yyjson_mut_doc_get_root(rawValue); 
 }
 void MutableDocument::clearRoot() { 
 	yyjson_mut_doc_set_root(rawValue, NULL); 
@@ -81,10 +90,14 @@ void MutableDocument::clearRoot() {
 void MutableDocument::writeTo(const char* path, WriteFlag flag) { 
 	yyjson_mut_write_file(path, rawValue, flag, NULL, NULL); 
 }
-
-void MutableValue::setDocRoot(MutableDocument& doc) { 
-	yyjson_mut_doc_set_root(doc.rawValue, rawValue); 
+const char* MutableDocument::write(WriteFlag flag) {
+	return yyjson_mut_write(rawValue, flag, NULL);
 }
+MutableDocument MutableDocument::copy() {
+	return MutableDocument(yyjson_mut_doc_mut_copy(rawValue, NULL));
+}
+
+MutableObject MutableArray::appendObject(MutableDocument& document) { return yyjson_mut_arr_add_obj(document.rawValue, rawValue); }
 
 Value OBJIterator::operator[](const char* value) {
 	return Value(yyjson_obj_iter_get(this, value));
