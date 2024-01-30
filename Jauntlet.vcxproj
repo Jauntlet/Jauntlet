@@ -169,6 +169,7 @@
     <ClCompile Include="Externals\yyjson.cpp" />
     <ClCompile Include="Filesystems\FileDialogs.cpp" />
     <ClCompile Include="Filesystems\FileManager.cpp" />
+    <ClCompile Include="Filesystems\JSON.cpp" />
     <ClCompile Include="Inputs\InputKey.cpp" />
     <ClCompile Include="Inputs\InputManager.cpp" />
     <ClCompile Include="Jauntlet.cpp" />
