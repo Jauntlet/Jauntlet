@@ -67,7 +67,7 @@ Document::Document(std::string path, ReadFlag flag)
 Value Document::getRoot() { 
 	return yyjson_doc_get_root(rawValue); 
 }
-void Document::writeTo(const char* path, WriteFlag flag = 0) { 
+void Document::writeTo(const char* path, WriteFlag flag) { 
 	yyjson_write_file(path, rawValue, flag, NULL, NULL); 
 }
 
@@ -78,7 +78,7 @@ void MutableDocument::clearRoot() {
 	yyjson_mut_doc_set_root(rawValue, NULL); 
 }
 
-void MutableDocument::writeTo(const char* path, WriteFlag flag = 0) { 
+void MutableDocument::writeTo(const char* path, WriteFlag flag) { 
 	yyjson_mut_write_file(path, rawValue, flag, NULL, NULL); 
 }
 
