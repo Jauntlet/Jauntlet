@@ -189,6 +189,7 @@
     <ClCompile Include="Rendering\Textures\SpriteBatch.cpp" />
     <ClCompile Include="Rendering\Textures\TextureCache.cpp" />
     <ClCompile Include="Rendering\Window.cpp" />
+    <ClCompile Include="Scenes\Scene.cpp" />
     <ClCompile Include="Tiles\TileMap.cpp" />
     <ClCompile Include="Tiles\TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Rendering\Textures\TextureCache.h" />
     <ClInclude Include="Rendering\Vertex.h" />
     <ClInclude Include="Rendering\Window.h" />
+    <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Tiles\TileMap.h" />
     <ClInclude Include="Tiles\TileSet.h" />
     <ClInclude Include="Time.h" />

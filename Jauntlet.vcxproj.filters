@@ -40,6 +40,9 @@
     <Filter Include="Audio">
       <UniqueIdentifier>{3bcbb863-5ccf-4185-810c-60d42f945b0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{bd6bdd31-cc1d-4df4-b117-2b0095d3fa03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\UIText.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="Filesystems\JSON.cpp">
       <Filter>Filesystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +288,9 @@
     </ClInclude>
     <ClInclude Include="Filesystems\JSON.h">
       <Filter>Filesystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
