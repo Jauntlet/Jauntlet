@@ -275,7 +275,7 @@ bool FileManager::readGLTF(const std::string& filePath, std::vector<glm::vec3>& 
 	out_normals.reserve(sizeof(glm::vec3) * vertCount);
 	for (uint64_t i = 0; i < vertCount; ++i) {
 		uint64_t bytePos = i * 3;
-		out_vertices.emplace_back(vertBuffer[bytePos], -vertBuffer[bytePos + 2], vertBuffer[bytePos + 1]);
+		out_vertices.emplace_back(vertBuffer[bytePos], vertBuffer[bytePos + 2], vertBuffer[bytePos + 1]);
 		out_uvs.emplace_back(uvBuffer[i * 2], 1.0f - uvBuffer[i * 2 + 1]);
 		out_normals.emplace_back(normalBuffer[bytePos], normalBuffer[bytePos + 1], normalBuffer[bytePos + 2]);
 	}
