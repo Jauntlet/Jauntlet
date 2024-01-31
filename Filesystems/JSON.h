@@ -19,39 +19,61 @@ namespace JSON {
 
 		// returns the contents if the value is a Bool
 		// returns NULL if value is not a bool, or is NULL
-		bool toBool();
+		inline bool toBool() {
+			return yyjson_get_bool(rawValue);
+		}
 		// returns the contents if the value is an Int
 		// returns 0 if value is NULL or not an int
-		int toInt();
+		inline int toInt() {
+			return yyjson_get_int(rawValue);
+		}
 		// returns the contents if the value is an uint64_t
 		// returns 0 if value is NULL or not an uint64_t
-		uint64_t toUint();
+		inline uint64_t toUint() {
+			return yyjson_get_uint(rawValue);
+		}
 		// returns the contents length (string, array, object)
 		// returns 0 if value is NULL or not a valid option
-		size_t getLength();
+		inline size_t getLength() {
+			return yyjson_get_len(rawValue);
+		}
 		// returns the contents if the value is a double
 		// returns 0.0 if value is NULL or not a double
-		double toDouble();
+		inline double toDouble() {
+			return yyjson_get_num(rawValue);
+		}
 		// returns the contents if the value is raw
 		// returns NULL if value is NULL or not raw
-		const char* toRaw();
+		inline const char* toRaw() {
+			return yyjson_get_raw(rawValue);
+		}
 		// returns the contents if the value is an int64_t
 		// returns 0 if value is NULL or not an int64_t
-		int64_t toSint();
+		inline int64_t toSint() {
+			return yyjson_get_sint(rawValue);
+		}
 		// returns the contents if the value is a string
 		// returns NULL if value is NULL or not a string
-		const char* toString();
+		inline const char* toString() {
+			return yyjson_get_str(rawValue);
+		}
 
 		// Returns the values JSON type as a readable string.
 		// meant for debugging
-		const char* getTypeDesc();
+		inline const char* getTypeDesc() {
+			return yyjson_get_type_desc(rawValue);
+		}
 
 		// returns the first element in an array.
 		// returns NULL if element is not an array.
-		Value first();
+		inline Value first() {
+			return yyjson_arr_get_first(rawValue);
+		}
 		// returns the last element in an array.
 		// returns NULL if element is not an array.
-		Value last();
+		inline Value last() {
+			return yyjson_arr_get_last(rawValue);
+		}
 
 		Value operator[](int index);
 		Value operator[](const char* value);
@@ -73,17 +95,23 @@ namespace JSON {
 		~Document();
 
 		// Returns the root of the Document
-		Value getRoot();
+		inline Value getRoot() {
+			return yyjson_doc_get_root(rawValue);
+		}
 
 		// Saves the document to the specified path.
 		// Use MutableDocument for an editable JSON document.
-		void writeTo(const char* path, WriteFlag flag = 0);
+		inline void writeTo(const char* path, WriteFlag flag = 0) {
+			yyjson_write_file(path, rawValue, flag, NULL, NULL);
+		}
 		// Saves the document to a string
 		// Use MutableDocument for an editable JSON document.
-		const char* write(WriteFlag flag = 0);
+		inline const char* write(WriteFlag flag = 0) {
+			return yyjson_write(rawValue, flag, NULL);
+		}
 
 		// copies the document as a new mutableDocument.
-		MutableDocument copy();
+		inline MutableDocument copy();
 
 		// prevents accidental copying of documents
 		Document(const Document& other) = delete;
@@ -103,19 +131,28 @@ namespace JSON {
 		MutableDocument(yyjson_mut_doc* rValue);
 		~MutableDocument();
 
-		void setRoot(MutableValue& val);
+		// sets the root of the document to the specified value
+		inline void setRoot(MutableValue& val);
 		// Returns the root of the Document
-		MutableValue getRoot();
+		inline MutableValue getRoot();
 		// Clears the root of the Document
-		void clearRoot();
+		inline void clearRoot() {
+			yyjson_mut_doc_set_root(rawValue, NULL);
+		}
 
 		// Saves the document to the specified path.
-		void writeTo(const char* path, WriteFlag flag = 0);
+		inline void writeTo(const char* path, WriteFlag flag = 0) {
+			yyjson_mut_write_file(path, rawValue, flag, NULL, NULL);
+		}
 		// Saves the document to a string
-		const char* write(WriteFlag flag = 0);
+		inline const char* write(WriteFlag flag = 0) {
+			return yyjson_mut_write(rawValue, flag, NULL);
+		}
 
 		// copies the document as a new document
-		MutableDocument copy();
+		inline MutableDocument copy() {
+			return MutableDocument(yyjson_mut_doc_mut_copy(rawValue, NULL));
+		}
 
 		// prevents accidental copying of MutableDocuments
 		MutableDocument(const MutableDocument& other) = delete;
@@ -123,6 +160,10 @@ namespace JSON {
 		bool operator!=(std::nullptr_t ptr);
 		bool operator==(std::nullptr_t ptr);
 	};
+
+	MutableDocument Document::copy() {
+		return yyjson_doc_mut_copy(rawValue, NULL);
+	}
 
 	class MutableValue {
 	public:
@@ -136,6 +177,13 @@ namespace JSON {
 		MutableValue(MutableDocument& doc, double duble);
 		MutableValue(yyjson_mut_val* rValue);
 	};
+
+	inline MutableValue MutableDocument::getRoot() {
+		return yyjson_mut_doc_get_root(rawValue);
+	}
+	inline void MutableDocument::setRoot(MutableValue& val) {
+		yyjson_mut_doc_set_root(rawValue, val.rawValue);
+	}
 
 	class MutableObject;
 
@@ -158,45 +206,73 @@ namespace JSON {
 
 		// appends another value to the end of the array
 		// returns false on error
-		bool append(JSON::MutableValue& val);
+		inline bool append(JSON::MutableValue& val) {
+			return yyjson_mut_arr_append(rawValue, val.rawValue);
+		}
 		// appends a bool to the end of the array
 		// returns false on error
-		bool append(MutableDocument& document, bool val);
+		inline bool append(MutableDocument& document, bool val) {
+			return yyjson_mut_arr_add_bool(document.rawValue, rawValue, val);
+		}
 		// appends an unsigned int to the end of the array
 		// returns false on error
-		bool append(MutableDocument& document, uint64_t val);
+		inline bool append(MutableDocument& document, uint64_t val) {
+			return yyjson_mut_arr_add_uint(document.rawValue, rawValue, val);
+		}
 		// appends an int to the end of the array
 		// returns false on error
-		bool append(MutableDocument& document, int64_t val);
+		inline bool append(MutableDocument& document, int64_t val) {
+			return yyjson_mut_arr_add_sint(document.rawValue, rawValue, val);
+		}
 		// appends a double to the end of the array
 		// returns false on error
-		bool append(MutableDocument& document, double val);
+		inline bool append(MutableDocument& document, double val) {
+			return yyjson_mut_arr_add_real(document.rawValue, rawValue, val);
+		}
 		// appends a string to the end of the array
 		// returns false on error
-		bool append(MutableDocument& document, const char* val);
+		inline bool append(MutableDocument& document, const char* val) {
+			return yyjson_mut_arr_add_str(document.rawValue, rawValue, val);
+		}
 
 		// appends a new array to the end of the array
-		MutableArray addArray(MutableDocument& document);
+		inline MutableArray addArray(MutableDocument& document) {
+			return yyjson_mut_arr_add_arr(document.rawValue, rawValue);
+		}
 		// appends a new object to the end of the array
-		MutableObject addObject(MutableDocument& document);
+		inline MutableObject addObject(MutableDocument& document);
 
 		// appends another value to the beginning of the array
 		// returns false on error
-		bool prepend(JSON::MutableValue& val);
+		inline bool prepend(JSON::MutableValue& val) {
+			return yyjson_mut_arr_prepend(rawValue, val.rawValue);
+		}
 		// appends another value to the specifed index of the array
 		// returns false on error or out of bounds
-		bool insert(JSON::MutableValue& val, size_t index);
+		inline bool insert(JSON::MutableValue& val, size_t index) {
+			return yyjson_mut_arr_insert(rawValue, val.rawValue, index);
+		}
 		
 		// replaces a value at the specified index, returns old value.
-		MutableValue replace(JSON::MutableValue& val, size_t index);
+		inline MutableValue replace(JSON::MutableValue& val, size_t index) {
+			return yyjson_mut_arr_replace(rawValue, index, val.rawValue);
+		}
 		// Removes and returns the value at the specified index.
-		MutableValue remove(size_t index);
+		inline MutableValue remove(size_t index) {
+			return yyjson_mut_arr_remove(rawValue, index);
+		}
 		// Removes and returns the value at the first index
-		MutableValue removeFirst();
+		inline MutableValue removeFirst() {
+			return yyjson_mut_arr_remove_first(rawValue);
+		}
 		// Removes and returns the value at the end of the array
-		MutableValue removeLast();
+		inline MutableValue removeLast() {
+			return yyjson_mut_arr_remove_last(rawValue);
+		}
 		// Clears the entire array
-		void clear();
+		inline void clear() {
+			yyjson_mut_arr_clear(rawValue);
+		}
 	};
 
 	class MutableObject : public MutableValue {
@@ -207,37 +283,63 @@ namespace JSON {
 		
 		// appends a key and a value within the object. Expects a string as the key and any value as the value
 		// returns false on error
-		bool append(JSON::MutableValue& key, JSON::MutableValue& value);
+		inline bool append(JSON::MutableValue& key, JSON::MutableValue& value) {
+			return yyjson_mut_obj_add(rawValue, key.rawValue, value.rawValue);
+		}
 		// appends a key and a value within the object. Expects a string as the key and a bool as the value
 		// returns false on error
-		bool append(MutableDocument& doc, const char* key, bool value);
+		inline bool append(MutableDocument& doc, const char* key, bool value) {
+			return yyjson_mut_obj_add_bool(doc.rawValue, rawValue, key, value);
+		}
 		// appends a key and a value within the object. Expects a string as the key and an unsigned int as the value
 		// returns false on error
-		bool append(MutableDocument& doc, const char* key, uint64_t value);
+		inline bool append(MutableDocument& doc, const char* key, uint64_t value) {
+			return yyjson_mut_obj_add_uint(doc.rawValue, rawValue, key, value);
+		}
 		// appends a key and a value within the object. Expects a string as the key and an int as the value
 		// returns false on error
-		bool append(MutableDocument& doc, const char* key, int64_t value);
+		inline bool append(MutableDocument& doc, const char* key, int64_t value) {
+			return yyjson_mut_obj_add_int(doc.rawValue, rawValue, key, value);
+		}
 		// appends a key and a value within the object. Expects a string as the key and a double as the value
 		// returns false on error
-		bool append(MutableDocument& doc, const char* key, double value);
+		inline bool append(MutableDocument& doc, const char* key, double value) {
+			return yyjson_mut_obj_add_real(doc.rawValue, rawValue, key, value);
+		}
 		// appends a key and a value within the object. Expects a string as the key and a string as the value
 		// returns false on error
-		bool append(MutableDocument& doc, const char* key, const char* value);
+		inline bool append(MutableDocument& doc, const char* key, const char* value) {
+			return yyjson_mut_obj_add_str(doc.rawValue, rawValue, key, value);
+		}
 
 		// appends a new array to the end of the object
-		MutableArray addArray(MutableDocument& doc, const char* key);
+		inline MutableArray addArray(MutableDocument& doc, const char* key) {
+			return yyjson_mut_obj_add_arr(doc.rawValue, rawValue, key);
+		}
 		// appends a new object to the end of the object
-		MutableObject addObject(MutableDocument& doc, const char* key);
+		inline MutableObject addObject(MutableDocument& doc, const char* key) {
+			return yyjson_mut_obj_add_obj(doc.rawValue, rawValue, key);
+		}
 		
 		// removes the key and its value from the object
 		// returns false on error
-		bool remove(JSON::MutableValue& key);
+		inline bool remove(JSON::MutableValue& key) {
+			return yyjson_mut_obj_remove(rawValue, key.rawValue);
+		}
 		// Clears the entire object
-		void clear();
+		inline void clear() {
+			yyjson_mut_obj_clear(rawValue);
+		}
 
 		// renames an existing key to another key name.
-		bool renameKey(MutableDocument& doc, const char* key, const char* newKey);
+		inline bool renameKey(MutableDocument& doc, const char* key, const char* newKey) {
+			return yyjson_mut_obj_rename_key(doc.rawValue, rawValue, key, newKey);
+		}
 	};
+
+	inline MutableObject MutableArray::addObject(MutableDocument& document) {
+		return yyjson_mut_arr_add_obj(document.rawValue, rawValue);
+	}
 
 	// Made for faster iteration through an object. Best to use when iterating through a single object many times over.
 	class OBJIterator : public yyjson_obj_iter {
@@ -245,7 +347,9 @@ namespace JSON {
 		OBJIterator(Value object);
 		
 		// get the next value within an object
-		Value next();
+		inline Value next() {
+			return yyjson_obj_iter_next(this);
+		}
 
 		Value operator[](const char* value);
 	};

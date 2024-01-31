@@ -4,35 +4,6 @@ using namespace JSON;
 
 Value::Value(yyjson_val* rValue) : rawValue(rValue) {}
 
-bool Value::toBool() {
-	return yyjson_get_bool(rawValue);
-}
-int Value::toInt() {
-	return yyjson_get_int(rawValue);
-}
-uint64_t Value::toUint() {
-	return yyjson_get_uint(rawValue);
-}
-size_t Value::getLength() {
-	return yyjson_get_len(rawValue);
-}
-double Value::toDouble() {
-	return yyjson_get_num(rawValue);
-}
-const char* Value::toRaw() {
-	return yyjson_get_raw(rawValue);
-}
-int64_t Value::toSint() {
-	return yyjson_get_sint(rawValue);
-}
-const char* Value::toString() {
-	return yyjson_get_str(rawValue);
-}
-
-const char* Value::getTypeDesc() {
-	return yyjson_get_type_desc(rawValue);
-}
-
 Value Value::operator[](int index) {
 	return yyjson_arr_get(rawValue, index);
 }
@@ -46,29 +17,12 @@ bool Value::operator==(std::nullptr_t ptr) {
 	return ptr == rawValue;
 }
 
-Value Value::first() {
-	return yyjson_arr_get_first(rawValue);
-}
-Value Value::last() {
-	return yyjson_arr_get_last(rawValue);
-}
-
 Document::Document(const char* path, ReadFlag flag) : rawValue(yyjson_read_file(path, flag, NULL, NULL)) {}
 Document::Document(std::string path, ReadFlag flag) : rawValue(yyjson_read_file(path.data(), flag, NULL, NULL)) {}
 Document::Document(yyjson_doc* rValue) : rawValue(rValue) {};
 Document::~Document() { 
 	yyjson_doc_free(rawValue); 
 };
-
-Value Document::getRoot() { 
-	return yyjson_doc_get_root(rawValue); 
-}
-void Document::writeTo(const char* path, WriteFlag flag) { 
-	yyjson_write_file(path, rawValue, flag, NULL, NULL); 
-}
-const char* Document::write(WriteFlag flag ) {
-	return yyjson_write(rawValue, flag, NULL);
-}
 
 bool Document::operator!=(std::nullptr_t ptr) {
 	return ptr != rawValue;
@@ -81,30 +35,6 @@ MutableDocument::MutableDocument() : rawValue(yyjson_mut_doc_new(NULL)) {}
 MutableDocument::MutableDocument(yyjson_mut_doc* rValue) : rawValue(rValue) {}
 MutableDocument::~MutableDocument() { 
 	yyjson_mut_doc_free(rawValue); 
-}
-
-MutableDocument Document::copy() {
-	return yyjson_doc_mut_copy(rawValue, NULL);
-}
-
-void MutableDocument::setRoot(MutableValue& val) { 
-	yyjson_mut_doc_set_root(rawValue, val.rawValue); 
-}
-MutableValue MutableDocument::getRoot() { 
-	return yyjson_mut_doc_get_root(rawValue); 
-}
-void MutableDocument::clearRoot() { 
-	yyjson_mut_doc_set_root(rawValue, NULL); 
-}
-
-void MutableDocument::writeTo(const char* path, WriteFlag flag) { 
-	yyjson_mut_write_file(path, rawValue, flag, NULL, NULL); 
-}
-const char* MutableDocument::write(WriteFlag flag) {
-	return yyjson_mut_write(rawValue, flag, NULL);
-}
-MutableDocument MutableDocument::copy() {
-	return MutableDocument(yyjson_mut_doc_mut_copy(rawValue, NULL));
 }
 
 bool MutableDocument::operator!=(std::nullptr_t ptr) {
@@ -137,100 +67,12 @@ MutableArray::MutableArray(MutableDocument& doc, float* vals, size_t count) : Mu
 MutableArray::MutableArray(MutableDocument& doc, const char** vals, size_t count) : MutableValue(yyjson_mut_arr_with_str(doc.rawValue, vals, count)) {}
 MutableArray::MutableArray(yyjson_mut_val* array) : MutableValue(array) {}
 
-bool MutableArray::append(JSON::MutableValue& val) {
-	return yyjson_mut_arr_append(rawValue, val.rawValue); 
-}
-bool MutableArray::append(MutableDocument& document, bool val) {
-	return yyjson_mut_arr_add_bool(document.rawValue, rawValue, val); 
-}
-bool MutableArray::append(MutableDocument& document, uint64_t val) {
-	return yyjson_mut_arr_add_uint(document.rawValue, rawValue, val); 
-}
-bool MutableArray::append(MutableDocument& document, int64_t val) { 
-	return yyjson_mut_arr_add_sint(document.rawValue, rawValue, val); 
-}
-bool MutableArray::append(MutableDocument& document, double val) { 
-	return yyjson_mut_arr_add_real(document.rawValue, rawValue, val); 
-}
-bool MutableArray::append(MutableDocument& document, const char* val) { 
-	return yyjson_mut_arr_add_str(document.rawValue, rawValue, val); 
-}
-
-MutableArray MutableArray::addArray(MutableDocument& document) { 
-	return yyjson_mut_arr_add_arr(document.rawValue, rawValue); 
-}
-MutableObject MutableArray::addObject(MutableDocument& document) { 
-	return yyjson_mut_arr_add_obj(document.rawValue, rawValue); 
-}
-bool MutableArray::prepend(JSON::MutableValue& val) { 
-	return yyjson_mut_arr_prepend(rawValue, val.rawValue); 
-}
-bool MutableArray::insert(JSON::MutableValue& val, size_t index) { 
-	return yyjson_mut_arr_insert(rawValue, val.rawValue, index); 
-}
-MutableValue MutableArray::replace(JSON::MutableValue& val, size_t index) { 
-	return yyjson_mut_arr_replace(rawValue, index, val.rawValue); 
-}
-MutableValue MutableArray::remove(size_t index) { 
-	return yyjson_mut_arr_remove(rawValue, index); 
-}
-MutableValue MutableArray::removeFirst() { 
-	return yyjson_mut_arr_remove_first(rawValue); 
-}
-MutableValue MutableArray::removeLast() { 
-	return yyjson_mut_arr_remove_last(rawValue); 
-}
-void MutableArray::clear() { 
-	yyjson_mut_arr_clear(rawValue); 
-}
-
 MutableObject::MutableObject(MutableDocument& doc) : MutableValue(yyjson_mut_obj(doc.rawValue)) {}
 MutableObject::MutableObject(MutableDocument& doc, const char** keys, const char** vals, size_t count) : MutableValue(yyjson_mut_obj_with_str(doc.rawValue, keys, vals, count)) {}
 MutableObject::MutableObject(yyjson_mut_val* object) : MutableValue(object) {}
-
-bool MutableObject::append(JSON::MutableValue& key, JSON::MutableValue& value) { 
-	return yyjson_mut_obj_add(rawValue, key.rawValue, value.rawValue); 
-}
-bool MutableObject::append(MutableDocument& doc, const char* key, bool value) {
-	return yyjson_mut_obj_add_bool(doc.rawValue, rawValue, key, value);
-}
-bool MutableObject::append(MutableDocument& doc, const char* key, uint64_t value) {
-	return yyjson_mut_obj_add_uint(doc.rawValue, rawValue, key, value);
-}
-bool MutableObject::append(MutableDocument& doc, const char* key, int64_t value) {
-	return yyjson_mut_obj_add_int(doc.rawValue, rawValue, key, value);
-}
-bool MutableObject::append(MutableDocument& doc, const char* key, double value) {
-	return yyjson_mut_obj_add_real(doc.rawValue, rawValue, key, value);
-}
-bool MutableObject::append(MutableDocument& doc, const char* key, const char* value) {
-	return yyjson_mut_obj_add_str(doc.rawValue, rawValue, key, value);
-}
-		
-MutableArray MutableObject::addArray(MutableDocument& doc, const char* key) {
-	return yyjson_mut_obj_add_arr(doc.rawValue, rawValue, key);
-}
-MutableObject MutableObject::addObject(MutableDocument& doc, const char* key) {
-	return yyjson_mut_obj_add_obj(doc.rawValue, rawValue, key);
-}
-
-bool MutableObject::remove(JSON::MutableValue& key) {
-	return yyjson_mut_obj_remove(rawValue,key.rawValue);
-}
-void MutableObject::clear() {
-	yyjson_mut_obj_clear(rawValue);
-}
-
-bool MutableObject::renameKey(MutableDocument& doc, const char* key, const char* newKey) {
-	return yyjson_mut_obj_rename_key(doc.rawValue, rawValue, key, newKey);
-}
 
 OBJIterator::OBJIterator(Value object) : yyjson_obj_iter(yyjson_obj_iter_with(object.rawValue)) {};
 
 Value OBJIterator::operator[](const char* value) {
 	return Value(yyjson_obj_iter_get(this, value));
-}
-
-Value OBJIterator::next() {
-	return yyjson_obj_iter_next(this);
 }
