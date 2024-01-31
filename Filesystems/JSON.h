@@ -15,7 +15,7 @@ namespace JSON {
 	public:
 		yyjson_val* rawValue;
 
-		Value(yyjson_val* rValue) : rawValue(rValue) {}
+		Value(yyjson_val* rValue);
 
 		// returns the contents if the value is a Bool
 		// returns NULL if value is not a bool, or is NULL
@@ -67,10 +67,10 @@ namespace JSON {
 		// The raw value of the Document; used for calls directly to yyjson
 		yyjson_doc* rawValue;
 
-		Document(yyjson_doc* rValue) : rawValue(rValue) {};
+		Document(yyjson_doc* rValue);
 		Document(const char* path, ReadFlag flag = 0);
 		Document(std::string path, ReadFlag flag = 0);
-		~Document() { yyjson_doc_free(rawValue); };
+		~Document();
 
 		// Returns the root of the Document
 		Value getRoot();
@@ -97,9 +97,9 @@ namespace JSON {
 		// The raw value of the Document; used for calls directly to yyjson
 		yyjson_mut_doc* rawValue;
 
-		MutableDocument() { rawValue = yyjson_mut_doc_new(NULL); }
-		~MutableDocument() { yyjson_mut_doc_free(rawValue); }
-		MutableDocument(yyjson_mut_doc* rValue) : rawValue(rValue) {}
+		MutableDocument();
+		MutableDocument(yyjson_mut_doc* rValue);
+		~MutableDocument();
 
 		void setRoot(MutableValue& val);
 		// Returns the root of the Document
@@ -124,79 +124,81 @@ namespace JSON {
 	public:
 		yyjson_mut_val* rawValue;
 
-		MutableValue(MutableDocument& doc, const char* string) { rawValue = yyjson_mut_str(doc.rawValue, string); }
-		MutableValue(MutableDocument& doc, bool value) { rawValue = yyjson_mut_bool(doc.rawValue, value);}
-		MutableValue(MutableDocument& doc, uint64_t uint) { rawValue = yyjson_mut_uint(doc.rawValue, uint); }
-		MutableValue(MutableDocument& doc, int64_t sint) { rawValue = yyjson_mut_sint(doc.rawValue, sint); }
-		MutableValue(MutableDocument& doc, int integer) { rawValue = yyjson_mut_int(doc.rawValue, integer); }
-		MutableValue(MutableDocument& doc, double duble) { rawValue = yyjson_mut_real(doc.rawValue, duble); }
-
-		MutableValue(yyjson_mut_val* rValue) : rawValue(rValue) {};
+		MutableValue(MutableDocument& doc, const char* string);
+		MutableValue(MutableDocument& doc, bool value);
+		MutableValue(MutableDocument& doc, uint64_t uint);
+		MutableValue(MutableDocument& doc, int64_t sint);
+		MutableValue(MutableDocument& doc, int integer);
+		MutableValue(MutableDocument& doc, double duble);
+		MutableValue(yyjson_mut_val* rValue);
 	};
 
 	class MutableObject;
 
 	class MutableArray : public MutableValue {
 	public:
-		MutableArray(MutableDocument& doc) : MutableValue(yyjson_mut_arr(doc.rawValue)) {}
-		MutableArray(MutableDocument& doc, bool* vals, size_t count) : MutableValue(yyjson_mut_arr_with_bool(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, double* vals, size_t count) : MutableValue(yyjson_mut_arr_with_real(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, int8_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint8(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, int16_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint16(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, int32_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint32(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, int64_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_sint(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, uint8_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint8(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, uint16_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint16(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, uint32_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint32(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, uint64_t* vals, size_t count) : MutableValue(yyjson_mut_arr_with_uint(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, float* vals, size_t count) : MutableValue(yyjson_mut_arr_with_float(doc.rawValue, vals, count)) {}
-		MutableArray(MutableDocument& doc, const char** vals, size_t count) : MutableValue(yyjson_mut_arr_with_str(doc.rawValue, vals, count)) {}
-		MutableArray(yyjson_mut_val* array) : MutableValue(array) {}
+		MutableArray(MutableDocument& doc);
+		MutableArray(MutableDocument& doc, bool* vals, size_t count);
+		MutableArray(MutableDocument& doc, double* vals, size_t count);
+		MutableArray(MutableDocument& doc, int8_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, int16_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, int32_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, int64_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, uint8_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, uint16_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, uint32_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, uint64_t* vals, size_t count);
+		MutableArray(MutableDocument& doc, float* vals, size_t count);
+		MutableArray(MutableDocument& doc, const char** vals, size_t count);
+		MutableArray(yyjson_mut_val* array);
 
 		// appends another value to the end of the array
 		// returns false on error
-		bool append(JSON::MutableValue& val) { return yyjson_mut_arr_append(rawValue, val.rawValue); }
-		bool append(MutableDocument& document, bool val) { return yyjson_mut_arr_add_bool(document.rawValue, rawValue, val); }
-		bool append(MutableDocument& document, uint64_t val) { return yyjson_mut_arr_add_uint(document.rawValue, rawValue, val); }
-		bool append(MutableDocument& document, int64_t val) { return yyjson_mut_arr_add_sint(document.rawValue, rawValue, val); }
-		bool append(MutableDocument& document, double val) { return yyjson_mut_arr_add_real(document.rawValue, rawValue, val); }
-		bool append(MutableDocument& document, const char* val) { return yyjson_mut_arr_add_str(document.rawValue, rawValue, val); }
+		bool append(JSON::MutableValue& val);
+		bool append(MutableDocument& document, bool val);
+		bool append(MutableDocument& document, uint64_t val);
+		bool append(MutableDocument& document, int64_t val);
+		bool append(MutableDocument& document, double val);
+		bool append(MutableDocument& document, const char* val);
 
 		// appends a new array to the end of the array
-		MutableArray appendArray(MutableDocument& document) { return yyjson_mut_arr_add_arr(document.rawValue, rawValue); }
-		MutableObject appendObject(MutableDocument& document);
+		MutableArray addArray(MutableDocument& document);
+		// appends a new object to the end of the array
+		MutableObject addObject(MutableDocument& document);
 
 		// appends another value to the beginning of the array
 		// returns false on error
-		bool prepend(JSON::MutableValue& val) { return yyjson_mut_arr_prepend(rawValue, val.rawValue); }
+		bool prepend(JSON::MutableValue& val);
 		// appends another value to the specifed index of the array
 		// returns false on error or out of bounds
-		bool insert(JSON::MutableValue& val, size_t index) { return yyjson_mut_arr_insert(rawValue, val.rawValue, index); }
+		bool insert(JSON::MutableValue& val, size_t index);
 		
 		// replaces a value at the specified index, returns old value.
-		MutableValue replace(JSON::MutableValue& val, size_t index) { return yyjson_mut_arr_replace(rawValue, index, val.rawValue); }
+		MutableValue replace(JSON::MutableValue& val, size_t index);
 		// Removes and returns the value at the specified index.
-		MutableValue remove(size_t index) { return yyjson_mut_arr_remove(rawValue, index); }
+		MutableValue remove(size_t index);
 		// Removes and returns the value at the first index
-		MutableValue removeFirst() { return yyjson_mut_arr_remove_first(rawValue); }
+		MutableValue removeFirst();
 		// Removes and returns the value at the end of the array
-		MutableValue removeLast() { return yyjson_mut_arr_remove_last(rawValue); }
+		MutableValue removeLast();
 		// Clears the entire array
-		void clear() { yyjson_mut_arr_clear(rawValue); }
+		void clear();
 	};
 
 	class MutableObject : public MutableValue {
 	public:
-		MutableObject(MutableDocument& doc) : MutableValue(yyjson_mut_obj(doc.rawValue)) {}
-		MutableObject(yyjson_mut_val* object) : MutableValue(object) {}
+		MutableObject(MutableDocument& doc);
+		MutableObject(yyjson_mut_val* object);
+		
 		// appends a key and a value within the object. Expects a string as the key and any value as the value
-		void append(JSON::MutableValue& key, JSON::MutableValue& value) { yyjson_mut_obj_add(rawValue, key.rawValue, value.rawValue); }
+		void append(JSON::MutableValue& key, JSON::MutableValue& value);
 	};
 
 	// Made for faster iteration through an object. Best to use when iterating through a single object many times over.
 	class OBJIterator : public yyjson_obj_iter {
 	public:
-		OBJIterator(Value object) : yyjson_obj_iter(yyjson_obj_iter_with(object.rawValue)) {};
+		OBJIterator(Value object);
+		
 		// get the next value within an object
 		Value next();
 

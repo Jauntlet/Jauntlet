@@ -5,5 +5,7 @@ Scene::Scene(const char* path) {
 	JSON::MutableArray root(document);
 	document.setRoot(root);
 
+	root.append(document, "HELLO");
+	
 	document.writeTo(path);
 }
