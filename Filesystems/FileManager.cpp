@@ -8,6 +8,8 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_NO_FAILURE_STRINGS
+#define STBI_NO_GIF
+#define STBI_NO_HDR
 #include "../Externals/stb_image.h"
 #include <GL/glew.h>
 
