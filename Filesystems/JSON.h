@@ -88,6 +88,8 @@ namespace JSON {
 		// prevents accidental copying of documents
 		Document(const Document& other) = delete;
 		Document& operator=(const Document& other) = delete;
+		bool operator!=(std::nullptr_t ptr);
+		bool operator==(std::nullptr_t ptr);
 	};
 	
 	class MutableValue;
@@ -118,6 +120,8 @@ namespace JSON {
 		// prevents accidental copying of MutableDocuments
 		MutableDocument(const MutableDocument& other) = delete;
 		MutableDocument& operator=(const MutableDocument& other) = delete;
+		bool operator!=(std::nullptr_t ptr);
+		bool operator==(std::nullptr_t ptr);
 	};
 
 	class MutableValue {

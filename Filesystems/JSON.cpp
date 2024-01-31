@@ -70,6 +70,13 @@ const char* Document::write(WriteFlag flag ) {
 	return yyjson_write(rawValue, flag, NULL);
 }
 
+bool Document::operator!=(std::nullptr_t ptr) {
+	return ptr != rawValue;
+}
+bool Document::operator==(std::nullptr_t ptr) {
+	return ptr == rawValue;
+}
+
 MutableDocument::MutableDocument() : rawValue(yyjson_mut_doc_new(NULL)) {}
 MutableDocument::MutableDocument(yyjson_mut_doc* rValue) : rawValue(rValue) {}
 MutableDocument::~MutableDocument() { 
@@ -98,6 +105,13 @@ const char* MutableDocument::write(WriteFlag flag) {
 }
 MutableDocument MutableDocument::copy() {
 	return MutableDocument(yyjson_mut_doc_mut_copy(rawValue, NULL));
+}
+
+bool MutableDocument::operator!=(std::nullptr_t ptr) {
+	return ptr != rawValue;
+}
+bool MutableDocument::operator==(std::nullptr_t ptr) {
+	return ptr == rawValue;
 }
 
 MutableValue::MutableValue(MutableDocument& doc, const char* string) : rawValue(yyjson_mut_str(doc.rawValue, string)) {}
