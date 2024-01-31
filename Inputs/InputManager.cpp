@@ -82,6 +82,7 @@ void InputManager::processInput() {
 				break;
 			case SDL_JOYBUTTONUP:
 				_keyMap[_event.cbutton.button] = false;
+				break;
 			case SDL_JOYHATMOTION:
 				if (_event.jhat.type == 1538) { // this is the identifier for the D-pad of a controller
 					switch (_event.jhat.value) {
