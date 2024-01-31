@@ -171,10 +171,44 @@ void MutableArray::clear() {
 }
 
 MutableObject::MutableObject(MutableDocument& doc) : MutableValue(yyjson_mut_obj(doc.rawValue)) {}
+MutableObject::MutableObject(MutableDocument& doc, const char** keys, const char** vals, size_t count) : MutableValue(yyjson_mut_obj_with_str(doc.rawValue, keys, vals, count)) {}
 MutableObject::MutableObject(yyjson_mut_val* object) : MutableValue(object) {}
 
-void MutableObject::append(JSON::MutableValue& key, JSON::MutableValue& value) { 
-	yyjson_mut_obj_add(rawValue, key.rawValue, value.rawValue); 
+bool MutableObject::append(JSON::MutableValue& key, JSON::MutableValue& value) { 
+	return yyjson_mut_obj_add(rawValue, key.rawValue, value.rawValue); 
+}
+bool MutableObject::append(MutableDocument& doc, const char* key, bool value) {
+	return yyjson_mut_obj_add_bool(doc.rawValue, rawValue, key, value);
+}
+bool MutableObject::append(MutableDocument& doc, const char* key, uint64_t value) {
+	return yyjson_mut_obj_add_uint(doc.rawValue, rawValue, key, value);
+}
+bool MutableObject::append(MutableDocument& doc, const char* key, int64_t value) {
+	return yyjson_mut_obj_add_int(doc.rawValue, rawValue, key, value);
+}
+bool MutableObject::append(MutableDocument& doc, const char* key, double value) {
+	return yyjson_mut_obj_add_real(doc.rawValue, rawValue, key, value);
+}
+bool MutableObject::append(MutableDocument& doc, const char* key, const char* value) {
+	return yyjson_mut_obj_add_str(doc.rawValue, rawValue, key, value);
+}
+		
+MutableArray MutableObject::addArray(MutableDocument& doc, const char* key) {
+	return yyjson_mut_obj_add_arr(doc.rawValue, rawValue, key);
+}
+MutableObject MutableObject::addObject(MutableDocument& doc, const char* key) {
+	return yyjson_mut_obj_add_obj(doc.rawValue, rawValue, key);
+}
+
+bool MutableObject::remove(JSON::MutableValue& key) {
+	return yyjson_mut_obj_remove(rawValue,key.rawValue);
+}
+void MutableObject::clear() {
+	yyjson_mut_obj_clear(rawValue);
+}
+
+bool MutableObject::renameKey(MutableDocument& doc, const char* key, const char* newKey) {
+	return yyjson_mut_obj_rename_key(doc.rawValue, rawValue, key, newKey);
 }
 
 OBJIterator::OBJIterator(Value object) : yyjson_obj_iter(yyjson_obj_iter_with(object.rawValue)) {};

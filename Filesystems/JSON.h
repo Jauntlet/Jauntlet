@@ -155,10 +155,20 @@ namespace JSON {
 		// appends another value to the end of the array
 		// returns false on error
 		bool append(JSON::MutableValue& val);
+		// appends a bool to the end of the array
+		// returns false on error
 		bool append(MutableDocument& document, bool val);
+		// appends an unsigned int to the end of the array
+		// returns false on error
 		bool append(MutableDocument& document, uint64_t val);
+		// appends an int to the end of the array
+		// returns false on error
 		bool append(MutableDocument& document, int64_t val);
+		// appends a double to the end of the array
+		// returns false on error
 		bool append(MutableDocument& document, double val);
+		// appends a string to the end of the array
+		// returns false on error
 		bool append(MutableDocument& document, const char* val);
 
 		// appends a new array to the end of the array
@@ -188,10 +198,41 @@ namespace JSON {
 	class MutableObject : public MutableValue {
 	public:
 		MutableObject(MutableDocument& doc);
+		MutableObject(MutableDocument& doc, const char** keys, const char** vals, size_t count);
 		MutableObject(yyjson_mut_val* object);
 		
 		// appends a key and a value within the object. Expects a string as the key and any value as the value
-		void append(JSON::MutableValue& key, JSON::MutableValue& value);
+		// returns false on error
+		bool append(JSON::MutableValue& key, JSON::MutableValue& value);
+		// appends a key and a value within the object. Expects a string as the key and a bool as the value
+		// returns false on error
+		bool append(MutableDocument& doc, const char* key, bool value);
+		// appends a key and a value within the object. Expects a string as the key and an unsigned int as the value
+		// returns false on error
+		bool append(MutableDocument& doc, const char* key, uint64_t value);
+		// appends a key and a value within the object. Expects a string as the key and an int as the value
+		// returns false on error
+		bool append(MutableDocument& doc, const char* key, int64_t value);
+		// appends a key and a value within the object. Expects a string as the key and a double as the value
+		// returns false on error
+		bool append(MutableDocument& doc, const char* key, double value);
+		// appends a key and a value within the object. Expects a string as the key and a string as the value
+		// returns false on error
+		bool append(MutableDocument& doc, const char* key, const char* value);
+
+		// appends a new array to the end of the object
+		MutableArray addArray(MutableDocument& doc, const char* key);
+		// appends a new object to the end of the object
+		MutableObject addObject(MutableDocument& doc, const char* key);
+		
+		// removes the key and its value from the object
+		// returns false on error
+		bool remove(JSON::MutableValue& key);
+		// Clears the entire object
+		void clear();
+
+		// renames an existing key to another key name.
+		bool renameKey(MutableDocument& doc, const char* key, const char* newKey);
 	};
 
 	// Made for faster iteration through an object. Best to use when iterating through a single object many times over.
