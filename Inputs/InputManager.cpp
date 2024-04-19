@@ -1,10 +1,14 @@
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_gamecontroller.h>
+#include <SDL2/SDL_joystick.h>
 #include <cstdio>
 #include "../Errors.h"
 #include "InputManager.h"
 #include <string>
+#include <SDL2/SDL.h>
 
 InputManager::InputManager() {
-	// Empty
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
 }
 
 InputManager::~InputManager() {
@@ -15,12 +19,6 @@ InputManager::~InputManager() {
 }
 
 void InputManager::processInput() {
-	// Add controller if detected.
-	while (SDL_NumJoysticks() > _controllers.size()) {
-		_controllers.emplace_back();
-		_controllers[_controllers.size() - 1].joystick = SDL_JoystickOpen(_controllers.size() - 1);
-	}
-
 	// updates previous key map via foreach loop
 	_previousKeyMap = _keyMap;
 
@@ -79,6 +77,7 @@ void InputManager::processInput() {
 				break;
 			case SDL_JOYBUTTONDOWN:
 				_keyMap[_event.cbutton.button] = true;
+				_lastInput = (SDL_KeyCode)_event.cbutton.button;
 				break;
 			case SDL_JOYBUTTONUP:
 				_keyMap[_event.cbutton.button] = false;
@@ -134,6 +133,21 @@ void InputManager::processInput() {
 			case SDL_WINDOWEVENT:
 				if (_event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
 					_windowResized = true;
+				}
+				break;
+			case SDL_CONTROLLERDEVICEADDED:
+				while (SDL_NumJoysticks() > _controllers.size()) {
+					_controllers.emplace_back();
+					_controllers[_controllers.size() - 1].controller = SDL_GameControllerOpen(_event.cdevice.which);
+					_controllers[_controllers.size() - 1].joystick = SDL_GameControllerGetJoystick(_controllers[_controllers.size()-1].controller);
+				}
+				break;
+			case SDL_CONTROLLERDEVICEREMOVED:
+				for (int i = 0; i < _controllers.size(); ++i) {
+					if (_event.cdevice.which == SDL_JoystickInstanceID(_controllers[i].joystick)) {
+						_controllers.erase(_controllers.begin() + i);
+						break;
+					}
 				}
 				break;
 		}
@@ -228,4 +242,12 @@ glm::vec2 InputManager::getControllerAxis(Axis type) {
 	}
 	
 	return output /= _controllers.size();
+}
+
+Controller* InputManager::getController(int controllerID) {
+	return &_controllers[controllerID];
+}
+
+unsigned int InputManager::getControllerCount() {
+	return _controllers.size();
 }

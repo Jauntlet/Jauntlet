@@ -4,12 +4,31 @@
 #pragma once
 
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_gamecontroller.h>
 #include <glm/vec2.hpp>
 #include <glm/fwd.hpp>
 #include <unordered_map>
 #include <vector>
 
 enum class Axis { LeftStick, RightStick, Triggers, dPad };
+
+// Controller Handling
+struct Controller {
+	SDL_GameController* controller;
+	SDL_Joystick* joystick;
+	glm::vec2 leftStick;
+	glm::vec2 rightStick;
+	glm::vec2 triggers;
+	glm::vec2 dPad;
+
+	Controller() {
+		joystick = nullptr;
+		leftStick = glm::vec2(0);
+		rightStick = glm::vec2(0);
+		triggers = glm::vec2(0);
+		dPad = glm::vec2(0);
+	}
+};
 	
 // Stores and manages the state of keys, aswell as other SDL events
 class InputManager
@@ -48,6 +67,10 @@ public:
 	glm::vec2 getControllerAxis(Axis type, int controllerID);
 	// Collect the average of all Axis's from all controllers, this value is NOT normalized
 	glm::vec2 getControllerAxis(Axis type);
+	// Returns the controller at the specified index.
+	Controller* getController(int controllerID);
+	// Returns the amount of connected controllers
+	unsigned int getControllerCount();
 
 	Sint32 deltaScroll = 0;
 private:
@@ -59,23 +82,6 @@ private:
 
 	bool _windowResized = false;
 	bool _quitGameCalled = false;
-
-	// Controller Handling
-	struct Controller {
-		SDL_Joystick* joystick;
-		glm::vec2 leftStick;
-		glm::vec2 rightStick;
-		glm::vec2 triggers;
-		glm::vec2 dPad;
-
-		Controller() {
-			joystick = nullptr;
-			leftStick = glm::vec2(0);
-			rightStick = glm::vec2(0);
-			triggers = glm::vec2(0);
-			dPad = glm::vec2(0);
-		}
-	};
 
 	std::vector<Controller> _controllers;
 };
