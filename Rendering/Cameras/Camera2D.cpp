@@ -199,12 +199,12 @@ void Camera2D::multiply(float scale) {
 	_needsMatrixUpdate = true;
 }
 
-glm::vec2 Camera2D::getSize() {
+glm::vec2 Camera2D::getSize() const {
 	return glm::vec2(_screenWidth, _screenHeight);
 }
-glm::vec2 Camera2D::getPosition() {
+glm::vec2 Camera2D::getPosition() const {
 	return _position;
 }
-float Camera2D::getScale() {
+float Camera2D::getScale() const {
 	return _scale;
 }
