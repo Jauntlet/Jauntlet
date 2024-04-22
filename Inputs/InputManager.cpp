@@ -247,33 +247,67 @@ void InputManager::processInput() {
 					switch (_event.jhat.value) {
 						case SDL_HAT_LEFTUP:
 							_controllers[_event.jhat.which].dPad = glm::vec2(-1, 1);
+							_keyMap[CONTROLLER_DPAD_LEFT] = true;
+							_keyMap[CONTROLLER_DPAD_UP] = true;
+							_keyMap[CONTROLLER_DPAD_DOWN] = false;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = false;
 							break;
 						case SDL_HAT_UP:
 							_controllers[_event.jhat.which].dPad = glm::vec2(0, 1);
+							_keyMap[CONTROLLER_DPAD_LEFT] = false;
+							_keyMap[CONTROLLER_DPAD_UP] = true;
+							_keyMap[CONTROLLER_DPAD_DOWN] = false;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = false;
 							break;
 						case SDL_HAT_RIGHTUP:
 							_controllers[_event.jhat.which].dPad = glm::vec2(1, 1);
+							_keyMap[CONTROLLER_DPAD_LEFT] = false;
+							_keyMap[CONTROLLER_DPAD_UP] = true;
+							_keyMap[CONTROLLER_DPAD_DOWN] = false;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = true;
 							break;
 						case SDL_HAT_LEFT:
 							_controllers[_event.jhat.which].dPad = glm::vec2(-1, 0);
-							break;
-						case SDL_HAT_CENTERED:
-							_controllers[_event.jhat.which].dPad = glm::vec2(0, 0);
+							_keyMap[CONTROLLER_DPAD_LEFT] = true;
+							_keyMap[CONTROLLER_DPAD_UP] = false;
+							_keyMap[CONTROLLER_DPAD_DOWN] = false;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = false;
 							break;
 						case SDL_HAT_RIGHT:
 							_controllers[_event.jhat.which].dPad = glm::vec2(1, 0);
+							_keyMap[CONTROLLER_DPAD_LEFT] = false;
+							_keyMap[CONTROLLER_DPAD_UP] = false;
+							_keyMap[CONTROLLER_DPAD_DOWN] = false;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = true;
 							break;
 						case SDL_HAT_LEFTDOWN:
 							_controllers[_event.jhat.which].dPad = glm::vec2(-1, -1);
+							_keyMap[CONTROLLER_DPAD_LEFT] = true;
+							_keyMap[CONTROLLER_DPAD_UP] = false;
+							_keyMap[CONTROLLER_DPAD_DOWN] = true;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = false;
 							break;
 						case SDL_HAT_DOWN:
 							_controllers[_event.jhat.which].dPad = glm::vec2(0, -1);
+							_keyMap[CONTROLLER_DPAD_LEFT] = false;
+							_keyMap[CONTROLLER_DPAD_UP] = false;
+							_keyMap[CONTROLLER_DPAD_DOWN] = true;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = false;
 							break;
 						case SDL_HAT_RIGHTDOWN:
 							_controllers[_event.jhat.which].dPad = glm::vec2(1, -1);
+							_keyMap[CONTROLLER_DPAD_LEFT] = false;
+							_keyMap[CONTROLLER_DPAD_UP] = false;
+							_keyMap[CONTROLLER_DPAD_DOWN] = true;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = true;
 							break;
+						case SDL_HAT_CENTERED:
 						default:
 							_controllers[_event.jhat.which].dPad = glm::vec2(0, 0);
+							_keyMap[CONTROLLER_DPAD_LEFT] = false;
+							_keyMap[CONTROLLER_DPAD_UP] = false;
+							_keyMap[CONTROLLER_DPAD_DOWN] = false;
+							_keyMap[CONTROLLER_DPAD_RIGHT] = false;
 					}
 				}
 				break;
