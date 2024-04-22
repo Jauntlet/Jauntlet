@@ -12,11 +12,13 @@
 
 enum class Axis { LeftStick, RightStick, Triggers, dPad };
 
+enum class Controller_Type { NINTENDO_SWITCH, PLAYSTATION, AMAZON_LUNA, GOOGLE_STADIA, NIVIDIA_SHIELD, XBOX, UNKNOWN };
+
 // Controller Handling
 struct Controller {
 	SDL_GameController* controller;
 	SDL_Joystick* joystick;
-	SDL_GameControllerType type;
+	Controller_Type type;
 	glm::vec2 leftStick;
 	glm::vec2 rightStick;
 	glm::vec2 triggers;
@@ -25,7 +27,36 @@ struct Controller {
 	Controller(SDL_GameController* Controller) {
 		controller = Controller;
 		joystick = SDL_GameControllerGetJoystick(Controller);
-		type = SDL_GameControllerGetType(Controller);
+		switch (SDL_GameControllerGetType(Controller)) {
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_LEFT:
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT:
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_PAIR:
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_PRO:
+				type = Controller_Type::NINTENDO_SWITCH;
+				break;
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_AMAZON_LUNA:
+				type = Controller_Type::AMAZON_LUNA;
+				break;
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_GOOGLE_STADIA:
+				type = Controller_Type::GOOGLE_STADIA;
+				break;
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_NVIDIA_SHIELD:
+				type = Controller_Type::NIVIDIA_SHIELD;
+				break;
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS3:
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS4:
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_PS5:
+				type = Controller_Type::PLAYSTATION;
+				break;
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_XBOXONE:
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_XBOX360:
+				type = Controller_Type::XBOX;
+				break;
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_VIRTUAL:
+			case SDL_GameControllerType::SDL_CONTROLLER_TYPE_UNKNOWN:
+				type = Controller_Type::UNKNOWN;
+				break;
+		}
 		leftStick = glm::vec2();
 		rightStick = glm::vec2();
 		triggers = glm::vec2();

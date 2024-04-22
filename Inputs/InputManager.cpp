@@ -79,20 +79,72 @@ void InputManager::processInput() {
 			case SDL_JOYBUTTONDOWN:
 				switch (_event.cbutton.button) {
 					case SDL_CONTROLLER_BUTTON_Y:
-						_keyMap[CONTROLLER_FACE_NORTH] = true;
-						_lastInput = CONTROLLER_FACE_NORTH;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_WEST] = true;
+								_lastInput = CONTROLLER_FACE_WEST;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_NORTH] = true;
+								_lastInput = CONTROLLER_FACE_NORTH;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_A:
-						_keyMap[CONTROLLER_FACE_EAST] = true;
-						_lastInput = CONTROLLER_FACE_EAST;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_NORTH] = true;
+								_lastInput = CONTROLLER_FACE_NORTH;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_EAST] = true;
+								_lastInput = CONTROLLER_FACE_EAST;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_B:
-						_keyMap[CONTROLLER_FACE_SOUTH] = true;
-						_lastInput = CONTROLLER_FACE_SOUTH;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_EAST] = true;
+								_lastInput = CONTROLLER_FACE_EAST;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_SOUTH] = true;
+								_lastInput = CONTROLLER_FACE_SOUTH;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_X:
-						_keyMap[CONTROLLER_FACE_WEST] = true;
-						_lastInput = CONTROLLER_FACE_WEST;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_SOUTH] = true;
+								_lastInput = CONTROLLER_FACE_SOUTH;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_WEST] = true;
+								_lastInput = CONTROLLER_FACE_WEST;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_BACK:
 						_keyMap[CONTROLLER_BACK] = true;
@@ -173,16 +225,64 @@ void InputManager::processInput() {
 			case SDL_JOYBUTTONUP:
 				switch (_event.cbutton.button) {
 					case SDL_CONTROLLER_BUTTON_Y:
-						_keyMap[CONTROLLER_FACE_NORTH] = false;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_WEST] = false;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_NORTH] = false;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_A:
-						_keyMap[CONTROLLER_FACE_EAST] = false;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_NORTH] = false;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_EAST] = false;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_B:
-						_keyMap[CONTROLLER_FACE_SOUTH] = false;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_EAST] = false;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_SOUTH] = false;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_X:
-						_keyMap[CONTROLLER_FACE_WEST] = false;
+						switch (getController(_event.cbutton.which)->type) {
+							case Controller_Type::PLAYSTATION:
+							case Controller_Type::XBOX:
+							case Controller_Type::AMAZON_LUNA: // Assumption
+							case Controller_Type::GOOGLE_STADIA: // Assumption
+							case Controller_Type::NIVIDIA_SHIELD: // Assumption
+								_keyMap[CONTROLLER_FACE_SOUTH] = false;
+								break;
+							case Controller_Type::NINTENDO_SWITCH:
+							default:
+								_keyMap[CONTROLLER_FACE_WEST] = false;
+								break;
+						}
 						break;
 					case SDL_CONTROLLER_BUTTON_BACK:
 						_keyMap[CONTROLLER_BACK] = false;
