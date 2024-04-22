@@ -1,6 +1,7 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_gamecontroller.h>
 #include <SDL2/SDL_joystick.h>
+#include <cstdint>
 #include <cstdio>
 #include "../Errors.h"
 #include "InputManager.h"
@@ -76,11 +77,170 @@ void InputManager::processInput() {
 				}
 				break;
 			case SDL_JOYBUTTONDOWN:
-				_keyMap[_event.cbutton.button] = true;
-				_lastInput = (SDL_KeyCode)_event.cbutton.button;
+				switch (_event.cbutton.button) {
+					case SDL_CONTROLLER_BUTTON_Y:
+						_keyMap[CONTROLLER_FACE_NORTH] = true;
+						_lastInput = CONTROLLER_FACE_NORTH;
+						break;
+					case SDL_CONTROLLER_BUTTON_A:
+						_keyMap[CONTROLLER_FACE_EAST] = true;
+						_lastInput = CONTROLLER_FACE_EAST;
+						break;
+					case SDL_CONTROLLER_BUTTON_B:
+						_keyMap[CONTROLLER_FACE_SOUTH] = true;
+						_lastInput = CONTROLLER_FACE_SOUTH;
+						break;
+					case SDL_CONTROLLER_BUTTON_X:
+						_keyMap[CONTROLLER_FACE_WEST] = true;
+						_lastInput = CONTROLLER_FACE_WEST;
+						break;
+					case SDL_CONTROLLER_BUTTON_BACK:
+						_keyMap[CONTROLLER_BACK] = true;
+						_lastInput = CONTROLLER_BACK;
+						break;
+					case SDL_CONTROLLER_BUTTON_GUIDE:
+						_keyMap[CONTROLLER_GUIDE] = true;
+						_lastInput = CONTROLLER_GUIDE;
+						break;
+					case SDL_CONTROLLER_BUTTON_START:
+						_keyMap[CONTROLLER_START] = true;
+						_lastInput = CONTROLLER_START;
+						break;
+					case SDL_CONTROLLER_BUTTON_LEFTSTICK:
+						_keyMap[CONTROLLER_LEFTSTICK] = true;
+						_lastInput = CONTROLLER_LEFTSTICK;
+						break;
+					case SDL_CONTROLLER_BUTTON_RIGHTSTICK:
+						_keyMap[CONTROLLER_RIGHTSTICK] = true;
+						_lastInput = CONTROLLER_RIGHTSTICK;
+						break;
+					case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+						_keyMap[CONTROLLER_LEFTSHOULDER] = true;
+						_lastInput = CONTROLLER_LEFTSHOULDER;
+						break;
+					case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+						_keyMap[CONTROLLER_RIGHTSHOULDER] = true;
+						_lastInput = CONTROLLER_RIGHTSHOULDER;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_UP:
+						_keyMap[CONTROLLER_DPAD_UP] = true;
+						_lastInput = CONTROLLER_DPAD_UP;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+						_keyMap[CONTROLLER_DPAD_DOWN] = true;
+						_lastInput = CONTROLLER_DPAD_DOWN;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+						_keyMap[CONTROLLER_DPAD_LEFT] = true;
+						_lastInput = CONTROLLER_DPAD_LEFT;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+						_keyMap[CONTROLLER_DPAD_RIGHT] = true;
+						_lastInput = CONTROLLER_DPAD_RIGHT;
+						break;
+					case SDL_CONTROLLER_BUTTON_MISC1:
+						_keyMap[CONTROLLER_MISC] = true;
+						_lastInput = CONTROLLER_MISC;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE1:
+						_keyMap[CONTROLLER_PADDLE1] = true;
+						_lastInput = CONTROLLER_PADDLE1;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE2:
+						_keyMap[CONTROLLER_PADDLE2] = true;
+						_lastInput = CONTROLLER_PADDLE2;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE3:
+						_keyMap[CONTROLLER_PADDLE3] = true;
+						_lastInput = CONTROLLER_PADDLE3;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE4:
+						_keyMap[CONTROLLER_PADDLE4] = true;
+						_lastInput = CONTROLLER_PADDLE4;
+						break;
+					case SDL_CONTROLLER_BUTTON_TOUCHPAD:
+						_keyMap[CONTROLLER_TOUCHPAD] = true;
+						_lastInput = CONTROLLER_TOUCHPAD;
+						break;
+					case SDL_CONTROLLER_BUTTON_MAX:
+						_keyMap[CONTROLLER_MAX] = true;
+						_lastInput = CONTROLLER_MAX;
+						break;
+					default: // Runs in case of SDL_CONTROLLER_BUTTON_INVALID
+						break;
+				}
 				break;
 			case SDL_JOYBUTTONUP:
-				_keyMap[_event.cbutton.button] = false;
+				switch (_event.cbutton.button) {
+					case SDL_CONTROLLER_BUTTON_Y:
+						_keyMap[CONTROLLER_FACE_NORTH] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_A:
+						_keyMap[CONTROLLER_FACE_EAST] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_B:
+						_keyMap[CONTROLLER_FACE_SOUTH] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_X:
+						_keyMap[CONTROLLER_FACE_WEST] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_BACK:
+						_keyMap[CONTROLLER_BACK] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_GUIDE:
+						_keyMap[CONTROLLER_GUIDE] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_START:
+						_keyMap[CONTROLLER_START] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_LEFTSTICK:
+						_keyMap[CONTROLLER_LEFTSTICK] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_RIGHTSTICK:
+						_keyMap[CONTROLLER_RIGHTSTICK] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+						_keyMap[CONTROLLER_LEFTSHOULDER] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+						_keyMap[CONTROLLER_RIGHTSHOULDER] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_UP:
+						_keyMap[CONTROLLER_DPAD_UP] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+						_keyMap[CONTROLLER_DPAD_DOWN] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+						_keyMap[CONTROLLER_DPAD_LEFT] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+						_keyMap[CONTROLLER_DPAD_RIGHT] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_MISC1:
+						_keyMap[CONTROLLER_MISC] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE1:
+						_keyMap[CONTROLLER_PADDLE1] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE2:
+						_keyMap[CONTROLLER_PADDLE2] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE3:
+						_keyMap[CONTROLLER_PADDLE3] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_PADDLE4:
+						_keyMap[CONTROLLER_PADDLE4] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_TOUCHPAD:
+						_keyMap[CONTROLLER_TOUCHPAD] = false;
+						break;
+					case SDL_CONTROLLER_BUTTON_MAX:
+						_keyMap[CONTROLLER_MAX] = false;
+						break;
+					default: // Runs in case of SDL_CONTROLLER_BUTTON_INVALID
+						break;
+				}
 				break;
 			case SDL_JOYHATMOTION:
 				if (_event.jhat.type == 1538) { // this is the identifier for the D-pad of a controller
@@ -137,9 +297,7 @@ void InputManager::processInput() {
 				break;
 			case SDL_CONTROLLERDEVICEADDED:
 				while (SDL_NumJoysticks() > _controllers.size()) {
-					_controllers.emplace_back();
-					_controllers[_controllers.size() - 1].controller = SDL_GameControllerOpen(_event.cdevice.which);
-					_controllers[_controllers.size() - 1].joystick = SDL_GameControllerGetJoystick(_controllers[_controllers.size()-1].controller);
+					_controllers.emplace_back(SDL_GameControllerOpen(_event.cdevice.which));
 				}
 				break;
 			case SDL_CONTROLLERDEVICEREMOVED:

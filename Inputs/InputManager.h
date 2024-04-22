@@ -16,20 +16,50 @@ enum class Axis { LeftStick, RightStick, Triggers, dPad };
 struct Controller {
 	SDL_GameController* controller;
 	SDL_Joystick* joystick;
+	SDL_GameControllerType type;
 	glm::vec2 leftStick;
 	glm::vec2 rightStick;
 	glm::vec2 triggers;
 	glm::vec2 dPad;
 
-	Controller() {
-		joystick = nullptr;
-		leftStick = glm::vec2(0);
-		rightStick = glm::vec2(0);
-		triggers = glm::vec2(0);
-		dPad = glm::vec2(0);
+	Controller(SDL_GameController* Controller) {
+		controller = Controller;
+		joystick = SDL_GameControllerGetJoystick(Controller);
+		type = SDL_GameControllerGetType(Controller);
+		leftStick = glm::vec2();
+		rightStick = glm::vec2();
+		triggers = glm::vec2();
+		dPad = glm::vec2();
 	}
 };
-	
+
+#define CONTROLLER_FACE_NORTH 200
+#define CONTROLLER_FACE_EAST 201
+#define CONTROLLER_FACE_SOUTH 202
+#define CONTROLLER_FACE_WEST 203
+#define CONTROLLER_BACK 204
+#define CONTROLLER_GUIDE 205
+#define CONTROLLER_START 206
+#define CONTROLLER_LEFTSTICK 207
+#define CONTROLLER_RIGHTSTICK 208
+#define CONTROLLER_LEFTSHOULDER 209
+#define CONTROLLER_RIGHTSHOULDER 210
+#define CONTROLLER_DPAD_UP 211
+#define CONTROLLER_DPAD_DOWN 212
+#define CONTROLLER_DPAD_LEFT 213
+#define CONTROLLER_DPAD_RIGHT 214
+// Misc button contains the following cases:
+// Xbox Series X share button
+// Nintendo Switch Pro capture button
+// Amazon Luna / PS5 Microphone button
+#define CONTROLLER_MISC 215
+#define CONTROLLER_PADDLE1 216
+#define CONTROLLER_PADDLE2 217
+#define CONTROLLER_PADDLE3 218
+#define CONTROLLER_PADDLE4 219
+#define CONTROLLER_TOUCHPAD 220
+#define CONTROLLER_MAX 221
+
 // Stores and manages the state of keys, aswell as other SDL events
 class InputManager
 {
