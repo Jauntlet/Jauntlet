@@ -51,7 +51,7 @@ public:
 	bool isKeyUp(unsigned int keyID);
 
 	// Returns the last button pressed by the user.
-	SDL_KeyCode lastButtonPressed();
+	uint32_t lastButtonPressed();
 	// sets the last button pressed to the ESCAPE key.
 	void clearLastButtonPressed();
 	
@@ -70,7 +70,7 @@ public:
 	// Returns the controller at the specified index.
 	Controller* getController(int controllerID);
 	// Returns the amount of connected controllers
-	unsigned int getControllerCount();
+	uint32_t getControllerCount();
 
 	Sint32 deltaScroll = 0;
 private:
@@ -78,7 +78,7 @@ private:
 	std::unordered_map<unsigned int, bool> _previousKeyMap;
 	glm::vec2 _mouseCoords = glm::vec2(0);
 
-	SDL_KeyCode _lastInput = SDLK_ESCAPE;
+	unsigned int _lastInput = SDLK_ESCAPE;
 
 	bool _windowResized = false;
 	bool _quitGameCalled = false;

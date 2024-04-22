@@ -7,20 +7,20 @@ InputKey::InputKey(InputManager* inputManager, SDL_KeyCode key) : _inputManager(
 	_keys.push_back(key);
 }
 
-void InputKey::addKey(SDL_KeyCode key) {
+void InputKey::addKey(uint32_t key) {
 	_keys.push_back(key);
 }
-void InputKey::addKey(SDL_KeyCode key, SDL_KeyCode keytwo) {
+void InputKey::addKey(uint32_t key, uint32_t keytwo) {
 	_keys.push_back(key);
 	_keys.push_back(keytwo);
 }
-void InputKey::addKey(std::vector<SDL_KeyCode> keys) {
+void InputKey::addKey(std::vector<uint32_t> keys) {
 	for (int i = 0; i < keys.size(); ++i) {
 		_keys.push_back(keys[i]);
 	}
 }
 
-void InputKey::removeKey(SDL_KeyCode key) {
+void InputKey::removeKey(uint32_t key) {
 	for (int i = 0; i < _keys.size(); ++i) {
 		if (_keys[i] == key) {
 			_keys[i] = _keys.back();

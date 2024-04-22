@@ -13,18 +13,18 @@ public:
 	InputKey(InputManager* inputManager);
 	InputKey(InputManager* inputManager, SDL_KeyCode key);
 	// add a key that will trigger the input
-	void addKey(SDL_KeyCode key);
+	void addKey(uint32_t key);
 	// add a key that will trigger the input
-	void addKey(SDL_KeyCode key, SDL_KeyCode keytwo);
+	void addKey(uint32_t key, uint32_t keytwo);
 	// add a key that will trigger the input
-	void addKey(std::vector<SDL_KeyCode> keys);
+	void addKey(std::vector<uint32_t> keys);
 	// remove a key from the input
-	void removeKey(SDL_KeyCode key);
+	void removeKey(uint32_t key);
 	// check if any of the keys are down
 	bool isDown();
 	// check if any of the keys are pressed
 	bool isPressed();
 private:
-	 std::vector<SDL_KeyCode> _keys;
+	 std::vector<uint32_t> _keys;
 	 InputManager* _inputManager;
 };

@@ -170,7 +170,7 @@ bool InputManager::isKeyUp(unsigned int keyID) {
 }
 
 
-SDL_KeyCode InputManager::lastButtonPressed() {
+uint32_t InputManager::lastButtonPressed() {
 	return _lastInput;
 }
 void InputManager::clearLastButtonPressed() {
