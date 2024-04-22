@@ -463,7 +463,7 @@ uint32_t InputManager::lastButtonPressed() {
 	return _lastInput;
 }
 void InputManager::clearLastButtonPressed() {
-	_lastInput = SDLK_ESCAPE;
+	_lastInput = SDLK_UNKNOWN;
 };
 
 bool InputManager::windowResized() {
