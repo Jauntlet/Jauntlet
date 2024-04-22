@@ -1,12 +1,9 @@
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_gamecontroller.h>
-#include <SDL2/SDL_joystick.h>
+#include <SDL2/SDL.h>
 #include <cstdint>
 #include <cstdio>
 #include "../Errors.h"
 #include "InputManager.h"
 #include <string>
-#include <SDL2/SDL.h>
 
 InputManager::InputManager() {
 	SDL_Init(SDL_INIT_GAMECONTROLLER);
