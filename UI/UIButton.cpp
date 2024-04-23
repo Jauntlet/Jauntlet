@@ -74,7 +74,12 @@ void UIButton::draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) {
         _wasPressed = false;
     }
     
-    spriteBatch->draw({_resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y}, {_clicked * 0.5, 0, 0.5, 1}, _textureId);
+    if (highlighted) {
+        spriteBatch->draw({ _resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y }, { 0.5, 0, 0.5, 1 }, _textureId);
+    }
+    else {
+        spriteBatch->draw({ _resolvedPosition.x, _resolvedPosition.y, _resolvedSize.x, _resolvedSize.y }, { _clicked * 0.5, 0, 0.5, 1 }, _textureId);
+    }
 }
 
 bool UIButton::isPressed() {

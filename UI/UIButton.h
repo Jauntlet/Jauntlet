@@ -25,6 +25,10 @@ public:
 	bool isPressed();
 	// Returns true if the button is currently pressed down
 	bool isDown();
+	
+	//contributed by Chris because I needed a way to show when a button is selected but not pressed (e.g. controller "hovering" over it)
+	bool highlighted = false;
+
    protected:
 	std::function<void()> _onClick;
 	glm::vec2 _size;
