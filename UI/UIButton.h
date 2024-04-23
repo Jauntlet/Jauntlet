@@ -19,7 +19,7 @@ public:
 	UIButton(InputManager* inputManager, std::function<void()> onClick, GLuint textureId, glm::vec2* position, glm::vec2 size, ORIGIN_PIN positionPinType);
        void draw(Camera2D* camera, SpriteBatch* spriteBatch, float scale) override;
 	void resolvePosition(Camera2D* camera, glm::vec2* resolvedPins, float scale) override;
-	void click() { _onClick(); };
+	void click() { _onClick(); _clicked = !_clicked; };
 
 	// Returns true if the button was pressed this frame
 	bool isPressed();
